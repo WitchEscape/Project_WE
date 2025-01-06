@@ -10,10 +10,10 @@ public class InteractableItemData : MonoBehaviour
 
     private void Awake()
     {
-        // XRGrabInteractable이 있는지 확인
+        // XRGrabInteractable????덈뮉筌왖 ?類ㅼ뵥
         if (!GetComponent<XRGrabInteractable>())
         {
-            Debug.LogError($"[InteractableItemData] {gameObject.name}에 XRGrabInteractable이 없습니다!");
+            Debug.LogError($"[InteractableItemData] {gameObject.name}??XRGrabInteractable????곷뮸??덈뼄!");
         }
     }
 }

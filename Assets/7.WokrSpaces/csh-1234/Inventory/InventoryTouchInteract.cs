@@ -22,28 +22,34 @@ public class InventoryTouchInteract : MonoBehaviour
     {
         if (!enabled)
         {
-            Debug.Log("[InventoryTouchInteract] 컴포넌트가 비활성화 상태입니다.");
+            Debug.Log("[InventoryTouchInteract] 而댄룷?뚰듃媛 鍮꾪솢?깊솕 ?곹깭?낅땲??");
             return;
         }
 
         Debug.Log($"[InventoryTouchInteract] Trigger Enter: {other.name}");
 
-        var controller = other.GetComponent<XRDirectInteractor>();
-        if (!controller)
+        // XRDirectInteractor瑜?癒쇱? ?뺤씤
+        var directInteractor = other.GetComponent<XRDirectInteractor>();
+        if (directInteractor == null)
         {
-            Debug.Log("[InventoryTouchInteract] XRDirectInteractor를 찾을 수 없습니다.");
+            directInteractor = other.GetComponentInParent<XRDirectInteractor>();
+        }
+
+        if (!directInteractor)
+        {
+            Debug.Log("[InventoryTouchInteract] XRDirectInteractor瑜?李얠쓣 ???놁뒿?덈떎.");
             return;
         }
 
-        Debug.Log($"[InventoryTouchInteract] 컨트롤러 감지됨: {controller.name}");
+        Debug.Log($"[InventoryTouchInteract] ?명꽣?숉꽣 媛먯??? {directInteractor.name}");
 
-        if (!inventorySlot.CurrentSlotItem && !controller.hasSelection)
+        if (!inventorySlot.CurrentSlotItem && !directInteractor.hasSelection)
         {
-            Debug.Log("[InventoryTouchInteract] 슬롯이 비어있고 컨트롤러가 아무것도 들고있지 않습니다.");
+            Debug.Log("[InventoryTouchInteract] ?щ’??鍮꾩뼱?덇퀬 而⑦듃濡ㅻ윭媛 ?꾨Т寃껊룄 ?ㅺ퀬?덉? ?딆뒿?덈떎.");
             return;
         }
 
-        Debug.Log("[InventoryTouchInteract] TryInteractWithSlot 호출");
-        inventorySlot.TryInteractWithSlot(controller);
+        Debug.Log("[InventoryTouchInteract] TryInteractWithSlot ?몄텧");
+        inventorySlot.TryInteractWithSlot(directInteractor);
     }
 }
