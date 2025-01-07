@@ -3,29 +3,28 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+
 public class SubtitleLoader : MonoBehaviour
 {
     //참조받을꺼면 굳?이 Resources폴더에 안넣어도 되지않나
     //TextAsset csvFile = Resources.Load<TextAsset>($"Subtitles/{language}"); 이렇게 쓰면 되긴 하는데
     //Auto-K
-    [Header("CSV파일")]public TextAsset csvFile;
-    [Header("언어"),Tooltip("KR, EN")]public string language = "KR";
 
-    private class SubtitleData
-    {
-        public int Index;
-        public int Chapter;
-        public string Language;
-        public string Content;
-    }
+    public Languages language;
+    public Chapters chapters;
+    [Header("CSV파일")] public TextAsset csvFile;
+    //[Header("언어"), Tooltip("KR, EN")] public string currentLanguage = "KR";
+    //[Header("챕터")] public int chapter;
+
+
 
     private List<SubtitleData> subtitles = new List<SubtitleData>();
 
     private void Awake()
     {
         LoadCSV();
-
     }
+
     void Start()
     {
         LoadSubtitles();
@@ -47,7 +46,7 @@ public class SubtitleLoader : MonoBehaviour
         string header = reader.ReadLine();
         while (true)
         {
-            
+
 
             //두 번째 줄부터 읽기 시작
             string line = reader.ReadLine();
@@ -56,9 +55,9 @@ public class SubtitleLoader : MonoBehaviour
             if (line == null)
             {
                 //Debug.Log("CSV 끝");
-                break; 
+                break;
             }
-           // Debug.Log($"읽은 줄: {line}");
+            // Debug.Log($"읽은 줄: {line}");
             //CSV파일은 쉼표로 구분됨, Split을 사용해 쉼표 단위로 쪼개면 배열에 저장됨
             string[] values = line.Split(',');
 
@@ -86,7 +85,7 @@ public class SubtitleLoader : MonoBehaviour
         {
             //Debug.Log($"{subtitle.Language} & {language}");
 
-            if (subtitle.Language == language)
+            if (subtitle.Language == language.ToString() && subtitle.Chapter == (int)chapters)
             {
                 filteredSubtitles.Add(subtitle.Content);
             }
@@ -95,14 +94,36 @@ public class SubtitleLoader : MonoBehaviour
         return filteredSubtitles;
     }
 
+    public List<float> LoadSubtitlesDuration()
+    {
+        List<float> filteredSubtitles = new List<float>();
+
+        foreach (var subtitle in subtitles)
+        {
+            if (subtitle.Language == language.ToString() && subtitle.Chapter == (int)chapters)
+            {
+                filteredSubtitles.Add(subtitle.Duration);
+            }
+        }
+        return filteredSubtitles;
+    }
+
     private void DisplaySubtitles()
     {
         foreach (var subtitle in subtitles)
         {
-            if (subtitle.Language == language)
+            if (subtitle.Language == language.ToString())
             {
                 Debug.Log($"[Index: {subtitle.Index}, Chapter : {subtitle.Chapter}, Laungue : {subtitle.Language}] {subtitle.Content}");
             }
         }
     }
+}
+public class SubtitleData
+{
+    public int Index;
+    public int Chapter;
+    public float Duration;
+    public string Language;
+    public string Content;
 }

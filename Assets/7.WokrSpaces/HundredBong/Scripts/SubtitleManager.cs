@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Collections;
 using UnityEngine;
 
 public class SubtitleManager : MonoBehaviour
 {
     public SubtitleLoader subtitleLoader;
-    public SubtitlePool subtitlePool; 
+    public SubtitlePool subtitlePool;
 
     public float displayTime = 3f;
 
@@ -15,21 +16,31 @@ public class SubtitleManager : MonoBehaviour
     private void Start()
     {
         subtitles = subtitleLoader.LoadSubtitles();
-        StartCoroutine(DisplaySubtitles());
+        //StartCoroutine(DisplaySubtitleCoroutine());
+        DisplaySubtitle(2);
     }
 
-    private IEnumerator DisplaySubtitles()
+    public void DisplaySubtitle(int i, float duration = 1f)
+    {
+        TextMeshProUGUI subtitleText = subtitlePool.GetText();
+
+        subtitleText.text = subtitles[i];
+        subtitleText.color = Color.white;
+        subtitlePool.ReturnSubtitle(subtitleText, duration);
+    }
+
+    public IEnumerator DisplaySubtitleCoroutine()
     {
         //Debug.Log($"코루틴 :{subtitles.Count}");
         foreach (var content in subtitles)
         {
             //Debug.Log($"코루틴2 :{subtitles.Count}");
 
-            TextMeshProUGUI subtitleText = subtitlePool.GetText(); 
+            TextMeshProUGUI subtitleText = subtitlePool.GetText();
             subtitleText.text = content;
             yield return new WaitForSeconds(displayTime);
 
-            subtitlePool.ReturnSubtitle(subtitleText); 
+            subtitlePool.ReturnSubtitle(subtitleText);
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SubtitlePool : MonoBehaviour
 {
-    [SerializeField, Header("미리 생성해둘 풀")] private int poolSize = 10;
+    [SerializeField, Header("미리 생성해둘 풀")] private int poolSize = 5;
     [SerializeField, Header("미리 생성해둘 프리팹")] private GameObject subtitlePrefab;
     [SerializeField, Header("생성할 영역")] private RectTransform content;
 
@@ -29,7 +29,7 @@ public class SubtitlePool : MonoBehaviour
 
     public TextMeshProUGUI GetText()
     {
-        Debug.Log("GetText 호출");
+        //Debug.Log("GetText 호출");
         TextMeshProUGUI subtitle;
 
         if (subtitlePool.Count > 0)
@@ -52,13 +52,13 @@ public class SubtitlePool : MonoBehaviour
 
     public void ReturnSubtitle(TextMeshProUGUI text, float delay = 0f)
     {
-        if (delay <= 0f)
+        if (delay <= 0.1f)
         {
             ReturnSubtitle(text);
         }
         else
         {
-            DelayedReturn(text, delay);
+            StartCoroutine(DelayedReturn(text, delay));
         }
     }
 

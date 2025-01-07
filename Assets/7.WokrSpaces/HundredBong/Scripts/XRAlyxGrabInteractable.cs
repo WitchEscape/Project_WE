@@ -6,8 +6,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class XRAlyxGrabInteractable : XRGrabInteractable
 {
     //Grab Interactable 대신 이 컴포넌트 넣으면 레이로 선택하고 손을 움직이면 물건이 날아옴
-    public float velocityThreshold = 2;
-    public float jumpAngleInDegree = 60;
+    public float velocityThreshold = 2f;
+    public float jumpAngleInDegree = 60f;
+
+    public ParticleSystem par;
 
     private XRRayInteractor rayInteractor;
     private Vector3 previousPos;
@@ -18,6 +20,7 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     {
         base.Awake();
         interactableRigidbody = GetComponent<Rigidbody>();
+        par = GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -32,6 +35,9 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
                 Drop();
                 interactableRigidbody.velocity = ComputeVelocity();
                 canJump = false;
+
+                //par.transform.position = previousPos;
+                par.Play();
             }
         }
     }
