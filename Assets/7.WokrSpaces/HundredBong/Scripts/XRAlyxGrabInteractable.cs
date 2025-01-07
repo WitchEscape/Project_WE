@@ -9,7 +9,7 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     public float velocityThreshold = 2f;
     public float jumpAngleInDegree = 60f;
 
-    public ParticleSystem par;
+    private ParticleSystem dropParticle;
 
     private XRRayInteractor rayInteractor;
     private Vector3 previousPos;
@@ -19,8 +19,8 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     protected override void Awake()
     {
         base.Awake();
-        interactableRigidbody = GetComponent<Rigidbody>();
-        par = GetComponent<ParticleSystem>();
+        interactableRigidbody = GetComponent<Rigidbody>();       
+        dropParticle = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Update()
@@ -37,7 +37,7 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
                 canJump = false;
 
                 //par.transform.position = previousPos;
-                par.Play();
+                dropParticle.Play();
             }
         }
     }
@@ -79,6 +79,17 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
         }
 
         base.OnSelectEntered(args);
+    }
+
+    protected override void OnHoverEntered(HoverEnterEventArgs args)
+    {
+        base.OnHoverEntered(args);
+        //hoverParticle.Play();
+    }
+    protected override void OnHoverExited(HoverExitEventArgs args)
+    {
+        base.OnHoverExited(args);
+        //hoverParticle.Stop();
     }
 }
 
