@@ -12,21 +12,23 @@ public class SubtitleManager : MonoBehaviour
     public float displayTime = 3f;
 
     private List<string> subtitles;
+    private List<float> subtitlesDuration;
 
     private void Start()
     {
         subtitles = subtitleLoader.LoadSubtitles();
+        subtitlesDuration = subtitleLoader.LoadSubtitlesDuration();
         //StartCoroutine(DisplaySubtitleCoroutine());
         DisplaySubtitle(2);
     }
 
-    public void DisplaySubtitle(int i, float duration = 1f)
+    public void DisplaySubtitle(int i)
     {
         TextMeshProUGUI subtitleText = subtitlePool.GetText();
 
         subtitleText.text = subtitles[i];
         subtitleText.color = Color.white;
-        subtitlePool.ReturnSubtitle(subtitleText, duration);
+        subtitlePool.ReturnSubtitle(subtitleText, subtitlesDuration[i]);
     }
 
     public IEnumerator DisplaySubtitleCoroutine()

@@ -67,7 +67,8 @@ public class SubtitleLoader : MonoBehaviour
                 Index = int.Parse(values[0]),
                 Chapter = int.Parse(values[1]),
                 Language = values[2],
-                Content = values[3]
+                Content = values[3],
+                Duration = float.Parse(values[4]),
             };
             //Debug.Log($"로드된 데이터: {subtitle.Language} - {subtitle.Content}");
             //생성한 SubtitleData를 리스트에 저장
@@ -96,16 +97,16 @@ public class SubtitleLoader : MonoBehaviour
 
     public List<float> LoadSubtitlesDuration()
     {
-        List<float> filteredSubtitles = new List<float>();
+        List<float> filteredSubtitlesDuration = new List<float>();
 
         foreach (var subtitle in subtitles)
         {
             if (subtitle.Language == language.ToString() && subtitle.Chapter == (int)chapters)
             {
-                filteredSubtitles.Add(subtitle.Duration);
+                filteredSubtitlesDuration.Add(subtitle.Duration);
             }
         }
-        return filteredSubtitles;
+        return filteredSubtitlesDuration;
     }
 
     private void DisplaySubtitles()
