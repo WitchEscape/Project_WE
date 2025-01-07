@@ -54,29 +54,21 @@ public class InventoryGrabInteract : MonoBehaviour
 
     private void SetControllerGrip(ActionBasedController controller, bool state)
     {
-        Debug.Log($"[InventoryGrabInteract] SetControllerGrip - Controller: {controller.name}, State: {state}");
-
         if (!controllers.Contains(controller))
         {
-            Debug.Log("[InventoryGrabInteract] 而⑦듃濡ㅻ윭媛 由ъ뒪?몄뿉 ?놁뒿?덈떎.");
             return;
         }
 
         if (!inventorySlot.gameObject.activeInHierarchy)
         {
-            Debug.Log("[InventoryGrabInteract] ?몃깽?좊━ ?щ’??鍮꾪솢?깊솕 ?곹깭?낅땲??");
             return;
         }
 
-        Debug.Log("[InventoryGrabInteract] TryInteractWithSlot ?몄텧");
         inventorySlot.TryInteractWithSlot(controller.GetComponentInChildren<XRDirectInteractor>());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"[InventoryGrabInteract] Trigger Enter: {other.name}");
-
-        // XRDirectInteractor瑜?癒쇱? ?뺤씤
         var directInteractor = other.GetComponent<XRDirectInteractor>();
         if (directInteractor != null)
         {
@@ -84,17 +76,14 @@ public class InventoryGrabInteract : MonoBehaviour
             if (controllerComponent && !controllers.Contains(controllerComponent))
             {
                 controllers.Add(controllerComponent);
-                Debug.Log($"[InventoryGrabInteract] 而⑦듃濡ㅻ윭 異붽??? {controllerComponent.name}");
             }
             return;
         }
 
-        // XRDirectInteractor媛 ?녿떎硫?ActionBasedController瑜?吏곸젒 ?뺤씤
         var foundController = other.GetComponentInParent<ActionBasedController>();
         if (foundController && !controllers.Contains(foundController))
         {
             controllers.Add(foundController);
-            Debug.Log($"[InventoryGrabInteract] 而⑦듃濡ㅻ윭 異붽??? {foundController.name}");
         }
     }
 

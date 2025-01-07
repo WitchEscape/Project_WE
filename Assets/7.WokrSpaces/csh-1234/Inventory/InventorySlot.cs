@@ -17,7 +17,7 @@ public class InventorySlot : MonoBehaviour
     [SerializeField]
     [Tooltip("Display used when slot is empty and can add an item")]
     private GameObject slotDisplayToAddItem = null;
-
+        
     [SerializeField]
     [Tooltip("Transform to hold the viewing model of the current Inventory Slot Item.")]
     private Transform itemModelHolder = null;
@@ -29,6 +29,9 @@ public class InventorySlot : MonoBehaviour
     [SerializeField]
     [Tooltip("Item will be scaled down to size to fit inside this box collider")]
     private BoxCollider inventorySize = null;
+
+    [SerializeField] private GameObject leftEffect;
+    [SerializeField] private GameObject rightEffect;
 
     [SerializeField] private new Collider collider = null;
     [SerializeField] private AudioSource grabAudio = null, releaseAudio = null;
@@ -575,22 +578,60 @@ public class InventorySlot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var controller = other.GetComponent<ActionBasedController>();
-        if (controller)
+        var interactor = other.GetComponent<XRDirectInteractor>();
+        if (interactor == null) return;
+
+        var controller = interactor.GetComponentInParent<ActionBasedController>();
+        if (controller == null) return;
+
+        bool isLeftHand = controller == inventoryManager.leftController;
+
+        Debug.Log($"[InventorySlot] OnTriggerEnter - Controller: {controller.name}, IsLeft: {isLeftHand}");
+
+        if (isLeftHand)
         {
-            slotDisplayToAddItem.GetComponent<Animator>().SetBool(onHoverAnimatorHash, true);
-            slotDisplayWhenContainsItem.GetComponent<Animator>().SetBool(onHoverAnimatorHash, true);
+            leftEffect.SetActive(true);
+            Debug.Log("[InventorySlot] 왼쪽 효과 활성화");
         }
+        else
+        {
+            rightEffect.SetActive(true);
+            Debug.Log("[InventorySlot] 오른쪽 효과 활성화");
+        }
+
+        if (slotDisplayToAddItem != null)
+            slotDisplayToAddItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, true);
+        if (slotDisplayWhenContainsItem != null)
+            slotDisplayWhenContainsItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        var controller = other.GetComponent<ActionBasedController>();
-        if (controller)
+        var interactor = other.GetComponent<XRDirectInteractor>();
+        if (interactor == null) return;
+
+        var controller = interactor.GetComponentInParent<ActionBasedController>();
+        if (controller == null) return;
+
+        bool isLeftHand = controller == inventoryManager.leftController;
+
+        Debug.Log($"[InventorySlot] OnTriggerExit - Controller: {controller.name}, IsLeft: {isLeftHand}");
+
+        if (isLeftHand)
         {
-            slotDisplayToAddItem.GetComponent<Animator>().SetBool(onHoverAnimatorHash, false);
-            slotDisplayWhenContainsItem.GetComponent<Animator>().SetBool(onHoverAnimatorHash, false);
+            leftEffect.SetActive(false);
+            Debug.Log("[InventorySlot] 왼쪽 효과 비활성화");
         }
+        else
+        {
+            rightEffect.SetActive(false);
+            Debug.Log("[InventorySlot] 오른쪽 효과 비활성화");
+        }
+
+        if (slotDisplayToAddItem != null)
+            slotDisplayToAddItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, false);
+        if (slotDisplayWhenContainsItem != null)
+            slotDisplayWhenContainsItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, false);
     }
 }
 
