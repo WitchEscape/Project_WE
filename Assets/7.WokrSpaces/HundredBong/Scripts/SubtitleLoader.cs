@@ -30,7 +30,7 @@ public class SubtitleLoader : MonoBehaviour
         LoadSubtitles();
 
         //테스트용
-        //DisplaySubtitles(); 
+        DisplaySubtitles(); 
     }
     private void Update()
     {
@@ -92,6 +92,10 @@ public class SubtitleLoader : MonoBehaviour
             }
         }
         //Debug.Log($"필터링 : {filteredSubtitles.Count}");
+        for (int i = 0; i < filteredSubtitles.Count; i++)
+        {
+            Debug.Log($"{i} : {filteredSubtitles[i]}");
+        }
         return filteredSubtitles;
     }
 
@@ -106,6 +110,7 @@ public class SubtitleLoader : MonoBehaviour
                 filteredSubtitlesDuration.Add(subtitle.Duration);
             }
         }
+
         return filteredSubtitlesDuration;
     }
 
@@ -118,6 +123,8 @@ public class SubtitleLoader : MonoBehaviour
                 Debug.Log($"[Index: {subtitle.Index}, Chapter : {subtitle.Chapter}, Laungue : {subtitle.Language}] {subtitle.Content}");
             }
         }
+
+
     }
 }
 public class SubtitleData

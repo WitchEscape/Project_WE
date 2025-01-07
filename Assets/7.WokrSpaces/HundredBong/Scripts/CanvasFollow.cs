@@ -3,13 +3,12 @@ using UnityEngine;
 public class CanvasFollow : MonoBehaviour
 {
     //캔버스가 카메라를 따라서 항상 플레이어를 바라보도록 함, 자막이나 UI 표시용.
-    public Texture[] asd;
     [Header("캔버스 카메라 오프셋")] public Transform cameraOffset;
     [Header("메인 카메라")] public Transform playerCamera;
     [Header("따라가는 속도")] public float followSpeed = 2.0f;
     [Header("캔버스 오프셋")] public Vector3 offset = new Vector3(0, -0.1f, 1.0f);
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         gameObject.transform.position = offset;
     }
