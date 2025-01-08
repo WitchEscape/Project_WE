@@ -141,21 +141,21 @@ public class InventorySlot : MonoBehaviour
     {
         if (isBusy || isDisabling) 
         {
-            Debug.Log($"[InventorySlot] ?곹샇?묒슜 遺덇?: isBusy={isBusy}, isDisabling={isDisabling}");
+            Debug.Log($"[InventorySlot] ????嚥?????????怨쀫뎐??: isBusy={isBusy}, isDisabling={isDisabling}");
             return;
         }
 
-        // 而⑦듃濡ㅻ윭媛 ?꾩씠?쒖쓣 ?ㅺ퀬 ?덈뒗吏 ?뺤씤
+        // ????????룻꼥?????⑤９苡???ル봿?? ?????밸븶??뫢??癲ル슢???믩쨨?????怨좊????????뀀땽?轅붽틓??? ??꿔꺂??틝?????
         XRBaseInteractable itemInHand = null;
         if (controller.hasSelection)
         {
             itemInHand = controller.selectTarget;
             
-            // InteractableItemData 泥댄겕
+            // InteractableItemData ?轅붽틓??????⒟?
             var itemData = itemInHand.GetComponent<InteractableItemData>();
             if (!itemData || !itemData.canInventory)
             {
-                Debug.Log($"[InventorySlot] ?꾩씠?쒖쓣 ?몃깽?좊━???ｌ쓣 ???놁쓬: {itemInHand.name}");
+                Debug.Log($"[InventorySlot] ?????밸븶??뫢??癲ル슢???믩쨨???꿔꺂???沃???????る?????傭?끆?????????????쇨덧?? {itemInHand.name}");
                 return;
             }
         }
@@ -166,19 +166,19 @@ public class InventorySlot : MonoBehaviour
 
     private void InteractWithSlot(XRDirectInteractor controller)
     {
-        Debug.Log($"[InventorySlot] InteractWithSlot ?쒖옉 - controller: {controller.name}");
+        Debug.Log($"[InventorySlot] InteractWithSlot ??癲ル슢??節녿쨨?- controller: {controller.name}");
 
         if (animateItemToSlotCoroutine != null)
         {
             StopCoroutine(animateItemToSlotCoroutine);
-            Debug.Log("[InventorySlot] ?댁쟾 ?좊땲硫붿씠??肄붾（??以묒?");
+            Debug.Log("[InventorySlot] ?????쇨덫???????ル뭸????룸퉲?????щ탵???????썹땟??雍???μ떝?띄몭??袁㏉떋?");
         }
 
         XRBaseInteractable itemHandIsHolding = null;
         if (controller.hasSelection)
         {
             itemHandIsHolding = controller.selectTarget;
-            Debug.Log($"[InventorySlot] 而⑦듃濡ㅻ윭媛 ?ㅺ퀬 ?덈뒗 ?꾩씠?? {itemHandIsHolding.name}");
+            Debug.Log($"[InventorySlot] ????????룻꼥?????⑤９苡???ル봿?? ????怨좊????????뀀땽 ?????밸븶??뫢?? {itemHandIsHolding.name}");
         }
 
         //Check if item is allowed to be added to inventory
@@ -187,26 +187,24 @@ public class InventorySlot : MonoBehaviour
             var itemData = itemHandIsHolding.GetComponent<InteractableItemData>();
             if (!itemData || !itemData.canInventory)
             {
-                Debug.Log($"[InventorySlot] ?꾩씠?쒖쓣 ?몃깽?좊━???ｌ쓣 ???놁쓬: {itemHandIsHolding.name}");
+                Debug.Log($"[InventorySlot] ?????밸븶??뫢??癲ル슢???믩쨨???꿔꺂???沃???????る?????傭?끆?????????????쇨덧?? {itemHandIsHolding.name}");
                 return;
             }
         }
 
         if (currentSlotItem)
         {
-            Debug.Log($"[InventorySlot] ?꾩옱 ?щ’???꾩씠???덉쓬: {currentSlotItem.name}");
+            Debug.Log($"[InventorySlot] ?????밸븶????????????밸븶??뫢?????濚밸Ŧ援?? {currentSlotItem.name}");
             DisableItemInHand(controller);
             GetNewItemFromSlot(controller);
         }
         else
         {
-            Debug.Log("[InventorySlot] 鍮??щ’???꾩씠??異붽? ?쒕룄");
             DisableItemInHand(controller);
         }
 
         //Enable Inventory Slot
         currentSlotItem = itemHandIsHolding;
-        Debug.Log($"[InventorySlot] ?щ’?????꾩씠???ㅼ젙: {(currentSlotItem ? currentSlotItem.name : "?놁쓬")}");
 
         StartCoroutine(AnimateIcon());
         SetNewItemModel();
@@ -260,74 +258,70 @@ public class InventorySlot : MonoBehaviour
         var itemHandIsHolding = controller.selectTarget;
         if (!itemHandIsHolding)
         {
-            Debug.Log("[InventorySlot] DisableItemInHand: 而⑦듃濡ㅻ윭媛 ?ㅺ퀬 ?덈뒗 ?꾩씠???놁쓬");
             return;
         }
 
-        Debug.Log($"[InventorySlot] DisableItemInHand: {itemHandIsHolding.name} 鍮꾪솢?깊솕 ?쒖옉");
         
-        // ?꾩씠?쒖쓣 ?щ’???먯떇?쇰줈 ?ㅼ젙?섍린 ?꾩뿉 ?꾩튂/?뚯쟾 ???
+        // ?????밸븶??뫢??癲ル슢???믩쨨?????????癲???????????濚밸Ŧ??????熬곣뫂爰??????밸븶???????밸븶???????????
         Vector3 targetPosition = transform.position;
         Quaternion targetRotation = transform.rotation;
         
-        // 而⑦듃濡ㅻ윭?먯꽌 ?꾩씠???댁젣
+        // ????????룻꼥?????⑤９苡??????????밸븶??뫢???????쇨덫??
         ReleaseItemFromHand(controller, itemHandIsHolding);
         
-        // itemModelHolder ?ㅼ젙
+        // itemModelHolder ???濚밸Ŧ???
         var itemHolderTransform = itemModelHolder.transform;
         itemHolderTransform.parent = transform;
         itemHolderTransform.localScale = Vector3.one;
         itemHolderTransform.localPosition = Vector3.zero;
         itemHolderTransform.localEulerAngles = Vector3.zero;
 
-        // ?꾩씠?쒖쓣 ?щ’???먯떇?쇰줈 ?ㅼ젙?섍퀬 ?꾩튂 議곗젙
+        // ?????밸븶??뫢??癲ル슢???믩쨨?????????癲???????????濚밸Ŧ??????롪퍓肉???????밸븶?????곗뒭????
         itemHandIsHolding.transform.parent = transform;
         itemHandIsHolding.transform.position = targetPosition;
         itemHandIsHolding.transform.rotation = targetRotation;
         
         StartCoroutine(DisableItem(itemHandIsHolding));
         
-        Debug.Log($"[InventorySlot] DisableItemInHand: {itemHandIsHolding.name} 鍮꾪솢?깊솕 ?꾨즺");
     }
 
     //Lets physics respond to collider disappearing before disabling object physics update needs to run twice
     private IEnumerator DisableItem(XRBaseInteractable item)
     {
-        Debug.Log($"[InventorySlot] DisableItem ?쒖옉: {item.name}");
+        Debug.Log($"[InventorySlot] DisableItem ??癲ル슢??節녿쨨? {item.name}");
         
-        // ?꾩씠?쒖쓽 ?먮옒 ?꾩튂 ???        Vector3 originalPosition = item.transform.position;
+        // ?????밸븶??뫢??癲ル슢???먮뙀???????????밸븶??????        Vector3 originalPosition = item.transform.position;
         Quaternion originalRotation = item.transform.rotation;
         
-        // ?꾩씠?쒖쓽 Rigidbody 李얘린
+        // ?????밸븶??뫢??癲ル슢???먮뙀?Rigidbody ?轅붽틓?????븐넂??ル젗?
         var rb = item.GetComponent<Rigidbody>();
         if (rb)
         {
-            rb.isKinematic = true; // 臾쇰━ ?곹뼢 諛쏆? ?딅룄濡??ㅼ젙
-            Debug.Log("[InventorySlot] Rigidbody瑜?kinematic?쇰줈 ?ㅼ젙");
+            rb.isKinematic = true; // ????ル늅???????釉뚯뺏????ш끽維뽳쭩?? ??????몃뜪?????濚밸Ŧ???
         }
 
         item.gameObject.SetActive(true);
         yield return null;
 
-        // OnGrabEnableDisable 而댄룷?뚰듃 泥섎━
+        // OnGrabEnableDisable ??????????살퓢???轅붽틓??影?뽧걤??
         var enableDisable = item.GetComponent<OnGrabEnableDisable>();
         if (enableDisable != null)
         {
             enableDisable.EnableAll();
-            //Debug.Log("[InventorySlot] OnGrabEnableDisable 而댄룷?뚰듃 ?쒖꽦??);
+            //Debug.Log("[InventorySlot] OnGrabEnableDisable ??????????살퓢????癲????);
         }
 
-        // ?꾩씠?쒖쓣 ?먮옒 ?꾩튂濡??ㅼ젙
+        // ?????밸븶??뫢??癲ル슢???믩쨨???????????밸븶????????濚밸Ŧ???
         item.transform.position = transform.position;
         item.transform.rotation = transform.rotation;
         
         yield return new WaitForSeconds(Time.fixedDeltaTime * 2);
 
-        // ?꾩씠??鍮꾪솢?깊솕 ??理쒖쥌 ?꾩튂 ?ㅼ젙
+        // ?????밸븶??뫢????????μ떜媛?걫??????轅붽틓????彛??쒓랜???????밸븶?????濚밸Ŧ???
         item.transform.localPosition = Vector3.zero;
         item.gameObject.SetActive(false);
         
-        Debug.Log($"[InventorySlot] ?꾩씠??鍮꾪솢?깊솕 ?꾨즺: {item.name}");
+        Debug.Log($"[InventorySlot] ?????밸븶??뫢????????μ떜媛?걫????????밸븶?? {item.name}");
 
         yield return new WaitForSeconds(Time.fixedDeltaTime);
 
@@ -336,31 +330,28 @@ public class InventorySlot : MonoBehaviour
 
     private void GetNewItemFromSlot(XRDirectInteractor controller)
     {
-        Debug.Log($"[InventorySlot] GetNewItemFromSlot: {currentSlotItem.name} ?쒖꽦???쒖옉");
         
         currentSlotItem.gameObject.SetActive(true);
         currentSlotItem.transform.parent = null;
 
-        // Rigidbody??isKinematic ?댁젣
+        // Rigidbody??isKinematic ?????쇨덫??
         var rb = currentSlotItem.GetComponent<Rigidbody>();
         if (rb)
         {
             rb.isKinematic = false;
-            //Debug.Log("[InventorySlot] Rigidbody??isKinematic ?댁젣??);
+            //Debug.Log("[InventorySlot] Rigidbody??isKinematic ?????쇨덫???);
         }
 
         GrabNewItem(controller, currentSlotItem);
         //grabAudio.Play();
         
-        Debug.Log($"[InventorySlot] GetNewItemFromSlot: {currentSlotItem.name} ?쒖꽦???꾨즺");
     }
 
     private void ReleaseItemFromHand(XRBaseInteractor interactor, XRBaseInteractable interactable)
     {
-        Debug.Log($"[InventorySlot] ReleaseItemFromHand: {interactable.name} ?댁젣 ?쒕룄");
         if (interactionManager == null)
         {
-            Debug.LogError("[InventorySlot] XR Interaction Manager媛 ?놁뒿?덈떎!");
+            Debug.LogError("[InventorySlot] XR Interaction Manager???ル봿?? ?????욱룏???????낆젵!");
             return;
         }
         interactionManager.SelectExit(interactor, interactable);
@@ -368,10 +359,9 @@ public class InventorySlot : MonoBehaviour
 
     private void GrabNewItem(XRBaseInteractor interactor, XRBaseInteractable interactable)
     {
-        Debug.Log($"[InventorySlot] GrabNewItem: {interactable.name} ?↔린 ?쒕룄");
         if (interactionManager == null)
         {
-            Debug.LogError("[InventorySlot] XR Interaction Manager媛 ?놁뒿?덈떎!");
+            Debug.LogError("[InventorySlot] XR Interaction Manager???ル봿?? ?????욱룏???????낆젵!");
             return;
         }
         interactionManager.SelectEnter(interactor, interactable);
@@ -380,55 +370,52 @@ public class InventorySlot : MonoBehaviour
 
     private void SetupNewMeshClone(XRBaseInteractable itemHandIsHolding)
     {
-        Debug.Log($"[InventorySlot] SetupNewMeshClone ?쒖옉: {itemHandIsHolding.name}");
+        Debug.Log($"[InventorySlot] SetupNewMeshClone ??癲ル슢??節녿쨨? {itemHandIsHolding.name}");
 
         if (itemSlotMeshClone)
         {
-            Debug.Log("[InventorySlot] 湲곗〈 硫붿떆 ?대줎 ?쒓굅");
             Destroy(itemSlotMeshClone.gameObject);
         }
 
-        // ?대줎??itemModelHolder???먯떇?쇰줈 吏곸젒 ?앹꽦
-        Debug.Log($"[InventorySlot] ??硫붿떆 ?대줎 ?앹꽦 - 遺紐? {itemModelHolder.name}");
+        // ???嚥??itemModelHolder?????癲?????????轅붽틓????????袁⑸즴???
+        Debug.Log($"[InventorySlot] ???轅붽틓????????嚥????袁⑸즴???- ????뉖??? {itemModelHolder.name}");
         itemSlotMeshClone = Instantiate(itemHandIsHolding, itemModelHolder.position, itemModelHolder.rotation, itemModelHolder).transform;
-        itemSlotMeshClone.gameObject.SetActive(true); // 紐낆떆?곸쑝濡??쒖꽦??
+        itemSlotMeshClone.gameObject.SetActive(true); // ?轅붽틓??筌뚮챶夷??????⑤뜪癲ル슢?뤺キ????癲????
         try
         {
-            Debug.Log("[InventorySlot] ?대줎??而댄룷?뚰듃 ?쒓굅 ?쒖옉");
             DestroyComponentsOnClone(itemSlotMeshClone);
-            Debug.Log("[InventorySlot] ?대줎??而댄룷?뚰듃 ?쒓굅 ?꾨즺");
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"[InventorySlot] 而댄룷?뚰듃 ?쒓굅 以??ㅻ쪟 諛쒖깮: {e.Message}");
+            Debug.LogError($"[InventorySlot] ??????????살퓢?????怨뚰뇠???떐????????⑤챷逾???ш끽維뽳쭩?좊쐪筌먲퐢??? {e.Message}");
         }
 
-        // 諛붿슫???쇳꽣 ?ㅼ젙
+        // ??ш끽維뽳쭩?????????モ닪?????濚밸Ŧ???
         Bounds bounds = GetBoundsOfAllMeshes(itemSlotMeshClone.transform);
         if (!boundCenterTransform)
         {
             boundCenterTransform = new GameObject("Bound Center Transform").transform;
-            boundCenterTransform.parent = itemModelHolder; // 紐낆떆?곸쑝濡?itemModelHolder???먯떇?쇰줈 ?ㅼ젙
+            boundCenterTransform.parent = itemModelHolder; // ?轅붽틓??筌뚮챶夷??????⑤뜪癲ル슢?뤺キ??itemModelHolder?????癲???????????濚밸Ŧ???
         }
 
-        // ?꾩튂? ?뚯쟾 ?ㅼ젙
+        // ?????밸븶??? ????????濚밸Ŧ???
         boundCenterTransform.position = bounds.center;
         boundCenterTransform.rotation = itemHandIsHolding.transform.rotation;
         
-        // ?대줎??boundCenterTransform???먯떇?쇰줈 ?ㅼ젙
+        // ???嚥??boundCenterTransform?????癲???????????濚밸Ŧ???
         itemSlotMeshClone.parent = boundCenterTransform;
 
-        // ?쒖옉 ?몃옖?ㅽ뤌 ?ㅼ젙
+        // ??癲ル슢??節녿쨨???꿔꺂?????????貫猷????濚밸Ŧ???
         startingTransformFromHand.SetTransformStruct(
             boundCenterTransform.localPosition,
             boundCenterTransform.localRotation,
             boundCenterTransform.localScale
         );
 
-        // ?뚯쟾 ?ㅼ젙
+        // ????????濚밸Ŧ???
         boundCenterTransform.localEulerAngles = new Vector3(0, 90, 0);
 
-        // ?ш린 議곗젅
+        // ???????곗뒭????
         inventorySize.enabled = true;
         Vector3 parentSize = inventorySize.bounds.size;
         while (bounds.size.x > parentSize.x || bounds.size.y > parentSize.y || bounds.size.z > parentSize.z)
@@ -440,9 +427,9 @@ public class InventorySlot : MonoBehaviour
 
         goalSizeToFitInSlot = boundCenterTransform.transform.localScale;
 
-        // ?좊땲硫붿씠???쒖옉 ?꾩뿉 怨꾩링 援ъ“ ?뺤씤
-        Debug.Log($"[InventorySlot] ?대줎 遺紐??뺤씤: {itemSlotMeshClone.parent.name}");
-        Debug.Log($"[InventorySlot] boundCenterTransform 遺紐??뺤씤: {boundCenterTransform.parent.name}");
+        // ?????ル뭸????룸퉲?????щ탵?????癲ル슢??節녿쨨??????밸븶????壤굿???잏솾?????繹????꿔꺂??틝?????
+        Debug.Log($"[InventorySlot] ???嚥?????뉖?????꿔꺂??틝????? {itemSlotMeshClone.parent.name}");
+        Debug.Log($"[InventorySlot] boundCenterTransform ????뉖?????꿔꺂??틝????? {boundCenterTransform.parent.name}");
 
         animateItemToSlotCoroutine = StartCoroutine(AnimateItemToSlot());
     }
@@ -451,74 +438,72 @@ public class InventorySlot : MonoBehaviour
 
     private void DestroyComponentsOnClone(Transform clone)
     {
-        Debug.Log("[InventorySlot] ?대줎 而댄룷?뚰듃 ?쒓굅 ?쒖옉");
 
         try
         {
-            // 癒쇱? IReturnMovedColliders 泥섎━
+            // ?雅?퍔瑗ⓩ뤃?? IReturnMovedColliders ?轅붽틓??影?뽧걤??
             var movedColliders = clone.GetComponentsInChildren<IReturnMovedColliders>(true);
             foreach (var t in movedColliders) 
             {
                 t.ReturnMovedColliders();
-                Debug.Log($"[InventorySlot] IReturnMovedColliders 泥섎━: {t.GetType().Name}");
+                Debug.Log($"[InventorySlot] IReturnMovedColliders ?轅붽틓??影?뽧걤?? {t.GetType().Name}");
             }
 
-            // 癒쇱? InteractableItemData 鍮꾪솢?깊솕
+            // ?雅?퍔瑗ⓩ뤃?? InteractableItemData ??????μ떜媛?걫???
             var itemDataComponents = clone.GetComponentsInChildren<InteractableItemData>(true);
             foreach (var t in itemDataComponents)
             {
                 t.enabled = false;
-                Debug.Log($"[InventorySlot] InteractableItemData 鍮꾪솢?깊솕: {t.name}");
+                Debug.Log($"[InventorySlot] InteractableItemData ??????μ떜媛?걫??? {t.name}");
             }
 
-            // XRGrabInteractable 鍮꾪솢?깊솕
+            // XRGrabInteractable ??????μ떜媛?걫???
             var grabComponents = clone.GetComponentsInChildren<XRGrabInteractable>(true);
             foreach (var t in grabComponents)
             {
                 t.enabled = false;
-                Debug.Log($"[InventorySlot] XRGrabInteractable 鍮꾪솢?깊솕: {t.name}");
+                Debug.Log($"[InventorySlot] XRGrabInteractable ??????μ떜媛?걫??? {t.name}");
             }
 
-            // Collider? Light ?쒓굅
+            // Collider?? Light ???怨뚰뇠???떐?
             var lights = clone.GetComponentsInChildren<Light>(true);
             foreach (var t in lights) 
             {
                 Destroy(t);
-                Debug.Log($"[InventorySlot] Light ?쒓굅: {t.name}");
+                Debug.Log($"[InventorySlot] Light ???怨뚰뇠???떐? {t.name}");
             }
 
             var colliders = clone.GetComponentsInChildren<Collider>(true);
             foreach (var t in colliders)
             {
                 Destroy(t);
-                Debug.Log($"[InventorySlot] Collider ?쒓굅: {t.name}");
+                Debug.Log($"[InventorySlot] Collider ???怨뚰뇠???떐? {t.name}");
             }
 
-            // ?섎㉧吏 MonoBehaviour 而댄룷?뚰듃???쒓굅 (InteractableItemData? XRGrabInteractable ?쒖쇅)
+            // ?????猷붽틛????? MonoBehaviour ??????????살퓢??????怨뚰뇠???떐?(InteractableItemData?? XRGrabInteractable ??癲ル슢????
             var monoBehaviors = clone.GetComponentsInChildren<MonoBehaviour>(true);
             foreach (var t in monoBehaviors)
             {
                 if (!(t is InteractableItemData) && !(t is XRGrabInteractable))
                 {
                     Destroy(t);
-                    Debug.Log($"[InventorySlot] MonoBehaviour ?쒓굅: {t.GetType().Name}");
+                    Debug.Log($"[InventorySlot] MonoBehaviour ???怨뚰뇠???떐? {t.GetType().Name}");
                 }
             }
 
-            // Rigidbody??鍮꾪솢?깊솕留??섍퀬 ?쒓굅?섏? ?딆쓬
+            // Rigidbody????????μ떜媛?걫????怨뺣만?????롪퍓肉?????怨뚰뇠???떐??? ?????ㅿ폎??
             var rigidBodies = clone.GetComponentsInChildren<Rigidbody>(true);
             foreach (var t in rigidBodies)
             {
                 t.isKinematic = true;
                 t.useGravity = false;
-                Debug.Log($"[InventorySlot] Rigidbody 鍮꾪솢?깊솕: {t.name}");
+                Debug.Log($"[InventorySlot] Rigidbody ??????μ떜媛?걫??? {t.name}");
             }
 
-            Debug.Log("[InventorySlot] ?대줎 而댄룷?뚰듃 ?쒓굅 ?꾨즺");
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"[InventorySlot] 而댄룷?뚰듃 ?쒓굅 以??ㅻ쪟 諛쒖깮: {e.Message}\n{e.StackTrace}");
+            Debug.LogError($"[InventorySlot] ??????????살퓢?????怨뚰뇠???떐????????⑤챷逾???ш끽維뽳쭩?좊쐪筌먲퐢??? {e.Message}\n{e.StackTrace}");
         }
     }
 
@@ -591,12 +576,12 @@ public class InventorySlot : MonoBehaviour
         if (isLeftHand)
         {
             leftEffect.SetActive(true);
-            Debug.Log("[InventorySlot] 왼쪽 효과 활성화");
+            //Debug.Log("[InventorySlot] ???リ옇?ユ뤃???壤굿??뗫툞 ??嶺????);
         }
         else
         {
             rightEffect.SetActive(true);
-            Debug.Log("[InventorySlot] 오른쪽 효과 활성화");
+            //Debug.Log("[InventorySlot] ?????봔饔낃퀣????壤굿??뗫툞 ??嶺????);
         }
 
         if (slotDisplayToAddItem != null)
@@ -620,12 +605,10 @@ public class InventorySlot : MonoBehaviour
         if (isLeftHand)
         {
             leftEffect.SetActive(false);
-            Debug.Log("[InventorySlot] 왼쪽 효과 비활성화");
         }
         else
         {
             rightEffect.SetActive(false);
-            Debug.Log("[InventorySlot] 오른쪽 효과 비활성화");
         }
 
         if (slotDisplayToAddItem != null)

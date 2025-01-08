@@ -98,9 +98,6 @@ public class InventoryGrabInteractBackup : MonoBehaviour
         if (controller && !controllers.Contains(controller))
         {
             controllers.Add(controller);
-
-            // isGripped is marked as false when a slot is interacted with to prevent repeated interaction.
-            // In that event, this checks that again if the player moved the hand in and out of the slot
             var gripState = GetTriggerOrGripValue();
 
             if (controller == leftHand)
