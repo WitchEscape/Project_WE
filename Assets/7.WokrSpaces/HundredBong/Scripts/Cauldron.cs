@@ -6,14 +6,28 @@ using UnityEngine.Events;
 
 public class Cauldron : MonoBehaviour
 {
-    public GameObject magicStonePrefab;
-    public float churnForce = 3f;
+    [Header("빛나는 돌 프리팹")] public GameObject magicStonePrefab;
+    [Header("휘저을때 필요한 힘")] public float churnForce = 3f;
+    [Header("물약 리스트")] public List<GameObject> positions;
+    [Header("성공했을 때 파티클")] public ParticleSystem successParticle;
+    [Header("실패했을 때 파티클")] public ParticleSystem failParticle;
+
 
     [HideInInspector] public Observable<int> postionCount;
     [HideInInspector] public Observable<bool> isCorrect;
 
     private bool[] isCorrectRune = new bool[4];
     private bool isChurned;
+    private bool wasInstantiate;
+
+    private void Awake()
+    {
+        foreach (GameObject obj in positions)
+        {
+            //리셋될 때 Transform 리셋할 수 있도록 컴포넌트 부착
+            obj.AddComponent<ResetPostion>();   
+        }
+    }
 
     private void OnEnable()
     {
@@ -81,9 +95,15 @@ public class Cauldron : MonoBehaviour
         }
         else if (isCorrect.Value == true)
         {
-            GameObject core = Instantiate(magicStonePrefab);
-            core.transform.position = gameObject.transform.position + (Vector3.up * 0.6f);
-            //TODO : 성공했을 때 파티클 재생
+            if (wasInstantiate == false)
+            {
+                GameObject core = Instantiate(magicStonePrefab);
+                core.transform.position = gameObject.transform.position + (Vector3.up * 0.6f);
+
+                //다음에 다시 생성되지 않도록 예외처리
+                wasInstantiate = true;
+            }
+            successParticle.Play();
         }
 
         //조건 검사가 끝나면 다시 포션카운트 0으로 초기화
@@ -95,6 +115,9 @@ public class Cauldron : MonoBehaviour
         {
             isCorrectRune[i] = false;
         }
+
+        //제조에 성공하던 실패하던 위치 리셋
+        ResetPostions();
     }
 
     private void PutInCauldron(GameObject arg)
@@ -179,6 +202,26 @@ public class Cauldron : MonoBehaviour
         if (other.CompareTag("Scoop"))
         {
             //isChurned = false;
+        }
+    }
+
+    [ContextMenu("Test2")]
+    private void ResetPostions()
+    {
+        foreach (GameObject obj in positions)
+        {
+            //포션들 전부 껐다 키면서 위치 리셋, 포션들 마다 OnEnable 달려있는 스크립트 달아줘야함
+            //리셋을 해주긴 하는데 만약 기획에서 솥에 들어간 오브젝트만 리셋해달라고 하면 어떻게 하죠
+
+            //1. 모든 포션들 리셋시키기
+            //obj.SetActive(false);
+            //obj.SetActive(true);
+
+            //2. 이미 들어간 포션들만 리셋시키기
+            if (obj.activeSelf == false)
+            {
+                obj.SetActive(true);
+            }
         }
     }
 

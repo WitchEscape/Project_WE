@@ -49,6 +49,7 @@ public class MagicStone : MonoBehaviour
 
     private void OnReleaseCore(SelectExitEventArgs arg)
     {
+        //땡겨올 때 Use Gravity 설정해서 정상적으로 날아오도록 설정 
         rb.useGravity = true;
     }
 
