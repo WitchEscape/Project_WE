@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -11,13 +12,19 @@ public class BookAnimationControll : MonoBehaviour
     private GameObject modelling;
     [SerializeField]
     private GameObject aniObject;
+    [SerializeField]
+    private AnimationClip openClip;
+    [SerializeField]
+    private AnimationClip closeClip;
     private bool isGrab;
+    private float animationTime;
 
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
         if (grab == null) grab = GetComponent<XRGrabInteractable>();
         ObjectControll();
+        GrabInteractorEventSet();
     }
 
     private void ObjectControll()
@@ -33,7 +40,82 @@ public class BookAnimationControll : MonoBehaviour
             Debug.LogError("BookAnimationControll / GrabInteratable is Null");
             return;
         }
+        grab.selectEntered.AddListener((x) =>
+        {
+            isGrab = true;
+            ObjectControll();
+        });
+        grab.activated.AddListener(BookAnimation);
+        grab.deactivated.AddListener(IsOpenBookCheak);
+    }
 
-        //grab.selectEntered.AddListener();
+    private void BookAnimation(ActivateEventArgs arg)
+    {
+        if (animator == null)
+        {
+            Debug.LogError("BookAnimationController / Animator is Null");
+            return;
+        }
+        if (closeClip == null || openClip == null)
+        {
+            Debug.LogError("BookAnimationController / AnimationClip is Null");
+            return;
+        }
+
+
+
+        if (Time.time >= animationTime)
+        {
+            print(animator.GetBool("IsOpen"));
+            animator.SetBool("IsOpen", !animator.GetBool("IsOpen"));
+            animationTime = Time.time + (animator.GetBool("IsOpen") ? openClip.length : closeClip.length);
+        }
+    }
+
+    private void IsOpenBookCheak(DeactivateEventArgs arg)
+    {
+        isGrab = false;
+
+        if (animator == null)
+        {
+            Debug.LogError("BookAnimationController / Animator is Null");
+            return;
+        }
+        if (closeClip == null || openClip == null)
+        {
+            Debug.LogError("BookAnimationController / AnimationClip is Null");
+            return;
+        }
+
+
+        if (Time.time >= animationTime)
+        {
+            _ = StartCoroutine(BookCloseCouortine());
+        }
+        else
+        {
+            ObjectControll();
+        }
+    }
+
+    private IEnumerator BookCloseCouortine()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() =>
+            {
+                return Time.time >= animationTime;
+            });
+            if (animator.GetBool("IsOpen"))
+            {
+                animator.SetBool("isOpen", false);
+                animationTime = Time.time + closeClip.length;
+            }
+            else
+            {
+                ObjectControll();
+                yield break;
+            }
+        }
     }
 }
