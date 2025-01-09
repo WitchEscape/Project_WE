@@ -16,7 +16,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private AudioSource enableAudio = null, disableAudio = null;
     [SerializeField] private GameObject pannel; 
     [SerializeField] private bool lookAtController = false;
-    private bool isActive = false;
+    private bool isActive = true;
+
+    public bool IsInventoryOpen { get; private set; }
 
     private void Start()
     {
@@ -36,11 +38,11 @@ public class InventoryManager : MonoBehaviour
             itemSlot.StartCoroutine(itemSlot.CreateStartingItemAndDisable());
         }
 
-        if (openMenuInputLeftHand != null && openMenuInputRightHand != null)
-        {
-            openMenuInputLeftHand.GetInputAction().performed += x => ToggleInventoryAtController(false);
-            openMenuInputRightHand.GetInputAction().performed += x => ToggleInventoryAtController(true);
-        }
+        //if (openMenuInputLeftHand != null && openMenuInputRightHand != null)
+        //{
+        //    openMenuInputLeftHand.GetInputAction().performed += x => ToggleInventoryAtController(false);
+        //    openMenuInputRightHand.GetInputAction().performed += x => ToggleInventoryAtController(true);
+        //}
     }
 
     private void OnValidate()
@@ -60,19 +62,16 @@ public class InventoryManager : MonoBehaviour
         openMenuInputRightHand.DisableAction();
     }
 
-    private void ToggleInventoryAtController(bool isRightHand)
+    public void ToggleInventoryAtController()
     {
-        if (isRightHand)
-            TurnOnInventory(rightController.gameObject);
-        else
-            TurnOnInventory(leftController.gameObject);
+        TurnOnInventory();
     }
 
-    private void TurnOnInventory(GameObject hand)
+    private void TurnOnInventory()
     {
         isActive = !isActive;
-        ToggleInventoryItems(isActive, hand);
-        PlayAudio(isActive);
+        ToggleInventoryItems(isActive);
+        //PlayAudio(isActive);
     }
 
     private void PlayAudio(bool state)
@@ -83,9 +82,11 @@ public class InventoryManager : MonoBehaviour
             disableAudio.Play();
     }
 
-    private void ToggleInventoryItems(bool state, GameObject hand)
+    public void ToggleInventoryItems(bool state)
     {
-        if (state)
+        IsInventoryOpen = state;
+        
+        if(state)
         {
             pannel.SetActive(true);
         }
@@ -93,25 +94,19 @@ public class InventoryManager : MonoBehaviour
         {
             pannel.SetActive(false);
         }
-        foreach (var itemSlot in inventorySlots)
+
+        // 인벤토리 UI 활성화/비활성화
+        foreach (var slot in inventorySlots)
         {
-            if (!state)
+            if (slot != null)
             {
-                itemSlot.DisableSlot();
-            }
-            else
-            {
-                if (!itemSlot.gameObject.activeSelf)
-                {
-                    itemSlot.gameObject.SetActive(true);
-                }
-                itemSlot.EnableSlot();
-                SetPositionAndRotation(hand);
+                slot.gameObject.SetActive(state);
             }
         }
+        SetPositionAndRotation();
     }
 
-    private void SetPositionAndRotation(GameObject hand)
+    private void SetPositionAndRotation()
     {
         Transform cameraTransform = Camera.main.transform;
         
