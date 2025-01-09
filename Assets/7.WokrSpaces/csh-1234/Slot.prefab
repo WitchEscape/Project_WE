@@ -909,8 +909,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1835669618016567781}
-  - component: {fileID: 1835669618016567778}
   - component: {fileID: 1835669618016567779}
+  - component: {fileID: 1835669618016567778}
   - component: {fileID: 1835669618016567780}
   - component: {fileID: 8696354539802983842}
   m_Layer: 0
@@ -930,8 +930,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0015347794, y: 0.0015347796, z: 0.0015347797}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.0013, y: 0.0013, z: 0.0013}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4361695166027122516}
   - {fileID: 7203571084698061481}
@@ -942,32 +942,6 @@ Transform:
   - {fileID: 442646842137904318}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1835669618016567778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835669618016567782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c4150928aa8cf743b9d64e6c96e8124, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingItem: {fileID: 0}
-  slotDisplayWhenContainsItem: {fileID: 1835669617859143372}
-  slotDisplayToAddItem: {fileID: 1835669617239174410}
-  itemModelHolder: {fileID: 1835669619289417563}
-  backImagesThatRotate: {fileID: 1835669617796272656}
-  inventorySize: {fileID: 1835669618514384806}
-  leftEffect: {fileID: 0}
-  rightEffect: {fileID: 0}
-  collider: {fileID: 1835669619151401656}
-  grabAudio: {fileID: 0}
-  releaseAudio: {fileID: 0}
-  inventorySlotUpdated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!54 &1835669618016567779
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -995,6 +969,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1835669618016567778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835669618016567782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4150928aa8cf743b9d64e6c96e8124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingItem: {fileID: 0}
+  slotDisplayWhenContainsItem: {fileID: 1835669617859143372}
+  slotDisplayToAddItem: {fileID: 1835669617239174410}
+  itemModelHolder: {fileID: 1835669619289417563}
+  backImagesThatRotate: {fileID: 1835669617796272656}
+  inventorySize: {fileID: 1835669618514384806}
+  leftEffect: {fileID: 3673100607246270546}
+  rightEffect: {fileID: 7246867688524467523}
+  collider: {fileID: 1835669619151401656}
+  grabAudio: {fileID: 0}
+  releaseAudio: {fileID: 0}
+  inventorySlotUpdated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1835669618016567780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,7 +1651,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 60, y: 60, z: 50}
+  m_Size: {x: 40, y: 40, z: 40}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1835669618547983912
 GameObject:
@@ -2919,7 +2919,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7, y: 0.7, z: 0.7}
+  m_Size: {x: 0.3, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7246867688524467523
 GameObject:

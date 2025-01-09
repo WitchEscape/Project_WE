@@ -30,7 +30,7 @@ public class SubtitleCanvas : CanvasFollow
         {
             timer += Time.deltaTime;
             //fadeCanvasGroup.alpha = Mathf.Lerp(0, 1, timer / fadeDuration);
-            //화면이 너무 확확 돌아가는 느낌을 받아서 Lerp보다 부드러운 SmoothStep 사용, 인자로 들어가는 값은 Lerp랑 같음
+            //화면이 너무 확확 돌아가는 느낌을 받아서 Lerp보다 부드러운 SmoothStep 사용
             fadeCanvasGroup.alpha = Mathf.SmoothStep(1, 0, timer / fadeDuration);
 
             yield return null;

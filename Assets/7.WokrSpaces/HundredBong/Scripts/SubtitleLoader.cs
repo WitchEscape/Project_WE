@@ -94,7 +94,7 @@ public class SubtitleLoader : MonoBehaviour
         //Debug.Log($"필터링 : {filteredSubtitles.Count}");
         for (int i = 0; i < filteredSubtitles.Count; i++)
         {
-            Debug.Log($"{i} : {filteredSubtitles[i]}");
+            //Debug.Log($"{i} : {filteredSubtitles[i]}");
         }
         return filteredSubtitles;
     }
@@ -120,7 +120,7 @@ public class SubtitleLoader : MonoBehaviour
         {
             if (subtitle.Language == language.ToString())
             {
-                Debug.Log($"[Index: {subtitle.Index}, Chapter : {subtitle.Chapter}, Laungue : {subtitle.Language}] {subtitle.Content}");
+                //Debug.Log($"[Index: {subtitle.Index}, Chapter : {subtitle.Chapter}, Laungue : {subtitle.Language}] {subtitle.Content}");
             }
         }
 
