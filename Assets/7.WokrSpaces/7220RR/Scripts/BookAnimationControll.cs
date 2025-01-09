@@ -46,7 +46,7 @@ public class BookAnimationControll : MonoBehaviour
             ObjectControll();
         });
         grab.activated.AddListener(BookAnimation);
-        grab.deactivated.AddListener(IsOpenBookCheak);
+        grab.selectExited.AddListener(IsOpenBookCheak);
     }
 
     private void BookAnimation(ActivateEventArgs arg)
@@ -72,7 +72,7 @@ public class BookAnimationControll : MonoBehaviour
         }
     }
 
-    private void IsOpenBookCheak(DeactivateEventArgs arg)
+    private void IsOpenBookCheak(SelectExitEventArgs arg)
     {
         isGrab = false;
 
