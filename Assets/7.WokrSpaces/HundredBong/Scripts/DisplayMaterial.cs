@@ -11,13 +11,13 @@ public class DisplayMaterial : MonoBehaviour
     private float elapsedTime = 0f;
 
     private bool isChanging;
-    private bool isDone;
     private bool wasPlayParticle;
     private bool wasPlaying;
 
     private float erase = 1f;
 
-    public ParticleSystem spawnParticle;
+    [Header("마법진 생성 시 재생할 파티클")] public ParticleSystem spawnParticle;
+
     private void Awake()
     {
         material = GetComponent<MeshRenderer>().material;
@@ -82,6 +82,13 @@ public class DisplayMaterial : MonoBehaviour
             //새로운 투명도 적용
             material.color = new Color(material.color.r, material.color.g, material.color.b, erase);
 
+            //파티클에도 새로운 투명도 적용
+            ParticleSystem.MainModule mainModule = spawnParticle.main;
+            Color startColor = mainModule.startColor.color;
+            startColor.a = erase;
+            mainModule.startColor = startColor;
+
+
             //투명도가 일정 이하이면
             if (material.color.a <= 0f && wasPlaying == false)
             {
@@ -90,6 +97,9 @@ public class DisplayMaterial : MonoBehaviour
 
                 //투명도를 0으로 만들고
                 material.color = new Color(material.color.r, material.color.g, material.color.b, 0);
+
+                startColor.a = 0;
+                mainModule.startColor = startColor;
 
                 Debug.Log("투명도 0");
 
