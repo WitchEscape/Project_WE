@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class BookAnimationControll : MonoBehaviour
 {
-    [SerializeField]
-    private Animator animator;
+    public Animator animator;
     [SerializeField]
     private XRGrabInteractable grab;
     [SerializeField]
@@ -45,9 +45,53 @@ public class BookAnimationControll : MonoBehaviour
             isGrab = true;
             ObjectControll();
         });
-        grab.activated.AddListener(BookAnimation);
+        //grab.activated.AddListener(BookAnimation);
+        grab.selectEntered.AddListener(ControllerEventSet);
+        grab.selectExited.AddListener(ContollerEventRemove);
+
         grab.selectExited.AddListener(IsOpenBookCheak);
     }
+
+    private void ContollerEventRemove(SelectExitEventArgs arg)
+    {
+        ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
+        controller.scaleToggleAction.action.performed -= ControllerEvent;
+    }
+
+    private void ControllerEventSet(SelectEnterEventArgs arg)
+    {
+        ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
+        controller.scaleToggleAction.action.performed += ControllerEvent;
+    }
+
+    private void ControllerEvent(InputAction.CallbackContext call)
+    {
+        BookAnimation();
+    }
+
+    private void BookAnimation()
+    {
+        if (animator == null)
+        {
+            Debug.LogError("BookAnimationController / Animator is Null");
+            return;
+        }
+        if (closeClip == null || openClip == null)
+        {
+            Debug.LogError("BookAnimationController / AnimationClip is Null");
+            return;
+        }
+
+
+
+        if (Time.time >= animationTime)
+        {
+            print(animator.GetBool("IsOpen"));
+            animator.SetBool("IsOpen", !animator.GetBool("IsOpen"));
+            animationTime = Time.time + (animator.GetBool("IsOpen") ? openClip.length : closeClip.length);
+        }
+    }
+
 
     private void BookAnimation(ActivateEventArgs arg)
     {

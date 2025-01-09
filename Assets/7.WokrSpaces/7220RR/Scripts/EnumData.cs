@@ -13,3 +13,10 @@ public enum InteractorType
     Single,
     Multiple
 }
+
+public enum ActiveUIType
+{
+    None,
+    UI,
+    Object
+}
