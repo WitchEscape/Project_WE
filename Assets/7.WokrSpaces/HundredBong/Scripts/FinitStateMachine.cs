@@ -126,14 +126,15 @@ public class FinitStateMachine : MonoBehaviour
         if (currentState != State.Talk) { return; }
 
         float dis = Vector3.Distance(gameObject.transform.position, mainCamera.transform.position);
-
+        //Debug.Log($"Dis  {dis}");
+        //Debug.Log($"상태 : {isTalking}");
         //플레이어와의 거리가 1 이하면
-        if (dis <= 1)
+        if (dis <= 2f)
         {
             isTalking = true;
         }
 
-        if (isTalking && 2 <= dis)
+        if (isTalking && 4f <= dis)
         {
             //대화 상태일 때 거리가 멀어지면 Talk 종료
             EndTalkByButtonOrDistance();
