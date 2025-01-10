@@ -58,13 +58,21 @@ public class BookAnimationControll : MonoBehaviour
     private void ContollerEventRemove(SelectExitEventArgs arg)
     {
         ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
-        controller.scaleToggleAction.action.performed -= ControllerEvent;
+        if (controller != null)
+            controller.scaleToggleAction.action.performed -= ControllerEvent;
     }
 
     private void ControllerEventSet(SelectEnterEventArgs arg)
     {
+        //if (arg.interactorObject.transform.TryGetComponent<XRBaseInteractor>(out XRBaseInteractor interactor))
+        //{
+        //    ActionBasedController controller = interactor.transform.GetComponentInParent<ActionBasedController>();
+        //    controller.scaleToggleAction.action.performed += ControllerEvent;
+        //}
+
         ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
-        controller.scaleToggleAction.action.performed += ControllerEvent;
+        if (controller != null)
+            controller.scaleToggleAction.action.performed += ControllerEvent;
     }
 
     private void ControllerEvent(InputAction.CallbackContext call)
@@ -84,8 +92,6 @@ public class BookAnimationControll : MonoBehaviour
             Debug.LogError("BookAnimationController / AnimationClip is Null");
             return;
         }
-
-
 
         if (Time.time >= animationTime)
         {
@@ -138,15 +144,15 @@ public class BookAnimationControll : MonoBehaviour
             return;
         }
 
-
-        if (Time.time >= animationTime)
-        {
-            _ = StartCoroutine(BookCloseCouortine());
-        }
-        else
-        {
-            ObjectControll();
-        }
+        if (aniObject.activeSelf && animator.GetBool("IsOpen"))
+            if (Time.time >= animationTime)
+            {
+                _ = StartCoroutine(BookCloseCouortine());
+            }
+            else
+            {
+                ObjectControll();
+            }
     }
 
     private IEnumerator BookCloseCouortine()

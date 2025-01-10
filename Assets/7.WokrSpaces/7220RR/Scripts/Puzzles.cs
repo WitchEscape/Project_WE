@@ -19,7 +19,12 @@ public class Puzzles : MonoBehaviour
     private int currentNum;
     private int totalNum;
     #endregion
+    #region Dial
+    public int dailCount;
+    public XRBaseInteractable[] dialInteractables;
+    public Collider[] dialColliders;
 
+    #endregion
     private void Awake()
     {
         switch (puzzleType)

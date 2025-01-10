@@ -190,22 +190,22 @@ public class Knob : XRBaseInteractable
 
     void UpdateRotation(bool freshCheck = false)
     {
-        // Are we in position offset or direction rotation mode?
         var interactorTransform = m_Interactor.GetAttachTransform(this);
 
-        // We cache the three potential sources of rotation - the position offset, the forward vector of the controller, and up vector of the controller
-        // We store any data used for determining which rotation to use, then flatten the vectors to the local xz plane
         var localOffset = transform.InverseTransformVector(interactorTransform.position - m_Handle.position);
         localOffset.y = 0.0f;
         var radiusOffset = transform.TransformVector(localOffset).magnitude;
         localOffset.Normalize();
 
-        var localForward = transform.InverseTransformDirection(interactorTransform.forward);
+        var localForward = transform.InverseTransformDirection(interactorTransform.up);
+        //var localY = Math.Abs(localForward.x);
         var localY = Math.Abs(localForward.y);
+        //localForward.x = 0.0f;
         localForward.y = 0.0f;
         localForward.Normalize();
 
         var localUp = transform.InverseTransformDirection(interactorTransform.up);
+        //localUp.x = 0.0f;
         localUp.y = 0.0f;
         localUp.Normalize();
 
@@ -213,8 +213,6 @@ public class Knob : XRBaseInteractable
         if (m_PositionDriven && !freshCheck)
             radiusOffset *= (1.0f + k_ModeSwitchDeadZone);
 
-        // Determine when a certain source of rotation won't contribute - in that case we bake in the offset it has applied
-        // and set a new anchor when they can contribute again
         if (radiusOffset >= m_PositionTrackedRadius)
         {
             if (!m_PositionDriven || freshCheck)
@@ -226,7 +224,6 @@ public class Knob : XRBaseInteractable
         else
             m_PositionDriven = false;
 
-        // If it's not a fresh check, then we weight the local Y up or down to keep it from flickering back and forth at boundaries
         if (!freshCheck)
         {
             if (!m_UpVectorDriven)
