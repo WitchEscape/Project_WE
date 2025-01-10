@@ -18,11 +18,14 @@ public class BookAnimationControll : MonoBehaviour
     private AnimationClip closeClip;
     private bool isGrab;
     private float animationTime;
+    [SerializeField]
+    private Activated activated;
 
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
         if (grab == null) grab = GetComponent<XRGrabInteractable>();
+        if (activated == null) activated = GetComponent<Activated>();
         ObjectControll();
         GrabInteractorEventSet();
     }
@@ -89,6 +92,10 @@ public class BookAnimationControll : MonoBehaviour
             print(animator.GetBool("IsOpen"));
             animator.SetBool("IsOpen", !animator.GetBool("IsOpen"));
             animationTime = Time.time + (animator.GetBool("IsOpen") ? openClip.length : closeClip.length);
+            if (!animator.GetBool("IsOpen"))
+            {
+                activated.ActivateUI(false);
+            }
         }
     }
 
@@ -146,6 +153,7 @@ public class BookAnimationControll : MonoBehaviour
     {
         while (true)
         {
+            if (!animator.GetBool("IsOpen")) activated.ActivateUI(false);
             yield return new WaitUntil(() =>
             {
                 return Time.time >= animationTime;
