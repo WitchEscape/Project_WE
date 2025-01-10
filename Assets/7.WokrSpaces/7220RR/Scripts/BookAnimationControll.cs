@@ -152,7 +152,7 @@ public class BookAnimationControll : MonoBehaviour
             });
             if (animator.GetBool("IsOpen"))
             {
-                animator.SetBool("isOpen", false);
+                animator.SetBool("IsOpen", false);
                 animationTime = Time.time + closeClip.length;
             }
             else
