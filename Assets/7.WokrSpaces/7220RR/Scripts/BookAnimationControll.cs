@@ -7,7 +7,7 @@ public class BookAnimationControll : MonoBehaviour
 {
     public Animator animator;
     [SerializeField]
-    private XRGrabInteractable grab;
+    private XRBaseInteractable grab;
     [SerializeField]
     private GameObject modelling;
     [SerializeField]
