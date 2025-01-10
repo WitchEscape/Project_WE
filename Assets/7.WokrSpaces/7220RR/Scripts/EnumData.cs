@@ -20,3 +20,10 @@ public enum ActiveUIType
     UI,
     Object
 }
+
+public enum RotationAxis
+{
+    XAxis,
+    YAxis,
+    ZAxis
+}

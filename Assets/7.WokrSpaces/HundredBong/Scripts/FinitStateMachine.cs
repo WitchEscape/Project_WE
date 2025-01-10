@@ -157,15 +157,15 @@ public class FinitStateMachine : MonoBehaviour
     [ContextMenu("Change Talk Test")]
     private void TestTalk()
     {
-        //if (IsCallOnCooldown() == false)
-        //{
-        lastCallTime = Time.time;
-        ChangeState(State.Talk);
-        // }
-        //else
-        //{
-        //   Debug.LogError($"쿨타임 에러, last : {lastCallTime}, interval : {callInterval}, {Time.time}");
-        // }
+        if (IsCallOnCooldown() == false)
+        {
+            lastCallTime = Time.time;
+            ChangeState(State.Talk);
+        }
+        else
+        {
+            Debug.LogError($"쿨타임 에러, last : {lastCallTime}, interval : {callInterval}, {Time.time}");
+        }
     }
 
     [ContextMenu("Change Move Test")]
