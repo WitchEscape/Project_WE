@@ -18,11 +18,14 @@ public class BookAnimationControll : MonoBehaviour
     private AnimationClip closeClip;
     private bool isGrab;
     private float animationTime;
+    [SerializeField]
+    private Activated activated;
 
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
         if (grab == null) grab = GetComponent<XRGrabInteractable>();
+        if (activated == null) activated = GetComponent<Activated>();
         ObjectControll();
         GrabInteractorEventSet();
     }
@@ -55,13 +58,21 @@ public class BookAnimationControll : MonoBehaviour
     private void ContollerEventRemove(SelectExitEventArgs arg)
     {
         ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
-        controller.scaleToggleAction.action.performed -= ControllerEvent;
+        if (controller != null)
+            controller.scaleToggleAction.action.performed -= ControllerEvent;
     }
 
     private void ControllerEventSet(SelectEnterEventArgs arg)
     {
+        //if (arg.interactorObject.transform.TryGetComponent<XRBaseInteractor>(out XRBaseInteractor interactor))
+        //{
+        //    ActionBasedController controller = interactor.transform.GetComponentInParent<ActionBasedController>();
+        //    controller.scaleToggleAction.action.performed += ControllerEvent;
+        //}
+
         ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
-        controller.scaleToggleAction.action.performed += ControllerEvent;
+        if (controller != null)
+            controller.scaleToggleAction.action.performed += ControllerEvent;
     }
 
     private void ControllerEvent(InputAction.CallbackContext call)
@@ -82,13 +93,15 @@ public class BookAnimationControll : MonoBehaviour
             return;
         }
 
-
-
         if (Time.time >= animationTime)
         {
             print(animator.GetBool("IsOpen"));
             animator.SetBool("IsOpen", !animator.GetBool("IsOpen"));
             animationTime = Time.time + (animator.GetBool("IsOpen") ? openClip.length : closeClip.length);
+            if (!animator.GetBool("IsOpen"))
+            {
+                activated.ActivateUI(false);
+            }
         }
     }
 
@@ -131,21 +144,22 @@ public class BookAnimationControll : MonoBehaviour
             return;
         }
 
-
-        if (Time.time >= animationTime)
-        {
-            _ = StartCoroutine(BookCloseCouortine());
-        }
-        else
-        {
-            ObjectControll();
-        }
+        if (aniObject.activeSelf && animator.GetBool("IsOpen"))
+            if (Time.time >= animationTime)
+            {
+                _ = StartCoroutine(BookCloseCouortine());
+            }
+            else
+            {
+                ObjectControll();
+            }
     }
 
     private IEnumerator BookCloseCouortine()
     {
         while (true)
         {
+            if (!animator.GetBool("IsOpen")) activated.ActivateUI(false);
             yield return new WaitUntil(() =>
             {
                 return Time.time >= animationTime;
