@@ -124,6 +124,6 @@ public class GhostController : MonoBehaviour
     [ContextMenu("Animation Trigger Test")]
     private void PlayAnimation()
     {
-        anim.SetTrigger($"{animationName}");
+        anim.SetTrigger(animationName);
     }
 }
