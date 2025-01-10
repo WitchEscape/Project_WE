@@ -19,7 +19,7 @@ public class TwoPointsLine : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
         line.positionCount = 2;
         line.SetPosition(0, pointA.position);
         line.SetPosition(1, pointB.position);

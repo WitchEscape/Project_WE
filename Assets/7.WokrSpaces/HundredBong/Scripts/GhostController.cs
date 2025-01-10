@@ -13,8 +13,11 @@ public class GhostController : MonoBehaviour
     private Animator anim;
     private XRGrabInteractable grab;
 
+    [Header("힌트 UI")] public CanvasGroup canvas;
+    [Header("힌트 UI 페이드 속도"), Range(0.1f, 1f)] public float fadeSpeed = 0.2f;
+
     //순찰 지점
-    [Header("유령 웨이포인트")]public Transform[] wayPoints = new Transform[4];
+    [Header("유령 웨이포인트")] public Transform[] wayPoints = new Transform[4];
     [Header("애니메이션 파라미터")] public string animationName;
 
     // 플래그 추가
@@ -102,23 +105,66 @@ public class GhostController : MonoBehaviour
                 hasSetDestination = true;
             }
 
-            //Talk 상태 동안 플레이어를 바라보게 설정
-            Vector3 direction = mainCamera.position - transform.position;
-            //Y축 제거
-            direction.y = 0;
-            //방향이 0이 아닌 경우에만 회전
-            if (direction != Vector3.zero) 
+            LookPlayer();
+
+            //agent.pathPending : 경로 계산이 완료되었는지 검사함, 계산중인경우 Distance가 정확하지 않을 수 있음
+            //agent.remainingDistance : 목적지까지의 남은 거리를 반환함 stoppingDistance를 활용하여 도착 여부 확인함
+            if (agent.pathPending == false && agent.remainingDistance <= agent.stoppingDistance)
             {
-                transform.rotation = Quaternion.LookRotation(direction);
+                //hasPath: 경로가 유효한지 확인함
+                //velocity.sqrMagnitude == 0f: NavMeshAgent가 정지했는지 확인함
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    DisplayCanvas();
+                }
             }
-            
         }
         else
         {
             //Talk 상태를 벗어나면 플래그 초기화
             //Debug.LogWarning("플래그 초기화");
             hasSetDestination = false;
+
+            ////캔바스 비활성화
+            //if (canvas.gameObject.activeSelf == true)
+            //{
+            //    canvas.gameObject.SetActive(false);
+            //}
         }
+    }
+
+    private void LookPlayer()
+    {
+        //Talk 상태 동안 플레이어를 바라보게 설정
+        Vector3 direction = mainCamera.position - transform.position;
+        //Y축 제거
+        direction.y = 0;
+        //방향이 0이 아닌 경우에만 회전
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
+    }
+    private void DisplayCanvas()
+    {
+        if (canvas.gameObject.activeSelf == false)
+        {
+            canvas.gameObject.SetActive(true);
+        }
+
+        if (canvas.alpha <= 1)
+        {
+            canvas.alpha = canvas.alpha + (Time.deltaTime * fadeSpeed);
+        }
+
+        //float dis = Vector3.Distance(gameObject.transform.position, mainCamera.transform.position);
+
+        ////목적지에 도착한 상태고, 플레이어와의 거리가 1 이하인 동안
+        //if (hasSetDestination == true && dis <= 1)
+        //{
+        //    //캔바스 활성화, 상태머신에서 Talk상태를 빠져나가면 캔버스 비활성화됨
+        //    canvas.gameObject.SetActive(true);
+        //}
     }
 
     [ContextMenu("Animation Trigger Test")]
