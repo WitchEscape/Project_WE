@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class ValueChangedEvent : MonoBehaviour
 {
-    public Observable<int> intValue;
+    public Observable<State> state;
+
     private void OnEnable()
     {
         //intValue.onValueChanged.AddListener(OnValueChanged);

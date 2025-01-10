@@ -19,7 +19,7 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     protected override void Awake()
     {
         base.Awake();
-        interactableRigidbody = GetComponent<Rigidbody>();       
+        interactableRigidbody = GetComponent<Rigidbody>();
         dropParticle = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -37,7 +37,10 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
                 canJump = false;
 
                 //par.transform.position = previousPos;
-                dropParticle.Play();
+                if (dropParticle != null)
+                {
+                    dropParticle.Play();
+                }
             }
         }
     }
