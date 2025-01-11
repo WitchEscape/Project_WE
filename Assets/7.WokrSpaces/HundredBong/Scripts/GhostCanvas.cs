@@ -8,23 +8,30 @@ using UnityEngine.UI;
 
 public class GhostCanvas : MonoBehaviour
 {
+    private FinitStateMachine fsm;
     private CanvasGroup canvas;
     public Chapters chapters;
     [SerializeField, Header("Yes버튼")] private Button yesButton;
     [SerializeField, Header("No버튼")] private Button noButton;
     [SerializeField, Header("호출 횟수에 따른 난이도")] private Button[] hintButtons;
     [Header("클리어 체크용 bool 변수")] public bool[] isCleared;
+    [Header("힌트 지속시간")] public float hintDuration;
 
     //유령 호출 횟수
-    private int callIndex;
+    private int currentIndex = 0;
+    private int callIndex { get { return currentIndex; } set { currentIndex = Mathf.Clamp(value, 0, 2); } }
 
     private int clearCount;
     private string[] hintTexts = new string[3];
 
     public TextMeshProUGUI hintText;
 
+    private Coroutine hintEndCoroutine;
+
+    private bool isYesButtonClicked = false;
     private void Awake()
     {
+        fsm = GetComponentInParent<FinitStateMachine>();
         canvas = GetComponent<CanvasGroup>();
         canvas.alpha = 0;
         canvas.gameObject.SetActive(false);
@@ -32,36 +39,69 @@ public class GhostCanvas : MonoBehaviour
 
     private void OnEnable()
     {
+        InitializationButtonsOnEnable();
+    }
+
+    private void InitializationButtonsOnEnable()
+    {
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
 
         yesButton.onClick.AddListener(OnClickYes);
         noButton.onClick.AddListener(OnClickNo);
-        Debug.Log($"힌트배열 : {hintButtons.Length}");
-        Debug.Log($"힌트텍스트 : {hintTexts.Length}");
-
-        for (int i = 0; i < hintTexts.Length; i++)
-        {
-            hintTexts[i] = "집에가게해줘";
-        }
 
         for (int i = 0; i < hintButtons.Length; i++)
         {
             int index = i;
-            hintButtons[i].onClick.RemoveAllListeners();
-            //hintButtons[i].onClick.AddListener(() => { OnClickHintButton(i); });
-            hintButtons[i].onClick.AddListener(()=>OnClickHintButton(index));
-            print(hintButtons[i].onClick);
-            Debug.Log($"힌트 텍스트 배열 {hintTexts[i]}");
-            Debug.Log($"Awake {i}");
-            
+            hintButtons[i].onClick.AddListener(() => OnClickHintButton(index));
         }
+    }
+
+    private void InitializationButtonsOnDisable()
+    {
+        canvas.alpha = 0f;
+        yesButton.onClick.RemoveListener(OnClickYes);
+        noButton.onClick.RemoveListener(OnClickNo);
+
+        for (int i = 0; i < hintButtons.Length; i++)
+        {
+            int index = i;
+            hintButtons[i].onClick.RemoveListener(() => OnClickHintButton(index));
+            hintButtons[i].gameObject.SetActive(false);
+        }
+
+        hintText.text = "";
     }
 
     private void OnClickYes()
     {
+        isYesButtonClicked = true;
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
+
+        CheckClearedPuzzles();
+        InitializationChapters();
+        SetHintButtons();
+
+        //기존 코루틴 중단 및 초기화
+        if (hintEndCoroutine != null)
+        {
+            StopCoroutine(hintEndCoroutine);
+            hintEndCoroutine = null;
+        }
+
+        //새로운 코루틴 시작
+        hintEndCoroutine = StartCoroutine(EndTalkAfterDelayCoroutine());
+
+        callIndex++;
+    }
+
+
+
+    private void CheckClearedPuzzles()
+    {
+
+        //int previousClearCount = clearCount; //이전 클리서탕태 저장용
 
         //호출할때마다 clearCount 초기화
         clearCount = 0;
@@ -69,6 +109,7 @@ public class GhostCanvas : MonoBehaviour
         //isCleared배열에서 클리어한 퍼즐 갯수 검사, 선형적 구조이니까 가능한 방법
         for (int i = 0; i < isCleared.Length; i++)
         {
+            Debug.Log(isCleared[i]);
             //클리어 한 상태라면
             if (isCleared[i] == true)
             {
@@ -76,11 +117,18 @@ public class GhostCanvas : MonoBehaviour
                 clearCount++;
             }
         }
-        InitializationChapters();
+
+        //if (previousClearCount != clearCount) // 클리어 상태가 변했을 경우만 초기화
+        //{
+        //    InitializationChapters();
+        //    Debug.Log($"ClearCount 변경 감지: {previousClearCount} -> {clearCount}, 초기화 실행");
+        //}
     }
 
     private void SetHintButtons()
     {
+        Debug.Log($"Call Index1 : {callIndex}");
+
         //호출한 횟수에 따라 버튼 초기화
         for (int i = 0; i <= callIndex; i++)
         {
@@ -90,36 +138,20 @@ public class GhostCanvas : MonoBehaviour
 
     public void OnClickHintButton(int i)
     {
-        
+
         Debug.Log($"i : {i}");
-        if (hintTexts.Length >= i)
+        if (i < hintTexts.Length)
         {
-            Debug.Log($"hint : {hintTexts[i]}");
+            Debug.Log($"Call Index : {callIndex}");
 
             hintText.text = $"{hintTexts[i]}";
         }
-        callIndex++;
     }
 
     private void OnClickNo()
     {
+        fsm.EndTalkByButtonOrDistance();
         StartCoroutine(DisableCanvasCoroutine());
-    }
-
-    public IEnumerator DisableCanvasCoroutine()
-    {
-        while (true)
-        {
-            canvas.alpha = canvas.alpha - (Time.deltaTime * 0.5f);
-
-            if (canvas.alpha <= 0)
-            {
-                gameObject.SetActive(false);
-                yield break;
-            }
-            yield return null;
-        }
-
     }
 
     private void InitializationChapters()
@@ -146,7 +178,6 @@ public class GhostCanvas : MonoBehaviour
                 break;
         }
 
-        SetHintButtons();
     }
 
     private void InitializationLobby()
@@ -169,19 +200,19 @@ public class GhostCanvas : MonoBehaviour
         switch (clearCount)
         {
             case 0:
-                hintTexts[0] = "하하 멍청일";
-                hintTexts[1] = "하하 멍청이";
-                hintTexts[2] = "하하 멍청삼";
+                hintTexts[0] = "색깔이 다른 글자가 숫자랑 연관이 있어";
+                hintTexts[1] = "4번 자리에 색이 다른 글자를 잘 보고 숫자로 바꿔서 비밀번호를 입력해봐";
+                hintTexts[2] = "4번 자리에 5242를 입력해봐";
                 break;
             case 1:
-                hintTexts[0] = "하하 멍청삼";
-                hintTexts[1] = "하하 멍청사";
-                hintTexts[2] = "하하 멍청오";
+                hintTexts[0] = "뒤에 게시판에 타로 카드가포스트잇과 연관되어 있어";
+                hintTexts[1] = "바보, 마법, 힘, 은둔자를 의미하는 카드를 수정구가 있는 책상 위에 배치해봐";
+                hintTexts[2] = "0번카드, 1번카드, 8번카드, 9번카드를 순서대로 책상 위에 배치하고 3번자리에 가봐!";
                 break;
             case 2:
-                hintTexts[0] = "하하 멍청육";
-                hintTexts[1] = "하하 멍청칠";
-                hintTexts[2] = "하하 멍청팔";
+                hintTexts[0] = "오른쪽에 있는 숫자를 왼쪽 키패드에 대입해서 생각해봐";
+                hintTexts[1] = "휴대폰에 있는 패턴처럼 생각하고 숫자를 따라 그려봐";
+                hintTexts[2] = "4번자리에 있는 상자에 HERA를 입력해봐";
                 break;
             case 3:
                 break;
@@ -249,21 +280,61 @@ public class GhostCanvas : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        canvas.alpha = 0f;
-        if(yesButton.onClick != null)
-        yesButton.onClick.RemoveListener(OnClickYes);
-        if (noButton.onClick != null)
-            noButton.onClick.RemoveListener(OnClickNo);
 
-        for (int i = 0; i < hintButtons.Length; i++)
+    public IEnumerator DisableCanvasCoroutine()
+    {
+        isYesButtonClicked = false;
+        if (canvas.alpha <= 0)
         {
-            if(hintButtons[i].onClick != null)
-            hintButtons[i].onClick.RemoveListener(() => OnClickHintButton(i));
-            hintButtons[i].gameObject.SetActive(false);
+            canvas.gameObject.SetActive(false);
+            yield break;
         }
 
-        hintText.text = "";
+        while (canvas.alpha > 0)
+        {
+            canvas.alpha -= Time.deltaTime * 0.5f;
+            yield return null;
+        }
+
+        canvas.gameObject.SetActive(false);
+    }
+
+    private IEnumerator EndTalkAfterDelayCoroutine()
+    {
+        yield return new WaitForSeconds(hintDuration);
+        StartCoroutine(DisableCanvasCoroutine());
+        fsm.EndTalkByEvent();
+        hintEndCoroutine = null;
+    }
+
+    public void ClearPuzzle(int i)
+    {
+        //퍼즐 클리어시 호출
+
+        //해당하는 인덱스의 클리어 유무를 true로 만듬
+        isCleared[i] = true;
+
+        if (hintEndCoroutine != null)
+        {
+            StopCoroutine(hintEndCoroutine);
+            hintEndCoroutine = null;
+        }
+
+        StartCoroutine(DisableCanvasCoroutine());
+        fsm.EndTalkByEvent();
+
+        callIndex = 0;
+    }
+
+
+    private void OnDisable()
+    {
+        InitializationButtonsOnDisable();
+    }
+
+    public bool IsYesButtonClicked()
+    {
+        //소소한 캡슐화
+        return isYesButtonClicked;
     }
 }

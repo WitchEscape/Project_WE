@@ -143,11 +143,19 @@ public class FinitStateMachine : MonoBehaviour
         //Talk상태에서 한번 더 누르면 Talk 종료
         if (callAction.action.WasPressedThisFrame() && isTalking == true)
         {
-            EndTalkByButtonOrDistance();
+            if (ghostCanvas.IsYesButtonClicked())
+            {
+                EndTalkByEvent();
+            }
+            else
+            {
+                EndTalkByButtonOrDistance();
+            }
         }
+        else { Debug.LogWarning($"쿨타임 진행중, last : {lastCallTime}, interval : {callInterval}, {Time.time}"); }
     }
 
-    private void EndTalkByButtonOrDistance()
+    public void EndTalkByButtonOrDistance()
     {
         //쿨타임은 초기화하지 않음
         ChangeState(State.Move);
@@ -155,7 +163,7 @@ public class FinitStateMachine : MonoBehaviour
         StartCoroutine(ghostCanvas.DisableCanvasCoroutine());
     }
 
-    private void EndTalkByEvent()
+    public void EndTalkByEvent()
     {
         if (currentState != State.Talk) { return; }
 
