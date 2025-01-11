@@ -12,6 +12,19 @@ public class ButtonHandler : MonoBehaviour
 
     private GameObject spawnedUI; // 생성된 UI 인스턴스
 
+    void Start()
+    {
+        // Main Camera를 자동으로 찾음
+        Camera mainCamera = Camera.main;
+        if (mainCamera != null)
+        {
+            playerCamera = mainCamera.transform;
+        }
+        else
+        {
+            Debug.LogError("Main Camera를 찾을 수 없습니다.");
+        }
+    }
     public void SpawnUI()
     {
         if (spawnedUI == null) // UI가 이미 생성되어 있지 않은 경우
