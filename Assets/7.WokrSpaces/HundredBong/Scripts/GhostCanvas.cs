@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class GhostCanvas : MonoBehaviour
 {
     private FinitStateMachine fsm;
-    private CanvasGroup canvas;
+    public CanvasGroup canvas;
+    [Header("힌트 UI 페이드 속도"), Range(0.1f, 2f)] public float fadeSpeed = 0.5f;
     public Chapters chapters;
     [SerializeField, Header("Yes버튼")] private Button yesButton;
     [SerializeField, Header("No버튼")] private Button noButton;
@@ -59,7 +60,6 @@ public class GhostCanvas : MonoBehaviour
 
     private void InitializationButtonsOnDisable()
     {
-        canvas.alpha = 0f;
         yesButton.onClick.RemoveListener(OnClickYes);
         noButton.onClick.RemoveListener(OnClickNo);
 
@@ -151,7 +151,7 @@ public class GhostCanvas : MonoBehaviour
     private void OnClickNo()
     {
         fsm.EndTalkByButtonOrDistance();
-        StartCoroutine(DisableCanvasCoroutine());
+        StartCoroutine(FadeOutCanvasCoroutine());
     }
 
     private void InitializationChapters()
@@ -281,7 +281,7 @@ public class GhostCanvas : MonoBehaviour
     }
 
 
-    public IEnumerator DisableCanvasCoroutine()
+    public IEnumerator FadeOutCanvasCoroutine()
     {
         isYesButtonClicked = false;
         if (canvas.alpha <= 0)
@@ -296,13 +296,31 @@ public class GhostCanvas : MonoBehaviour
             yield return null;
         }
 
+        canvas.alpha = 0;
+
         canvas.gameObject.SetActive(false);
+    }
+
+    public IEnumerator FadeInCanvasCoroutine()
+    {
+        if (canvas.gameObject.activeSelf == false)
+        {
+            canvas.gameObject.SetActive(true);
+        }
+
+        while (canvas.alpha < 1)
+        {
+            canvas.alpha += Time.deltaTime * fadeSpeed;
+            yield return null;
+        }
+
+        canvas.alpha = 1;
     }
 
     private IEnumerator EndTalkAfterDelayCoroutine()
     {
         yield return new WaitForSeconds(hintDuration);
-        StartCoroutine(DisableCanvasCoroutine());
+        StartCoroutine(FadeOutCanvasCoroutine());
         fsm.EndTalkByEvent();
         hintEndCoroutine = null;
     }
@@ -320,8 +338,15 @@ public class GhostCanvas : MonoBehaviour
             hintEndCoroutine = null;
         }
 
-        StartCoroutine(DisableCanvasCoroutine());
-        fsm.EndTalkByEvent();
+        //오브젝트가 활성화된 상태명
+        if (gameObject.activeSelf == true)
+        {
+            //오브젝트 비활성화
+            StartCoroutine(FadeOutCanvasCoroutine());
+
+            //유령 상태변경 및 쿨타임 초기화
+            fsm.EndTalkByEvent();
+        }
 
         callIndex = 0;
     }

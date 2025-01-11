@@ -10,6 +10,7 @@ public class TriggerZone : MonoBehaviour
     //이벤트만들어 하여 하드코딩을 방지함
     [Header("상호작용할 타겟 태그")] public string[] targetTags;
     public UnityEvent<GameObject> OnEnterEvent;
+    public UnityEvent<GameObject> OnExitEvent;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,6 +21,18 @@ public class TriggerZone : MonoBehaviour
             {
                 OnEnterEvent?.Invoke(other.gameObject);
                 return; //태그를 찾았으므로 더 이상 비교하지 않음
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        foreach (string tag in targetTags)
+        {
+            if (other.gameObject.CompareTag(tag))
+            {
+                OnEnterEvent?.Invoke(other.gameObject);
+                return;
             }
         }
     }

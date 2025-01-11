@@ -125,6 +125,9 @@ public class FinitStateMachine : MonoBehaviour
     {
         if (currentState != State.Talk) { return; }
 
+        //퍼즐을 끝까지 클리어했다면 Talk상태 진입 불가능
+        if (ghostCanvas.isCleared[ghostCanvas.isCleared.Length]) { return; }
+
         float dis = Vector3.Distance(gameObject.transform.position, mainCamera.transform.position);
         //Debug.Log($"Dis  {dis}");
         //Debug.Log($"상태 : {isTalking}");
@@ -160,7 +163,7 @@ public class FinitStateMachine : MonoBehaviour
         //쿨타임은 초기화하지 않음
         ChangeState(State.Move);
         isTalking = false;
-        StartCoroutine(ghostCanvas.DisableCanvasCoroutine());
+        StartCoroutine(ghostCanvas.FadeOutCanvasCoroutine());
     }
 
     public void EndTalkByEvent()
@@ -171,7 +174,7 @@ public class FinitStateMachine : MonoBehaviour
         lastCallTime = Time.time;
         ChangeState(State.Move);
         isTalking = false;
-        StartCoroutine(ghostCanvas.DisableCanvasCoroutine());
+        StartCoroutine(ghostCanvas.FadeOutCanvasCoroutine());
     }
 
     private void ChangeState(State newState)
@@ -202,7 +205,7 @@ public class FinitStateMachine : MonoBehaviour
     private void TestMove()
     {
         ChangeState(State.Move);
-        StartCoroutine(ghostCanvas.DisableCanvasCoroutine());
+        StartCoroutine(ghostCanvas.FadeOutCanvasCoroutine());
     }
 
 

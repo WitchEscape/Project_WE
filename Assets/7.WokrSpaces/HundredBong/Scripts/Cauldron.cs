@@ -11,8 +11,8 @@ public class Cauldron : MonoBehaviour
     [Header("물약 리스트")] public List<GameObject> positions;
     [Header("성공했을 때 파티클")] public ParticleSystem successParticle;
     [Header("실패했을 때 파티클")] public ParticleSystem failParticle;
-
-
+    private GhostCanvas ghostCanvas;
+    
     [HideInInspector] public Observable<int> postionCount;
     [HideInInspector] public Observable<bool> isCorrect;
 
@@ -22,6 +22,8 @@ public class Cauldron : MonoBehaviour
 
     private void Awake()
     {
+        ghostCanvas = FindObjectOfType<GhostCanvas>();
+
         foreach (GameObject obj in positions)
         {
             //리셋될 때 Transform 리셋할 수 있도록 컴포넌트 부착
@@ -102,6 +104,7 @@ public class Cauldron : MonoBehaviour
 
                 //다음에 다시 생성되지 않도록 예외처리
                 wasInstantiate = true;
+                ghostCanvas.ClearPuzzle(1);
             }
             successParticle.Play();
         }
@@ -153,11 +156,6 @@ public class Cauldron : MonoBehaviour
         }
 
         postionCount.Value++;
-
-        if (1 <= postionCount.Value)
-        {
-            //TODO : 파티클 재생
-        }
     }
 
     private bool CheckCorrectPostion()
@@ -208,6 +206,7 @@ public class Cauldron : MonoBehaviour
     [ContextMenu("Test2")]
     private void ResetPostions()
     {
+        Debug.Log("포션 리셋 ");
         foreach (GameObject obj in positions)
         {
             //포션들 전부 껐다 키면서 위치 리셋, 포션들 마다 OnEnable 달려있는 스크립트 달아줘야함

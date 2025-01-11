@@ -12,9 +12,8 @@ public class GhostController : MonoBehaviour
     private FinitStateMachine fsm;
     private Animator anim;
     private XRGrabInteractable grab;
+    private GhostCanvas canvas;
 
-    [Header("힌트 UI")] public CanvasGroup canvas;
-    [Header("힌트 UI 페이드 속도"), Range(0.1f, 1f)] public float fadeSpeed = 0.2f;
 
     //순찰 지점
     [Header("유령 웨이포인트")] public Transform[] wayPoints = new Transform[4];
@@ -31,6 +30,7 @@ public class GhostController : MonoBehaviour
         fsm = GetComponent<FinitStateMachine>();
         anim = GetComponentInChildren<Animator>();
         grab = GetComponent<XRGrabInteractable>();
+        canvas = GetComponentInChildren<GhostCanvas>();
     }
 
     private void Start()
@@ -84,14 +84,7 @@ public class GhostController : MonoBehaviour
 
     private void ChangePoint()
     {
-        //최대 인덱스값이 3이므로 3이되면 다시 0으로 되돌려줌
-        if (nextPoint == 3)
-            nextPoint = 0;
-        //그런거 아니면 인덱스값 1 증가시켜서 포인트 바꿔줌
-        else
-            nextPoint++;
-
-        //두 달 전에는 이따구로 하드코딩했구나 알수있었던 유익한 시간이였읍니다.
+        nextPoint = (nextPoint + 1) % wayPoints.Length;
     }
 
     private void Talk()
@@ -115,7 +108,7 @@ public class GhostController : MonoBehaviour
                 //velocity.sqrMagnitude == 0f: NavMeshAgent가 정지했는지 확인함
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
-                    DisplayCanvas();
+                    StartCoroutine(canvas.FadeInCanvasCoroutine());
                 }
             }
         }
@@ -147,15 +140,14 @@ public class GhostController : MonoBehaviour
     }
     private void DisplayCanvas()
     {
-        if (canvas.gameObject.activeSelf == false)
-        {
-            canvas.gameObject.SetActive(true);
-        }
-
-        if (canvas.alpha <= 1)
-        {
-            canvas.alpha = canvas.alpha + (Time.deltaTime * fadeSpeed);
-        }
+        //if (canvas.gameObject.activeSelf == false)
+        //{
+        //    canvas.gameObject.SetActive(true);
+        //}
+        //if (canvas.alpha <= 1)
+        //{
+        //    canvas.alpha = canvas.alpha + (Time.deltaTime * fadeSpeed);
+        //}
 
         //float dis = Vector3.Distance(gameObject.transform.position, mainCamera.transform.position);
 
