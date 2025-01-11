@@ -37,7 +37,6 @@ public class FinitStateMachine : MonoBehaviour
 
         //Debug.Log($"현재 상태 : {currentState}");
         //Debug.Log($"현재 코루틴 상태 : {stateCoroutine}");
-
         switch (currentState)
         {
             case State.Idle:
@@ -126,7 +125,7 @@ public class FinitStateMachine : MonoBehaviour
         if (currentState != State.Talk) { return; }
 
         //퍼즐을 끝까지 클리어했다면 Talk상태 진입 불가능
-        if (ghostCanvas.isCleared[ghostCanvas.isCleared.Length]) { return; }
+        if (ghostCanvas.isCleared[ghostCanvas.isCleared.Length - 1]) { return; }
 
         float dis = Vector3.Distance(gameObject.transform.position, mainCamera.transform.position);
         //Debug.Log($"Dis  {dis}");
