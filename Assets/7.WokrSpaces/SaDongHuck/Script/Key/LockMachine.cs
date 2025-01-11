@@ -6,6 +6,7 @@ public class LockMachine : MonoBehaviour
 {
     public Animator lockAnimator; // 자물쇠의 애니메이터
     public GameObject lockObject; // 자물쇠 오브젝트
+    public GameObject Object;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,12 +20,12 @@ public class LockMachine : MonoBehaviour
             }
 
             // 3초 뒤에 자물쇠 삭제
-            Invoke("DestroyLock", 3f);
+            DestroyLock(); ;
         }
     }
 
     private void DestroyLock()
     {
-        Destroy(lockObject);
+        Destroy(Object, 2f);
     }
 }
