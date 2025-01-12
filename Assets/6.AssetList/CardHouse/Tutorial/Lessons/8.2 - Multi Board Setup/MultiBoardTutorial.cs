@@ -18,9 +18,9 @@ namespace CardHouse.Tutorial
 
         public MultiplayerBoardSetup SetupScript;
         public TMP_Text PlayerCountLabel;
-        public Slider PlayerCountSlider;
+        public UnityEngine.UI.Slider PlayerCountSlider;
         public TMP_Text SpacingLabel;
-        public Slider SpacingSlider;
+        public UnityEngine.UI.Slider SpacingSlider;
         public Button SetupButton;
 
         public GameObject InstructionsRoot;

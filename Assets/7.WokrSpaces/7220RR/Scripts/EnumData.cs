@@ -27,3 +27,10 @@ public enum RotationAxis
     YAxis,
     ZAxis
 }
+
+public enum InteractableType
+{
+    None,
+    Knob
+}
+

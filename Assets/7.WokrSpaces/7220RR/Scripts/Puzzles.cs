@@ -20,10 +20,22 @@ public class Puzzles : MonoBehaviour
     private int totalNum;
     #endregion
     #region Dial
-    public int dailCount;
-    public XRBaseInteractable[] dialInteractables;
-    public Collider[] dialColliders;
+    public int dialCount;
+    public List<GameObject> _dialInteractables;
+    [HideInInspector]
+    public List<XRBaseInteractable> dialInteractables;
+    [HideInInspector]
+    public List<Knob> dialKnob;
 
+    public InteractableType interactableType;
+    public List<int> passward;
+    private List<float> currentPassward = new List<float>();
+    public RotationAxis rotationAxis;
+    public int offSetAngle = 18;
+    public bool isDialClear;
+    //NOTE :
+    //offSetAngle , rotationAxis  => Instactor에서 확인 가능하게 수정
+    //subPassward 사용
     #endregion
     private void Awake()
     {
@@ -37,6 +49,13 @@ public class Puzzles : MonoBehaviour
                 FindSocket();
                 break;
             case PuzzleType.Dial:
+                //임시
+                offSetAngle = 18;
+
+                isDialClear = false;
+                CurrentPasswardReset();
+                PasswardCheak();
+                DialInteractablesEventSet();
                 break;
             case PuzzleType.Keypad:
                 break;
@@ -44,7 +63,6 @@ public class Puzzles : MonoBehaviour
                 break;
         }
     }
-
     #region Slot
     private void InteractorNameSet()
     {
@@ -95,6 +113,140 @@ public class Puzzles : MonoBehaviour
             print("카운트 낮춰여");
             --interactorCount;
         }
+    }
+    #endregion
+    #region Dial
+    private void DialInteractablesEventSet()
+    {
+        for (int i = 0; i < dialCount; i++)
+        {
+            int index = i;
+            switch (interactableType)
+            {
+                case InteractableType.None:
+                    if (dialInteractables[i] == null)
+                    {
+                        Debug.LogError($"Puzzles / DialInteractables[{i}] is Null");
+                        continue;
+                    }
+                    break;
+                case InteractableType.Knob:
+                    if (dialKnob[i] == null)
+                    {
+                        Debug.LogError($"Puzzles / DialKnob[{i}] is Null");
+                        continue;
+                    }
+                    dialKnob[i].axis = rotationAxis;
+                    dialKnob[i].selectExited.AddListener((x) => DialRotationSet(x, dialKnob[index].handle, index));
+                    break;
+            }
+        }
+    }
+
+    private void DialRotationSet(SelectExitEventArgs args, Transform handle, int index)
+    {
+        Vector3 newHandleRotation = Vector3.zero;
+        float angle = 0;
+        switch (rotationAxis)
+        {
+            case RotationAxis.XAxis:
+                newHandleRotation.x = NormalizedAngle(handle.eulerAngles.x);
+                angle = newHandleRotation.x;
+                break;
+            case RotationAxis.YAxis:
+                newHandleRotation.y = NormalizedAngle(handle.eulerAngles.y);
+                angle = newHandleRotation.y;
+                break;
+            case RotationAxis.ZAxis:
+                newHandleRotation.z = NormalizedAngle(handle.eulerAngles.z);
+                angle = newHandleRotation.z;
+                break;
+            default:
+                Debug.LogError("Puzzles / RotationAxis is Error");
+                break;
+        }
+        handle.localEulerAngles = newHandleRotation;
+        CurrentPasswardSet(index, angle);
+        PasswardCheak();
+    }
+
+    private float NormalizedAngle(float angle)
+    {
+        if (angle < 0f) angle += 360;
+        angle = ((int)angle) % 360;
+        return OffSetAngle(angle);
+    }
+
+    private float OffSetAngle(float angle)
+    {
+        if (offSetAngle <= 0)
+        {
+            return angle;
+        }
+        float tempAngle = Mathf.Abs(angle);
+        tempAngle = tempAngle % offSetAngle;
+        float subAngle = (tempAngle >= offSetAngle / 2) ? offSetAngle - tempAngle : -tempAngle;
+        return angle += subAngle;
+    }
+
+    private void CurrentPasswardReset()
+    {
+        if (passward == null)
+        {
+            Debug.LogError("Puzzles / Passward is Null");
+            return;
+        }
+
+        for (int i = 0; i < passward.Count; i++)
+        {
+            if (currentPassward.Count - 1 >= i)
+            {
+                currentPassward[i] = 0;
+            }
+            else
+            {
+                currentPassward.Add(0);
+            }
+        }
+    }
+
+    private void PasswardCheak()
+    {
+        if (passward == null)
+        {
+            Debug.LogError("Puzzles / Passward is Null");
+            return;
+        }
+
+        for (int i = 0; i < passward.Count; i++)
+        {
+            if (passward.Count >= i && currentPassward.Count >= i)
+            {
+                if (passward[i] != currentPassward[i])
+                {
+                    return;
+                }
+            }
+            else
+            {
+                Debug.LogError("Puzzels / Passward and currentPassward is Not Count");
+            }
+        }
+
+        print("다이얼 풀림");
+        isDialClear = true;
+    }
+
+    private void CurrentPasswardSet(int index, float angle)
+    {
+        if (currentPassward == null || currentPassward.Count <= index)
+        {
+            Debug.LogError("Puzzles / CurrentPassward is Error");
+            return;
+        }
+
+        currentPassward[index] = ((angle / 36) >= 10) ? (angle / 36) - 10 : angle / 36;
+        print(currentPassward[index]);
     }
     #endregion
 }

@@ -6,13 +6,13 @@ namespace CardHouse.Tutorial
 {
     public class SplayTutorial : MonoBehaviour
     {
-        public Slider XScaleSlider;
+        public UnityEngine.UI.Slider XScaleSlider;
         public TMP_Text XScaleText;
-        public Slider ArcMarginSlider;
+        public UnityEngine.UI.Slider ArcMarginSlider;
         public TMP_Text ArcMarginText;
-        public Slider XOffsetSlider;
+        public UnityEngine.UI.Slider XOffsetSlider;
         public TMP_Text XOffsetText;
-        public Slider YOffsetSlider;
+        public UnityEngine.UI.Slider YOffsetSlider;
         public TMP_Text YOffsetText;
 
         public CardGroup Deck;

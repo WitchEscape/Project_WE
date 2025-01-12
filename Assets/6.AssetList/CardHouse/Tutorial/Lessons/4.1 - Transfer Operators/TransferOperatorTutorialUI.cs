@@ -9,9 +9,9 @@ namespace CardHouse.Tutorial
         public TMP_Dropdown GrabFromDropdown;
         public TMP_Dropdown SendToDropdown;
         public TMP_Text NumberToTransferText;
-        public Slider NumberToTransferSlider;
+        public UnityEngine.UI.Slider NumberToTransferSlider;
         public TMP_Text FlipSpeedText;
-        public Slider FlipSpeedSlider;
+        public UnityEngine.UI.Slider FlipSpeedSlider;
         public CardTransferOperator Operator;
 
         public void AdjustNumberToTransfer()

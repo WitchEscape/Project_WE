@@ -6,13 +6,13 @@ namespace CardHouse.Tutorial
 {
     public class GridTutorial : MonoBehaviour
     {
-        public Slider CardsPerRowSlider;
+        public UnityEngine.UI.Slider CardsPerRowSlider;
         public TMP_Text CardsPerRowText;
-        public Slider CardLimitSlider;
+        public UnityEngine.UI.Slider CardLimitSlider;
         public TMP_Text CardLimitText;
-        public Slider XScaleSlider;
+        public UnityEngine.UI.Slider XScaleSlider;
         public TMP_Text XScaleText;
-        public Slider YScaleSlider;
+        public UnityEngine.UI.Slider YScaleSlider;
         public TMP_Text YScaleText;
 
         public CardGroup Deck;

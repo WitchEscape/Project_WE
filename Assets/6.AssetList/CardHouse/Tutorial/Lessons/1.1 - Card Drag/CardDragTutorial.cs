@@ -7,14 +7,14 @@ namespace CardHouse.Tutorial
 {
     public class CardDragTutorial : MonoBehaviour
     {
-        public Slider DragSwellSlider;
+        public UnityEngine.UI.Slider DragSwellSlider;
         public TMP_Text DragSwellText;
-        public Slider SeekerGainSlider;
+        public UnityEngine.UI.Slider SeekerGainSlider;
         public TMP_Text SeekerGainText;
         public Toggle GrabOffsetToggle;
-        public Slider XOffsetSlider;
+        public UnityEngine.UI.Slider XOffsetSlider;
         public TMP_Text XOffsetText;
-        public Slider YOffsetSlider;
+        public UnityEngine.UI.Slider YOffsetSlider;
         public TMP_Text YOffsetText;
 
         public Card Card;

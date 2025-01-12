@@ -6,9 +6,9 @@ namespace CardHouse.Tutorial
 {
     public class StackTutorial : MonoBehaviour
     {
-        public Slider XOffsetSlider;
+        public UnityEngine.UI.Slider XOffsetSlider;
         public TMP_Text XOffsetText;
-        public Slider YOffsetSlider;
+        public UnityEngine.UI.Slider YOffsetSlider;
         public TMP_Text YOffsetText;
 
         public StackLayout Stack;

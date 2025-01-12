@@ -13,11 +13,11 @@ namespace CardHouse.Tutorial
         public CardGroup Deck;
 
         public TMP_Text ASpadesText;
-        public Slider ASpadesSlider;
+        public UnityEngine.UI.Slider ASpadesSlider;
         public TMP_Text QDiamondsText;
-        public Slider QDiamondsSlider;
+        public UnityEngine.UI.Slider QDiamondsSlider;
         public TMP_Text Hearts10Text;
-        public Slider Hearts10Slider;
+        public UnityEngine.UI.Slider Hearts10Slider;
         public Toggle ShuffleToggle;
 
         public void Setup()

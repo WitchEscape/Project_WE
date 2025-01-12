@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [CustomEditor(typeof(Puzzles))]
 public class PuzzleEditor : Editor
@@ -37,57 +38,295 @@ public class PuzzleEditor : Editor
             case PuzzleType.Slot:
                 puzzles.interactorType = (InteractorType)EditorGUILayout.EnumPopup("상호작용 방식", puzzles.interactorType);
                 break;
+            case PuzzleType.Dial:
+                //puzzles.dialCount = EditorGUILayout.IntField("다이얼 갯수", puzzles.dialCount);
+                puzzles.dialCount = EditorGUILayout.IntSlider("다이얼 갯수", puzzles.dialCount, 0, 10);
+                puzzles.interactableType = (InteractableType)EditorGUILayout.EnumPopup("Interactable Type", puzzles.interactableType);
+                break;
+            case PuzzleType.Keypad:
+                break;
             default:
                 break;
         }
 
-        if (puzzles.interactorType != InteractorType.None)
+        if (puzzles.puzzleType == PuzzleType.Slot)
         {
-            if (puzzles.socketInteractors == null)
+            if (puzzles.interactorType != InteractorType.None)
             {
-                puzzles.socketInteractors = new List<GameObject>();
+                if (puzzles.socketInteractors == null)
+                {
+                    puzzles.socketInteractors = new List<GameObject>();
+                }
+
+                int newSocketSize = EditorGUILayout.IntField("소켓 사이즈", puzzles.socketInteractors.Count);
+
+                if (newSocketSize != puzzles.socketInteractors.Count)
+                {
+                    while (newSocketSize > puzzles.socketInteractors.Count) puzzles.socketInteractors.Add(null);
+                    while (newSocketSize < puzzles.socketInteractors.Count) puzzles.socketInteractors.RemoveAt(puzzles.socketInteractors.Count - 1);
+                }
+
+                for (int i = 0; i < puzzles.socketInteractors.Count; i++)
+                {
+                    puzzles.socketInteractors[i] = (GameObject)EditorGUILayout.ObjectField($"Element {i}", puzzles.socketInteractors[i], typeof(GameObject), true);
+                }
+                //if (GUILayout.Button("Add Element"))
+                //{
+                //    puzzles.socketInteractors.Add(null);
+                //}
             }
 
-            int newSocketSize = EditorGUILayout.IntField("소켓 사이즈", puzzles.socketInteractors.Count);
-
-            if (newSocketSize != puzzles.socketInteractors.Count)
+            if (puzzles.interactorType == InteractorType.Multiple)
             {
-                while (newSocketSize > puzzles.socketInteractors.Count) puzzles.socketInteractors.Add(null);
-                while (newSocketSize < puzzles.socketInteractors.Count) puzzles.socketInteractors.RemoveAt(puzzles.socketInteractors.Count - 1);
-            }
+                if (puzzles.interactors == null)
+                {
+                    puzzles.interactors = new List<GameObject>();
+                }
 
-            for (int i = 0; i < puzzles.socketInteractors.Count; i++)
-            {
-                puzzles.socketInteractors[i] = (GameObject)EditorGUILayout.ObjectField($"Element {i}", puzzles.socketInteractors[i], typeof(GameObject), true);
+                int newInteractorSize = EditorGUILayout.IntField("오브젝트 사이즈", puzzles.interactors.Count);
+
+                if (newInteractorSize != puzzles.interactors.Count)
+                {
+                    while (newInteractorSize > puzzles.interactors.Count) puzzles.interactors.Add(null);
+                    while (newInteractorSize < puzzles.interactors.Count) puzzles.interactors.RemoveAt(puzzles.interactors.Count - 1);
+                }
+
+                for (int i = 0; i < puzzles.interactors.Count; i++)
+                {
+                    puzzles.interactors[i] = (GameObject)EditorGUILayout.ObjectField($"Element {i}", puzzles.interactors[i], typeof(GameObject), true);
+                }
+
+                puzzles.interactorName = EditorGUILayout.TextField("변경할 이름", puzzles.interactorName);
             }
-            //if (GUILayout.Button("Add Element"))
+        }
+        else if (puzzles.puzzleType == PuzzleType.Dial)
+        {
+            #region 따로따로불편러
+            //if (puzzles._dialInteractables != null && puzzles._dialInteractables.Count > 0)
+            //    EditorGUILayout.LabelField("다이얼 상호작용", EditorStyles.boldLabel);
+
+            //if (puzzles._dialInteractables == null)
             //{
-            //    puzzles.socketInteractors.Add(null);
+            //    puzzles._dialInteractables = new List<GameObject>();
             //}
+            //if (puzzles.dialInteractables == null)
+            //{
+            //    puzzles.dialInteractables = new List<XRBaseInteractable>();
+            //}
+
+            //int newDialInteractablesSize = puzzles.dialCount;
+
+            //if (newDialInteractablesSize != puzzles._dialInteractables.Count)
+            //{
+            //    while (newDialInteractablesSize > puzzles._dialInteractables.Count) puzzles._dialInteractables.Add(null);
+            //    while (newDialInteractablesSize < puzzles._dialInteractables.Count) puzzles._dialInteractables.RemoveAt(puzzles._dialInteractables.Count - 1);
+            //}
+
+            //if (newDialInteractablesSize != puzzles.dialInteractables.Count)
+            //{
+            //    while (newDialInteractablesSize > puzzles.dialInteractables.Count) puzzles.dialInteractables.Add(null);
+            //    while (newDialInteractablesSize < puzzles.dialInteractables.Count) puzzles.dialInteractables.RemoveAt(puzzles.dialInteractables.Count - 1);
+            //}
+
+            //for (int i = 0; i < newDialInteractablesSize; i++)
+            //{
+            //    puzzles._dialInteractables[i] = (GameObject)EditorGUILayout.ObjectField($"Element {i}", puzzles._dialInteractables[i], typeof(GameObject), true);
+
+            //    if (puzzles._dialInteractables[i] == null) continue;
+
+            //    if (puzzles._dialInteractables[i].TryGetComponent<XRBaseInteractable>(out XRBaseInteractable xrbaseinteractable))
+            //    {
+            //        puzzles.dialInteractables[i] = xrbaseinteractable;
+            //    }
+            //    else
+            //    {
+            //        puzzles._dialInteractables[i] = null;
+            //    }
+            //}
+
+
+            //if (puzzles._dialInteractables != null && puzzles._dialColliders.Count > 0)
+            //    EditorGUILayout.LabelField("다이얼 콜라이더", EditorStyles.boldLabel);
+
+            //if (puzzles._dialColliders == null)
+            //{
+            //    puzzles._dialColliders = new List<GameObject>();
+            //}
+            //if (puzzles.dialColliders == null)
+            //{
+            //    puzzles.dialColliders = new List<Collider>();
+            //}
+
+            //int newDialCollidersSize = puzzles.dialCount;
+
+            //if (puzzles._dialColliders.Count != newDialCollidersSize)
+            //{
+            //    while (puzzles._dialColliders.Count > newDialCollidersSize) puzzles._dialColliders.RemoveAt(puzzles._dialColliders.Count - 1);
+            //    while (puzzles._dialColliders.Count < newDialCollidersSize) puzzles._dialColliders.Add(null);
+            //}
+            //if (puzzles.dialColliders.Count != newDialCollidersSize)
+            //{
+            //    while (puzzles.dialColliders.Count > newDialCollidersSize) puzzles.dialColliders.RemoveAt(puzzles.dialColliders.Count - 1);
+            //    while (puzzles.dialColliders.Count < newDialCollidersSize) puzzles.dialColliders.Add(null);
+            //}
+
+            //for (int i = 0; i < newDialCollidersSize; i++)
+            //{
+            //    puzzles._dialColliders[i] = (GameObject)EditorGUILayout.ObjectField($"Element {i}", puzzles._dialColliders[i], typeof(GameObject), true);
+
+            //    if (puzzles._dialColliders[i] != null && puzzles._dialColliders[i].TryGetComponent<Collider>(out Collider collider))
+            //    {
+            //        puzzles.dialColliders[i] = collider;
+            //    }
+            //    else
+            //    {
+            //        puzzles._dialColliders[i] = null;
+            //    }
+            //}
+            #endregion
+
+            #region DialInteractbles
+            int newDialInteractablesSize = puzzles.dialCount;
+
+            if (puzzles._dialInteractables == null)
+            {
+                puzzles._dialInteractables = new List<GameObject>();
+            }
+
+
+            if (newDialInteractablesSize != puzzles._dialInteractables.Count)
+            {
+                while (newDialInteractablesSize > puzzles._dialInteractables.Count) puzzles._dialInteractables.Add(null);
+                while (newDialInteractablesSize < puzzles._dialInteractables.Count) puzzles._dialInteractables.RemoveAt(puzzles._dialInteractables.Count - 1);
+            }
+
+            switch (puzzles.interactableType)
+            {
+                case InteractableType.None:
+                    if (puzzles.dialInteractables == null)
+                    {
+                        puzzles.dialInteractables = new List<XRBaseInteractable>();
+                    }
+                    if (newDialInteractablesSize != puzzles.dialInteractables.Count)
+                    {
+                        while (newDialInteractablesSize > puzzles.dialInteractables.Count) puzzles.dialInteractables.Add(null);
+                        while (newDialInteractablesSize < puzzles.dialInteractables.Count) puzzles.dialInteractables.RemoveAt(puzzles.dialInteractables.Count - 1);
+                    }
+                    break;
+                case InteractableType.Knob:
+                    if (puzzles.dialKnob == null)
+                    {
+                        puzzles.dialKnob = new List<Knob>();
+                    }
+                    if (newDialInteractablesSize != puzzles.dialKnob.Count)
+                    {
+                        while (newDialInteractablesSize > puzzles.dialKnob.Count) puzzles.dialKnob.Add(null);
+                        while (newDialInteractablesSize < puzzles.dialKnob.Count) puzzles.dialKnob.RemoveAt(puzzles.dialKnob.Count - 1);
+                    }
+                    break;
+            }
+
+
+
+
+            #endregion
+            #region DialColliders
+            //if (puzzles._dialColliders == null)
+            //{
+            //    puzzles._dialColliders = new List<GameObject>();
+            //}
+            //if (puzzles.dialColliders == null)
+            //{
+            //    puzzles.dialColliders = new List<Collider>();
+            //}
+
+            //int newDialCollidersSize = puzzles.dialCount;
+
+            //if (puzzles._dialColliders.Count != newDialCollidersSize)
+            //{
+            //    while (puzzles._dialColliders.Count > newDialCollidersSize) puzzles._dialColliders.RemoveAt(puzzles._dialColliders.Count - 1);
+            //    while (puzzles._dialColliders.Count < newDialCollidersSize) puzzles._dialColliders.Add(null);
+            //}
+            //if (puzzles.dialColliders.Count != newDialCollidersSize)
+            //{
+            //    while (puzzles.dialColliders.Count > newDialCollidersSize) puzzles.dialColliders.RemoveAt(puzzles.dialColliders.Count - 1);
+            //    while (puzzles.dialColliders.Count < newDialCollidersSize) puzzles.dialColliders.Add(null);
+            //}
+            #endregion
+            #region password
+            int newPasswordSize = puzzles.dialCount;
+            if (puzzles.passward == null)
+            {
+                puzzles.passward = new List<int>();
+            }
+
+            if (puzzles.passward.Count != newPasswordSize)
+            {
+                while (puzzles.passward.Count > newPasswordSize) puzzles.passward.RemoveAt(puzzles.passward.Count - 1);
+                while (puzzles.passward.Count < newPasswordSize) puzzles.passward.Add(0);
+            }
+            #endregion
+
+            EditorGUILayout.LabelField("비밀번호", EditorStyles.boldLabel);
+            for (int i = 0; i < newPasswordSize; i++)
+            {
+                puzzles.passward[i] = EditorGUILayout.IntSlider($"{i + 1}번 비밀번호", puzzles.passward[i], 0, 9);
+            }
+
+            EditorGUILayout.LabelField($"\n", EditorStyles.largeLabel);
+            for (int i = 0; i < newDialInteractablesSize; i++)
+            {
+                EditorGUILayout.LabelField($"{i + 1}번 째 다이얼", EditorStyles.centeredGreyMiniLabel);
+                //EditorGUILayout.CurveField($"{i}번 째 다이얼", EditorStyles.boldLabel);
+                //EditorGUILayout.Toggle(true, EditorStyles.boldLabel);
+                puzzles._dialInteractables[i] = (GameObject)EditorGUILayout.ObjectField($"Interactable {i + 1}", puzzles._dialInteractables[i], typeof(GameObject), true);
+                //puzzles._dialColliders[i] = (GameObject)EditorGUILayout.ObjectField($"Collider {i + 1}", puzzles._dialColliders[i], typeof(GameObject), true);
+
+
+                if (puzzles._dialInteractables[i] != null)
+                {
+                    switch (puzzles.interactableType)
+                    {
+                        case InteractableType.None:
+                            if (puzzles._dialInteractables[i].TryGetComponent<XRBaseInteractable>(out XRBaseInteractable xrbaseinteractable))
+                            {
+                                puzzles.dialInteractables[i] = xrbaseinteractable;
+                            }
+                            else
+                            {
+                                puzzles._dialInteractables[i] = null;
+                            }
+                            break;
+                        case InteractableType.Knob:
+                            if (puzzles._dialInteractables[i].TryGetComponent<Knob>(out Knob knob))
+                            {
+                                puzzles.dialKnob[i] = knob;
+                            }
+                            else
+                            {
+                                puzzles._dialInteractables[i] = null;
+                            }
+                            break;
+                        default:
+                            EditorGUILayout.LabelField("아무것도 없어요", EditorStyles.boldLabel);
+                            break;
+                    }
+                }
+
+                //if (puzzles._dialColliders[i] != null)
+                //{
+                //    if (puzzles._dialColliders[i] != null && puzzles._dialColliders[i].TryGetComponent<Collider>(out Collider collider))
+                //    {
+                //        puzzles.dialColliders[i] = collider;
+                //    }
+                //    else
+                //    {
+                //        puzzles._dialColliders[i] = null;
+                //    }
+                //}
+            }
         }
 
-        if (puzzles.interactorType == InteractorType.Multiple)
-        {
-            if (puzzles.interactors == null)
-            {
-                puzzles.interactors = new List<GameObject>();
-            }
-
-            int newInteractorSize = EditorGUILayout.IntField("오브젝트 사이즈", puzzles.interactors.Count);
-
-            if (newInteractorSize != puzzles.interactors.Count)
-            {
-                while (newInteractorSize > puzzles.interactors.Count) puzzles.interactors.Add(null);
-                while (newInteractorSize < puzzles.interactors.Count) puzzles.interactors.RemoveAt(puzzles.interactors.Count - 1);
-            }
-
-            for (int i = 0; i < puzzles.interactors.Count; i++)
-            {
-                puzzles.interactors[i] = (GameObject)EditorGUILayout.ObjectField($"Element {i}", puzzles.interactors[i], typeof(GameObject), true);
-            }
-
-            puzzles.interactorName = EditorGUILayout.TextField("변경할 이름", puzzles.interactorName);
-        }
 
         if (GUI.changed)
         {

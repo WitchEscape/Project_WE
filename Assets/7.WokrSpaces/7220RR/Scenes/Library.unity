@@ -1227,8 +1227,8 @@ MonoBehaviour:
   m_MaxAngle: 90
   m_MinAngle: -90
   m_AngleIncrement: 0
-  m_PositionTrackedRadius: 0.1
-  m_TwistSensitivity: 1.5
+  m_PositionTrackedRadius: 1.5
+  m_TwistSensitivity: 0.1
 --- !u!54 &412913559
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2043,6 +2043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 790090852}
   - component: {fileID: 790090853}
+  - component: {fileID: 790090854}
   m_Layer: 0
   m_Name: DialTest
   m_TagString: Untagged
@@ -2077,7 +2078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92abf3e0216ffbd4f9c2999a0a68eee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleType: 0
+  puzzleType: 2
   isActivatedObject: 0
   ActivatedObject: {fileID: 0}
   activatedObject: {fileID: 0}
@@ -2095,9 +2096,45 @@ MonoBehaviour:
   - {fileID: 0}
   interactors: []
   interactorName: 
-  dailCount: 0
-  dialInteractables: []
-  dialColliders: []
+  dialCount: 4
+  _dialInteractables:
+  - {fileID: 1175678882}
+  - {fileID: 412913552}
+  - {fileID: 1720802687}
+  - {fileID: 1546467764}
+  dialInteractables:
+  - {fileID: 1546467770}
+  - {fileID: 2138937134}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  dialKnob:
+  - {fileID: 1175678888}
+  - {fileID: 412913558}
+  - {fileID: 1720802693}
+  - {fileID: 1546467770}
+  interactableType: 1
+  passward: 04000000030000000400000002000000
+  rotationAxis: 0
+  offSetAngle: 0
+  isDialClear: 0
+--- !u!114 &790090854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790090851}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4eeaa85235b2114d992fba44bf718d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: {fileID: 0}
+  colliderx: {fileID: 0}
+  asd: b0ffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  list: 000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  asss: 39
 --- !u!1 &798445894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,7 +2176,6 @@ GameObject:
   m_Component:
   - component: {fileID: 808539900}
   - component: {fileID: 808539899}
-  - component: {fileID: 808539901}
   m_Layer: 0
   m_Name: Combination PadLock (1)
   m_TagString: Untagged
@@ -2191,20 +2227,6 @@ Transform:
   - {fileID: 586148133}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &808539901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808539895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4eeaa85235b2114d992fba44bf718d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactable: {fileID: 1546467770}
-  colliderx: {fileID: 1546467767}
 --- !u!1 &828096723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,9 +2500,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   interactorName: qweqwe
-  dailCount: 0
+  dialCount: 0
+  _dialInteractables: []
   dialInteractables: []
-  dialColliders: []
+  dialKnob: []
+  interactableType: 0
+  passward: 
+  rotationAxis: 0
+  offSetAngle: 0
+  isDialClear: 0
 --- !u!4 &1018553863
 Transform:
   m_ObjectHideFlags: 0
@@ -2913,8 +2941,8 @@ MonoBehaviour:
   m_MaxAngle: 180
   m_MinAngle: -180
   m_AngleIncrement: 0
-  m_PositionTrackedRadius: 0.1
-  m_TwistSensitivity: 1.5
+  m_PositionTrackedRadius: 1.5
+  m_TwistSensitivity: 0.1
 --- !u!54 &1175678889
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4042,12 +4070,12 @@ MonoBehaviour:
   axis: 0
   m_Handle: {fileID: 1928902769}
   m_Value: 0.5
-  m_ClampedMotion: 1
+  m_ClampedMotion: 0
   m_MaxAngle: 360
   m_MinAngle: -360
   m_AngleIncrement: 0
-  m_PositionTrackedRadius: 0.075
-  m_TwistSensitivity: 1.5
+  m_PositionTrackedRadius: 1
+  m_TwistSensitivity: 1
 --- !u!54 &1546467771
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4625,8 +4653,8 @@ MonoBehaviour:
   m_MaxAngle: 90
   m_MinAngle: -90
   m_AngleIncrement: 0
-  m_PositionTrackedRadius: 0.1
-  m_TwistSensitivity: 1.5
+  m_PositionTrackedRadius: 0.5
+  m_TwistSensitivity: 0.2
 --- !u!54 &1720802694
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4942,7 +4970,7 @@ MonoBehaviour:
   m_AttachTransform: {fileID: 1089335837}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
-  m_StartingSelectedInteractable: {fileID: 2138937134}
+  m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -5227,7 +5255,7 @@ Transform:
   m_Children:
   - {fileID: 1546467765}
   m_Father: {fileID: 808539900}
-  m_LocalEulerAnglesHint: {x: 36, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1932070946
 GameObject:
   m_ObjectHideFlags: 0
@@ -5603,6 +5631,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2160962606701867783, guid: 4fd4c4c17bbe83e49b9771298860fa2e,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 6908987585900647294, guid: 4fd4c4c17bbe83e49b9771298860fa2e,
         type: 3}
       propertyPath: m_Name
@@ -5986,7 +6019,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2124128201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6118,7 +6151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138937127}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.24186015, y: -0, z: -0, w: -0.9703111}
   m_LocalPosition: {x: 0, y: 0.706, z: 0}
   m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_ConstrainProportionsScale: 1
@@ -6128,7 +6161,7 @@ Transform:
   - {fileID: 235873127}
   - {fileID: 2124128201}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 332.007, y: 0, z: 0}
 --- !u!65 &2138937129
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class Knob : XRBaseInteractable
 
     const float k_ModeSwitchDeadZone = 0.1f;
 
+    //NOTE :
+    //현재 좌우의 축으로만 움직임
+
     public struct TrackedRotation
     {
         private float m_BaseAngle;
@@ -192,12 +195,35 @@ public class Knob : XRBaseInteractable
     {
         var interactorTransform = m_Interactor.GetAttachTransform(this);
 
-        var localOffset = transform.InverseTransformVector(interactorTransform.position - m_Handle.position);
-        localOffset.y = 0.0f;
-        var radiusOffset = transform.TransformVector(localOffset).magnitude;
-        localOffset.Normalize();
 
-        var localForward = transform.InverseTransformDirection(interactorTransform.up);
+        var localOffset = transform.InverseTransformVector(interactorTransform.position - m_Handle.position);
+
+
+        var tempLocalOffset = localOffset;
+        localOffset = Vector3.zero;
+        //switch (axis)
+        //{
+        //    case RotationAxis.XAxis:
+        //        //localOffset.x = tempLocalOffset.x;
+        //        //localOffset.y = tempLocalOffset.y;
+        //        break;
+        //    case RotationAxis.YAxis:
+        //        localOffset.y = tempLocalOffset.y;
+        //        break;
+        //    case RotationAxis.ZAxis:
+        //        localOffset.z = tempLocalOffset.z;
+        //        break;
+        //    default:
+        //        Debug.LogError("Knob / Axis is Error");
+        //        break;
+        //}
+
+
+
+        var radiusOffset = transform.TransformVector(localOffset).magnitude;
+        //localOffset.Normalize();
+
+        var localForward = transform.InverseTransformDirection(interactorTransform.forward);
         //var localY = Math.Abs(localForward.x);
         var localY = Math.Abs(localForward.y);
         //localForward.x = 0.0f;
