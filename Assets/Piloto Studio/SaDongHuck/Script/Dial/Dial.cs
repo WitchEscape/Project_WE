@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class Dial : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Dial : MonoBehaviour
     string result;
 
     public TextMeshProUGUI[] inputChars;
+    public GameObject keyprefab;
+    public Transform spawnLoation;
 
     void Awake()
     {
@@ -24,9 +27,22 @@ public class Dial : MonoBehaviour
         }
         if (answer == result)
         {
-            Debug.Log("서랍이 열렸습니다.");
+            //Debug.Log("서랍이 열렸습니다.");
+            SpawnItem();
         }
         else
             return;
     }
+
+    private void SpawnItem()
+    {
+        if (keyprefab != null && spawnLoation != null)
+        {
+            Instantiate(keyprefab, spawnLoation.position, spawnLoation.rotation);
+            print("열쇠가 생성 되었습니다");
+        }
+    }
+
+   
+
 }

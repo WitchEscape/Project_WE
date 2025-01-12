@@ -12,10 +12,13 @@ public class FinitStateMachine : MonoBehaviour
     public State currentState = State.Idle;
     [Header("유령 호출키")] public InputActionProperty callAction;
     [Header("유령 호출 쿨타임")] public float callInterval = 120f;
+    [Header("메인 카메라")] public Transform mainCamera;
+    public GhostCanvas ghostCanvas;
 
     private float lastCallTime;
     private Coroutine stateCoroutine;
 
+    private bool isTalking;
 
     private void Awake()
     {
@@ -34,7 +37,6 @@ public class FinitStateMachine : MonoBehaviour
 
         //Debug.Log($"현재 상태 : {currentState}");
         //Debug.Log($"현재 코루틴 상태 : {stateCoroutine}");
-
         switch (currentState)
         {
             case State.Idle:
@@ -122,26 +124,56 @@ public class FinitStateMachine : MonoBehaviour
     {
         if (currentState != State.Talk) { return; }
 
-        //Talk상태에서 한번 더 누르면 Talk 종료
-        if (callAction.action.WasPressedThisFrame())
+        //퍼즐을 끝까지 클리어했다면 Talk상태 진입 불가능
+        if (ghostCanvas.isCleared[ghostCanvas.isCleared.Length - 1]) { return; }
+
+        float dis = Vector3.Distance(gameObject.transform.position, mainCamera.transform.position);
+        //Debug.Log($"Dis  {dis}");
+        //Debug.Log($"상태 : {isTalking}");
+        //플레이어와의 거리가 1 이하면
+        if (dis <= 2f)
         {
-            EndTalkByButton();
+            isTalking = true;
         }
+
+        if (isTalking && 4f <= dis)
+        {
+            //대화 상태일 때 거리가 멀어지면 Talk 종료
+            EndTalkByButtonOrDistance();
+        }
+
+        //Talk상태에서 한번 더 누르면 Talk 종료
+        if (callAction.action.WasPressedThisFrame() && isTalking == true)
+        {
+            if (ghostCanvas.IsYesButtonClicked())
+            {
+                EndTalkByEvent();
+            }
+            else
+            {
+                EndTalkByButtonOrDistance();
+            }
+        }
+        else { Debug.LogWarning($"쿨타임 진행중, last : {lastCallTime}, interval : {callInterval}, {Time.time}"); }
     }
 
-    private void EndTalkByButton()
+    public void EndTalkByButtonOrDistance()
     {
         //쿨타임은 초기화하지 않음
         ChangeState(State.Move);
+        isTalking = false;
+        StartCoroutine(ghostCanvas.FadeOutCanvasCoroutine());
     }
 
-    private void EndTalkByEvent()
+    public void EndTalkByEvent()
     {
         if (currentState != State.Talk) { return; }
 
         //힌트를 받아서 이벤트에서 호출되면 쿨타임 초기화 후 상태 전환
         lastCallTime = Time.time;
         ChangeState(State.Move);
+        isTalking = false;
+        StartCoroutine(ghostCanvas.FadeOutCanvasCoroutine());
     }
 
     private void ChangeState(State newState)
@@ -157,21 +189,22 @@ public class FinitStateMachine : MonoBehaviour
     [ContextMenu("Change Talk Test")]
     private void TestTalk()
     {
-        if (IsCallOnCooldown() == false)
-        {
-            lastCallTime = Time.time;
-            ChangeState(State.Talk);
-        }
-        else
-        {
-            Debug.LogError($"쿨타임 에러, last : {lastCallTime}, interval : {callInterval}, {Time.time}");
-        }
+        //if (IsCallOnCooldown() == false)
+        //{
+        //    lastCallTime = Time.time;
+        ChangeState(State.Talk);
+        //}
+        //else
+        //{
+        //    Debug.LogError($"쿨타임 에러, last : {lastCallTime}, interval : {callInterval}, {Time.time}");
+        //}
     }
 
     [ContextMenu("Change Move Test")]
     private void TestMove()
     {
         ChangeState(State.Move);
+        StartCoroutine(ghostCanvas.FadeOutCanvasCoroutine());
     }
 
 
