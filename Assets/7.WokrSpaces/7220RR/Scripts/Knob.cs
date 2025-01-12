@@ -6,12 +6,23 @@ using Mathf = UnityEngine.Mathf;
 
 public class Knob : XRBaseInteractable
 {
-    public RotationAxis axis;
-
-    const float k_ModeSwitchDeadZone = 0.1f;
-
+    public RotationAxis interactableAxis;
+    public RotationAxis interactorAxis;
+    [HideInInspector]
+    public float angleIncrement
+    {
+        get { return m_AngleIncrement; }
+        set { m_AngleIncrement = value; }
+    }
     //NOTE :
     //현재 좌우의 축으로만 움직임
+
+
+
+
+
+
+    const float k_ModeSwitchDeadZone = 0.1f;
 
     public struct TrackedRotation
     {
@@ -201,27 +212,26 @@ public class Knob : XRBaseInteractable
 
         var tempLocalOffset = localOffset;
         localOffset = Vector3.zero;
-        //switch (axis)
-        //{
-        //    case RotationAxis.XAxis:
-        //        //localOffset.x = tempLocalOffset.x;
-        //        //localOffset.y = tempLocalOffset.y;
-        //        break;
-        //    case RotationAxis.YAxis:
-        //        localOffset.y = tempLocalOffset.y;
-        //        break;
-        //    case RotationAxis.ZAxis:
-        //        localOffset.z = tempLocalOffset.z;
-        //        break;
-        //    default:
-        //        Debug.LogError("Knob / Axis is Error");
-        //        break;
-        //}
+        switch (interactorAxis)
+        {
+            case RotationAxis.XAxis:
+                localOffset.x = tempLocalOffset.x;
+                break;
+            case RotationAxis.YAxis:
+                localOffset.y = tempLocalOffset.y;
+                break;
+            case RotationAxis.ZAxis:
+                localOffset.z = tempLocalOffset.z;
+                break;
+            default:
+                Debug.LogError("Knob / Axis is Error");
+                break;
+        }
 
 
 
         var radiusOffset = transform.TransformVector(localOffset).magnitude;
-        //localOffset.Normalize();
+        localOffset.Normalize();
 
         var localForward = transform.InverseTransformDirection(interactorTransform.forward);
         //var localY = Math.Abs(localForward.x);
@@ -308,7 +318,7 @@ public class Knob : XRBaseInteractable
 
         if (m_Handle != null)
         {
-            switch (axis)
+            switch (interactableAxis)
             {
                 case RotationAxis.XAxis:
                     m_Handle.localEulerAngles = new Vector3(angle, 0f, 0.0f);

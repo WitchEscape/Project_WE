@@ -31,11 +31,14 @@ public class Puzzles : MonoBehaviour
     public List<int> passward;
     private List<float> currentPassward = new List<float>();
     public RotationAxis rotationAxis;
+    public RotationAxis controllerAxis;
     public int offSetAngle = 18;
+    //임시 풀리면 어떻게 상호작용이 될지
     public bool isDialClear;
-    //NOTE :
-    //offSetAngle , rotationAxis  => Instactor에서 확인 가능하게 수정
-    //subPassward 사용
+    public bool isDialClamped;
+    #endregion
+    #region Keypad
+
     #endregion
     private void Awake()
     {
@@ -49,9 +52,6 @@ public class Puzzles : MonoBehaviour
                 FindSocket();
                 break;
             case PuzzleType.Dial:
-                //임시
-                offSetAngle = 18;
-
                 isDialClear = false;
                 CurrentPasswardReset();
                 PasswardCheak();
@@ -63,6 +63,7 @@ public class Puzzles : MonoBehaviour
                 break;
         }
     }
+
     #region Slot
     private void InteractorNameSet()
     {
@@ -79,7 +80,6 @@ public class Puzzles : MonoBehaviour
         for (int i = 0; i < socketInteractors.Count; i++)
         {
             if (socketInteractors[i] == null) continue;
-            print($"{i + 1} 번 째 소켓에 이벤트 할당해요");
             currentNum = i;
             totalNum++;
             if (socketInteractors[i].TryGetComponent<XRSocketInteractor>(out XRSocketInteractor socket))
@@ -94,13 +94,11 @@ public class Puzzles : MonoBehaviour
     {
         if (arg.interactableObject.transform.name == interactors[currentNum].name)
         {
-            print("카운트 높여요");
 
             ++interactorCount;
 
             if (interactorCount == totalNum && isActivatedObject)
             {
-                print("퍼즐이 다 풀렸어요 \n 오브젝트 활성화 시켜요");
                 activatedObject.activate();
             }
         }
@@ -110,7 +108,6 @@ public class Puzzles : MonoBehaviour
     {
         if (args.interactableObject.transform.gameObject.name == interactors[currentNum].name)
         {
-            print("카운트 낮춰여");
             --interactorCount;
         }
     }
@@ -136,7 +133,12 @@ public class Puzzles : MonoBehaviour
                         Debug.LogError($"Puzzles / DialKnob[{i}] is Null");
                         continue;
                     }
-                    dialKnob[i].axis = rotationAxis;
+                    if (isDialClamped)
+                    {
+                        dialKnob[i].angleIncrement = offSetAngle;
+                    }
+                    dialKnob[i].interactableAxis = rotationAxis;
+                    dialKnob[i].interactorAxis = controllerAxis;
                     dialKnob[i].selectExited.AddListener((x) => DialRotationSet(x, dialKnob[index].handle, index));
                     break;
             }
