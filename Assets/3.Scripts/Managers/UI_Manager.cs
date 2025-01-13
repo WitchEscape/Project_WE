@@ -11,11 +11,29 @@ public class UI_Manager : MonoBehaviour
         get
         {
             if (instance == null)
+            {
                 instance = FindObjectOfType<UI_Manager>();
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("@UIManager");
+                    instance = go.AddComponent<UI_Manager>();
+                }
+            }
             return instance;
         }
     }
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private Stack<GameObject> uiStack = new Stack<GameObject>();
 
     public void OpenUI(GameObject uiPanel)
@@ -64,6 +82,7 @@ public class UI_Manager : MonoBehaviour
                 currentUI.SetActive(false);
             }
         }
+        uiStack.Clear();
     }
 
     public bool HasActiveUI()

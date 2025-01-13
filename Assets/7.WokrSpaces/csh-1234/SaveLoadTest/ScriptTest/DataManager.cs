@@ -30,6 +30,7 @@ public class DataManager : MonoBehaviour
     
     public Dictionary<string, DialogData> DialogDic { get; private set; } = new Dictionary<string, DialogData>();
 
+
     private void Awake()
     {
         if (instance == null)
