@@ -12,8 +12,9 @@ public class Keypad : MonoBehaviour
 
     private string Answer = "1042";
 
-    [SerializeField]
-    private LockCabinet lockcabinet;
+    [SerializeField] private LockCabinet lockcabinet;
+
+    [SerializeField] private GameObject WateringCan;
 
     private void Start()
     {
@@ -22,6 +23,8 @@ public class Keypad : MonoBehaviour
         {
             print("LockCabinet을 찾을 수 없습니다");
         }
+
+        WateringCan.SetActive(false);
     }
     public void Number(int number)
     {
@@ -34,7 +37,7 @@ public class Keypad : MonoBehaviour
         {
             Ans.text = "Correct";
             lockcabinet.UnLockDrawer();
-            
+            WateringCan.SetActive(true);
         }
         else
         {

@@ -29,7 +29,15 @@ public class LockCabinet : MonoBehaviour
         limits.min = 0f;
         limits.max = 123.2095f;
         joint.limits = limits;
-        joint.useLimits = false;
+        joint.useLimits = true;
         print("서랍문이 열렸습니다");
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.WakeUp(); // Rigidbody 깨우기
+        }
+
+        print($"UnLockDrawer: useLimits={joint.useLimits}, limits.min={limits.min}, limits.max={limits.max}");
     }
 }
