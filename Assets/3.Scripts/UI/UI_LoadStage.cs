@@ -6,60 +6,89 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// 筌뤴뫀諭?ui????뺤쓰????롪돌??몄춸 鈺곕똻???뺣뼄
-// 
-
 public class UI_LoadStage : MonoBehaviour
 {
-    [SerializeField] private Button Class535SceneButton;
-    [SerializeField] private Button DomitorySceneButton;
-    [SerializeField] private Button PotionClassSceneButton;
-    [SerializeField] private Button LibrarySceneButton;
-    [SerializeField] private Button CommonRoomSceneButton;
     public float StartPanelDistance = 2f;
-    private void Start()
-    {
-        Class535SceneButton.onClick.AddListener(OnClass535SceneButtonClick);
-        DomitorySceneButton.onClick.AddListener(OnDomitorySceneButtonClick);
-        PotionClassSceneButton.onClick.AddListener(OnPotionClassSceneButtonClick);
-        LibrarySceneButton.onClick.AddListener(OnLibrarySceneButtonClick);
-        CommonRoomSceneButton.onClick.AddListener(OnCommonRoomSceneButtonClick);
-    }
 
-    private void Initialize()
-    {
-        //Todo : ??쎈??? ???????????怨뺚뀲 筌ｌ꼶???袁⑹뒄
-    }
+    [SerializeField] private UI_DataLoadButton buttonPrefab;
+    [SerializeField] private Transform buttonContainer;
+
     private void OnEnable()
     {
         Initialize();
         SetPositionAndRotation();
+        LoadSaveFiles();
     }
 
-
-    private void OnClass535SceneButtonClick()
+    private void Initialize()
     {
-        SceneManager.LoadScene("Class535");
+        if (buttonContainer != null)
+        {
+            foreach (Transform child in buttonContainer)
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
-    private void OnDomitorySceneButtonClick()
+    private void LoadSaveFiles()
     {
-        SceneManager.LoadScene("Domitory");
+        var saveFiles = SaveLoadManager.Instance.GetSavedStageFiles();
+        Debug.Log($"Found {saveFiles.Count} save files");
+        
+        foreach (var saveFile in saveFiles)
+        {
+            Debug.Log($"Creating button for stage: {saveFile.StageName}");
+            UI_DataLoadButton button = Instantiate(buttonPrefab, buttonContainer);
+            button.Initialize(saveFile.StageName, saveFile.SaveTime, OnLoadButtonClicked, OnDeleteButtonClicked);
+        }
     }
 
-    private void OnPotionClassSceneButtonClick()
+    private void OnLoadButtonClicked(string stageName)
     {
-        SceneManager.LoadScene("PotionClass");
+        Debug.Log($"OnLoadButtonClicked called with stage: {stageName}");
+        StartCoroutine(LoadStageCoroutine(stageName));
     }
 
-    private void OnLibrarySceneButtonClick()
+    private IEnumerator LoadStageCoroutine(string stageName)
     {
-        SceneManager.LoadScene("Library");
+        Debug.Log($"Starting to load stage: {stageName}");
+        UI_Manager.Instance.CloseAllCurrentUI();
+        // 씬 로드
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(stageName);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        // 씬이 완전히 로드될 때까지 잠시 대기
+        yield return new WaitForSeconds(0.5f);
+
+        // SaveLoadManager가 새 씬에서 초기화되었는지 확인
+        if (SaveLoadManager.Instance == null)
+        {
+            Debug.LogError("SaveLoadManager.Instance is null after scene load!");
+            yield break;
+        }
+
+        Debug.Log($"Scene loaded, now loading save data for: {stageName}");
+        
+        try
+        {
+            SaveLoadManager.Instance.LoadGame(stageName);
+            Debug.Log($"Save data loaded successfully for: {stageName}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to load save data: {e.Message}\nStackTrace: {e.StackTrace}");
+        }
     }
 
-    private void OnCommonRoomSceneButtonClick()
+    private void OnDeleteButtonClicked(string stageName)
     {
-        SceneManager.LoadScene("CommonRoom");
+        SaveLoadManager.Instance.DeleteSaveFile(stageName);
+        Initialize();
+        LoadSaveFiles();
     }
 
     private void SetPositionAndRotation()

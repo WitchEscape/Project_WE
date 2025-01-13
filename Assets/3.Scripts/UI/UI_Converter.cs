@@ -13,7 +13,7 @@ public class UI_Converter : MonoBehaviour
     [SerializeField] private InputActionReference openInventoryRightHand;
     [SerializeField] private InputActionReference openMenuInputRightHand;
 
-    private bool isMenuOpen = false;
+    public bool isMenuOpen = false;
 
     private void Start()
     {
