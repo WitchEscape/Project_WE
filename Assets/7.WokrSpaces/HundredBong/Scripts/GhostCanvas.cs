@@ -128,11 +128,19 @@ public class GhostCanvas : MonoBehaviour
         {
             Debug.Log(isCleared[i]);
             //클리어 한 상태라면
-            if (isCleared[i] == true)
+            //if (isCleared[i] == true)
+            //{
+            //    //클리어 카운트 증가시킴
+            //    clearCount++;
+            //}
+
+            if (isCleared[i] == false)
             {
                 //클리어 카운트 증가시킴
-                clearCount++;
+                clearCount = i;
+                break;
             }
+
         }
 
         //if (previousClearCount != clearCount) // 클리어 상태가 변했을 경우만 초기화
