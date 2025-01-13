@@ -147,6 +147,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2237597854394570880}
     m_Modifications:
+    - target: {fileID: 1276621605660350367, guid: d5be8bf12aa12444886bdc4a1057f40a,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 5283321368814074180, guid: d5be8bf12aa12444886bdc4a1057f40a,
         type: 3}
       propertyPath: m_Name
@@ -175,7 +180,7 @@ PrefabInstance:
     - target: {fileID: 8770365425025222536, guid: d5be8bf12aa12444886bdc4a1057f40a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.90526485
+      value: 0.8931
       objectReference: {fileID: 0}
     - target: {fileID: 8770365425025222536, guid: d5be8bf12aa12444886bdc4a1057f40a,
         type: 3}
@@ -220,8 +225,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5283321368814074180, guid: d5be8bf12aa12444886bdc4a1057f40a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2533569873176160261}
   m_SourcePrefab: {fileID: 100100000, guid: d5be8bf12aa12444886bdc4a1057f40a, type: 3}
+--- !u!1 &4987741188034991514 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5283321368814074180, guid: d5be8bf12aa12444886bdc4a1057f40a,
+    type: 3}
+  m_PrefabInstance: {fileID: 894568045678013662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2533569873176160261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987741188034991514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2719cf38cf65b4da48c3fb4a0b1075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8492869736151034710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8770365425025222536, guid: d5be8bf12aa12444886bdc4a1057f40a,
@@ -325,6 +352,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4418257926947743026}
     m_Modifications:
+    - target: {fileID: 2251535693858874731, guid: 856200ba7ef0fa944a2fa45bb209f75c,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 2251535693858874731, guid: 856200ba7ef0fa944a2fa45bb209f75c,
         type: 3}
       propertyPath: m_IsKinematic
