@@ -29,7 +29,11 @@ public class Latern : MonoBehaviour
 
     private void Start()
     {
-        pointLight.gameObject.SetActive(false);
+        if (pointLight.gameObject.activeSelf)
+        {
+            pointLight.gameObject.SetActive(false); 
+        }
+
     }
 
     private void CoreEnter(SelectEnterEventArgs arg)
@@ -37,6 +41,7 @@ public class Latern : MonoBehaviour
         if (arg.interactableObject.transform.CompareTag(itemTag))
         {
             pointLight.gameObject.SetActive(true);
+            arg.interactableObject.transform.gameObject.layer = LayerMask.NameToLayer("Interactable");
         }
     }
 
@@ -45,6 +50,8 @@ public class Latern : MonoBehaviour
         if (arg.interactableObject.transform.CompareTag(itemTag))
         {
             pointLight.gameObject.SetActive(false);
+            arg.interactableObject.transform.gameObject.layer = LayerMask.NameToLayer("Default");
+
         }
     }
 
