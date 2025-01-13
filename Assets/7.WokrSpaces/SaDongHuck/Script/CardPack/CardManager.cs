@@ -12,24 +12,24 @@ public class CardManager : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         // 중력 비활성화
-        rb.useGravity = false;
+        rb.isKinematic = true;
 
         // Y축 위치와 회전 고정
-        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY;
+        //rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY;
     }
 
     // XR Grab Interactable로 잡았을 때 동작
     public void OnGrabbed()
     {
         // 잡았을 때 고정을 해제하고 중력 활성화
-        rb.useGravity = true;
-        rb.constraints = RigidbodyConstraints.None; // 모든 제약 해제
+        rb.isKinematic = false;
+        //rb.constraints = RigidbodyConstraints.None; // 모든 제약 해제
     }
 
     // XR Grab Interactable에서 놓았을 때 동작
     public void OnReleased()
     {
         // 중력 활성화 상태를 유지하며 Y축만 고정
-        rb.useGravity = true;
+        rb.isKinematic = false;
     }
 }
