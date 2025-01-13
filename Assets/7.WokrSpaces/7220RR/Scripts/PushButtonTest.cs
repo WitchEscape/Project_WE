@@ -15,7 +15,6 @@ public class PushButtonTest : XRBaseInteractable
     private bool isPush = true;
     private bool isPop = false;
 
-    private bool isHover = false;
     public float duration = 0f;
 
     public UnityEvent OnPush;
@@ -190,7 +189,6 @@ public class PushButtonTest : XRBaseInteractable
             if (interactors.Contains(interactor))
             {
                 interactors.Remove(interactor);
-                isHover = false;
                 if (currentCoroutine == null)
                 {
                     currentCoroutine = StartCoroutine(ButtonPositionReset());
@@ -218,7 +216,6 @@ public class PushButtonTest : XRBaseInteractable
             else
             {
                 interactors.Add(interactor);
-                isHover = true;
                 if (currentCoroutine != null)
                 {
                     StopCoroutine(currentCoroutine);
@@ -307,25 +304,18 @@ public class PushButtonTest : XRBaseInteractable
 
     private IEnumerator ButtonPositionReset()
     {
+        print("진입");
         float subTime = 0f;
-        yield return null;
-        while (true)
+        while (Vector3.Distance(baseButtonPosition, button.localPosition) >= 0.2f)
         {
-            if (isHover)
-            {
-                subTime = 0f;
-                yield return null;
-                continue;
-            }
-            while (Vector3.Distance(baseButtonPosition, button.localPosition) > 0.1f)
-            {
-                button.localPosition = Vector3.Lerp(button.localPosition, baseButtonPosition, subTime / duration);
-                subTime += Time.deltaTime;
-                yield return null;
-            }
-
-            SetButtonHeight(1f);
+            button.localPosition = Vector3.Lerp(button.localPosition, baseButtonPosition, subTime / duration);
+            print($"base :  {baseButtonPosition}");
+            print($"local :  {button.localPosition}");
+            subTime += Time.deltaTime;
+            yield return null;
         }
+
+        SetButtonHeight(1f);
     }
 
     private void OnDrawGizmosSelected()
