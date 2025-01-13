@@ -10,7 +10,20 @@ public class PuzzleDial : MonoBehaviour
 
     private string result;
 
+    [SerializeField] // 인스펙터 창에서 LockBox 연결 가능
+    private LockBox lockBox;
+
     public TextMeshProUGUI[] inputChars;
+
+    private void Start()
+    {
+        // LockBox 스크립트를 가진 오브젝트를 찾습니다.
+        lockBox = FindObjectOfType<LockBox>();
+        if (lockBox == null)
+        {
+            Debug.LogError("LockBox 컴포넌트를 가진 오브젝트를 찾을 수 없습니다.");
+        }
+    }
 
     public void AnswerCheck()
     {
@@ -21,6 +34,7 @@ public class PuzzleDial : MonoBehaviour
         }
         if (answer == result)
         {
+            lockBox.UnLockbox();
             Debug.Log("서랍이 열렸습니다.");
         }
         else

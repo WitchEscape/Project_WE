@@ -39,6 +39,13 @@ public class PuzzleEditor : Editor
                 puzzles.interactorType = (InteractorType)EditorGUILayout.EnumPopup("상호작용 방식", puzzles.interactorType);
                 break;
             case PuzzleType.Dial:
+                puzzles.rotationAxis = (RotationAxis)EditorGUILayout.EnumPopup("오브젝트 회전 방향", puzzles.rotationAxis);
+                puzzles.controllerAxis = (RotationAxis)EditorGUILayout.EnumPopup("컨트롤러 회전 방향", puzzles.controllerAxis);
+                puzzles.offSetAngle = EditorGUILayout.IntField("제한 각도", puzzles.offSetAngle);
+                puzzles.offSetAngle = Mathf.Clamp(puzzles.offSetAngle, 0, 360);
+
+                puzzles.isDialClamped = EditorGUILayout.Toggle("다이얼 회전 각도 제한", puzzles.isDialClamped);
+
                 //puzzles.dialCount = EditorGUILayout.IntField("다이얼 갯수", puzzles.dialCount);
                 puzzles.dialCount = EditorGUILayout.IntSlider("다이얼 갯수", puzzles.dialCount, 0, 10);
                 puzzles.interactableType = (InteractableType)EditorGUILayout.EnumPopup("Interactable Type", puzzles.interactableType);
@@ -325,6 +332,8 @@ public class PuzzleEditor : Editor
                 //    }
                 //}
             }
+
+
         }
 
 
