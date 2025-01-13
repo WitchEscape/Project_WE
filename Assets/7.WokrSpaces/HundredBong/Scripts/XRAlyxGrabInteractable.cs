@@ -16,6 +16,10 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     private Rigidbody interactableRigidbody;
     private bool canJump = true;
 
+    public Transform leftAttachedTransform;
+    public Transform rightAttachedTransform;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -94,5 +98,28 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
         base.OnHoverExited(args);
         //hoverParticle.Stop();
     }
+
+    #region 핸드 데이터 쓰면서 안쓰이게될듯함
+    //public override Transform GetAttachTransform(IXRInteractor interactor)
+    //{
+    //    //어태치 포인트를 양 손마다 지정하여 어느 손으로 잡던 어태치 포인트가 동일하도록 함
+    //    //사용하려면 한쪽 손 어태치 포인트 설정 후 반대쪽 손은 값을 반대로 해줘야 함
+    //    //Debug.Log("GetAttachTransform");
+
+    //    Transform i_attachTransform = null;
+
+    //    if (interactor.transform.CompareTag("Left Hand"))
+    //    {
+    //        Debug.Log("Left");
+    //        i_attachTransform = leftAttachedTransform;
+    //    }
+    //    if (interactor.transform.CompareTag("Right Hand"))
+    //    {
+    //        Debug.Log("Right");
+    //        i_attachTransform = rightAttachedTransform;
+    //    }
+    //    return i_attachTransform != null ? i_attachTransform : base.GetAttachTransform(interactor);
+    //}
+    #endregion
 }
 

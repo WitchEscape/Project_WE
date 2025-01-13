@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Timeline;
 
 public class Dial : MonoBehaviour
@@ -10,9 +11,18 @@ public class Dial : MonoBehaviour
     string result;
 
     public TextMeshProUGUI[] inputChars;
-    public GameObject keyprefab;
-    public Transform spawnLoation;
 
+    [SerializeField]
+    private LockDeskDrawer lockdeskdrawer;
+
+    private void Start()
+    {
+        lockdeskdrawer = FindObjectOfType<LockDeskDrawer>();
+        if(lockdeskdrawer == null )
+        {
+            print("locKbox를 찾을 수 없습니다");
+        }
+    }
     void Awake()
     {
         answer = "BROP";
@@ -28,20 +38,14 @@ public class Dial : MonoBehaviour
         if (answer == result)
         {
             //Debug.Log("서랍이 열렸습니다.");
-            SpawnItem();
+            lockdeskdrawer.UnLockDrawer();
+            
         }
         else
             return;
     }
 
-    private void SpawnItem()
-    {
-        if (keyprefab != null && spawnLoation != null)
-        {
-            Instantiate(keyprefab, spawnLoation.position, spawnLoation.rotation);
-            print("열쇠가 생성 되었습니다");
-        }
-    }
+    
 
    
 

@@ -12,11 +12,22 @@ public class DialogTest : MonoBehaviour
     {
         DialogPlayer.Instance.OnDialogStart.AddListener((dialog) =>
         {
-            if (CoTyping != null)
+            if(dialog.DialogType == DialogType.Story)
             {
-                StopCoroutine(CoTyping);
+                if (CoTyping != null)
+                {
+                    StopCoroutine(CoTyping);
+                }
+                CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
             }
-            CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
+            else
+            {
+                if (CoTyping != null)
+                {
+                    StopCoroutine(CoTyping);
+                }
+                CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
+            }
         });
 
         DialogPlayer.Instance.OnDialogEnd.AddListener(() =>
@@ -105,5 +116,6 @@ public class DialogTest : MonoBehaviour
 
     void Update()
     {
+
     }
 }
