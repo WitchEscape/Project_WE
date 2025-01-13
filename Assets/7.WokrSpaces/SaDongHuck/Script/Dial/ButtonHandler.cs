@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ButtonHandler : MonoBehaviour
@@ -11,6 +12,8 @@ public class ButtonHandler : MonoBehaviour
     public Vector3 offset = new Vector3(0, 1.0f, 0); // 위치 오프셋
 
     private GameObject spawnedUI; // 생성된 UI 인스턴스
+
+    
 
     void Start()
     {
@@ -24,10 +27,14 @@ public class ButtonHandler : MonoBehaviour
         {
             Debug.LogError("Main Camera를 찾을 수 없습니다.");
         }
+
+        
+        
+        
     }
     public void SpawnUI()
     {
-        if (spawnedUI == null) // UI가 이미 생성되어 있지 않은 경우
+        if (uiPrefab != null) // UI가 이미 생성되어 있지 않은 경우
         {
             // UI 생성 위치 계산
             Vector3 spawnPosition = playerCamera.position + playerCamera.forward.normalized * distanceFromPlayer + offset;
@@ -36,8 +43,9 @@ public class ButtonHandler : MonoBehaviour
             Quaternion spawnRotation = Quaternion.LookRotation(playerCamera.forward, Vector3.up);
 
             // UI 생성 및 설정
-            spawnedUI = Instantiate(uiPrefab, spawnPosition, spawnRotation);
-            spawnedUI.SetActive(true);
+            //spawnedUI = Instantiate(uiPrefab, spawnPosition, spawnRotation);
+            //spawnedUI.SetActive(true);
+            uiPrefab.SetActive(true);
         }
         else
         {
