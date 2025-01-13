@@ -26,8 +26,8 @@ public class LockCabinet : MonoBehaviour
     {
         isLokced = false;
         JointLimits limits = joint.limits;
-        limits.min = 0;
-        limits.max = 123;
+        limits.min = 0f;
+        limits.max = 123.2095f;
         joint.limits = limits;
         joint.useLimits = false;
         print("서랍문이 열렸습니다");
