@@ -16,7 +16,6 @@ public class PushButtonTest : XRBaseInteractable
     private bool isPop = false;
 
     private bool isHover = false;
-    private float currentHeight;
     public float duration = 0f;
 
     public UnityEvent OnPush;
@@ -24,6 +23,7 @@ public class PushButtonTest : XRBaseInteractable
 
     private Vector3 baseButtonPosition;
     private List<XRDirectInteractor> interactors;
+    private Coroutine currentCoroutine = null;
 
     private void Start()
     {
@@ -53,14 +53,10 @@ public class PushButtonTest : XRBaseInteractable
 
         OnPush.AddListener(IsPushEventTest);
         OnPop.AddListener(IsPopEventTest);
-
-        _ = StartCoroutine(ButtonPositionReset());
     }
 
     protected override void OnDisable()
     {
-        StopCoroutine(ButtonPositionReset());
-
         hoverEntered.RemoveListener(StartHover);
         hoverExited.RemoveListener(EndHover);
         OnPop.RemoveListener(IsBoolReset);
@@ -195,6 +191,10 @@ public class PushButtonTest : XRBaseInteractable
             {
                 interactors.Remove(interactor);
                 isHover = false;
+                if (currentCoroutine == null)
+                {
+                    currentCoroutine = StartCoroutine(ButtonPositionReset());
+                }
             }
             else
             {
@@ -219,6 +219,10 @@ public class PushButtonTest : XRBaseInteractable
             {
                 interactors.Add(interactor);
                 isHover = true;
+                if (currentCoroutine != null)
+                {
+                    StopCoroutine(currentCoroutine);
+                }
             }
         }
         else
@@ -283,7 +287,6 @@ public class PushButtonTest : XRBaseInteractable
         }
 
         button.localPosition = newPosition;
-        currentHeight = height;
     }
 
     private void IsBoolReset()
@@ -305,6 +308,7 @@ public class PushButtonTest : XRBaseInteractable
     private IEnumerator ButtonPositionReset()
     {
         float subTime = 0f;
+        yield return null;
         while (true)
         {
             if (isHover)
