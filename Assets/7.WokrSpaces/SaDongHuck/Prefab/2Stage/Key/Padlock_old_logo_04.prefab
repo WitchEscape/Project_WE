@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7656570016474558474}
   - component: {fileID: 1923328922136240733}
+  - component: {fileID: 661574014243825993}
   m_Layer: 0
   m_Name: Padlock_old_logo_04
   m_TagString: Untagged
@@ -138,6 +139,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &661574014243825993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4249062496974708594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4c81e6ce69da040b622e769630a047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socketInteractor: {fileID: 4774862561128286527}
+  lockObject: {fileID: 7378415511159870337}
+  lockAnimator: {fileID: 1923328922136240733}
 --- !u!1 &7378415511159870337
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,8 +165,8 @@ GameObject:
   - component: {fileID: 1987000262274303161}
   - component: {fileID: 5508301065479032374}
   - component: {fileID: 119471796352531575}
-  - component: {fileID: 287905106808380493}
   - component: {fileID: 344113388869922433}
+  - component: {fileID: 4774862561128286527}
   m_Layer: 0
   m_Name: base
   m_TagString: Untagged
@@ -224,20 +240,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &287905106808380493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7378415511159870337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4c81e6ce69da040b622e769630a047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockAnimator: {fileID: 1923328922136240733}
-  lockObject: {fileID: 8765805218833694043}
 --- !u!65 &344113388869922433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -259,6 +261,66 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.12435495, y: 0.112183645, z: 0.059138775}
   m_Center: {x: -0.042043265, y: -0.02133024, z: 0.0004572654}
+--- !u!114 &4774862561128286527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7378415511159870337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60523e0647cc6ab43acc73cb266a32a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 0}
+  m_InteractionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 4294967295
+  m_AttachTransform: {fileID: 8945573543216952010}
+  m_KeepSelectedTargetValid: 1
+  m_DisableVisualsWhenBlockedInGroup: 1
+  m_StartingSelectedInteractable: {fileID: 0}
+  m_StartingTargetFilter: {fileID: 0}
+  m_HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_SelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
+  m_OnHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ShowInteractableHoverMeshes: 1
+  m_InteractableHoverMeshMaterial: {fileID: 0}
+  m_InteractableCantHoverMeshMaterial: {fileID: 0}
+  m_SocketActive: 1
+  m_InteractableHoverScale: 1
+  m_RecycleDelayTime: 1
+  m_HoverSocketSnapping: 0
+  m_SocketSnappingRadius: 0.1
+  m_SocketScaleMode: 0
+  m_FixedScale: {x: 1, y: 1, z: 1}
+  m_TargetBoundsSize: {x: 1, y: 1, z: 1}
 --- !u!1 &8765805218833694043
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +349,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000004172325, y: -0.000000004268668, z: 0.000000059604645,
     w: 1}
-  m_LocalPosition: {x: -0.04219071, y: 0.010517177, z: 0.031030871}
+  m_LocalPosition: {x: -0.0431, y: 0.010517177, z: 0.031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
