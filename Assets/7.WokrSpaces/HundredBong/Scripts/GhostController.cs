@@ -104,10 +104,13 @@ public class GhostController : MonoBehaviour
             //agent.remainingDistance : 목적지까지의 남은 거리를 반환함 stoppingDistance를 활용하여 도착 여부 확인함
             if (agent.pathPending == false && agent.remainingDistance <= agent.stoppingDistance)
             {
+                Debug.Log("if문 진입");
                 //hasPath: 경로가 유효한지 확인함
                 //velocity.sqrMagnitude == 0f: NavMeshAgent가 정지했는지 확인함
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
+                    Debug.Log("내부 if문 진입");
+
                     StartCoroutine(canvas.FadeInCanvasCoroutine());
                 }
             }

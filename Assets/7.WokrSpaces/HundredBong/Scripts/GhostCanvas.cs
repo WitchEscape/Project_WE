@@ -36,12 +36,16 @@ public class GhostCanvas : MonoBehaviour
         fsm = GetComponentInParent<FinitStateMachine>();
         canvas = GetComponent<CanvasGroup>();
         canvas.alpha = 0;
-        canvas.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
         InitializationButtonsOnEnable();
+    }
+
+    private void Start()
+    {
+        canvas.gameObject.SetActive(false);
     }
 
     private void InitializationButtonsOnEnable()
@@ -322,6 +326,8 @@ public class GhostCanvas : MonoBehaviour
 
     public IEnumerator FadeInCanvasCoroutine()
     {
+        Debug.Log("Fade In Coroutine 진입");
+
         if (canvas.gameObject.activeSelf == false)
         {
             canvas.gameObject.SetActive(true);

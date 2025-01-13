@@ -9,12 +9,35 @@ public class Examiner : MonoBehaviour
     public bool[] isCorrectPostion = new bool[3];
 
     private bool isComplite = false;
-    private bool isCleared = false; 
+    private bool isCleared = false;
+
+    private TriggerZone[] triggerZone = new TriggerZone[3];
     private void Awake()
     {
         ghostCanvas = FindObjectOfType<GhostCanvas>();
+        triggerZone = GetComponentsInChildren<TriggerZone>();
     }
-        
+
+    private void OnEnable()
+    {
+        for (int i = 0; triggerZone.Length > i; i++)
+        {
+            int index = i;
+            triggerZone[index].OnEnterEvent.AddListener(x => SetPostionEnter(index));
+            triggerZone[index].OnExitEvent.AddListener(x => SetPostionExit(index));
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; triggerZone.Length > i; i++)
+        {
+            int index = i;
+            triggerZone[index].OnEnterEvent.RemoveListener(x => SetPostionEnter(index));
+            triggerZone[index].OnExitEvent.RemoveListener(x => SetPostionExit(index));
+        }
+    }
+
     public void SetPostionEnter(int i)
     {
         isCorrectPostion[i] = true;
@@ -31,7 +54,6 @@ public class Examiner : MonoBehaviour
     public void SetPostionExit(int i)
     {
         isCorrectPostion[i] = false;
-
     }
 
     private bool CheckCorrectPostion()
