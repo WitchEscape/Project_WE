@@ -14,6 +14,7 @@ public class GhostCanvas : MonoBehaviour
     public Chapters chapters;
     [SerializeField, Header("Yes버튼")] private Button yesButton;
     [SerializeField, Header("No버튼")] private Button noButton;
+    [SerializeField, Header("취소 버튼")] private Button cancelButton;
     [SerializeField, Header("호출 횟수에 따른 난이도")] private Button[] hintButtons;
     [Header("클리어 체크용 bool 변수")] public bool[] isCleared;
     [Header("힌트 지속시간")] public float hintDuration;
@@ -47,12 +48,15 @@ public class GhostCanvas : MonoBehaviour
     {
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
+        cancelButton.gameObject.SetActive(false);
 
         yesButton.onClick.AddListener(OnClickYes);
         noButton.onClick.AddListener(OnClickNo);
+        cancelButton.onClick.AddListener(OnClickCancel);
 
         for (int i = 0; i < hintButtons.Length; i++)
         {
+            //클로저 문제 방지용 인덱스 추가
             int index = i;
             hintButtons[i].onClick.AddListener(() => OnClickHintButton(index));
         }
@@ -62,6 +66,8 @@ public class GhostCanvas : MonoBehaviour
     {
         yesButton.onClick.RemoveListener(OnClickYes);
         noButton.onClick.RemoveListener(OnClickNo);
+        cancelButton.onClick.RemoveListener(OnClickCancel);
+
 
         for (int i = 0; i < hintButtons.Length; i++)
         {
@@ -76,8 +82,10 @@ public class GhostCanvas : MonoBehaviour
     private void OnClickYes()
     {
         isYesButtonClicked = true;
+
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
+        cancelButton.gameObject.SetActive(true);
 
         CheckClearedPuzzles();
         InitializationChapters();
@@ -95,8 +103,17 @@ public class GhostCanvas : MonoBehaviour
 
         callIndex++;
     }
+    private void OnClickNo()
+    {
+        fsm.EndTalkByButtonOrDistance();
+        StartCoroutine(FadeOutCanvasCoroutine());
+    }
 
-
+    private void OnClickCancel()
+    {
+        StartCoroutine(FadeOutCanvasCoroutine());
+        fsm.EndTalkByEvent();
+    }
 
     private void CheckClearedPuzzles()
     {
@@ -146,12 +163,6 @@ public class GhostCanvas : MonoBehaviour
 
             hintText.text = $"{hintTexts[i]}";
         }
-    }
-
-    private void OnClickNo()
-    {
-        fsm.EndTalkByButtonOrDistance();
-        StartCoroutine(FadeOutCanvasCoroutine());
     }
 
     private void InitializationChapters()
