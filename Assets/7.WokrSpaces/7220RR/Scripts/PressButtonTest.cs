@@ -8,7 +8,6 @@ public class PressButtonTest : XRBaseInteractable
 {
     public Transform button;
     public bool isTrigger;
-    public bool isToggle;
     public float pressDistance;
     public Axis pressAxis;
 

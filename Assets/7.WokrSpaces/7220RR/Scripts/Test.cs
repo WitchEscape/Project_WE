@@ -11,14 +11,9 @@ public class Test : MonoBehaviour
     public int asss;
     private void Start()
     {
-        interactable.selectEntered.AddListener((x) =>
-        {
-            colliderx.isTrigger = true;
-        });
-        interactable.selectExited.AddListener((x) =>
-        {
-            colliderx.isTrigger = false;
-        });
+        asss = 10;
+        asss = Mathf.Max(asss, 1);
+        print(asss);
 
     }
 }
