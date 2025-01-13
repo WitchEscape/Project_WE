@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Cauldron : MonoBehaviour
 {
-    [Header("빛나는 돌 프리팹")] public GameObject magicStonePrefab;
+    [Header("생성할 빛나는 돌")] public GameObject magicStone;
     [Header("휘저을때 필요한 힘")] public float churnForce = 3f;
     [Header("물약 리스트")] public List<GameObject> positions;
     [Header("성공했을 때 파티클")] public ParticleSystem successParticle;
@@ -99,8 +99,7 @@ public class Cauldron : MonoBehaviour
         {
             if (wasInstantiate == false)
             {
-                GameObject core = Instantiate(magicStonePrefab);
-                core.transform.position = gameObject.transform.position + (Vector3.up * 0.6f);
+                magicStone.gameObject.SetActive(true);
 
                 //다음에 다시 생성되지 않도록 예외처리
                 wasInstantiate = true;
@@ -183,7 +182,6 @@ public class Cauldron : MonoBehaviour
             {
                 isChurned = true;
             }
-
         }
     }
 
