@@ -79,7 +79,7 @@ public class KeyPlaceMent : MonoBehaviour
     // 열쇠를 놓았을 때 호출
     private void OnReleased(SelectExitEventArgs args)
     {
-        LockPositionAndRotation(); // 놓았을 때 다시 고정
+        UnlockPositionAndRotation(); // 놓았을 때 다시 고정
         rb.isKinematic = false;
         rb.useGravity = true;
     }
