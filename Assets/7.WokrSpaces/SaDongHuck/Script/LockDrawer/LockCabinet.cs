@@ -20,7 +20,7 @@ public class LockCabinet : MonoBehaviour
         limits.max = 0;
         joint.limits = limits;
         joint.useLimits = true;
-        print("문이 잠겼음");
+        print("서랍문이 잠겼음");
     }
     public void UnLockDrawer()
     {
@@ -30,5 +30,6 @@ public class LockCabinet : MonoBehaviour
         limits.max = 123;
         joint.limits = limits;
         joint.useLimits = false;
+        print("서랍문이 열렸습니다");
     }
 }
