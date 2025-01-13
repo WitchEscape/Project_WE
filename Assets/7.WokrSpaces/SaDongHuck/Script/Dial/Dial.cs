@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Timeline;
@@ -14,6 +15,8 @@ public class Dial : MonoBehaviour
 
     [SerializeField]
     private LockDeskDrawer lockdeskdrawer;
+
+    [SerializeField] private GameObject key;
 
     private void Start()
     {
@@ -39,6 +42,7 @@ public class Dial : MonoBehaviour
         {
             //Debug.Log("서랍이 열렸습니다.");
             lockdeskdrawer.UnLockDrawer();
+            key.SetActive(true);
             
         }
         else
