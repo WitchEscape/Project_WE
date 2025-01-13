@@ -7,15 +7,22 @@ using UnityEngine.Rendering;
 
 public class Keypad : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI Ans;
+    [SerializeField] 
+    private TextMeshProUGUI Ans;
 
     private string Answer = "1042";
 
-    // 생성할 오브젝트의 프리팹
-    public GameObject objectinstant;
+    [SerializeField]
+    private LockCabinet lockcabinet;
 
-    // 오브젝트를 생성할 위치
-    public Transform objectPosition;
+    private void Start()
+    {
+        lockcabinet = FindObjectOfType<LockCabinet>();
+        if (lockcabinet == null )
+        {
+            print("LockCabinet을 찾을 수 없습니다");
+        }
+    }
     public void Number(int number)
     {
         Ans.text += number.ToString();
@@ -26,7 +33,8 @@ public class Keypad : MonoBehaviour
         if (Ans.text == Answer)
         {
             Ans.text = "Correct";
-            Instantiate(objectinstant, objectPosition.position, objectPosition.rotation);
+            lockcabinet.UnLockDrawer();
+            
         }
         else
         {
