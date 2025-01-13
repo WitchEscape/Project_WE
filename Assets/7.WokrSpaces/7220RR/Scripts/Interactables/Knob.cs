@@ -6,8 +6,8 @@ using Mathf = UnityEngine.Mathf;
 
 public class Knob : XRBaseInteractable
 {
-    public RotationAxis interactableAxis;
-    public RotationAxis interactorAxis;
+    public Axis interactableAxis;
+    public Axis interactorAxis;
     [HideInInspector]
     public float angleIncrement
     {
@@ -214,13 +214,13 @@ public class Knob : XRBaseInteractable
         localOffset = Vector3.zero;
         switch (interactorAxis)
         {
-            case RotationAxis.XAxis:
+            case Axis.XAxis:
                 localOffset.x = tempLocalOffset.x;
                 break;
-            case RotationAxis.YAxis:
+            case Axis.YAxis:
                 localOffset.y = tempLocalOffset.y;
                 break;
-            case RotationAxis.ZAxis:
+            case Axis.ZAxis:
                 localOffset.z = tempLocalOffset.z;
                 break;
             default:
@@ -320,13 +320,13 @@ public class Knob : XRBaseInteractable
         {
             switch (interactableAxis)
             {
-                case RotationAxis.XAxis:
+                case Axis.XAxis:
                     m_Handle.localEulerAngles = new Vector3(angle, 0f, 0.0f);
                     break;
-                case RotationAxis.YAxis:
+                case Axis.YAxis:
                     m_Handle.localEulerAngles = new Vector3(0f, angle, 0.0f);
                     break;
-                case RotationAxis.ZAxis:
+                case Axis.ZAxis:
                     m_Handle.localEulerAngles = new Vector3(0f, 0.0f, angle);
                     break;
                 default:

@@ -21,7 +21,7 @@ public enum ActiveUIType
     Object
 }
 
-public enum RotationAxis
+public enum Axis
 {
     XAxis,
     YAxis,

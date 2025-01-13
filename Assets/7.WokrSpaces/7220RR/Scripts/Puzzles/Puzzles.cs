@@ -30,15 +30,15 @@ public class Puzzles : MonoBehaviour
     public InteractableType interactableType;
     public List<int> passward;
     private List<float> currentPassward = new List<float>();
-    public RotationAxis rotationAxis;
-    public RotationAxis controllerAxis;
+    public Axis rotationAxis;
+    public Axis controllerAxis;
     public int offSetAngle = 18;
     //임시 풀리면 어떻게 상호작용이 될지
     public bool isDialClear;
     public bool isDialClamped;
     #endregion
     #region Keypad
-
+    public List<GameObject> _KeypadNum;
     #endregion
     private void Awake()
     {
@@ -70,7 +70,6 @@ public class Puzzles : MonoBehaviour
         for (int i = 0; interactors.Count > i; i++)
         {
             if (interactors[i] == null) continue;
-            print($"{i + 1} 번 째 오브젝트 이름 변경");
             interactors[i].name = $"{interactorName} {i}";
         }
     }
@@ -151,15 +150,15 @@ public class Puzzles : MonoBehaviour
         float angle = 0;
         switch (rotationAxis)
         {
-            case RotationAxis.XAxis:
+            case Axis.XAxis:
                 newHandleRotation.x = NormalizedAngle(handle.eulerAngles.x);
                 angle = newHandleRotation.x;
                 break;
-            case RotationAxis.YAxis:
+            case Axis.YAxis:
                 newHandleRotation.y = NormalizedAngle(handle.eulerAngles.y);
                 angle = newHandleRotation.y;
                 break;
-            case RotationAxis.ZAxis:
+            case Axis.ZAxis:
                 newHandleRotation.z = NormalizedAngle(handle.eulerAngles.z);
                 angle = newHandleRotation.z;
                 break;
@@ -249,6 +248,15 @@ public class Puzzles : MonoBehaviour
 
         currentPassward[index] = ((angle / 36) >= 10) ? (angle / 36) - 10 : angle / 36;
         print(currentPassward[index]);
+    }
+    #endregion
+    #region Keypad
+    private void KeypadInteractableEventSet()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+
+        }
     }
     #endregion
 }
