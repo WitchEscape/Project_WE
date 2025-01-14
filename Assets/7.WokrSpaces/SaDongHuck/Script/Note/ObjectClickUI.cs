@@ -5,48 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ObjectClickUI : MonoBehaviour
 {
-    /*public GameObject uiCanvas; // 호출할 UI Canvas
-    private XRGrabInteractable grabInteractable; // XR Grab Interactable
-
-    void Start()
-    {
-        // XR Grab Interactable 컴포넌트 가져오기
-        grabInteractable = GetComponent<XRGrabInteractable>();
-
-        // Select Entered 이벤트에 메서드 연결
-        if (grabInteractable != null)
-        {
-            grabInteractable.selectEntered.AddListener(OnObjectGrabbed);
-            grabInteractable.selectExited.AddListener(OnObjectReleased); // 선택사항
-        }
-    }
-
-    private void OnObjectGrabbed(SelectEnterEventArgs args)
-    {
-        // UI 활성화/비활성화 토글
-        if (uiCanvas != null)
-        {
-            uiCanvas.SetActive(!uiCanvas.activeSelf);
-            Debug.Log("UI Toggled: " + uiCanvas.activeSelf);
-        }
-    }
-
-    private void OnObjectReleased(SelectExitEventArgs args)
-    {
-        // 선택적으로 UI 비활성화 처리
-        Debug.Log("Object Released");
-    }
-
-    void OnDestroy()
-    {
-        // 이벤트 제거
-        if (grabInteractable != null)
-        {
-            grabInteractable.selectEntered.RemoveListener(OnObjectGrabbed);
-            grabInteractable.selectExited.RemoveListener(OnObjectReleased);
-        }
-    }*/
-
 
     public GameObject uiPrefab; // 생성할 UI 프리팹
     public float distanceFromPlayer = 2f; // 플레이어와 UI 사이 거리
@@ -67,9 +25,18 @@ public class ObjectClickUI : MonoBehaviour
         {
             Debug.LogError("Main Camera를 찾을 수 없습니다. Main Camera 태그가 설정되어 있는지 확인하세요.");
         }
+
+        var grabinteractable = GetComponent<XRGrabInteractable>();
+        {
+            if(grabinteractable != null)
+            {
+                grabinteractable.selectEntered.AddListener(SpawnUI);
+                grabinteractable.selectExited.AddListener(RemoveUI);
+            }
+        }
     }
 
-    public void SpawnUI()
+    private void SpawnUI(SelectEnterEventArgs args)
     {
         if (playerCamera == null)
         {
@@ -94,5 +61,10 @@ public class ObjectClickUI : MonoBehaviour
             // UI 활성화/비활성화 전환
             spawnedUI.SetActive(!spawnedUI.activeSelf);
         }
+    }
+
+    public void RemoveUI(SelectExitEventArgs args)
+    {
+        uiPrefab.SetActive(false);
     }
 }
