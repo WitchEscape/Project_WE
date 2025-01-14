@@ -1,29 +1,35 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class We_LEVEL3_Dialog : MonoBehaviour
+public class WE_LEVEL3_Dialog : MonoBehaviour
 {
+    private bool isActivate = false;
     public TextMeshProUGUI dialogText;
     [SerializeField] private float typingSpeed = 0.05f;
     private Coroutine CoTyping;
 
-    void Start()
+    private void Start()
     {
+        GetComponent<TriggerZone>().OnEnterEvent.AddListener(TriggerTest);
+
         DialogPlayer.Instance.OnDialogStart.AddListener((dialog) =>
         {
-            if(dialog.DialogType == DialogType.Story)
+            if (dialog.DialogType == DialogType.Story)
             {
-                if (CoTyping != null)
-                {
-                    StopCoroutine(CoTyping);
-                }
-                CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
+                dialogText.text = $"{dialog.SpeakerName} : {dialog.Text}";
+                //if (CoTyping != null)
+                //{
+                //    StopCoroutine(CoTyping);
+                //}
+                //CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
             }
             else
             {
                 if (CoTyping != null)
-                {
+                {       
                     StopCoroutine(CoTyping);
                 }
                 CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
@@ -41,15 +47,26 @@ public class We_LEVEL3_Dialog : MonoBehaviour
         });
     }
 
+    public void TriggerTest(GameObject go)
+    {
+        if(!isActivate)
+        {
+            DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_01_");
+            isActivate = true;
+        }
+    }
+
+
+
     private IEnumerator TypeText(string speaker, string text)
     {
         string fullText = $"{speaker} : {text}";
         dialogText.text = "";
-        
+
         string currentText = "";
         string currentTag = "";
         bool isTag = false;
-        
+
         foreach (char letter in fullText)
         {
             if (letter == '<')
@@ -58,7 +75,7 @@ public class We_LEVEL3_Dialog : MonoBehaviour
                 currentTag += letter;
                 continue;
             }
-            
+
             if (isTag)
             {
                 currentTag += letter;
@@ -73,7 +90,7 @@ public class We_LEVEL3_Dialog : MonoBehaviour
 
             currentText += letter;
             dialogText.text = currentText;
-            
+
             if (!isTag)
             {
                 yield return new WaitForSeconds(typingSpeed);
@@ -90,7 +107,7 @@ public class We_LEVEL3_Dialog : MonoBehaviour
         {
             StopCoroutine(CoTyping);
             CoTyping = null;
-            
+
             var currentDialog = DialogPlayer.Instance.GetCurrentDialog();
             if (currentDialog != null)
             {
@@ -99,23 +116,5 @@ public class We_LEVEL3_Dialog : MonoBehaviour
         }
     }
 
-    public void StartDialog()
-    {
-        DialogPlayer.Instance.PlayDialogSequence("LOBBY_01_");
-    }
 
-    public void StartDialog2()
-    {
-        DialogPlayer.Instance.PlayDialogSequence("LOBBY_02_");
-    }
-
-    public void StartDialog3()
-    {
-        DialogPlayer.Instance.PlayDialogSequence("LOBBY_03_");
-    }
-
-    void Update()
-    {
-
-    }
 }

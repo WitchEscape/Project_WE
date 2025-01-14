@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Cauldron : MonoBehaviour
 {
+    [SerializeField] private string puzzleID = "Puzzle_2";
+
     [Header("생성할 빛나는 돌")] public GameObject magicStone;
     [Header("휘저을때 필요한 힘")] public float churnForce = 3f;
     [Header("물약 리스트")] public List<GameObject> positions;
@@ -113,6 +115,7 @@ public class Cauldron : MonoBehaviour
                 wasInstantiate = true;
                 ghostCanvas.ClearPuzzle(1);
             }
+            DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_03_");
             successParticle.Play();
         }
 

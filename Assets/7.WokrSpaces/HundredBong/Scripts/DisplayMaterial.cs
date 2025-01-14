@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisplayMaterial : MonoBehaviour
 {
+    [SerializeField] private string puzzleID = "Puzzle_3";
+
     private Material material;
     public float fadeDuration = 3f;
     private float elapsedTime = 0f;
@@ -70,7 +73,14 @@ public class DisplayMaterial : MonoBehaviour
                 spawnParticle.Play();
                 wasPlayParticle = true;
             }
+            StartCoroutine(sceneChange());
         }
+    }
+
+    IEnumerator sceneChange()
+    {
+        yield return new WaitForSeconds(10f);
+        SceneManager.LoadScene("SaveLoadTest");
     }
 
     private void OnTriggerEnter(Collider other)

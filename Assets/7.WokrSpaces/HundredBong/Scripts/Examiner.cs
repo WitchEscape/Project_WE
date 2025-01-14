@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Examiner : MonoBehaviour
 {
+    [SerializeField] private string puzzleID = "Puzzle_1";
+
     private GhostCanvas ghostCanvas;
 
     public bool[] isCorrectPostion = new bool[3];
@@ -60,6 +62,7 @@ public class Examiner : MonoBehaviour
         if (isComplite && isCleared == false)
         {
             //TODO : 발생할 이벤트 작성
+            DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_02_");
             Debug.Log("포션 퍼즐 클리어");
 
             match.gameObject.SetActive(true);
