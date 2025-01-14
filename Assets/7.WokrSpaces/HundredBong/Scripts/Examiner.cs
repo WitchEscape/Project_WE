@@ -7,6 +7,7 @@ public class Examiner : MonoBehaviour
     private GhostCanvas ghostCanvas;
 
     public bool[] isCorrectPostion = new bool[3];
+    [Header("활성화할 성냥")] public GameObject match;
 
     private bool isComplite = false;
     private bool isCleared = false;
@@ -38,6 +39,14 @@ public class Examiner : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (match != null && match.activeSelf == true)
+        {
+            match.gameObject.SetActive(false);
+        }
+    }
+
     public void SetPostionEnter(int i)
     {
         isCorrectPostion[i] = true;
@@ -46,6 +55,7 @@ public class Examiner : MonoBehaviour
         {
             //TODO : 발생할 이벤트 작성
             Debug.Log("포션 퍼즐 클리어");
+            match.gameObject.SetActive(true);
             isCleared = true;
             ghostCanvas.ClearPuzzle(0);
         }

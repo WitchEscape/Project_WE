@@ -23,6 +23,8 @@ public class Firewood : MonoBehaviour
 
         if (other.CompareTag(matchTag))
         {
+            Debug.Log($"other 태그: {other.tag}, matchTag: {matchTag}");
+
             Rigidbody rb = other.GetComponent<Rigidbody>();
 
             if (fireForce <= rb.velocity.magnitude)
