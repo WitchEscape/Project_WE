@@ -9,6 +9,8 @@ public class SaveData
     public List<ObjectData> worldObjects;
     public List<StageProgressData> stageProgressList;
     public string saveTimeString;
+    public List<InventorySlotData> inventoryData;
+    public List<string> removedFromWorldItems;
 
     public DateTime saveTime
     {
@@ -56,6 +58,14 @@ public class SaveData
     {
         public string key;
         public string value;
+    }
+
+    [Serializable]
+    public class InventorySlotData
+    {
+        public string itemPrefabPath;
+        public int slotIndex;
+        public string itemUniqueID;
     }
 
     public Dictionary<string, Dictionary<string, PuzzleProgressManager.PuzzleData>> GetStageProgress()
@@ -129,6 +139,7 @@ public class SaveData
         worldObjects = new List<ObjectData>();
         stageProgressList = new List<StageProgressData>();
         saveTime = DateTime.Now;
+        removedFromWorldItems = new List<string>();
     }
 }
 
@@ -148,10 +159,12 @@ public class ObjectData
     public Vector3 position;
     public Quaternion rotation;
     public SerializableCustomData customData;
+    public bool isInInventory;
 
     public ObjectData()
     {
         customData = new SerializableCustomData();
+        isInInventory = false;
     }
 }
 

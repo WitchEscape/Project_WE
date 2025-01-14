@@ -15,6 +15,7 @@ public class Cauldron : MonoBehaviour
     
     [HideInInspector] public Observable<int> postionCount;
     [HideInInspector] public Observable<bool> isCorrect;
+    [HideInInspector] public bool isFire;
 
     private bool[] isCorrectRune = new bool[4];
     private bool isChurned;
@@ -61,11 +62,11 @@ public class Cauldron : MonoBehaviour
         }
     }
 
-    #region 기존 이벤트 방식에서 가마솥 휘젓는걸로 바뀜에따라 업데이트에서 조건검사 진행
+   
     private void OnValueChanged(int newValue)
     {
         isChurned = false;
-
+        #region 기존 이벤트 방식에서 가마솥 휘젓는걸로 바뀜에따라 업데이트에서 조건검사 진행
         //Debug.Log($"(int)new Value : {newValue}, {postionCount.Value}");
 
         //if (postionCount.Value < 0) { return; }
@@ -84,8 +85,9 @@ public class Cauldron : MonoBehaviour
         //        isCorrectRune[i] = false;
         //    }
         //}
+        #endregion 
     }
-    #endregion 
+
 
     private void OnValueChanged(bool newValue)
     {
@@ -93,7 +95,8 @@ public class Cauldron : MonoBehaviour
 
         if (isCorrect.Value == false)
         {
-            //TODO : 실패했을 때 파티클 재생
+            //DONE : 실패했을 때 파티클 재생
+            failParticle.Play();
         }
         else if (isCorrect.Value == true)
         {
@@ -124,6 +127,16 @@ public class Cauldron : MonoBehaviour
 
     private void PutInCauldron(GameObject arg)
     {
+        //불 안붙은 상태
+        if (isFire == false)
+        {
+            //유니티는 SetActive를 프레임 단위로 실행하기 때문에 같은 프레임에서 false -> true해도 하나밖에 실행 안됨
+            //코루틴으로 한 프레임 유예를 두고 ResetPostions 메서드 실행
+            arg.gameObject.SetActive(false);
+            StartCoroutine(ResetPostionCoroutine());
+
+        }
+
         //0일때 H를 넣으면 true
         if (postionCount.Value == 0 && arg.CompareTag("Rune_H"))
         {
@@ -207,19 +220,17 @@ public class Cauldron : MonoBehaviour
         Debug.Log("포션 리셋 ");
         foreach (GameObject obj in positions)
         {
-            //포션들 전부 껐다 키면서 위치 리셋, 포션들 마다 OnEnable 달려있는 스크립트 달아줘야함
-            //리셋을 해주긴 하는데 만약 기획에서 솥에 들어간 오브젝트만 리셋해달라고 하면 어떻게 하죠
-
-            //1. 모든 포션들 리셋시키기
-            //obj.SetActive(false);
-            //obj.SetActive(true);
-
-            //2. 이미 들어간 포션들만 리셋시키기
             if (obj.activeSelf == false)
             {
                 obj.SetActive(true);
             }
         }
+    }
+
+    private IEnumerator ResetPostionCoroutine()
+    {
+        yield return null;
+        ResetPostions();
     }
 
     [ContextMenu("Test")]
