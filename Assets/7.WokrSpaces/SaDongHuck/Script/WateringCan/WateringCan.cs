@@ -25,10 +25,12 @@ public class WateringCan : MonoBehaviour
 
     private void OnTriggerPressed(ActivateEventArgs args)
     {
+        print($"");
         // 물 뿌리기 시작
         if (waterParticle != null)
         {
             waterParticle.Play();
+            
         }
     }
 

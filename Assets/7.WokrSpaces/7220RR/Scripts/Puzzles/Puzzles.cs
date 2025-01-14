@@ -331,7 +331,7 @@ public class Puzzles : MonoBehaviour
             return;
         }
 
-        if (currentPassword.Length <= 0)
+        if (currentPassword == null)
         {
             currentPassword = index.ToString();
         }
@@ -357,6 +357,7 @@ public class Puzzles : MonoBehaviour
     private void KeypadClearButtonClickEvent()
     {
         currentPassword = null;
+        isPull = false;
         KeypadMoniterTextChange(currentPassword);
     }
 
@@ -369,7 +370,8 @@ public class Puzzles : MonoBehaviour
         }
         else
         {
-            KeypadMoniterTextChange("Field");
+            KeypadMoniterTextChange("Fail");
+            currentPassword = null;
         }
     }
 

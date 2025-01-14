@@ -330,9 +330,6 @@ public class PuzzleEditor : Editor
         }
         else if (puzzles.puzzleType == PuzzleType.Keypad)
         {
-            if (puzzles._KeypadNum == null) puzzles._KeypadNum = new List<GameObject>();
-            if (puzzles._KeypadSub == null) puzzles._KeypadSub = new List<GameObject>();
-
             if (puzzles.numPushButtons == null) puzzles.numPushButtons = new List<PushButtonTest>();
             if (puzzles.subPushButtons == null) puzzles.subPushButtons = new List<PushButtonTest>();
 
