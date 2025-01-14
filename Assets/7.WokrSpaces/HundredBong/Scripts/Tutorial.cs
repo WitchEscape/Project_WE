@@ -68,7 +68,7 @@ public class Tutorial : MonoBehaviour
         tutorialCleared[i] = true;
     }
 
-    public void OnLookArea()
+    public void OnLookArea(int i)
     {
         ResetRenderers();
 
@@ -79,7 +79,7 @@ public class Tutorial : MonoBehaviour
         gameObject.transform.position = tutorialAreas[0].transform.position;
     }
 
-    public void OnGrapArea()
+    public void OnGrapArea(int i)
     {
         ResetRenderers();
 
@@ -91,7 +91,7 @@ public class Tutorial : MonoBehaviour
         gameObject.transform.position = tutorialAreas[0].transform.position;
     }
 
-    public void OnRayInteractorArea()
+    public void OnRayInteractorArea(int i)
     {
         ResetRenderers();
 
@@ -103,7 +103,7 @@ public class Tutorial : MonoBehaviour
         gameObject.transform.position = tutorialAreas[0].transform.position;
     }
 
-    public void OnAlyxGrabArea()
+    public void OnAlyxGrabArea(int i)
     {
         //AlyxGrabTutorialObject 이벤트에서 SetActive(true)하고 다음 튜토리얼존에서 false 시키기
         ResetRenderers();

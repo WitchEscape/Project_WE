@@ -79,8 +79,8 @@ public class DisplayMaterial : MonoBehaviour
         if (wasPlayParticle == false) { return; }
 
         //1 : 불투명      0 : 투명
-        if (other.CompareTag("Player") && wasPlaying == false)
-        {
+        if (other.CompareTag("Left") && wasPlaying == false)
+        {            
             //알파값을 매 프레임 감소시킴
             erase = erase - (Time.deltaTime * 0.3f);
 
