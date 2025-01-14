@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class PressButtonTest : XRBaseInteractable
+public class PressButtonTest : XRSimpleInteractable
 {
     public Transform button;
     public bool isTrigger;
