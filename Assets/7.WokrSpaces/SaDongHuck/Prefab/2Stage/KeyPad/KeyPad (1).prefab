@@ -1562,7 +1562,7 @@ GameObject:
   - component: {fileID: 2906465737035179810}
   - component: {fileID: 6959184091983727748}
   - component: {fileID: 8635645433465105003}
-  - component: {fileID: 6531514301178851118}
+  - component: {fileID: 1554954462372194100}
   m_Layer: 0
   m_Name: Excute
   m_TagString: Untagged
@@ -1672,9 +1672,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6531514301178851118}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
-        m_MethodName: SpawnUI
+      - m_Target: {fileID: 1554954462372194100}
+        m_TargetAssemblyTypeName: DeskDrawerPuzzle, Assembly-CSharp
+        m_MethodName: ToggleUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1684,7 +1684,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6531514301178851118
+--- !u!114 &1554954462372194100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1693,12 +1693,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5761517465297691868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 498bc84dbde8d3e4fbd3137c41cb6521, type: 3}
+  m_Script: {fileID: 11500000, guid: a273fa257fa1ec1479ce5cd6043c0e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPrefab: {fileID: 1938693050300991914, guid: f96f5cb675610a5408be3c69da05b126,
-    type: 3}
-  playerCamera: {fileID: 0}
+  answer: BROP
+  inputChars:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lockdeskdrawer: {fileID: 0}
+  key: {fileID: 0}
+  uiPrefab: {fileID: 0}
   distanceFromPlayer: 2
   offset: {x: 0, y: 1, z: 0}
 --- !u!1 &5910743179836268531

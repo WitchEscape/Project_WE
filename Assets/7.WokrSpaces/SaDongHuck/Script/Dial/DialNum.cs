@@ -11,7 +11,7 @@ public class DialNum : MonoBehaviour
     int dialCharIndex;
 
     public TextMeshProUGUI dialCharTxt;
-    public NumDial dial;
+    public DrawerPuzzle drawerPuzzleManager;
 
     void Awake()
     {
@@ -33,7 +33,7 @@ public class DialNum : MonoBehaviour
             dialCharTxt.text = dialChars[dialCharIndex];
         }
 
-        dial.AnswerCheck();
+        drawerPuzzleManager.AnswerCheck();
     }
 
     public void NumDown()
@@ -49,6 +49,6 @@ public class DialNum : MonoBehaviour
             dialCharTxt.text = dialChars[dialCharIndex];
         }
 
-        dial.AnswerCheck();
+        drawerPuzzleManager.AnswerCheck();
     }
 }
