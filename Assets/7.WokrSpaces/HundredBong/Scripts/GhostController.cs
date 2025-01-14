@@ -12,7 +12,7 @@ public class GhostController : MonoBehaviour
     private FinitStateMachine fsm;
     private Animator anim;
     private XRGrabInteractable grab;
-    private GhostCanvas canvas;
+    private GhostCanvas ghostCanvas;
 
 
     //순찰 지점
@@ -30,7 +30,7 @@ public class GhostController : MonoBehaviour
         fsm = GetComponent<FinitStateMachine>();
         anim = GetComponentInChildren<Animator>();
         grab = GetComponent<XRGrabInteractable>();
-        canvas = GetComponentInChildren<GhostCanvas>();
+        ghostCanvas = GetComponentInChildren<GhostCanvas>();
     }
 
     private void Start()
@@ -89,6 +89,8 @@ public class GhostController : MonoBehaviour
 
     private void Talk()
     {
+        if (ghostCanvas.isCleared[ghostCanvas.isCleared.Length - 1] == true) { return; }
+
         if (fsm.currentState == State.Talk)
         {
             // 목적지 설정은 한 번만 실행
@@ -111,7 +113,7 @@ public class GhostController : MonoBehaviour
                 {
                     Debug.Log("내부 if문 진입");
 
-                    StartCoroutine(canvas.FadeInCanvasCoroutine());
+                    StartCoroutine(ghostCanvas.FadeInCanvasCoroutine());
                 }
             }
         }
