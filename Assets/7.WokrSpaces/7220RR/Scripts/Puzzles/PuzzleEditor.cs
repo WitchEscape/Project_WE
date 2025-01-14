@@ -324,18 +324,6 @@ public class PuzzleEditor : Editor
                             break;
                     }
                 }
-
-                //if (puzzles._dialColliders[i] != null)
-                //{
-                //    if (puzzles._dialColliders[i] != null && puzzles._dialColliders[i].TryGetComponent<Collider>(out Collider collider))
-                //    {
-                //        puzzles.dialColliders[i] = collider;
-                //    }
-                //    else
-                //    {
-                //        puzzles._dialColliders[i] = null;
-                //    }
-                //}
             }
 
 
@@ -360,6 +348,23 @@ public class PuzzleEditor : Editor
                         puzzles.numPushButtons[i] = (PushButtonTest)EditorGUILayout.ObjectField($"Push {i}", puzzles.numPushButtons[i], typeof(PushButtonTest), true);
                         break;
                     case InteractableType.Press:
+                        while (puzzles.numPressButton.Count <= i) puzzles.numPressButton.Add(null);
+                        puzzles.numPressButton[i] = (PressButtonTest)EditorGUILayout.ObjectField($"Press {i}", puzzles.numPressButton[i], typeof(PressButtonTest), true);
+                        break;
+                }
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                switch (puzzles.interactableType)
+                {
+                    case InteractableType.Push:
+                        while (puzzles.subPushButtons.Count <= i) puzzles.subPushButtons.Add(null);
+                        puzzles.subPushButtons[i] = (PushButtonTest)EditorGUILayout.ObjectField($"Sub Push {i}", puzzles.subPushButtons[i], typeof(PushButtonTest), true);
+                        break;
+                    case InteractableType.Press:
+                        while (puzzles.subPressButton.Count <= i) puzzles.subPressButton.Add(null);
+                        puzzles.subPressButton[i] = (PressButtonTest)EditorGUILayout.ObjectField($"Sub Press {i}", puzzles.subPressButton[i], typeof(PressButtonTest), true);
                         break;
                 }
             }

@@ -323,7 +323,7 @@ public class PushButtonTest : XRBaseInteractable
         Vector3 newButtonPoint = Vector3.zero;
         if (button != null)
         {
-            newButtonPoint = button.localPosition;
+            newButtonPoint = button.position;
         }
 
         Gizmos.color = Color.green;
