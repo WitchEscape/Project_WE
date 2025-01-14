@@ -39,6 +39,15 @@ public class Puzzles : MonoBehaviour
     #endregion
     #region Keypad
     public List<GameObject> _KeypadNum;
+    public List<PushButtonTest> numPushButtons;
+    public List<PushButtonTest> subPushButtons;
+    public List<PressButtonTest> numPressButton;
+    public List<PressButtonTest> subPressButton;
+    private bool isClear = true;
+    private bool isPull = false;
+    public int password;
+    private int currentPassword;
+    private int passwordNum;
     #endregion
     private void Awake()
     {
@@ -58,8 +67,10 @@ public class Puzzles : MonoBehaviour
                 DialInteractablesEventSet();
                 break;
             case PuzzleType.Keypad:
+                KeypadInteractableEventSet();
                 break;
             default:
+                Debug.LogError("Puzzels / Awake / PuzzleType is Error");
                 break;
         }
     }
@@ -253,10 +264,45 @@ public class Puzzles : MonoBehaviour
     #region Keypad
     private void KeypadInteractableEventSet()
     {
-        for (int i = 0; i < 10; i++)
+        switch (interactableType)
         {
+            case InteractableType.Push:
+                for (int i = 0; i < 10; i++)
+                {
+                    int index = i;
+                    if (numPushButtons.Count < i || numPushButtons[i] == null)
+                    {
+                        continue;
+                    }
 
+                    numPushButtons[index].OnPush.AddListener(() => { KeypadNumEvent(index); });
+                }
+                break;
+            case InteractableType.Press:
+                break;
+            default:
+                Debug.LogError("Puzzles / KeypadInteracbleEventSet / InteractableType is Error");
+                break;
         }
+    }
+
+    private void KeypadNumEvent(int index)
+    {
+        if (isPull)
+        {
+            return;
+        }
+
+        if ((currentPassword / 1) <= 0)
+        {
+            currentPassword = index;
+        }
+        else
+        {
+            currentPassword = (currentPassword * 10) + index;
+        }
+
+
     }
     #endregion
 }

@@ -31,6 +31,8 @@ public enum Axis
 public enum InteractableType
 {
     None,
-    Knob
+    Knob,
+    Push,
+    Press
 }
 
