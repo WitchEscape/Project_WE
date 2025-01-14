@@ -49,8 +49,5 @@ public class Dial : MonoBehaviour
             return;
     }
 
-    
-
-   
 
 }
