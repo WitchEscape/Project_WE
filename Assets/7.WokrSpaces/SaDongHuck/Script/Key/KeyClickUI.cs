@@ -33,7 +33,7 @@ public class KeyClickUI : MonoBehaviour
             return;
         }
 
-        if (spawnedUI == null) // UI가 아직 생성되지 않은 경우
+        if (uiPrefab != null) // UI가 아직 생성되지 않은 경우
         {
             // UI 생성 위치 계산
             Vector3 spawnPosition = playerCamera.position + playerCamera.forward.normalized * distanceFromPlayer + offset;
@@ -42,8 +42,8 @@ public class KeyClickUI : MonoBehaviour
             Quaternion spawnRotation = Quaternion.LookRotation(playerCamera.forward, Vector3.up);
 
             // UI 생성 및 설정
-            spawnedUI = Instantiate(uiPrefab, spawnPosition, spawnRotation);
-            spawnedUI.SetActive(true);
+            //spawnedUI = Instantiate(uiPrefab, spawnPosition, spawnRotation);
+            uiPrefab.SetActive(true);
         }
         else
         {
