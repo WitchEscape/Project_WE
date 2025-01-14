@@ -48,6 +48,11 @@ public class Cauldron : MonoBehaviour
 
         //Debug.Log(postionCount.Value);
         //Debug.Log(isCorrect.Value);
+
+        if (magicStone.activeSelf == true)
+        {
+            magicStone.gameObject.SetActive(false);
+        }
     }
 
     private void Update()

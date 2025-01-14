@@ -42,6 +42,7 @@ public class Latern : MonoBehaviour
         {
             pointLight.gameObject.SetActive(true);
             arg.interactableObject.transform.gameObject.layer = LayerMask.NameToLayer("Interactable");
+            gameObject.tag = "Core";
         }
     }
 
@@ -51,7 +52,7 @@ public class Latern : MonoBehaviour
         {
             pointLight.gameObject.SetActive(false);
             arg.interactableObject.transform.gameObject.layer = LayerMask.NameToLayer("Default");
-
+            gameObject.tag = "Untagged";
         }
     }
 
