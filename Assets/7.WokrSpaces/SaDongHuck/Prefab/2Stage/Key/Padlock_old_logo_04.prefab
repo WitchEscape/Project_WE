@@ -154,6 +154,38 @@ MonoBehaviour:
   socketInteractor: {fileID: 4774862561128286527}
   lockObject: {fileID: 7378415511159870337}
   lockAnimator: {fileID: 1923328922136240733}
+--- !u!1 &5050563767262050307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8438248396229002876}
+  m_Layer: 0
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8438248396229002876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5050563767262050307}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.0000000040467545, y: -0.000000028011758, z: -0.037702266,
+    w: 0.99928904}
+  m_LocalPosition: {x: -0.0341, y: 0.0025, z: -0.0148}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8945573543216952010}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -4.321}
 --- !u!1 &7378415511159870337
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +311,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_InteractionLayers:
     m_Bits: 4294967295
-  m_AttachTransform: {fileID: 8945573543216952010}
+  m_AttachTransform: {fileID: 8438248396229002876}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -347,14 +379,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765805218833694043}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000004172325, y: -0.000000004268668, z: 0.000000059604645,
-    w: 1}
-  m_LocalPosition: {x: -0.0431, y: 0.010517177, z: 0.031}
+  m_LocalRotation: {x: -0.016426016, y: -0.0046260054, z: -0.016305191, w: 0.9997214}
+  m_LocalPosition: {x: -0.0424, y: 0.0105, z: 0.031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8438248396229002876}
   m_Father: {fileID: 1987000262274303161}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.891, y: -0.5, z: -1.861}
 --- !u!33 &2437572760773913798
 MeshFilter:
   m_ObjectHideFlags: 0
