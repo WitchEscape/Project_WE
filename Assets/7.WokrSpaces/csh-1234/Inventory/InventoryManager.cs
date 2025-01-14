@@ -86,24 +86,31 @@ public class InventoryManager : MonoBehaviour
     {
         IsInventoryOpen = state;
         
-        if(state)
+        if(pannel!= null)
         {
-            pannel.SetActive(true);
-        }
-        else
-        {
-            pannel.SetActive(false);
-        }
-
-        // 인벤토리 UI 활성화/비활성화
-        foreach (var slot in inventorySlots)
-        {
-            if (slot != null)
+            if (state)
             {
-                slot.gameObject.SetActive(state);
+                pannel.SetActive(true);
             }
+            else
+            {
+                pannel.SetActive(false);
+            }
+
+            // 인벤토리 UI 활성화/비활성화
+            foreach (var slot in inventorySlots)
+            {
+                if (slot != null)
+                {
+                    slot.gameObject.SetActive(state);
+                }
+            }
+            SetPositionAndRotation();
         }
-        SetPositionAndRotation();
+        
+
+
+
     }
 
     private void SetPositionAndRotation()
@@ -235,6 +242,8 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+        //ToggleInventoryItems(false);
+
         // 모든 아이템이 로드된 후 인벤토리를 이전 상태로 되돌림
         if (!wasInventoryOpen)
         {
@@ -246,7 +255,33 @@ public class InventoryManager : MonoBehaviour
     private IEnumerator CloseInventoryAfterDelay()
     {
         // 아이템 설정이 완료될 때까지 잠시 대기
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         ToggleInventoryItems(false);
+    }
+
+    public void ClearInventory()
+    {
+        Debug.Log("[InventoryManager] 인벤토리 초기화 시작");
+        
+        // 모든 슬롯의 아이템 제거
+        foreach (var slot in inventorySlots)
+        {
+            if (slot != null && slot.CurrentSlotItem != null)
+            {
+                Debug.Log($"[InventoryManager] 슬롯 아이템 제거: {slot.CurrentSlotItem.name}");
+                Destroy(slot.CurrentSlotItem.gameObject);
+            }
+        }
+
+        // 인벤토리 UI 상태 초기화
+        if (pannel != null)
+        {
+            pannel.SetActive(false);
+        }
+        
+        IsInventoryOpen = false;
+        isActive = true;
+
+        Debug.Log("[InventoryManager] 인벤토리 초기화 완료");
     }
 }

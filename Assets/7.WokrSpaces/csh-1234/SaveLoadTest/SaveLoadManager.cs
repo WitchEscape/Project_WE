@@ -16,7 +16,16 @@ public class SaveLoadManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         #if UNITY_EDITOR
             // 유니티 에디터에서 실행 시 프로젝트 내부 경로 사용
             savePath = Path.Combine(Application.dataPath, "1.Resources/Data/SaveData");
@@ -94,34 +103,53 @@ public class SaveLoadManager : MonoBehaviour
         try
         {
             string filePath = Path.Combine(savePath, $"save_{SceneName}.json");
+            if (!File.Exists(filePath))
+            {
+                Debug.LogError($"Save file not found: {filePath}");
+                return;
+            }
+
+            // 현재 씬의 인벤토리 초기화
+            var currentInventoryManager = FindObjectOfType<InventoryManager>();
+            if (currentInventoryManager != null)
+            {
+                currentInventoryManager.ClearInventory();
+            }
+
             string json = File.ReadAllText(filePath);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
+            
+            // 씬 로드 후에 데이터를 로드하도록 이벤트를 등록
+            SceneManager.sceneLoaded += (scene, mode) => 
+            {
+                Debug.Log($"Scene loaded: {scene.name}, Starting to load game data");
+                StartCoroutine(LoadGameWithDelay(saveData));
+                SceneManager.sceneLoaded -= (s, m) => { }; // 이벤트 한 번만 실행되도록 제거
+            };
 
-            // 순서 변경: 인벤토리를 먼저 로드
-            var inventoryManager = FindObjectOfType<InventoryManager>();
-            if (inventoryManager != null && saveData.inventoryData != null)
-            {
-                Debug.Log("[SaveLoadManager] 인벤토리 데이터 로드 시작");
-                inventoryManager.LoadInventoryData(saveData.inventoryData);
-                
-                // 인벤토리 로드 후 약간의 지연을 줍니다
-                StartCoroutine(LoadGameCoroutine(saveData));
-            }
-            else
-            {
-                LoadGameData(saveData);
-            }
+            // 씬 로드 시작
+            SceneManager.LoadScene(SceneName);
         }
         catch (Exception e)
         {
-            Debug.LogError($"[SaveLoadManager] LoadGame 에러: {e.Message}");
+            Debug.LogError($"[SaveLoadManager] LoadGame 에러: {e.Message}\n{e.StackTrace}");
         }
     }
 
-    private IEnumerator LoadGameCoroutine(SaveData saveData)
+    private IEnumerator LoadGameWithDelay(SaveData saveData)
     {
-        // 인벤토리 아이템이 완전히 로드될 때까지 기다립니다
-        yield return new WaitForSeconds(0.2f);
+        Debug.Log("Starting LoadGameWithDelay coroutine");
+        yield return new WaitForSeconds(0.5f); // 씬 로드 후 모든 오브젝트가 초기화될 시간을 줍니다
+
+        var inventoryManager = FindObjectOfType<InventoryManager>();
+        if (inventoryManager != null && saveData.inventoryData != null)
+        {
+            Debug.Log("[SaveLoadManager] 인벤토리 데이터 로드 시작");
+            inventoryManager.LoadInventoryData(saveData.inventoryData);
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        Debug.Log("Loading game data after delay");
         LoadGameData(saveData);
     }
 
@@ -283,13 +311,12 @@ public class SaveLoadManager : MonoBehaviour
                 {
                     targetObject.LoadFromSaveData(data);
                     remainingObjects.Remove(data.uniqueID);
-                    Debug.Log($"[SaveLoadManager] 기존 오브젝트 업데이트: {data.uniqueID}");
                 }
             }
         }
         catch (Exception e)
         {
-            Debug.LogError($"[SaveLoadManager] LoadWorldObjects 에러: {e.Message}\n{e.StackTrace}");
+            Debug.LogError($"{e.Message}");
         }
     }
 
