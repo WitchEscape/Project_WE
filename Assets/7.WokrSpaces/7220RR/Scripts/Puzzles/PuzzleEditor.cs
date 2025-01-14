@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -51,6 +52,10 @@ public class PuzzleEditor : Editor
                 puzzles.interactableType = (InteractableType)EditorGUILayout.EnumPopup("Interactable Type", puzzles.interactableType);
                 break;
             case PuzzleType.Keypad:
+                puzzles.interactableType = (InteractableType)EditorGUILayout.EnumPopup("Interactable Type", puzzles.interactableType);
+                puzzles.password = EditorGUILayout.TextField("Password", puzzles.password);
+                puzzles.keypadMoniter = (GameObject)EditorGUILayout.ObjectField("모니터", puzzles.keypadMoniter, typeof(GameObject), true);
+                puzzles.keypadMoniterText = (TextMeshPro)EditorGUILayout.ObjectField("텍스트", puzzles.keypadMoniterText, typeof(TextMeshPro), true);
                 break;
             default:
                 break;
@@ -334,6 +339,30 @@ public class PuzzleEditor : Editor
             }
 
 
+        }
+        else if (puzzles.puzzleType == PuzzleType.Keypad)
+        {
+            if (puzzles._KeypadNum == null) puzzles._KeypadNum = new List<GameObject>();
+            if (puzzles._KeypadSub == null) puzzles._KeypadSub = new List<GameObject>();
+
+            if (puzzles.numPushButtons == null) puzzles.numPushButtons = new List<PushButtonTest>();
+            if (puzzles.subPushButtons == null) puzzles.subPushButtons = new List<PushButtonTest>();
+
+            if (puzzles.numPressButton == null) puzzles.numPressButton = new List<PressButtonTest>();
+            if (puzzles.subPressButton == null) puzzles.subPressButton = new List<PressButtonTest>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                switch (puzzles.interactableType)
+                {
+                    case InteractableType.Push:
+                        while (puzzles.numPushButtons.Count <= i) puzzles.numPushButtons.Add(null);
+                        puzzles.numPushButtons[i] = (PushButtonTest)EditorGUILayout.ObjectField($"Push {i}", puzzles.numPushButtons[i], typeof(PushButtonTest), true);
+                        break;
+                    case InteractableType.Press:
+                        break;
+                }
+            }
         }
 
 

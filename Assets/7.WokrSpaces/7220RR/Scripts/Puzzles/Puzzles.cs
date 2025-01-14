@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -39,15 +40,19 @@ public class Puzzles : MonoBehaviour
     #endregion
     #region Keypad
     public List<GameObject> _KeypadNum;
+    public List<GameObject> _KeypadSub;
     public List<PushButtonTest> numPushButtons;
     public List<PushButtonTest> subPushButtons;
     public List<PressButtonTest> numPressButton;
     public List<PressButtonTest> subPressButton;
-    private bool isClear = true;
     private bool isPull = false;
-    public int password;
-    private int currentPassword;
+    public string password;
+    private string currentPassword = null;
     private int passwordNum;
+    public GameObject keypadMoniter;
+    private Material keypadMoniterMaterial;
+    private Color keypadMoniterBaseColor;
+    public TextMeshPro keypadMoniterText;
     #endregion
     private void Awake()
     {
@@ -67,6 +72,7 @@ public class Puzzles : MonoBehaviour
                 DialInteractablesEventSet();
                 break;
             case PuzzleType.Keypad:
+                초기화();
                 KeypadInteractableEventSet();
                 break;
             default:
@@ -262,8 +268,18 @@ public class Puzzles : MonoBehaviour
     }
     #endregion
     #region Keypad
+
+    private void 초기화()
+    {
+        passwordNum = password.Length;
+        keypadMoniterMaterial = keypadMoniter.GetComponent<MeshRenderer>().material;
+        keypadMoniterBaseColor = keypadMoniterMaterial.color;
+        KeypadMoniterTextChange(null);
+    }
+
     private void KeypadInteractableEventSet()
     {
+
         switch (interactableType)
         {
             case InteractableType.Push:
@@ -272,13 +288,35 @@ public class Puzzles : MonoBehaviour
                     int index = i;
                     if (numPushButtons.Count < i || numPushButtons[i] == null)
                     {
+                        Debug.LogError($"Puzzles / KeypadInteractableEventSet / NumPushButtons{i} is null");
                         continue;
                     }
 
                     numPushButtons[index].OnPush.AddListener(() => { KeypadNumEvent(index); });
                 }
+                if (subPushButtons != null && subPushButtons.Count >= 2)
+                {
+                    subPushButtons[0].OnPush.AddListener(keypadEnterButtonClickEvent);
+                    subPushButtons[1].OnPush.AddListener(KeypadClearButtonClickEvent);
+                }
                 break;
             case InteractableType.Press:
+                for (int i = 0; i < 10; i++)
+                {
+                    int index = i;
+                    if (numPressButton.Count < i || numPressButton[i] == null)
+                    {
+                        Debug.LogError($"Puzzles / KeypadInteractableEventSet / NumPressButton{i} is null");
+                        continue;
+                    }
+
+                    numPressButton[index].OnPress.AddListener(() => { KeypadNumEvent(index); });
+                }
+                if (subPressButton != null && subPressButton.Count >= 2)
+                {
+                    subPressButton[0].OnPress.AddListener(keypadEnterButtonClickEvent);
+                    subPressButton[1].OnPress.AddListener(KeypadClearButtonClickEvent);
+                }
                 break;
             default:
                 Debug.LogError("Puzzles / KeypadInteracbleEventSet / InteractableType is Error");
@@ -293,16 +331,47 @@ public class Puzzles : MonoBehaviour
             return;
         }
 
-        if ((currentPassword / 1) <= 0)
+        if (currentPassword.Length <= 0)
         {
-            currentPassword = index;
+            currentPassword = index.ToString();
         }
         else
         {
-            currentPassword = (currentPassword * 10) + index;
+            currentPassword += index.ToString();
         }
 
 
+        if (currentPassword.Length == passwordNum)
+        {
+            isPull = true;
+        }
+
+        KeypadMoniterTextChange(currentPassword);
     }
+
+    private void KeypadMoniterTextChange(string text)
+    {
+        keypadMoniterText.text = text;
+    }
+
+    private void KeypadClearButtonClickEvent()
+    {
+        currentPassword = null;
+        KeypadMoniterTextChange(currentPassword);
+    }
+
+    private void keypadEnterButtonClickEvent()
+    {
+        if (currentPassword == password)
+        {
+            print("풀림");
+            KeypadMoniterTextChange("Success");
+        }
+        else
+        {
+            KeypadMoniterTextChange("Field");
+        }
+    }
+
     #endregion
 }

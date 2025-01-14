@@ -694,8 +694,6 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
-  leftAttachedTransform: {fileID: 0}
-  rightAttachedTransform: {fileID: 0}
 --- !u!114 &63829343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,8 +977,6 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
-  leftAttachedTransform: {fileID: 0}
-  rightAttachedTransform: {fileID: 0}
 --- !u!114 &67108886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1714,7 +1710,6 @@ Transform:
   m_Children:
   - {fileID: 415599740}
   - {fileID: 1069953112}
-  - {fileID: 913329021}
   - {fileID: 1074936213}
   - {fileID: 1582110600}
   m_Father: {fileID: 0}
@@ -5695,6 +5690,112 @@ Transform:
   - {fileID: 1276329185}
   m_Father: {fileID: 232874864}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &735544773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 735544777}
+  - component: {fileID: 735544776}
+  - component: {fileID: 735544775}
+  - component: {fileID: 735544774}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &735544774
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735544773}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &735544775
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735544773}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &735544776
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735544773}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &735544777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735544773}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 1, z: 0.4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747321922
 GameObject:
   m_ObjectHideFlags: 0
@@ -6112,7 +6213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &812188141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6192,8 +6293,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812188140}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.000000029802322, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 12, y: 1, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7380,7 +7481,7 @@ PrefabInstance:
     - target: {fileID: 5619886027901917417, guid: a24cf60fb70202d499317d495aa854df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.532
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5619886027901917417, guid: a24cf60fb70202d499317d495aa854df,
         type: 3}
@@ -7451,8 +7552,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913329020}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: -0.62557304, y: -0.49971205, z: 5.658122}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7460,7 +7561,7 @@ Transform:
   - {fileID: 1904103742}
   - {fileID: 2136386151}
   - {fileID: 1305607943}
-  m_Father: {fileID: 169047942}
+  m_Father: {fileID: 1925680897465778087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &921778089
 GameObject:
@@ -8866,8 +8967,6 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
-  leftAttachedTransform: {fileID: 0}
-  rightAttachedTransform: {fileID: 0}
 --- !u!114 &1074630638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9029,11 +9128,14 @@ MonoBehaviour:
   isDialClear: 0
   isDialClamped: 0
   _KeypadNum: []
+  _KeypadSub: []
   numPushButtons: []
   subPushButtons: []
   numPressButton: []
   subPressButton: []
-  password: 0
+  password: 
+  keypadMoniter: {fileID: 0}
+  keypadMoniterText: {fileID: 0}
 --- !u!1 &1076848373
 GameObject:
   m_ObjectHideFlags: 0
@@ -9259,8 +9361,6 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
-  leftAttachedTransform: {fileID: 0}
-  rightAttachedTransform: {fileID: 0}
 --- !u!114 &1106678233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13119,8 +13219,6 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
-  leftAttachedTransform: {fileID: 0}
-  rightAttachedTransform: {fileID: 0}
 --- !u!114 &1782200598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15347,17 +15445,17 @@ PrefabInstance:
     - target: {fileID: 707442155899896433, guid: a2c32152f29cf8a4bb763e8b8214cb25,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.6581216
+      value: 3.1582756
       objectReference: {fileID: 0}
     - target: {fileID: 707442155899896433, guid: a2c32152f29cf8a4bb763e8b8214cb25,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.49971205
+      value: 0.00000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 707442155899896433, guid: a2c32152f29cf8a4bb763e8b8214cb25,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.62557346
+      value: -0.64067423
       objectReference: {fileID: 0}
     - target: {fileID: 707442155899896433, guid: a2c32152f29cf8a4bb763e8b8214cb25,
         type: 3}
@@ -15491,7 +15589,11 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 707442155899896433, guid: a2c32152f29cf8a4bb763e8b8214cb25,
         type: 3}
-      insertIndex: 21
+      insertIndex: 0
+      addedObject: {fileID: 913329021}
+    - targetCorrespondingSourceObject: {fileID: 707442155899896433, guid: a2c32152f29cf8a4bb763e8b8214cb25,
+        type: 3}
+      insertIndex: 22
       addedObject: {fileID: 701393967}
     - targetCorrespondingSourceObject: {fileID: 5978463634150970627, guid: a2c32152f29cf8a4bb763e8b8214cb25,
         type: 3}
@@ -15514,3 +15616,4 @@ SceneRoots:
   - {fileID: 232874864}
   - {fileID: 910672171}
   - {fileID: 169047942}
+  - {fileID: 735544777}
