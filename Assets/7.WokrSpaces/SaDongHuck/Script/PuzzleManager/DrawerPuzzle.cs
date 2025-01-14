@@ -90,4 +90,17 @@ public class DrawerPuzzle : MonoBehaviour
             Debug.Log("비밀번호가 틀렸습니다.");
         }
     }
+
+    public void CloseUIPanel()
+    {
+        if (uipanel != null)
+        {
+            uipanel.SetActive(false);
+            Debug.Log("UI 패널이 닫혔습니다.");
+        }
+        else
+        {
+            Debug.LogWarning("UI 패널이 설정되지 않았습니다.");
+        }
+    }
 }

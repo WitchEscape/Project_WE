@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using MikeNspired.UnityXRHandPoser;
 using TMPro;
 using UnityEngine;
 
@@ -63,7 +62,7 @@ public class InventorySlotTextUpdater : MonoBehaviour
     private void SetTextToInfinity()
     {
         currentCount.text = "";
-        maxCount.text = "¡Ä";
+        maxCount.text = "âˆž";
     }
 
 

@@ -38,17 +38,20 @@ public class UI_Manager : MonoBehaviour
 
     public void OpenUI(GameObject uiPanel)
     {
-        if (uiStack.Count > 0)
+        if(uiPanel != null)
         {
-            GameObject currentUI = uiStack.Peek();
-            if (currentUI != null)
+            if (uiStack.Count > 0)
             {
-                currentUI.SetActive(false);
+                GameObject currentUI = uiStack.Peek();
+                if (currentUI != null)
+                {
+                    currentUI.SetActive(false);
+                }
             }
-        }
 
-        uiPanel.SetActive(true);
-        uiStack.Push(uiPanel);
+            uiPanel.SetActive(true);
+            uiStack.Push(uiPanel);
+        }
     }
 
     public void CloseCurrentUI()
