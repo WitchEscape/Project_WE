@@ -11,7 +11,7 @@ public class DialPuzzle : MonoBehaviour
     int dialCharIndex;
 
     public TextMeshProUGUI dialCharTxt;
-    public PuzzleDial dial;
+    public BoxPuzzle dial;
 
     void Awake()
     {
