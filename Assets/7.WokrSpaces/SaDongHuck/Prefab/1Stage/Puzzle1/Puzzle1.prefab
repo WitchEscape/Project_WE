@@ -144,7 +144,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4769920175205886029}
-  - component: {fileID: 5750032559673817649}
   m_Layer: 5
   m_Name: Dial
   m_TagString: Untagged
@@ -175,25 +174,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1.9500008, y: -1.9000001}
   m_SizeDelta: {x: 72.9, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5750032559673817649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 609365034101463787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc67ad94da0d6854d8e8a3afac35c1c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  answer: 5242
-  uipanel: {fileID: 2813779832235340498}
-  inputChars:
-  - {fileID: 7423477651837826333}
-  - {fileID: 5109900302164671177}
-  - {fileID: 6337541129002675861}
-  - {fileID: 5281575626701123887}
 --- !u!1 &728266641759210143
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialCharTxt: {fileID: 5109900302164671177}
-  dial: {fileID: 5750032559673817649}
+  drawerPuzzleManager: {fileID: 0}
 --- !u!1 &1289607671396369529
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialCharTxt: {fileID: 5281575626701123887}
-  dial: {fileID: 5750032559673817649}
+  drawerPuzzleManager: {fileID: 0}
 --- !u!1 &2083767245082342383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1668,7 +1648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialCharTxt: {fileID: 7423477651837826333}
-  dial: {fileID: 5750032559673817649}
+  drawerPuzzleManager: {fileID: 0}
 --- !u!1 &4643274532372401939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,7 +2813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialCharTxt: {fileID: 6337541129002675861}
-  dial: {fileID: 5750032559673817649}
+  drawerPuzzleManager: {fileID: 0}
 --- !u!1 &7207361075777908575
 GameObject:
   m_ObjectHideFlags: 0
