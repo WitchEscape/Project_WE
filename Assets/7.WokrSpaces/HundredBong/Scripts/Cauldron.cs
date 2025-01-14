@@ -61,7 +61,7 @@ public class Cauldron : MonoBehaviour
         if (isChurned == false) { return; }
 
         //포션카운트가 4일때 조건 검사
-        if (postionCount.Value == 4 && isChurned)
+        if (postionCount.Value >= 4 && isChurned)
         {
             isCorrect.Value = CheckCorrectPostion();
         }
@@ -139,7 +139,7 @@ public class Cauldron : MonoBehaviour
             //코루틴으로 한 프레임 유예를 두고 ResetPostions 메서드 실행
             arg.gameObject.SetActive(false);
             StartCoroutine(ResetPostionCoroutine());
-
+            return;
         }
 
         //0일때 H를 넣으면 true
@@ -182,7 +182,7 @@ public class Cauldron : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"PostionCount : {postionCount.Value}");
+        //Debug.Log($"PostionCount : {postionCount.Value}");
 
         if (other.CompareTag("Scoop"))
         {

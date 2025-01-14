@@ -7,8 +7,8 @@ public class Examiner : MonoBehaviour
     private GhostCanvas ghostCanvas;
 
     public bool[] isCorrectPostion = new bool[3];
-    [Header("활성화할 성냥")] public GameObject match;
-
+    [Header("활성화 할 성냥")] public GameObject match;
+    [Header("활성화 할 파티클")] public ParticleSystem particle;
     private bool isComplite = false;
     private bool isCleared = false;
 
@@ -45,6 +45,12 @@ public class Examiner : MonoBehaviour
         {
             match.gameObject.SetActive(false);
         }
+        
+        if (particle != null && particle.gameObject.activeSelf == true)
+        {
+            particle.Stop();
+            particle.gameObject.SetActive(false);
+        }
     }
 
     public void SetPostionEnter(int i)
@@ -55,8 +61,14 @@ public class Examiner : MonoBehaviour
         {
             //TODO : 발생할 이벤트 작성
             Debug.Log("포션 퍼즐 클리어");
+
             match.gameObject.SetActive(true);
+
+            particle.gameObject.SetActive(true);
+            particle.Play();
+
             isCleared = true;
+
             ghostCanvas.ClearPuzzle(0);
         }
     }

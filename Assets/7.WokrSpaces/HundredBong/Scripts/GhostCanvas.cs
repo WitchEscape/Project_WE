@@ -31,6 +31,7 @@ public class GhostCanvas : MonoBehaviour
     private Coroutine hintEndCoroutine;
 
     private bool isYesButtonClicked = false;
+
     private void Awake()
     {
         fsm = GetComponentInParent<FinitStateMachine>();
@@ -107,6 +108,7 @@ public class GhostCanvas : MonoBehaviour
 
         callIndex++;
     }
+
     private void OnClickNo()
     {
         fsm.EndTalkByButtonOrDistance();

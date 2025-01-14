@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisplayMaterial : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class DisplayMaterial : MonoBehaviour
 
     [Header("마법진 생성 시 재생할 파티클")] public ParticleSystem spawnParticle;
     private GhostCanvas ghostCanvas;
+
+    private int playerHandCount; 
+
     private void Awake()
     {
         material = GetComponent<MeshRenderer>().material;
@@ -69,6 +73,14 @@ public class DisplayMaterial : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<XRDirectInteractor>() != null)
+        {
+            playerHandCount++;
+        }
+    }
+
     #region 임시 페이드 아웃 로직
     private void OnTriggerStay(Collider other)
     {
@@ -79,7 +91,7 @@ public class DisplayMaterial : MonoBehaviour
         if (wasPlayParticle == false) { return; }
 
         //1 : 불투명      0 : 투명
-        if (other.CompareTag("Left") && wasPlaying == false)
+        if (2 <=playerHandCount && wasPlaying == false)
         {            
             //알파값을 매 프레임 감소시킴
             erase = erase - (Time.deltaTime * 0.3f);
@@ -115,4 +127,12 @@ public class DisplayMaterial : MonoBehaviour
         }
     }
     #endregion
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<XRDirectInteractor>() != null)
+        {
+            playerHandCount--;
+        }
+    }
 }
