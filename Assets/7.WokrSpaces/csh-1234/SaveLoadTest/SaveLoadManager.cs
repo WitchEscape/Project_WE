@@ -4,6 +4,8 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using System.Linq;
+using System.Collections;
 
 public class SaveLoadManager : MonoBehaviour
 {
@@ -60,6 +62,20 @@ public class SaveLoadManager : MonoBehaviour
                 }
             }
 
+            // 인벤토리 데이터 저장
+            var inventoryManager = FindObjectOfType<InventoryManager>();
+            if (inventoryManager != null)
+            {
+                var inventoryItems = inventoryManager.GetInventoryData();
+                saveData.inventoryData = inventoryItems;
+                
+                // 인벤토리에 있는 아이템 ID 저장
+                saveData.removedFromWorldItems = inventoryItems
+                    .Where(item => !string.IsNullOrEmpty(item.itemUniqueID))
+                    .Select(item => item.itemUniqueID)
+                    .ToList();
+            }
+
             string json = JsonUtility.ToJson(saveData, true);
             string filePath = Path.Combine(savePath, $"save_{SceneName}.json");
             File.WriteAllText(filePath, json);
@@ -81,30 +97,55 @@ public class SaveLoadManager : MonoBehaviour
             string json = File.ReadAllText(filePath);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
 
-            // 오브젝트 불러오기
-            LoadWorldObjects(saveData.worldObjects);
-            LoadPlayerData(saveData.playerData);
-
-            // 퍼즐 진행도 불러오기
-            var puzzleManager = PuzzleProgressManager.Instance;
-            if (puzzleManager != null)
+            // 순서 변경: 인벤토리를 먼저 로드
+            var inventoryManager = FindObjectOfType<InventoryManager>();
+            if (inventoryManager != null && saveData.inventoryData != null)
             {
-                string currentStage = SceneManager.GetActiveScene().name;
-                var stageProgress = saveData.GetStageProgress();
+                Debug.Log("[SaveLoadManager] 인벤토리 데이터 로드 시작");
+                inventoryManager.LoadInventoryData(saveData.inventoryData);
                 
-                if (stageProgress.TryGetValue(currentStage, out var stageData))
-                {
-                    Dictionary<string, object> puzzleData = new Dictionary<string, object>
-                    {
-                        ["puzzleStates"] = stageData
-                    };
-                    puzzleManager.LoadPuzzleProgress(puzzleData);
-                }
+                // 인벤토리 로드 후 약간의 지연을 줍니다
+                StartCoroutine(LoadGameCoroutine(saveData));
+            }
+            else
+            {
+                LoadGameData(saveData);
             }
         }
         catch (Exception e)
         {
-            Debug.LogError(e.Message);
+            Debug.LogError($"[SaveLoadManager] LoadGame 에러: {e.Message}");
+        }
+    }
+
+    private IEnumerator LoadGameCoroutine(SaveData saveData)
+    {
+        // 인벤토리 아이템이 완전히 로드될 때까지 기다립니다
+        yield return new WaitForSeconds(0.2f);
+        LoadGameData(saveData);
+    }
+
+    private void LoadGameData(SaveData saveData)
+    {
+        // 오브젝트 불러오기
+        LoadWorldObjects(saveData.worldObjects);
+        LoadPlayerData(saveData.playerData);
+
+        // 퍼즐 진행도 불러오기
+        var puzzleManager = PuzzleProgressManager.Instance;
+        if (puzzleManager != null)
+        {
+            string currentStage = SceneManager.GetActiveScene().name;
+            var stageProgress = saveData.GetStageProgress();
+            
+            if (stageProgress.TryGetValue(currentStage, out var stageData))
+            {
+                Dictionary<string, object> puzzleData = new Dictionary<string, object>
+                {
+                    ["puzzleStates"] = stageData
+                };
+                puzzleManager.LoadPuzzleProgress(puzzleData);
+            }
         }
     }
 
@@ -137,6 +178,20 @@ public class SaveLoadManager : MonoBehaviour
             if (obj.ObjectType == SaveableObject.SaveableType.InteractableObject)
             {
                 ObjectData data = obj.GetSaveData();
+                
+                // 인벤토리에 있는 아이템인지 확인
+                var itemData = obj.GetComponent<InteractableItemData>();
+                if (itemData != null)
+                {
+                    // 인벤토리 매니저에서 현재 인벤토리에 있는 아이템의 ID 목록 가져오기
+                    var inventoryManager = FindObjectOfType<InventoryManager>();
+                    if (inventoryManager != null)
+                    {
+                        var inventoryItems = inventoryManager.GetInventoryData();
+                        data.isInInventory = inventoryItems.Any(item => item.itemUniqueID == obj.UniqueID);
+                    }
+                }
+                
                 objectsData.Add(data);
             }
         }
@@ -177,48 +232,64 @@ public class SaveLoadManager : MonoBehaviour
 
     private void LoadWorldObjects(List<ObjectData> objectsData)
     {
-        if (objectsData == null)
-        {
-            Debug.LogError("objectsData is null");
-            return;
-        }
-
         try
         {
-            Dictionary<string, SaveableObject> existingObjects = new Dictionary<string, SaveableObject>();
-            var foundObjects = FindObjectsOfType<SaveableObject>();
-
-            foreach (var obj in foundObjects)
+            // 먼저 인벤토리에 있는 아이템의 ID 목록을 가져옵니다
+            HashSet<string> inventoryItemIDs = new HashSet<string>();
+            
+            // 저장된 removedFromWorldItems 목록 사용
+            var saveData = JsonUtility.FromJson<SaveData>(File.ReadAllText(Path.Combine(savePath, $"save_{SceneManager.GetActiveScene().name}.json")));
+            if (saveData.removedFromWorldItems != null)
             {
-                if (string.IsNullOrEmpty(obj.UniqueID) == false)
+                foreach (var id in saveData.removedFromWorldItems)
                 {
-                    existingObjects[obj.UniqueID] = obj;
+                    inventoryItemIDs.Add(id);
+                    Debug.Log($"[SaveLoadManager] 제거 대상 아이템 ID: {id}");
                 }
             }
 
+            // 현재 씬의 모든 SaveableObject를 찾아서 처리합니다
+            var foundObjects = FindObjectsOfType<SaveableObject>();
+            Debug.Log($"[SaveLoadManager] 씬에서 발견된 SaveableObject 수: {foundObjects.Length}");
+
+            foreach (var obj in foundObjects)
+            {
+                if (obj != null && !string.IsNullOrEmpty(obj.UniqueID))
+                {
+                    if (inventoryItemIDs.Contains(obj.UniqueID))
+                    {
+                        Debug.Log($"[SaveLoadManager] 인벤토리에 있는 아이템 제거: {obj.name} (ID: {obj.UniqueID})");
+                        DestroyImmediate(obj.gameObject);
+                    }
+                }
+            }
+
+            // 남은 오브젝트들에 대해 저장된 데이터 적용
+            Dictionary<string, SaveableObject> remainingObjects = new Dictionary<string, SaveableObject>();
+            foreach (var obj in FindObjectsOfType<SaveableObject>()) // 다시 검색
+            {
+                if (!string.IsNullOrEmpty(obj.UniqueID))
+                {
+                    remainingObjects[obj.UniqueID] = obj;
+                }
+            }
+
+            // 저장된 데이터 로드
             foreach (var data in objectsData)
             {
-                if (data == null)
-                {
-                    Debug.LogWarning("ObjectData is null");
-                    continue;
-                }
+                if (data == null || data.isInInventory) continue;
 
-                SaveableObject targetObject;
-                if (existingObjects.TryGetValue(data.uniqueID, out targetObject))
+                if (remainingObjects.TryGetValue(data.uniqueID, out var targetObject))
                 {
                     targetObject.LoadFromSaveData(data);
-                    existingObjects.Remove(data.uniqueID);
-                }
-                else
-                {
-                    Debug.LogWarning($"unique ID Error");
+                    remainingObjects.Remove(data.uniqueID);
+                    Debug.Log($"[SaveLoadManager] 기존 오브젝트 업데이트: {data.uniqueID}");
                 }
             }
         }
         catch (Exception e)
         {
-            Debug.LogError(e.Message);
+            Debug.LogError($"[SaveLoadManager] LoadWorldObjects 에러: {e.Message}\n{e.StackTrace}");
         }
     }
 

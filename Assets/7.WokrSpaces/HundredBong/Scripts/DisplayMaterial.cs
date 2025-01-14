@@ -17,10 +17,15 @@ public class DisplayMaterial : MonoBehaviour
     private float erase = 1f;
 
     [Header("마법진 생성 시 재생할 파티클")] public ParticleSystem spawnParticle;
-
+    private GhostCanvas ghostCanvas;
     private void Awake()
     {
         material = GetComponent<MeshRenderer>().material;
+        ghostCanvas = FindObjectOfType<GhostCanvas>();
+        if (gameObject.activeSelf == true)
+        {
+            gameObject.SetActive(false);    
+        }
     }
 
     private void OnEnable()
@@ -104,6 +109,8 @@ public class DisplayMaterial : MonoBehaviour
                 Debug.Log("투명도 0");
 
                 //TODO : 대화던 씬 이동이던 다음 로직 작성
+                ghostCanvas.ClearPuzzle(2);
+                Debug.Log("모든 퍼즐 클리어");
             }
         }
     }

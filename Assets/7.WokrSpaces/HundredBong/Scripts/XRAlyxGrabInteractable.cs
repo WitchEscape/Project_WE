@@ -16,10 +16,6 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     private Rigidbody interactableRigidbody;
     private bool canJump = true;
 
-    public Transform leftAttachedTransform;
-    public Transform rightAttachedTransform;
-
-
     protected override void Awake()
     {
         base.Awake();

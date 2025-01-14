@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class NumDial : MonoBehaviour
 {
-    [SerializeField] // 인스펙터 창에서 설정 가능
-    private string answer = "BROP"; // 초기값 설정
+    [SerializeField] private string answer = "BROP"; // 초기값 설정
+    [SerializeField] private GameObject uipanel; //닫을 패널
 
     private string result;
 
     public TextMeshProUGUI[] inputChars;
+
 
     public void AnswerCheck()
     {
@@ -22,6 +23,10 @@ public class NumDial : MonoBehaviour
         if (answer == result)
         {
             Debug.Log("서랍이 열렸습니다.");
+            if(uipanel != null)
+            {
+                uipanel.SetActive(false);
+            }
         }
         else
             return;

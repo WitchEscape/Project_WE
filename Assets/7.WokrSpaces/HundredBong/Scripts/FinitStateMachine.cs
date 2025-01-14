@@ -13,7 +13,7 @@ public class FinitStateMachine : MonoBehaviour
     [Header("유령 호출키")] public InputActionProperty callAction;
     [Header("유령 호출 쿨타임")] public float callInterval = 120f;
     [Header("메인 카메라")] public Transform mainCamera;
-    public GhostCanvas ghostCanvas;
+    private GhostCanvas ghostCanvas;
 
     private float lastCallTime;
     private Coroutine stateCoroutine;
@@ -22,7 +22,7 @@ public class FinitStateMachine : MonoBehaviour
 
     private void Awake()
     {
-
+        ghostCanvas = GetComponentInChildren<GhostCanvas>();
     }
 
     private void Start()

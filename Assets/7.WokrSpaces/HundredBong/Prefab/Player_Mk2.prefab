@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6926525630272979127}
   m_Layer: 0
   m_Name: Right Direct Interactor
-  m_TagString: Right Hand
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 7815578851314923851}
   m_Layer: 0
   m_Name: Left Controller
-  m_TagString: Untagged
+  m_TagString: Left Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1266,9 +1266,10 @@ GameObject:
   - component: {fileID: 7634166443257109708}
   - component: {fileID: 4275255576917551035}
   - component: {fileID: 4262995017840009908}
+  - component: {fileID: 7799306591636494108}
   m_Layer: 0
   m_Name: Left Direct Interactor
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1411,6 +1412,38 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_PhysicsTriggerInteraction: 1
+--- !u!114 &7799306591636494108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447893261889774200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145fb008cc1c31b44a1db805b0088d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handType: 0
+  root: {fileID: 1322415797006283323}
+  anim: {fileID: 1322415796998790637}
+  fingerBones:
+  - {fileID: 1322415797006283275}
+  - {fileID: 1322415797006283269}
+  - {fileID: 1322415797006283271}
+  - {fileID: 1322415797006283267}
+  - {fileID: 1322415797006283293}
+  - {fileID: 1322415797006283295}
+  - {fileID: 1322415797006283291}
+  - {fileID: 1322415797006283285}
+  - {fileID: 1322415797006283287}
+  - {fileID: 1322415797006283281}
+  - {fileID: 1322415797006283309}
+  - {fileID: 1322415797006283311}
+  - {fileID: 1322415797006283305}
+  - {fileID: 1322415797006283301}
+  - {fileID: 1322415797006283303}
+  - {fileID: 1322415797006283297}
 --- !u!1 &8238002575156990019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1875,7 +1908,7 @@ GameObject:
   - component: {fileID: 7395500604934635265}
   m_Layer: 0
   m_Name: Left Poke Interactor
-  m_TagString: Untagged
+  m_TagString: Left Hand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2030,11 +2063,114 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2912227676404097017, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
+--- !u!95 &1322415796998790637 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 109434732388006827, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283267 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451461, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283269 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451459, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283271 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451457, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283275 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451469, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283281 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451479, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283285 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451475, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283287 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451473, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283291 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451485, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283293 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451483, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283295 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451481, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283297 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451495, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283301 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451491, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283303 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451489, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283305 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451503, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283309 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451499, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1322415797006283311 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451497, guid: 65847589f926b734d9eaed6e25f0046b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431828460768716358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1322415797006283323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 109434732395451517, guid: 65847589f926b734d9eaed6e25f0046b,
@@ -2236,6 +2372,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Left Ray Interactor
       objectReference: {fileID: 0}
+    - target: {fileID: 1787346994484839025, guid: ad818c36731146e994540a1896ad8f24,
+        type: 3}
+      propertyPath: m_TagString
+      value: Left Hand
+      objectReference: {fileID: 0}
     - target: {fileID: 5888765399538998960, guid: ad818c36731146e994540a1896ad8f24,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2285,6 +2426,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7462879561657043759, guid: ad818c36731146e994540a1896ad8f24,
+        type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 2147483937
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2714,7 +2860,7 @@ PrefabInstance:
     - target: {fileID: 7462879561657043759, guid: ad818c36731146e994540a1896ad8f24,
         type: 3}
       propertyPath: m_RaycastMask.m_Bits
-      value: 2147483745
+      value: 2147483937
       objectReference: {fileID: 0}
     - target: {fileID: 7462879561657043759, guid: ad818c36731146e994540a1896ad8f24,
         type: 3}
