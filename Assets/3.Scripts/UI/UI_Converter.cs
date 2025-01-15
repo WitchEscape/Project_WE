@@ -70,24 +70,24 @@ public class UI_Converter : MonoBehaviour
         if (inventoryManager.IsInventoryOpen && !isMenuOpen)
         {
             inventoryManager.ToggleInventoryItems(false);
-            UI_Manager.Instance.OpenUI(ui_Menu);
+            UIManager.Instance.OpenUI(ui_Menu);
             isMenuOpen = true;
         }
         else if (!inventoryManager.IsInventoryOpen && !isMenuOpen)
         {
-            UI_Manager.Instance.OpenUI(ui_Menu);
+            UIManager.Instance.OpenUI(ui_Menu);
             isMenuOpen = true;
         }
         else if (isMenuOpen)
         {
-            if (UI_Manager.Instance.GetUIStackCount() == 1)
+            if (UIManager.Instance.GetUIStackCount() == 1)
             {
-                UI_Manager.Instance.CloseAllCurrentUI();
+                UIManager.Instance.CloseAllCurrentUI();
                 isMenuOpen = false;
             }
             else
             {
-                UI_Manager.Instance.CloseCurrentUI();
+                UIManager.Instance.CloseCurrentUI();
             }
         }
     }
@@ -96,7 +96,7 @@ public class UI_Converter : MonoBehaviour
     {
         if (!inventoryManager.IsInventoryOpen)
         {
-            UI_Manager.Instance.CloseAllCurrentUI();
+            UIManager.Instance.CloseAllCurrentUI();
             inventoryManager.ToggleInventoryItems(true);
             isMenuOpen = false;
         }
