@@ -37,6 +37,8 @@ public class Puzzles : MonoBehaviour
     //임시 풀리면 어떻게 상호작용이 될지
     public bool isDialClear;
     public bool isDialClamped;
+
+    public List<TextMeshProUGUI> dialTexts;
     #endregion
     #region Keypad
     public List<GameObject> _KeypadNum;
@@ -68,6 +70,7 @@ public class Puzzles : MonoBehaviour
                 break;
             case PuzzleType.Dial:
                 isDialClear = false;
+
                 CurrentPasswardReset();
                 PasswardCheak();
                 DialInteractablesEventSet();
@@ -151,27 +154,48 @@ public class Puzzles : MonoBehaviour
                     }
                     break;
                 case InteractableType.Knob:
-                    if (dialKnob[i] == null)
+                    if (dialKnob[index] == null)
                     {
                         Debug.LogError($"Puzzles / DialKnob[{i}] is Null");
                         continue;
                     }
                     if (isDialClamped)
                     {
-                        dialKnob[i].angleIncrement = offSetAngle;
+                        dialKnob[index].angleIncrement = offSetAngle;
                     }
-                    dialKnob[i].interactableAxis = rotationAxis;
-                    dialKnob[i].interactorAxis = controllerAxis;
-                    dialKnob[i].selectExited.AddListener((x) => DialRotationSet(x, dialKnob[index].handle, index));
-                    foreach (Knob knob in dialKnob)
-                    {
-                        //knob
-                    }
+                    dialKnob[index].interactableAxis = rotationAxis;
+                    dialKnob[index].interactorAxis = controllerAxis;
+                    dialKnob[index].selectExited.AddListener((x) => DialRotationSet(x, dialKnob[index].handle, index));
                     break;
             }
         }
+        int temp = 0;
+        foreach (Knob knob in dialKnob)
+        {
+            ++temp;
+            knob.handle.localEulerAngles = Vector3.zero;
+            print($"knob{temp} : {knob.handle.localEulerAngles}");
+        }
     }
 
+    public void DialUIUPButtonEvent(int index)
+    {
+        Vector3 newHandleRotation = Vector3.zero;
+        newHandleRotation[(int)rotationAxis] = offSetAngle + (currentPassward[index] * offSetAngle);
+
+        dialKnob[index].handle.localEulerAngles = newHandleRotation;
+        CurrentPasswardSet(index, newHandleRotation[(int)rotationAxis]);
+        PasswardCheak();
+    }
+    public void DialUIDownButtonEvent(int index)
+    {
+        Vector3 newHandleRotation = Vector3.zero;
+        newHandleRotation[(int)rotationAxis] = -offSetAngle + (currentPassward[index] * offSetAngle);
+
+        dialKnob[index].handle.localEulerAngles = newHandleRotation;
+        CurrentPasswardSet(index, newHandleRotation[(int)rotationAxis]);
+        PasswardCheak();
+    }
     private void DialRotationSet(SelectExitEventArgs args, Transform handle, int index)
     {
         Vector3 newHandleRotation = Vector3.zero;
@@ -237,6 +261,12 @@ public class Puzzles : MonoBehaviour
                 currentPassward.Add(0);
             }
         }
+
+        for (int i = 0; i < dialTexts.Count; i++)
+        {
+            int index = i;
+            dialTexts[index].text = currentPassward[index].ToString();
+        }
     }
 
     private void PasswardCheak()
@@ -276,6 +306,11 @@ public class Puzzles : MonoBehaviour
         }
 
         currentPassward[index] = ((angle / 36) >= 10) ? (angle / 36) - 10 : angle / 36;
+        if (currentPassward[index] < 0)
+        {
+            currentPassward[index] += 10;
+        }
+        dialTexts[index].text = currentPassward[index].ToString();
         print(currentPassward[index]);
     }
     #endregion

@@ -1133,11 +1133,10 @@ GameObject:
   - component: {fileID: 294919227}
   - component: {fileID: 294919229}
   - component: {fileID: 294919228}
-  - component: {fileID: 294919233}
   - component: {fileID: 294919232}
   - component: {fileID: 294919231}
   - component: {fileID: 294919230}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: PadlockCap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1354,28 +1353,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &294919233
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294919226}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7870995915381749528, guid: b6bef8e616618874aaa092edfd01f370, type: 3}
 --- !u!1 &324842248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,7 +1826,7 @@ GameObject:
   - component: {fileID: 412913555}
   - component: {fileID: 412913558}
   - component: {fileID: 412913559}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Ruller3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2050,8 +2027,8 @@ MonoBehaviour:
   m_Handle: {fileID: 2060351177}
   m_Value: 0.5
   m_ClampedMotion: 0
-  m_MaxAngle: 90
-  m_MinAngle: -90
+  m_MaxAngle: 360
+  m_MinAngle: -360
   m_AngleIncrement: 0
   m_PositionTrackedRadius: 1
   m_TwistSensitivity: 1.2
@@ -2078,7 +2055,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3664,6 +3641,7 @@ MonoBehaviour:
   offSetAngle: 36
   isDialClear: 0
   isDialClamped: 1
+  dialTexts: []
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -4095,7 +4073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &808539899
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4195,6 +4173,7 @@ MonoBehaviour:
   offSetAngle: 36
   isDialClear: 0
   isDialClamped: 1
+  dialTexts: []
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -4955,6 +4934,7 @@ MonoBehaviour:
   offSetAngle: 18
   isDialClear: 0
   isDialClamped: 0
+  dialTexts: []
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons:
@@ -5409,6 +5389,7 @@ MonoBehaviour:
   offSetAngle: 0
   isDialClear: 0
   isDialClamped: 0
+  dialTexts: []
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -5852,7 +5833,7 @@ GameObject:
   - component: {fileID: 1175678885}
   - component: {fileID: 1175678888}
   - component: {fileID: 1175678889}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Ruller4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6053,8 +6034,8 @@ MonoBehaviour:
   m_Handle: {fileID: 586148133}
   m_Value: 0.5
   m_ClampedMotion: 0
-  m_MaxAngle: 180
-  m_MinAngle: -180
+  m_MaxAngle: 360
+  m_MinAngle: -360
   m_AngleIncrement: 0
   m_PositionTrackedRadius: 1
   m_TwistSensitivity: 1.2
@@ -6081,7 +6062,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -9281,7 +9262,7 @@ GameObject:
   - component: {fileID: 1546467767}
   - component: {fileID: 1546467770}
   - component: {fileID: 1546467771}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Ruller1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9510,7 +9491,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -11014,7 +10995,7 @@ GameObject:
   - component: {fileID: 1720802690}
   - component: {fileID: 1720802693}
   - component: {fileID: 1720802694}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Ruller2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11215,8 +11196,8 @@ MonoBehaviour:
   m_Handle: {fileID: 1709680892}
   m_Value: 0.5
   m_ClampedMotion: 0
-  m_MaxAngle: 90
-  m_MinAngle: -90
+  m_MaxAngle: 360
+  m_MinAngle: -360
   m_AngleIncrement: 0
   m_PositionTrackedRadius: 1
   m_TwistSensitivity: 1.2
@@ -11243,7 +11224,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -12745,7 +12726,12 @@ PrefabInstance:
     - target: {fileID: 2160962606701867783, guid: 4fd4c4c17bbe83e49b9771298860fa2e,
         type: 3}
       propertyPath: m_RaycastMask.m_Bits
-      value: 33
+      value: 2147483681
+      objectReference: {fileID: 0}
+    - target: {fileID: 2160962606701867783, guid: 4fd4c4c17bbe83e49b9771298860fa2e,
+        type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6908987585900647294, guid: 4fd4c4c17bbe83e49b9771298860fa2e,
         type: 3}
@@ -21944,6 +21930,84 @@ RectTransform:
   m_AnchoredPosition: {x: -0, y: 0.967}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &8973313850159327104
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2790594488958198114, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_Name
+      value: PadLock
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343778175095012818, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8844831638133905031, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: dialInteractables.Array.data[0]
+      value: 
+      objectReference: {fileID: 1546467770}
+    - target: {fileID: 8844831638133905031, guid: 899a4f9d2384fde49a4b26904caacd73,
+        type: 3}
+      propertyPath: dialInteractables.Array.data[1]
+      value: 
+      objectReference: {fileID: 2138937134}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 899a4f9d2384fde49a4b26904caacd73, type: 3}
 --- !u!222 &9013607539276220855
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22081,6 +22145,7 @@ SceneRoots:
   - {fileID: 1841075497}
   - {fileID: 1991253367}
   - {fileID: 2916001606574767559}
+  - {fileID: 8973313850159327104}
   - {fileID: 808539900}
   - {fileID: 1485691267}
   - {fileID: 1509511669}
