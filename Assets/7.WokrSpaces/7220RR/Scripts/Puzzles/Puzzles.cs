@@ -165,7 +165,7 @@ public class Puzzles : MonoBehaviour
                     dialKnob[i].selectExited.AddListener((x) => DialRotationSet(x, dialKnob[index].handle, index));
                     foreach (Knob knob in dialKnob)
                     {
-
+                        //knob
                     }
                     break;
             }
