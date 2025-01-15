@@ -159,7 +159,7 @@ public class FinitStateMachine : MonoBehaviour
                 EndTalkByButtonOrDistance();
             }
         }
-        else { Debug.LogWarning($"쿨타임 진행중, last : {lastCallTime}, interval : {callInterval}, {Time.time}"); }
+        //else { Debug.LogWarning($"쿨타임 진행중, last : {lastCallTime}, interval : {callInterval}, {Time.time}"); }
     }
 
     public void EndTalkByButtonOrDistance()
