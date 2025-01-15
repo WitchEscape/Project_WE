@@ -14,13 +14,6 @@ public enum InteractorType
     Multiple
 }
 
-public enum ActiveUIType
-{
-    None,
-    UI,
-    Object
-}
-
 public enum Axis
 {
     XAxis,

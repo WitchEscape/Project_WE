@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class BookActivated : Activated
 {
@@ -11,7 +12,14 @@ public class BookActivated : Activated
 
     protected override void Awake()
     {
-        base.Awake();
+        ActivateUI(false);
+
+        if (interactable == null)
+            interactable = GetComponent<XRBaseInteractable>();
+
+        ObjectOnOff<GameObject>(objects, false);
+        ObjectOnOff<XRBaseInteractable>(interactables, false);
+
         if (rigid == null)
             rigid = GetComponent<Rigidbody>();
         if (bookAnimationControll == null)
@@ -46,7 +54,7 @@ public class BookActivated : Activated
         }
     }
 
-    public override void activate()
+    public override void Activate()
     {
         if (isTrigger)
         {

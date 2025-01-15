@@ -48,9 +48,13 @@ public class BookAnimationControll : MonoBehaviour
             isGrab = true;
             ObjectControll();
         });
-        //grab.activated.AddListener(BookAnimation);
-        grab.selectEntered.AddListener(ControllerEventSet);
-        grab.selectExited.AddListener(ContollerEventRemove);
+        //grab.selectEntered.AddListener(ControllerEventSet);
+        //grab.selectExited.AddListener(ContollerEventRemove);
+
+        grab.selectEntered.AddListener(ControllerEventSetMk1);
+        grab.selectExited.AddListener(ContollerEventRemoveMk1);
+
+        grab.activated.AddListener((x) => BookAnimation());
 
         grab.selectExited.AddListener(IsOpenBookCheak);
     }
@@ -64,16 +68,34 @@ public class BookAnimationControll : MonoBehaviour
 
     private void ControllerEventSet(SelectEnterEventArgs arg)
     {
-        //if (arg.interactorObject.transform.TryGetComponent<XRBaseInteractor>(out XRBaseInteractor interactor))
-        //{
-        //    ActionBasedController controller = interactor.transform.GetComponentInParent<ActionBasedController>();
-        //    controller.scaleToggleAction.action.performed += ControllerEvent;
-        //}
-
         ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
         if (controller != null)
             controller.scaleToggleAction.action.performed += ControllerEvent;
     }
+
+
+    private void ContollerEventRemoveMk1(SelectExitEventArgs arg)
+    {
+        activated.ActivateUI(false);
+        ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
+        if (controller != null)
+            controller.scaleToggleAction.action.performed -= ControllerEventMk1;
+    }
+
+    private void ControllerEventSetMk1(SelectEnterEventArgs arg)
+    {
+        ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
+        if (controller != null)
+            controller.scaleToggleAction.action.performed += ControllerEventMk1;
+    }
+
+    private void ControllerEventMk1(InputAction.CallbackContext call)
+    {
+        activated.ActivateUI();
+    }
+
+
+
 
     private void ControllerEvent(InputAction.CallbackContext call)
     {
@@ -102,30 +124,6 @@ public class BookAnimationControll : MonoBehaviour
             {
                 activated.ActivateUI(false);
             }
-        }
-    }
-
-
-    private void BookAnimation(ActivateEventArgs arg)
-    {
-        if (animator == null)
-        {
-            Debug.LogError("BookAnimationController / Animator is Null");
-            return;
-        }
-        if (closeClip == null || openClip == null)
-        {
-            Debug.LogError("BookAnimationController / AnimationClip is Null");
-            return;
-        }
-
-
-
-        if (Time.time >= animationTime)
-        {
-            print(animator.GetBool("IsOpen"));
-            animator.SetBool("IsOpen", !animator.GetBool("IsOpen"));
-            animationTime = Time.time + (animator.GetBool("IsOpen") ? openClip.length : closeClip.length);
         }
     }
 
