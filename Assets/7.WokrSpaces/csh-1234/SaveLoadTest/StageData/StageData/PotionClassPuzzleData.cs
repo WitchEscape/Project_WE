@@ -8,9 +8,9 @@ public class PotionClassPuzzleData : StageDataBase
     {
         PuzzleProgressManager.Instance.SetPuzzleSequence(new List<string>
         {
-            "PUZZLE_1",
-            "PUZZLE_2",
-            "PUZZLE_3",
+            "PotionClass_Puzzle_01",    // => 시험관 퍼즐"
+            "PotionClass_Puzzle_02",    // => 포션제조 퍼즐"
+            "PotionClass_Puzzle_03",    // => 등불 마법진 퍼즐 => 스크롤 획득"
         });
     }
 }

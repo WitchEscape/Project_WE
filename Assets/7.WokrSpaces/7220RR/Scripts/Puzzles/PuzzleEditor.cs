@@ -47,9 +47,22 @@ public class PuzzleEditor : Editor
 
                 puzzles.isDialClamped = EditorGUILayout.Toggle("다이얼 회전 각도 제한", puzzles.isDialClamped);
 
-                //puzzles.dialCount = EditorGUILayout.IntField("다이얼 갯수", puzzles.dialCount);
                 puzzles.dialCount = EditorGUILayout.IntSlider("다이얼 갯수", puzzles.dialCount, 0, 10);
                 puzzles.interactableType = (InteractableType)EditorGUILayout.EnumPopup("Interactable Type", puzzles.interactableType);
+
+                if (puzzles.dialTexts == null)
+                {
+                    puzzles.dialTexts = new List<TextMeshProUGUI>();
+                }
+                for (int i = 0; i < puzzles.dialCount; i++)
+                {
+                    while (puzzles.dialTexts.Count <= i)
+                    {
+                        puzzles.dialTexts.Add(null);
+                    }
+                    puzzles.dialTexts[i] = (TextMeshProUGUI)EditorGUILayout.ObjectField($"Text {i}", puzzles.dialTexts[i], typeof(TextMeshProUGUI), true);
+                }
+
                 break;
             case PuzzleType.Keypad:
                 puzzles.interactableType = (InteractableType)EditorGUILayout.EnumPopup("Interactable Type", puzzles.interactableType);

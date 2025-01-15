@@ -8,10 +8,11 @@ public class Class535PuzzleData : StageDataBase
     {
         PuzzleProgressManager.Instance.SetPuzzleSequence(new List<string>
         {
-            "PUZZLE_1",
-            "PUZZLE_2",
-            "PUZZLE_3",
-            "PUZZLE_3",
+            "Claass535_Puzzle_01", //=> 3번 자리 책상 비밀번호 퍼즐
+            "Claass535_Puzzle_02", //=> 타로 퍼즐
+            "Claass535_Puzzle_03", //=> 타로 옆자리 책상 비밀번호 퍼즐4
+            "Claass535_Puzzle_03", //=> 교탁밑 상자 퍼즐 => 스크롤 획득
+
         });
     }
 }

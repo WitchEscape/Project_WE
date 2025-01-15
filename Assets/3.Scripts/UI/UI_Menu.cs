@@ -30,17 +30,17 @@ public class UI_Menu : MonoBehaviour
 
     private void OnSettingButtonClick()
     {
-        UI_Manager.Instance.OpenUI(settingPanel);
+        UIManager.Instance.OpenUI(settingPanel);
     }
 
     private void OnSaveLoadButtonClick()
     {
-        UI_Manager.Instance.OpenUI(saveLoadPanel);
+        UIManager.Instance.OpenUI(saveLoadPanel);
     }
 
     private void OnBackButtonClick()
     {
-        UI_Manager.Instance.CloseCurrentUI();
+        UIManager.Instance.CloseCurrentUI();
     }
 
     private void OnSaveExitButtonClick()
