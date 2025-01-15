@@ -104,7 +104,7 @@ public class DisplayMaterial : MonoBehaviour
         if (2 <=playerHandCount && wasPlaying == false)
         {            
             //알파값을 매 프레임 감소시킴
-            erase = erase - (Time.deltaTime * 0.3f);
+            erase = erase - (Time.deltaTime * 0.1f);
 
             //새로운 투명도 적용
             material.color = new Color(material.color.r, material.color.g, material.color.b, erase);

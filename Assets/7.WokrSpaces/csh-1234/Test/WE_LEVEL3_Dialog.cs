@@ -57,7 +57,7 @@ public class WE_LEVEL3_Dialog : MonoBehaviour
             {
                 Debug.Log("enter3");
                 DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_01_");
-                //isActivate = true;
+                isActivate = true;
             }
         }
 
