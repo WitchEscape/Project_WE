@@ -23,8 +23,8 @@ public class GhostCanvas : MonoBehaviour
     private int currentIndex = 0;
     private int callIndex { get { return currentIndex; } set { currentIndex = Mathf.Clamp(value, 0, 2); } }
 
-    private int clearCount;
-    private string[] hintTexts = new string[3];
+    private int clearCount = 0;
+    private string[] hintTexts;
 
     public TextMeshProUGUI hintText;
 
@@ -46,6 +46,15 @@ public class GhostCanvas : MonoBehaviour
 
     private void Start()
     {
+        if (chapters == Chapters.Library)
+        {
+            hintTexts = new string[4];
+        }
+        else
+        {
+            hintTexts = new string[3];
+        }
+
         canvas.gameObject.SetActive(false);
     }
 
@@ -92,8 +101,14 @@ public class GhostCanvas : MonoBehaviour
         noButton.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(true);
 
-        CheckClearedPuzzles();
+        if (chapters != Chapters.Library)
+        {
+            CheckClearedPuzzles();
+        }
+
+
         InitializationChapters();
+
         SetHintButtons();
 
         //기존 코루틴 중단 및 초기화
@@ -160,11 +175,22 @@ public class GhostCanvas : MonoBehaviour
     {
         Debug.Log($"Call Index1 : {callIndex}");
 
-        //호출한 횟수에 따라 버튼 초기화
-        for (int i = 0; i <= callIndex; i++)
+        if (chapters == Chapters.Library)
         {
-            hintButtons[i].gameObject.SetActive(true);
+            foreach (Button button in hintButtons)
+            {
+                button.gameObject.SetActive(true);
+            }
         }
+        else
+        {
+            //호출한 횟수에 따라 버튼 초기화
+            for (int i = 0; i <= callIndex; i++)
+            {
+                hintButtons[i].gameObject.SetActive(true);
+            }
+        }
+
     }
 
     public void OnClickHintButton(int i)
@@ -274,7 +300,7 @@ public class GhostCanvas : MonoBehaviour
         switch (clearCount)
         {
             case 0:
-                hintTexts[0] = "선반위에포션이움직일수있게되어있어! 시험관에있는글라스크랑연관이있을것같은데..";
+                hintTexts[0] = "선반 위에 포션이 움직일 수 있게 되어있어! 시험관에 있는 글라스크랑 연관이 있을 것 같은데..";
                 hintTexts[1] = "포션을 시험관 글라스크의 색 순서대로 배치해보자";
                 hintTexts[2] = "포션을 초록, 빨강, 파랑 순서로 배치 해보자!";
                 break;
@@ -301,6 +327,7 @@ public class GhostCanvas : MonoBehaviour
                 hintTexts[0] = "A x B + C";
                 hintTexts[1] = "숫자를 시간이라고 생각해봐";
                 hintTexts[2] = "책을 뒤집어서 확인해봐";
+                hintTexts[3] = "하하 나도 모르겠지렁이";
                 break;
             case 1:
                 hintTexts[0] = "";

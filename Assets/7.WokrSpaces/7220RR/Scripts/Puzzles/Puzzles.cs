@@ -52,7 +52,8 @@ public class Puzzles : MonoBehaviour
     public GameObject keypadMoniter;
     private Material keypadMoniterMaterial;
     private Color keypadMoniterBaseColor;
-    public TextMeshPro keypadMoniterText;
+    public TextMeshPro keypadMoniterText1;
+    public TextMeshProUGUI keypadMoniterText2;
     #endregion
     private void Awake()
     {
@@ -162,6 +163,10 @@ public class Puzzles : MonoBehaviour
                     dialKnob[i].interactableAxis = rotationAxis;
                     dialKnob[i].interactorAxis = controllerAxis;
                     dialKnob[i].selectExited.AddListener((x) => DialRotationSet(x, dialKnob[index].handle, index));
+                    foreach (Knob knob in dialKnob)
+                    {
+
+                    }
                     break;
             }
         }
@@ -358,7 +363,8 @@ public class Puzzles : MonoBehaviour
 
     private void KeypadMoniterTextChange(string text)
     {
-        keypadMoniterText.text = text;
+        keypadMoniterText1.text = text;
+        keypadMoniterText2.text = text;
     }
 
     private void KeypadClearButtonClickEvent()
