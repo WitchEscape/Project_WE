@@ -13,6 +13,7 @@ public class BoxPuzzle : MonoBehaviour
     [Header("비밀번호 관련 설정")]
     [SerializeField] private string answer = "BROP"; // 비밀번호 정답
     public TextMeshProUGUI[] inputChars; // 입력된 문자들
+    [SerializeField] private GameObject Book;
 
     [SerializeField] private LockBox lockBox; // LockBox 연결
     public GameObject lockObject;
@@ -85,6 +86,7 @@ public class BoxPuzzle : MonoBehaviour
             if (lockBox != null)
             {
                 Destroy(lockObject,2f);
+                Book.SetActive(true);
                 lockBox.UnLockbox(); // 서랍 열기
                 Debug.Log("상자가 열렸습니다.");
             }
