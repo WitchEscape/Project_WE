@@ -131,6 +131,11 @@ public class PressButtonTest : XRBaseInteractable
         }
     }
 
+    public void UIButtonClick()
+    {
+        OnPress.Invoke();
+    }
+
     private void HandleButtonPress(SelectEnterEventArgs args)
     {
         SetButtonHeight(-pressDistance);

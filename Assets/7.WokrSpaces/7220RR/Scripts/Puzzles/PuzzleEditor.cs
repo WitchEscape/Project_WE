@@ -55,7 +55,8 @@ public class PuzzleEditor : Editor
                 puzzles.interactableType = (InteractableType)EditorGUILayout.EnumPopup("Interactable Type", puzzles.interactableType);
                 puzzles.password = EditorGUILayout.TextField("Password", puzzles.password);
                 puzzles.keypadMoniter = (GameObject)EditorGUILayout.ObjectField("모니터", puzzles.keypadMoniter, typeof(GameObject), true);
-                puzzles.keypadMoniterText = (TextMeshPro)EditorGUILayout.ObjectField("텍스트", puzzles.keypadMoniterText, typeof(TextMeshPro), true);
+                puzzles.keypadMoniterText1 = (TextMeshPro)EditorGUILayout.ObjectField("텍스트1", puzzles.keypadMoniterText1, typeof(TextMeshPro), true);
+                puzzles.keypadMoniterText2 = (TextMeshProUGUI)EditorGUILayout.ObjectField("텍스트2", puzzles.keypadMoniterText2, typeof(TextMeshProUGUI), true);
                 break;
             default:
                 break;
