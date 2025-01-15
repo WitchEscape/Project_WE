@@ -42,6 +42,7 @@ public class DialogPlayer : MonoBehaviour
     private bool isPlaying = false;
     private Coroutine playCoroutine;
 
+    [Header("스크립트 사이 시간간격")]
     [SerializeField] private float delayBetweenDialogs = 0.2f; 
 
     public UnityEvent<DataManager.DialogData> OnDialogStart = new UnityEvent<DataManager.DialogData>();
