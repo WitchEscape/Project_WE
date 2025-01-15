@@ -106,13 +106,42 @@ public class DataManager : MonoBehaviour
     {
         List<DialogData> dialogList = new List<DialogData>();
         string csvPath = GetDataPath($"Excel/{filename}Data.csv", true);
-        string[] lines = File.ReadAllText(csvPath).Split("\n");
+        string[] lines = File.ReadAllText(csvPath).Split('\n');
 
         for (int y = 1; y < lines.Length; y++)
         {
-            string[] row = lines[y].Replace("\r", "").Split(',');
+            if (string.IsNullOrEmpty(lines[y].Trim())) continue;
 
-            if (row.Length == 0 || string.IsNullOrEmpty(row[0])) continue;
+            // CSV 파싱 로직 개선
+            List<string> row = new List<string>();
+            bool inQuotes = false;
+            string currentValue = "";
+            
+            foreach (char c in lines[y].Replace("\r", ""))
+            {
+                if (c == '"')
+                {
+                    inQuotes = !inQuotes;
+                    continue;
+                }
+                
+                if (c == ',' && !inQuotes)
+                {
+                    row.Add(currentValue.Trim());
+                    currentValue = "";
+                    continue;
+                }
+                
+                currentValue += c;
+            }
+            
+            // 마지막 값 추가
+            if (!string.IsNullOrEmpty(currentValue))
+            {
+                row.Add(currentValue.Trim());
+            }
+
+            if (row.Count == 0 || string.IsNullOrEmpty(row[0])) continue;
 
             int i = 0;
             DialogData dd = new DialogData

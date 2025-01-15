@@ -49,13 +49,10 @@ public class WE_LEVEL3_Dialog : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("enter1");
         if(other.CompareTag("Player"))
         {
-            Debug.Log("enter2");
             if (!isActivate)
             {
-                Debug.Log("enter3");
                 DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_01_");
                 isActivate = true;
             }

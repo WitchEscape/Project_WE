@@ -24,6 +24,7 @@ public class UI_Manager : MonoBehaviour
     }
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this;
@@ -34,6 +35,12 @@ public class UI_Manager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Start()
+    {
+        Application.targetFrameRate = 72;
+    }
+
     private Stack<GameObject> uiStack = new Stack<GameObject>();
 
     public void OpenUI(GameObject uiPanel)
