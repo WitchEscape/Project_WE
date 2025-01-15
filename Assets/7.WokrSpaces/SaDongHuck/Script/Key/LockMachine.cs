@@ -11,13 +11,13 @@ public class LockMachine : MonoBehaviour
     public Animator lockAnimator; // 자물쇠의 애니메이터
     public GameObject Key;
 
-    [SerializeField] private LockDeskDrawer lockDeskDrawer;
+    [SerializeField] private DrawerLock lockDrawer;
     private void Start()
     {
         // 소켓 이벤트 등록
         socketInteractor.selectEntered.AddListener(OnKeyInserted);
-        lockDeskDrawer = FindObjectOfType<LockDeskDrawer>();
-        if(lockDeskDrawer != null )
+        lockDrawer = FindObjectOfType<DrawerLock>();
+        if(lockDrawer != null )
         {
             print("lockDeskDrawer을 찾을 수 없음");
         }
@@ -30,7 +30,7 @@ public class LockMachine : MonoBehaviour
         OpenLock(); // 자물쇠 열기 함수 호출
         Destroy(lockObject, 2f);
         Destroy(Key, 1f);
-        lockDeskDrawer.UnLockDrawer();
+        lockDrawer.UnLockDrawer();
     }
 
     private void OpenLock()

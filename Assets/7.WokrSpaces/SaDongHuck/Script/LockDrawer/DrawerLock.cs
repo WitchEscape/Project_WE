@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-public class LockDeskDrawer : MonoBehaviour
+public class DrawerLock : MonoBehaviour
 {
     private ConfigurableJoint joint;
     private void Start()
@@ -24,6 +23,6 @@ public class LockDeskDrawer : MonoBehaviour
         {
             rb.WakeUp(); // Rigidbody 깨우기
         }
-        
+
     }
 }
