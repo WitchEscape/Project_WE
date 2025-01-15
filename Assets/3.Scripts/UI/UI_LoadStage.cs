@@ -53,7 +53,7 @@ public class UI_LoadStage : MonoBehaviour
     private IEnumerator LoadStageCoroutine(string stageName)
     {
         Debug.Log($"Starting to load stage: {stageName}");
-        UI_Manager.Instance.CloseAllCurrentUI();
+        UIManager.Instance.CloseAllCurrentUI();
         // 씬 로드
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(stageName);
         while (!asyncLoad.isDone)

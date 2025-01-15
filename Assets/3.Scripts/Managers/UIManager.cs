@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public class UI_Manager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    private static UI_Manager instance;
-    public static UI_Manager Instance
+    private static UIManager instance;
+    public static UIManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<UI_Manager>();
+                instance = FindObjectOfType<UIManager>();
                 if (instance == null)
                 {
                     GameObject go = new GameObject("@UIManager");
-                    instance = go.AddComponent<UI_Manager>();
+                    instance = go.AddComponent<UIManager>();
                 }
             }
             return instance;
