@@ -8,7 +8,7 @@ public class LibraryPuzzleData : StageDataBase
     {
         PuzzleProgressManager.Instance.SetPuzzleSequence(new List<string>
         {
-            "Puzzle_1",
+            "Library_Puzzle_01,",   // => 책 배치 퍼즐 => 빛나는 책 속 스크롤 획득"
         });
     }
 }
