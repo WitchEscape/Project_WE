@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class WE_LEVEL3_Dialog : MonoBehaviour
 {
-    private bool isActivate = false;
+    public bool isActivate = false;
     public TextMeshProUGUI dialogText;
     [SerializeField] private float typingSpeed = 0.05f;
     private Coroutine CoTyping;
 
     private void Start()
     {
-        GetComponent<TriggerZone>().OnEnterEvent.AddListener(TriggerTest);
+        //GetComponent<TriggerZone>().OnEnterEvent.AddListener(TriggerTest);
 
         DialogPlayer.Instance.OnDialogStart.AddListener((dialog) =>
         {
@@ -47,15 +47,21 @@ public class WE_LEVEL3_Dialog : MonoBehaviour
         });
     }
 
-    public void TriggerTest(GameObject go)
+    private void OnTriggerEnter(Collider other)
     {
-        if(!isActivate)
+        Debug.Log("enter1");
+        if(other.CompareTag("Player"))
         {
-            DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_01_");
-            isActivate = true;
+            Debug.Log("enter2");
+            if (!isActivate)
+            {
+                Debug.Log("enter3");
+                DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_01_");
+                //isActivate = true;
+            }
         }
-    }
 
+    }
 
 
     private IEnumerator TypeText(string speaker, string text)

@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Activated : MonoBehaviour
 {
     public GameObject activatedUI;
-    public GameObject activateObject;
-    public ActiveUIType uiType;
-    protected XRBaseInteractable interactable;
+    public XRBaseInteractable interactable;
+    public List<GameObject> objects;
+    public List<XRBaseInteractable> interactables;
 
     protected virtual void Awake()
     {
@@ -26,47 +27,43 @@ public class Activated : MonoBehaviour
                 ActivateUI(false);
             });
         }
+
+        ObjectOnOff<GameObject>(objects, false);
+        ObjectOnOff<XRBaseInteractable>(interactables, false);
+
     }
 
     public virtual void ActivateUI()
     {
-        //if (activatedUI != null)
-        //    activatedUI.SetActive(!activatedUI.activeSelf);
-
-        if (uiType == ActiveUIType.None) return;
-
-        switch (uiType)
-        {
-            case ActiveUIType.None:
-                break;
-            case ActiveUIType.UI:
-                activatedUI?.SetActive(!activatedUI.activeSelf);
-                break;
-            case ActiveUIType.Object:
-                activateObject?.SetActive(!activateObject.activeSelf);
-                break;
-        }
+        activatedUI?.SetActive(!activatedUI.activeSelf);
     }
 
     public virtual void ActivateUI(bool isbool)
     {
-        if (uiType == ActiveUIType.None) return;
-
-        switch (uiType)
-        {
-            case ActiveUIType.None:
-                break;
-            case ActiveUIType.UI:
-                activatedUI?.SetActive(isbool);
-                break;
-            case ActiveUIType.Object:
-                activateObject?.SetActive(isbool);
-                break;
-        }
+        activatedUI?.SetActive(isbool);
     }
 
-    public virtual void activate()
+    public virtual void Activate()
     {
+        ObjectOnOff<GameObject>(objects, true);
+        ObjectOnOff<XRBaseInteractable>(interactables, true);
+    }
 
+    public virtual void ObjectOnOff<T>(List<T> list, bool isBooooool) where T : class
+    {
+        if (list != null)
+        {
+            foreach (T howRyou in list)
+            {
+                if (howRyou is XRBaseInteractable whatbase)
+                {
+                    whatbase.enabled = isBooooool;
+                }
+                else if (howRyou is GameObject whatname)
+                {
+                    whatname.SetActive(isBooooool);
+                }
+            }
+        }
     }
 }

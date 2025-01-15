@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class PressButtonTest : XRSimpleInteractable
+public class PressButtonTest : XRBaseInteractable
 {
     public Transform button;
     public bool isTrigger;
@@ -14,6 +14,7 @@ public class PressButtonTest : XRSimpleInteractable
     public UnityEvent OnPress;
     public UnityEvent OnRelease;
     private List<ActionBasedController> controllers = new List<ActionBasedController>();
+
     private void Start()
     {
         SetButtonHeight(0f);
@@ -170,4 +171,13 @@ public class PressButtonTest : XRSimpleInteractable
         button.localPosition = newPosition;
     }
 
+
+    public override Transform GetAttachTransform(IXRInteractor interactor)
+    {
+        if (button != null)
+        {
+            return button;
+        }
+        return transform;
+    }
 }

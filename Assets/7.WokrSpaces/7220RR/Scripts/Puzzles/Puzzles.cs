@@ -81,6 +81,12 @@ public class Puzzles : MonoBehaviour
         }
     }
 
+    private void PuzzleClear()
+    {
+        if (isActivatedObject)
+            activatedObject.Activate();
+    }
+
     #region Slot
     private void InteractorNameSet()
     {
@@ -113,9 +119,9 @@ public class Puzzles : MonoBehaviour
 
             ++interactorCount;
 
-            if (interactorCount == totalNum && isActivatedObject)
+            if (interactorCount == totalNum)
             {
-                activatedObject.activate();
+                PuzzleClear();
             }
         }
     }
@@ -252,6 +258,7 @@ public class Puzzles : MonoBehaviour
         }
 
         print("다이얼 풀림");
+        PuzzleClear();
         isDialClear = true;
     }
 
@@ -361,12 +368,16 @@ public class Puzzles : MonoBehaviour
         KeypadMoniterTextChange(currentPassword);
     }
 
+
+    //NOTE 
+    //임시로 메시지만 바꿈
     private void keypadEnterButtonClickEvent()
     {
         if (currentPassword == password)
         {
             print("풀림");
             KeypadMoniterTextChange("Success");
+            PuzzleClear();
         }
         else
         {
