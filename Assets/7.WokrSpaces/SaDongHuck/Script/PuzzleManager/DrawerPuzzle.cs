@@ -15,6 +15,9 @@ public class DrawerPuzzle : MonoBehaviour
     [Header("비밀번호 관련 설정")]
     [SerializeField] private string answer = "BROP"; // 정답 설정
     [SerializeField] private GameObject uipanel; // 닫을 패널
+    [SerializeField] private GameObject paper;
+    [SerializeField] private DeskLock desklock;
+    [SerializeField] private GameObject dialLock;
     public TextMeshProUGUI[] inputChars; // 사용자가 입력한 문자 배열
 
     private Transform playerCamera; // 플레이어의 카메라 Transform
@@ -31,6 +34,12 @@ public class DrawerPuzzle : MonoBehaviour
         else
         {
             Debug.LogError("Main Camera를 찾을 수 없습니다. Main Camera 태그가 설정되어 있는지 확인하세요.");
+        }
+
+        desklock = FindObjectOfType<DeskLock>();
+        if(desklock == null)
+        {
+            print("desklock을 찾을 수 없습니다");
         }
 
         var simpleinteractable = GetComponent<XRSimpleInteractable>();
@@ -80,6 +89,15 @@ public class DrawerPuzzle : MonoBehaviour
         if (answer == result) // 정답인 경우
         {
             Debug.Log("서랍이 열렸습니다.");
+
+            Destroy(dialLock, 1f);
+            desklock.UnLockDrawer();
+
+            if(paper != null)
+            {
+                paper.SetActive(true);
+            }
+
             if (uipanel != null)
             {
                 uipanel.SetActive(false);

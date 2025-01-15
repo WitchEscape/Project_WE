@@ -122,10 +122,10 @@ public class FinitStateMachine : MonoBehaviour
 
     private void Talk()
     {
-        Debug.Log($"클리어1 : {ghostCanvas.isCleared[0]}");
-        Debug.Log($"클리어2 : {ghostCanvas.isCleared[1]}");
-        Debug.Log($"클리어3 : {ghostCanvas.isCleared[2]}");
-        Debug.Log($"배열 크기 : {ghostCanvas.isCleared.Length} , {ghostCanvas.isCleared[ghostCanvas.isCleared.Length - 1]}");
+        //Debug.Log($"클리어1 : {ghostCanvas.isCleared[0]}");
+        //Debug.Log($"클리어2 : {ghostCanvas.isCleared[1]}");
+        //Debug.Log($"클리어3 : {ghostCanvas.isCleared[2]}");
+        //Debug.Log($"배열 크기 : {ghostCanvas.isCleared.Length} , {ghostCanvas.isCleared[ghostCanvas.isCleared.Length - 1]}");
 
         if (currentState != State.Talk) { return; }
 

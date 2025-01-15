@@ -2,11 +2,14 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class We_LEVEL3_Dialog : MonoBehaviour
+public class DialogTest : MonoBehaviour
 {
     public TextMeshProUGUI dialogText;
     [SerializeField] private float typingSpeed = 0.05f;
     private Coroutine CoTyping;
+
+    [Header("체크시 한글자씩 나옵니다!")]
+    public bool isAnim = false;
 
     void Start()
     {
@@ -14,19 +17,34 @@ public class We_LEVEL3_Dialog : MonoBehaviour
         {
             if(dialog.DialogType == DialogType.Story)
             {
-                if (CoTyping != null)
+                if(isAnim == true)
                 {
-                    StopCoroutine(CoTyping);
+                    if (CoTyping != null)
+                    {
+                        StopCoroutine(CoTyping);
+                    }
+                    CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
                 }
-                CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
+                else
+                {
+                    dialogText.text = $"{dialog.SpeakerName} : {dialog.Text}";
+                }
+                
             }
             else
             {
-                if (CoTyping != null)
+                if (isAnim == true)
                 {
-                    StopCoroutine(CoTyping);
+                    if (CoTyping != null)
+                    {
+                        StopCoroutine(CoTyping);
+                    }
+                    CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
                 }
-                CoTyping = StartCoroutine(TypeText(dialog.SpeakerName, dialog.Text));
+                else
+                {
+                    dialogText.text = $"{dialog.SpeakerName} : {dialog.Text}";
+                }
             }
         });
 
