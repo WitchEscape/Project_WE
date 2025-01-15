@@ -18,5 +18,13 @@ public class DeskLock : MonoBehaviour
     public void UnLockDrawer()
     {
         joint.zMotion = ConfigurableJointMotion.Limited;
+
+        /*Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.WakeUp(); // Rigidbody를 깨움
+        }*/
+
+        Debug.Log("서랍 잠금 해제 완료");
     }
 }
