@@ -34,7 +34,6 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private GameObject rightEffect;
 
     [SerializeField] private new Collider collider = null;
-    [SerializeField] private AudioSource grabAudio = null, releaseAudio = null;
 
     public XRBaseInteractable CurrentSlotItem => currentSlotItem;
     public UnityEvent inventorySlotUpdated;
@@ -44,32 +43,21 @@ public class InventorySlot : MonoBehaviour
     private XRInteractionManager interactionManager;
     private InventoryManager inventoryManager;
 
-    //Animation
-    private int disableAnimatorHash, enableAnimatorHash, onHoverAnimatorHash, resetAnimatorHash;
 
     private bool isBusy, isDisabling;
-    private Animator addItemAnimator, hasItemAnimator;
     private TransformStruct startingTransformFromHand;
     private Vector3 goalSizeToFitInSlot;
-    private const float AnimationDisableLength = .5f, AnimationLengthItemToSlot = .15f;
 
     private void Awake()
     {
         OnValidate();
-
-        disableAnimatorHash = Animator.StringToHash("Disable");
-        enableAnimatorHash = Animator.StringToHash("Enable");
-        onHoverAnimatorHash = Animator.StringToHash("OnHover");
-        resetAnimatorHash = Animator.StringToHash("Reset");
     }
 
     public IEnumerator CreateStartingItemAndDisable()
     {
-        Debug.Log("[InventorySlot] CreateStartingItemAndDisable 시작");
-        
         if (startingItem)
         {
-            Debug.Log($"[InventorySlot] startingItem 설정: {startingItem.name}");
+            Debug.Log($"startingItem 설정");
             currentSlotItem = Instantiate(startingItem, transform, true);
             
             // prefabPath 복사
@@ -78,12 +66,10 @@ public class InventorySlot : MonoBehaviour
             if (sourceItemData != null && targetItemData != null)
             {
                 targetItemData.prefabPath = sourceItemData.prefabPath;
-                Debug.Log($"[InventorySlot] prefabPath 복사됨: {targetItemData.prefabPath}");
             }
 
             yield return null;
-            
-            Debug.Log("[InventorySlot] 아이템 설정 중...");
+
             currentSlotItem.gameObject.SetActive(false);
             currentSlotItem.transform.localPosition = Vector3.zero;
             currentSlotItem.transform.localEulerAngles = Vector3.zero;
@@ -103,21 +89,14 @@ public class InventorySlot : MonoBehaviour
                 boundCenterTransform.localScale = goalSizeToFitInSlot;
                 boundCenterTransform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
-            
-            Debug.Log("[InventorySlot] 아이템 설정 완료");
         }
         else
         {
-            Debug.LogWarning("[InventorySlot] startingItem이 null입니다");
             slotDisplayWhenContainsItem.gameObject.SetActive(false);
             slotDisplayToAddItem.gameObject.SetActive(true);
         }
-
-        // 슬롯 비활성화로 되돌림
         gameObject.SetActive(false);
-        Debug.Log("[InventorySlot] 슬롯 비활성화");
     }
-
 
     private void OnValidate()
     {
@@ -125,29 +104,17 @@ public class InventorySlot : MonoBehaviour
             inventoryManager = GetComponentInParent<InventoryManager>();
         if (!interactionManager)
             interactionManager = FindObjectOfType<XRInteractionManager>();
-        if (!addItemAnimator)
-            addItemAnimator = slotDisplayToAddItem.GetComponent<Animator>();
-        if (!hasItemAnimator)
-            hasItemAnimator = slotDisplayWhenContainsItem.GetComponent<Animator>();
     }
 
     public void DisableSlot()
     {
         collider.enabled = false;
-        if (!isDisabling)
-            StartCoroutine(DisableAfterAnimation(AnimationDisableLength));
     }
 
     public void EnableSlot()
     {
         StopAllCoroutines();
         OnEnable(); 
-    }
-
-    private void ResetAnimationState(Animator anim, bool setToStartingAnimState)
-    {
-        if (setToStartingAnimState)
-            hasItemAnimator.SetTrigger(resetAnimatorHash);
     }
 
 
@@ -192,7 +159,6 @@ public class InventorySlot : MonoBehaviour
         InteractWithSlot(controller);
     }
 
-
     private void InteractWithSlot(XRDirectInteractor controller)
     {
         if (animateItemToSlotCoroutine != null)
@@ -231,13 +197,6 @@ public class InventorySlot : MonoBehaviour
         StartCoroutine(AnimateIcon());
         SetNewItemModel();
         inventorySlotUpdated.Invoke();
-    }
-
-    private bool CheckIfCanAddItemToSlot(XRBaseInteractable itemHandIsHolding)
-    {
-        // Itemda helper = itemHandIsHolding.GetComponent<InventoryItemHelper>();
-        // return helper.canInventory;
-        return true;
     }
 
     private IEnumerator AnimateIcon()
@@ -346,11 +305,9 @@ public class InventorySlot : MonoBehaviour
         if (rb)
         {
             rb.isKinematic = false;
-            //Debug.Log("[InventorySlot] Rigidbody??isKinematic ?????쇨덫???);
         }
 
         GrabNewItem(controller, currentSlotItem);
-        //grabAudio.Play();
         
     }
 
@@ -429,14 +386,12 @@ public class InventorySlot : MonoBehaviour
 
     private void DestroyComponentsOnClone(Transform clone)
     {
-
         try
         {
             var movedColliders = clone.GetComponentsInChildren<IReturnMovedColliders>(true);
             foreach (var t in movedColliders) 
             {
                 t.ReturnMovedColliders();
-                Debug.Log($"[InventorySlot] IReturnMovedColliders ?轅붽틓??影?뽧걤?? {t.GetType().Name}");
             }
 
             var itemDataComponents = clone.GetComponentsInChildren<InteractableItemData>(true);
@@ -549,8 +504,6 @@ public class InventorySlot : MonoBehaviour
 
         bool isLeftHand = controller == inventoryManager.leftController;
 
-        Debug.Log($"[InventorySlot] OnTriggerEnter - Controller: {controller.name}, IsLeft: {isLeftHand}");
-
         if (isLeftHand)
         {
             leftEffect.SetActive(true);
@@ -559,11 +512,6 @@ public class InventorySlot : MonoBehaviour
         {
             rightEffect.SetActive(true);
         }
-
-        if (slotDisplayToAddItem != null)
-            slotDisplayToAddItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, true);
-        if (slotDisplayWhenContainsItem != null)
-            slotDisplayWhenContainsItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, true);
     }
 
     private void OnTriggerExit(Collider other)
@@ -576,8 +524,6 @@ public class InventorySlot : MonoBehaviour
 
         bool isLeftHand = controller == inventoryManager.leftController;
 
-        Debug.Log($"[InventorySlot] OnTriggerExit - Controller: {controller.name}, IsLeft: {isLeftHand}");
-
         if (isLeftHand)
         {
             leftEffect.SetActive(false);
@@ -586,11 +532,6 @@ public class InventorySlot : MonoBehaviour
         {
             rightEffect.SetActive(false);
         }
-
-        if (slotDisplayToAddItem != null)
-            slotDisplayToAddItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, false);
-        if (slotDisplayWhenContainsItem != null)
-            slotDisplayWhenContainsItem.GetComponent<Animator>()?.SetBool(onHoverAnimatorHash, false);
     }
 }
 
