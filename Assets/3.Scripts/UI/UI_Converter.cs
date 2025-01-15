@@ -15,20 +15,58 @@ public class UI_Converter : MonoBehaviour
 
     public bool isMenuOpen = false;
 
+    private InputAction.CallbackContext inventoryAction;
+    private InputAction.CallbackContext menuAction;
+
     private void Start()
     {
+        if (ui_Menu == null)
+        {
+            Debug.LogError("UI Menu reference is missing on UI_Converter");
+            return;
+        }
+
         if (openInventoryRightHand != null)
         {
-            openInventoryRightHand.GetInputAction().performed += x => ToggleInventoryAtController();
+            openInventoryRightHand.GetInputAction().performed += OnInventoryPerformed;
         }
         if (openMenuInputRightHand != null)
         {
-            openMenuInputRightHand.GetInputAction().performed += x => HandleMenuInput();
+            openMenuInputRightHand.GetInputAction().performed += OnMenuPerformed;
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (openInventoryRightHand != null)
+        {
+            openInventoryRightHand.GetInputAction().performed -= OnInventoryPerformed;
+        }
+        if (openMenuInputRightHand != null)
+        {
+            openMenuInputRightHand.GetInputAction().performed -= OnMenuPerformed;
+        }
+    }
+
+    private void OnInventoryPerformed(InputAction.CallbackContext context)
+    {
+        ToggleInventoryAtController();
+    }
+
+    private void OnMenuPerformed(InputAction.CallbackContext context)
+    {
+        HandleMenuInput();
     }
 
     private void HandleMenuInput()
     {
+        if (ui_Menu == null)
+        {
+            Debug.LogWarning("UI Menu is null. Please check the reference.");
+            isMenuOpen = false;
+            return;
+        }
+
         if (inventoryManager.IsInventoryOpen && !isMenuOpen)
         {
             inventoryManager.ToggleInventoryItems(false);
@@ -51,12 +89,6 @@ public class UI_Converter : MonoBehaviour
             {
                 UI_Manager.Instance.CloseCurrentUI();
             }
-        }
-
-        if(isMenuOpen == true && ui_Menu.activeSelf == false)
-        {
-            UI_Manager.Instance.OpenUI(ui_Menu);
-            isMenuOpen = true;
         }
     }
 

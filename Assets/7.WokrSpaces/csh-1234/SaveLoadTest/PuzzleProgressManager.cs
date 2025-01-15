@@ -27,14 +27,21 @@ public class PuzzleProgressManager : MonoBehaviour
         public Dictionary<string, object> progressData = new Dictionary<string, object>();
     }
  
+    private bool isInitialized = false;
+    public bool IsInitialized => isInitialized;
+
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
+        {
             Destroy(gameObject);
-
-        InitializePuzzles();
+        }
+        isInitialized = true;
     }
 
     // 씬 로드할때 마다 초기화 해줘야 할듯?

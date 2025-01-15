@@ -24,7 +24,7 @@ public class SaveableObject : MonoBehaviour, ISaveable
         // uniqueID가 없으면 새로 생성
         if (string.IsNullOrEmpty(uniqueID))
         {
-            uniqueID = System.Guid.NewGuid().ToString();
+            uniqueID = gameObject.name;
         }
     }
 

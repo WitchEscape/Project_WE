@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -36,7 +36,9 @@ public class OnGrabEnableDisable : MonoBehaviour, IReturnMovedColliders
     private void OnValidate()
     {
         if (!grabInteractable)
+        {
             grabInteractable = GetComponent<XRGrabInteractable>();
+        }
     }
 
     private void Start()
@@ -71,14 +73,20 @@ public class OnGrabEnableDisable : MonoBehaviour, IReturnMovedColliders
         {
             StopAllCoroutines();
             if (disableOnGrab)
+            {
                 disableOnGrab.GetComponent<CollidersSetToTrigger>()?.ReturnToDefaultState();
+            }
             StartCoroutine(MoveDisableAndReturn(enableOnGrab));
         }
         else if (enableOnGrab)
+        {
             enableOnGrab.gameObject.SetActive(false);
+        }
 
         if (disableOnGrab)
+        {
             disableOnGrab.gameObject.SetActive(true);
+        }
     }
 
     private void OnGrab()
@@ -87,11 +95,15 @@ public class OnGrabEnableDisable : MonoBehaviour, IReturnMovedColliders
         {
             StopAllCoroutines();
             if (enableOnGrab)
+            {
                 enableOnGrab.GetComponent<CollidersSetToTrigger>()?.ReturnToDefaultState();
+            }
             StartCoroutine(MoveDisableAndReturn(disableOnGrab));
         }
         else if (disableOnGrab)
+        {
             disableOnGrab.gameObject.SetActive(false);
+        }
 
         if (enableOnGrab)
         {
@@ -107,7 +119,6 @@ public class OnGrabEnableDisable : MonoBehaviour, IReturnMovedColliders
         yield return new WaitForSeconds(Time.fixedDeltaTime * 2);
 
         objectToMove.position += Vector3.one * 9999;
-        //Lets physics respond to collider disappearing before disabling object physics update needs to run twice
         yield return new WaitForSeconds(Time.fixedDeltaTime * 2);
         objectToMove.gameObject.SetActive(false);
         objectToMove.localPosition = objectToMove == enableOnGrab ? enableOnGrabStartPosition : disableOnGrabStartPosition;
@@ -119,8 +130,13 @@ public class OnGrabEnableDisable : MonoBehaviour, IReturnMovedColliders
     {
         StopAllCoroutines();
         if (enableOnGrab)
+        {
             enableOnGrab.localPosition = enableOnGrabStartPosition;
+        }
+
         if (disableOnGrab)
+        {
             disableOnGrab.localPosition = disableOnGrabStartPosition;
+        }
     }
 }

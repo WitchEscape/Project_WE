@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Cauldron : MonoBehaviour
 {
+    [SerializeField] private string puzzleID = "Puzzle_2";
+
     [Header("생성할 빛나는 돌")] public GameObject magicStone;
     [Header("휘저을때 필요한 힘")] public float churnForce = 3f;
     [Header("물약 리스트")] public List<GameObject> positions;
@@ -61,7 +63,7 @@ public class Cauldron : MonoBehaviour
         if (isChurned == false) { return; }
 
         //포션카운트가 4일때 조건 검사
-        if (postionCount.Value == 4 && isChurned)
+        if (postionCount.Value >= 4 && isChurned)
         {
             isCorrect.Value = CheckCorrectPostion();
         }
@@ -113,6 +115,7 @@ public class Cauldron : MonoBehaviour
                 wasInstantiate = true;
                 ghostCanvas.ClearPuzzle(1);
             }
+            DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_03_");
             successParticle.Play();
         }
 
@@ -139,7 +142,7 @@ public class Cauldron : MonoBehaviour
             //코루틴으로 한 프레임 유예를 두고 ResetPostions 메서드 실행
             arg.gameObject.SetActive(false);
             StartCoroutine(ResetPostionCoroutine());
-
+            return;
         }
 
         //0일때 H를 넣으면 true
@@ -182,7 +185,7 @@ public class Cauldron : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"PostionCount : {postionCount.Value}");
+        //Debug.Log($"PostionCount : {postionCount.Value}");
 
         if (other.CompareTag("Scoop"))
         {

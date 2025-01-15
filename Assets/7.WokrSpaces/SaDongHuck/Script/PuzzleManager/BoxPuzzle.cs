@@ -98,4 +98,16 @@ public class BoxPuzzle : MonoBehaviour
             Debug.Log("비밀번호가 틀렸습니다.");
         }
     }
+    public void CloseUIPanel()
+    {
+        if(uiPrefab != null)
+        {
+            uiPrefab.SetActive(false);
+            print("패널이 닫혔습니다");
+        }
+        else
+        {
+            print("패널이 설정이 안됬습니다");
+        }
+    }
 }
