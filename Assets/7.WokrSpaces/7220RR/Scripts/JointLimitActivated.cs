@@ -43,10 +43,15 @@ public class JointLimitActivated : Activated
 
     private void MinLimitSet()
     {
-        while (minbaseFloatLists.Count != minLimitLists.Count)
+        if (minLimitFloatLists.Count != minLimitLists.Count)
         {
             while (minLimitLists.Count > minLimitFloatLists.Count) minLimitFloatLists.Add(0);
             while (minLimitLists.Count < minLimitFloatLists.Count) minLimitFloatLists.RemoveAt(minLimitFloatLists.Count - 1);
+        }
+        if (minbaseFloatLists.Count != minLimitLists.Count)
+        {
+            while (minLimitLists.Count > minbaseFloatLists.Count) minbaseFloatLists.Add(0);
+            while (minLimitLists.Count < minbaseFloatLists.Count) minbaseFloatLists.RemoveAt(minbaseFloatLists.Count - 1);
         }
 
         for (int i = 0; i < minLimitLists.Count; i++)
@@ -90,7 +95,12 @@ public class JointLimitActivated : Activated
     private void MaxLimitSet()
     {
 
-        while (maxbaseFloatLists.Count != maxLimitLists.Count)
+        if (maxbaseFloatLists.Count != maxLimitLists.Count)
+        {
+            while (maxLimitLists.Count > maxbaseFloatLists.Count) maxbaseFloatLists.Add(0);
+            while (maxLimitLists.Count < maxbaseFloatLists.Count) maxbaseFloatLists.RemoveAt(maxbaseFloatLists.Count - 1);
+        }
+        if (maxLimitFloatLists.Count != maxLimitLists.Count)
         {
             while (maxLimitLists.Count > maxLimitFloatLists.Count) maxLimitFloatLists.Add(0);
             while (maxLimitLists.Count < maxLimitFloatLists.Count) maxLimitFloatLists.RemoveAt(maxLimitFloatLists.Count - 1);
@@ -132,7 +142,7 @@ public class JointLimitActivated : Activated
                 limit.limit = maxbaseFloatLists[i];
                 con.linearLimit = limit;
             }
-            else if (minLimitLists[i] is HingeJoint hin)
+            else if (maxLimitLists[i] is HingeJoint hin)
             {
                 JointLimits limits = hin.limits;
                 limits.min = maxbaseFloatLists[i];

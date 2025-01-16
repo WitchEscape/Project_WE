@@ -456,5 +456,10 @@ public class Puzzles : MonoBehaviour
 
     }
 
+    private void ColorChange(int index, Material material)
+    {
+
+    }
+
     #endregion
 }

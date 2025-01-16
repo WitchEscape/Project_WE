@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DialNum : MonoBehaviour
+public class InputNum : MonoBehaviour
 {
     //각각의 UI에 1 ~ 9를 표시하시 위해서 알파벳 저장할 변수 배열
     string[] dialChars;
@@ -11,7 +11,7 @@ public class DialNum : MonoBehaviour
     int dialCharIndex;
 
     public TextMeshProUGUI dialCharTxt;
-    public DraweringPuzzle drawerPuzzleManager;
+    public DrawerPuzzle drawerPuzzle;
 
     void Awake()
     {
@@ -33,7 +33,7 @@ public class DialNum : MonoBehaviour
             dialCharTxt.text = dialChars[dialCharIndex];
         }
 
-        drawerPuzzleManager.AnswerCheck();
+        drawerPuzzle.AnswerCheck();
     }
 
     public void NumDown()
@@ -49,6 +49,6 @@ public class DialNum : MonoBehaviour
             dialCharTxt.text = dialChars[dialCharIndex];
         }
 
-        drawerPuzzleManager.AnswerCheck();
+        drawerPuzzle.AnswerCheck();
     }
 }
