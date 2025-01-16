@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,18 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     private Vector3 previousPos;
     private Rigidbody interactableRigidbody;
     private bool canJump = true;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        selectEntered.AddListener(attack);
+    }
+
+    public void attack(SelectEnterEventArgs arg0)
+    {
+        print("attack");
+        attachTransform = GetAttachTransform(arg0.interactorObject);
+    }
 
     protected override void Awake()
     {
@@ -96,26 +109,30 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     }
 
     #region 핸드 데이터 쓰면서 안쓰이게될듯함
-    //public override Transform GetAttachTransform(IXRInteractor interactor)
-    //{
-    //    //어태치 포인트를 양 손마다 지정하여 어느 손으로 잡던 어태치 포인트가 동일하도록 함
-    //    //사용하려면 한쪽 손 어태치 포인트 설정 후 반대쪽 손은 값을 반대로 해줘야 함
-    //    //Debug.Log("GetAttachTransform");
 
-    //    Transform i_attachTransform = null;
+    public Transform leftAttachedTransform;
+    public Transform rightAttachedTransform;
 
-    //    if (interactor.transform.CompareTag("Left Hand"))
-    //    {
-    //        Debug.Log("Left");
-    //        i_attachTransform = leftAttachedTransform;
-    //    }
-    //    if (interactor.transform.CompareTag("Right Hand"))
-    //    {
-    //        Debug.Log("Right");
-    //        i_attachTransform = rightAttachedTransform;
-    //    }
-    //    return i_attachTransform != null ? i_attachTransform : base.GetAttachTransform(interactor);
-    //}
+    public override Transform GetAttachTransform(IXRInteractor interactor)
+    {
+        //어태치 포인트를 양 손마다 지정하여 어느 손으로 잡던 어태치 포인트가 동일하도록 함
+        //사용하려면 한쪽 손 어태치 포인트 설정 후 반대쪽 손은 값을 반대로 해줘야 함
+        //Debug.Log("GetAttachTransform");
+
+        Transform i_attachTransform = null;
+
+        if (interactor.transform.CompareTag("Left Hand"))
+        {
+            Debug.Log("Left");
+            i_attachTransform = leftAttachedTransform;
+        }
+        if (interactor.transform.CompareTag("Right Hand"))
+        {
+            Debug.Log("Right");
+            i_attachTransform = rightAttachedTransform;
+        }
+        return i_attachTransform != null ? i_attachTransform : base.GetAttachTransform(interactor);
+    }
     #endregion
 }
 
