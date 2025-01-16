@@ -11,7 +11,7 @@ public class DialNum : MonoBehaviour
     int dialCharIndex;
 
     public TextMeshProUGUI dialCharTxt;
-    public DrawerPuzzle drawerPuzzleManager;
+    public DraweringPuzzle drawerPuzzleManager;
 
     void Awake()
     {

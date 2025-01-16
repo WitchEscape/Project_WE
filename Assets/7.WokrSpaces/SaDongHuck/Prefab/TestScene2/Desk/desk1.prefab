@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7761446449343800063}
   - component: {fileID: 7409738123049486549}
   - component: {fileID: 2735848855849644817}
-  - component: {fileID: 5721866409225425014}
   - component: {fileID: 7958029177002276027}
+  - component: {fileID: 248012209992554680}
   m_Layer: 0
-  m_Name: DialClick
+  m_Name: DialClick1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,31 +139,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &5721866409225425014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196339669689318904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9052c75e9ea450348856cb091dc13591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiPrefab: {fileID: 0}
-  distanceFromPlayer: 2
-  offset: {x: 0, y: 1, z: 0}
-  answer: 0189
-  uipanel: {fileID: 0}
-  paper: {fileID: 0}
-  desklock: {fileID: 0}
-  dialLock: {fileID: 5691024735371341163}
-  inputChars:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &7958029177002276027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +241,31 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &248012209992554680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196339669689318904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a2ed9cd203f7442b45f4cc0e0391fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiPrefab: {fileID: 0}
+  distanceFromPlayer: 2
+  offset: {x: 0, y: 1, z: 0}
+  answer: 0189
+  uipanel: {fileID: 0}
+  paper: {fileID: 0}
+  desklocker: {fileID: 0}
+  dialLock: {fileID: 5691024735371341163}
+  inputChars:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &520731773249028900
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,9 +795,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5775312134547107346}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7179526, z: -0, w: -0.69609207}
+  m_LocalRotation: {x: 0, y: 0.7179501, z: -0, w: -0.69609463}
   m_LocalPosition: {x: -1.329, y: 0.533, z: 2.346}
-  m_LocalScale: {x: 0.9757466, y: 1.32334, z: 1.065233}
+  m_LocalScale: {x: 0.9757466, y: 1.1765155, z: 1.065233}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 280471439279816605}
@@ -1009,7 +1009,7 @@ GameObject:
   - component: {fileID: 8575915584195631082}
   - component: {fileID: 679538901957906792}
   - component: {fileID: 506141367380079401}
-  - component: {fileID: 2337143055198203789}
+  - component: {fileID: 2402441275251246954}
   m_Layer: 0
   m_Name: WoodenSchoolDesk.002
   m_TagString: Untagged
@@ -1384,7 +1384,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &2337143055198203789
+--- !u!114 &2402441275251246954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1393,7 +1393,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8437707180705180983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76377a8dc18c5c5408aa600ea56d07f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d053c999a2b30848afa56f73237928c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8576020367670222974
