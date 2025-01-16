@@ -4,7 +4,40 @@ public enum Chapters { Lobby, Class535, Dormitory, PostionClass, Library, Teache
 
 public enum PuzzleColor { Red, Green, Blue, White, Black, Gray, Yellow, Orange, Violet, Skyblue, Pink }
 
+#region Puzzles
+public enum PuzzleType
+{
+    None,
+    Slot,
+    Dial,
+    Keypad,
+    ColorButton
+}
 
+public enum InteractorType
+{
+    None,
+    Single,
+    Multiple
+}
+
+public enum Axis
+{
+    XAxis,
+    YAxis,
+    ZAxis
+}
+
+public enum InteractableType
+{
+    None,
+    Knob,
+    Push,
+    Press
+}
+
+
+#endregion
 
 #region Data
 public enum DialogType { Story, Hint, None }
