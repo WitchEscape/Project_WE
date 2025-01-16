@@ -11,8 +11,8 @@ public class Activated : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if( activatedUI != null )
-        ActivateUI(false);
+        if (activatedUI != null)
+            ActivateUI(false);
 
         if (interactable == null)
             interactable = GetComponent<XRBaseInteractable>();
@@ -46,8 +46,10 @@ public class Activated : MonoBehaviour
 
     public virtual void Activate()
     {
-        ObjectOnOff<GameObject>(objects, true);
-        ObjectOnOff<XRBaseInteractable>(interactables, true);
+        if (objects != null)
+            ObjectOnOff<GameObject>(objects, true);
+        if (interactables != null)
+            ObjectOnOff<XRBaseInteractable>(interactables, true);
     }
 
     public virtual void ObjectOnOff<T>(List<T> list, bool isBooooool) where T : class
