@@ -17,6 +17,11 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     private Rigidbody interactableRigidbody;
     private bool canJump = true;
 
+    private void Start()
+    {
+        trackScale = false;
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
