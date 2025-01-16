@@ -10,10 +10,11 @@ public class FountainPen : MonoBehaviour
     private Collider penNibCollider;
     [SerializeField]
     private Texture penNibRedTexture;
+    [SerializeField]
+    private Rigidbody penHeadRigidbody;
 
     private int changeLayerIndex;
     private int penHeadBaseLayerIndex = int.MaxValue;
-    private GameObject penHeadFixedJointObject = null;
     private FixedJoint j;
     private bool isInk = false;
 
@@ -58,15 +59,13 @@ public class FountainPen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (gameObject.CompareTag("Cube") && other.CompareTag("Water"))
+        if (isInk) return;
+
+        if (other.CompareTag("Water"))
         {
-            print("OnTriggerEnter1");
-
-            if (!isInk && penNibRedTexture != null)
+            if (penNibCollider != null && penNibRedTexture != null)
             {
-                print("OnTriggerEnter2");
-
-                penNibCollider.gameObject.GetComponent<MeshRenderer>().material.SetTexture(name, penNibRedTexture);
+                penNibCollider.gameObject.GetComponent<MeshRenderer>().material.mainTexture = penNibRedTexture;
             }
         }
     }
@@ -85,35 +84,29 @@ public class FountainPen : MonoBehaviour
             }
         }
 
-        penHeadObject.layer = changeLayerIndex;
-
-        if (penHeadFixedJointObject == null)
+        if (penHeadRigidbody == null)
         {
-            FixedJoint penHeadFixedJoint = penHeadObject.GetComponentInChildren<FixedJoint>();
-            if (penHeadFixedJoint != null)
-                penHeadFixedJoint.connectedBody ??= GetComponent<Rigidbody>();
-            penHeadFixedJointObject ??= penHeadFixedJoint.gameObject;
-
-            if (penHeadFixedJointObject == null)
-            {
-                Debug.LogError("FountainPen / PenHeadRigidbodyAndLayerChange / PenHeadFixedJoint is Not Setting");
-                return;
-            }
+            penHeadRigidbody = penHeadObject.GetComponent<Rigidbody>();
+            if (penHeadRigidbody == null)
+                Debug.LogError("FountainPen / PenHeadRigidbodyAndLayerChange / PenHeadRigidbody is null");
         }
 
-        penHeadFixedJointObject.SetActive(true);
+        penHeadObject.layer = changeLayerIndex;
+        penHeadRigidbody.isKinematic = true;
+        penNibCollider.enabled = false;
     }
 
     private void PenHeadRigidbodyAndLayerChange(SelectExitEventArgs arg)
     {
-        if (penHeadBaseLayerIndex == int.MaxValue || penHeadFixedJointObject == null)
+        if (penHeadBaseLayerIndex == int.MaxValue || penHeadRigidbody == null)
         {
             Debug.LogError("FountainPen / PenHeadRigidbodyAndLayerChange / PenHead Components is Not Settings");
             return;
         }
 
+        penHeadRigidbody.isKinematic = false;
         arg.interactableObject.transform.gameObject.layer = penHeadBaseLayerIndex;
-        penHeadFixedJointObject.SetActive(false);
+        penNibCollider.enabled = true;
     }
 }
 

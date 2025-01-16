@@ -25,6 +25,8 @@ public class XRGrabInteractableTwoAttach : XRGrabInteractable
             // Debug.Log("Right");
             i_attachTransform = rightAttachedTransform;
         }
+        attachTransform = i_attachTransform;
+        Debug.Log($"attach : {i_attachTransform.gameObject.name}");
         return i_attachTransform != null ? i_attachTransform : base.GetAttachTransform(interactor);
     }
 }

@@ -19,11 +19,11 @@ public class DeskLock : MonoBehaviour
     {
         joint.zMotion = ConfigurableJointMotion.Limited;
 
-        /*Rigidbody rb = GetComponent<Rigidbody>();
+        Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.WakeUp(); // Rigidbody를 깨움
-        }*/
+        }
 
         Debug.Log("서랍 잠금 해제 완료");
     }
