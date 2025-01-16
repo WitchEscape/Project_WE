@@ -55,7 +55,7 @@ public class DeskDrawerPuzzle : MonoBehaviour
         if (answer == result)
         {
             Debug.Log("서랍이 열렸습니다.");
-            lockdeskdrawer?.UnLockDrawer(); // 서랍 잠금 해제
+            lockdeskdrawer.UnLockDrawer(); // 서랍 잠금 해제
 
             if (key != null)
             {

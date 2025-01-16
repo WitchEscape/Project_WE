@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class LockDeskDrawer : MonoBehaviour
 {
@@ -18,5 +19,11 @@ public class LockDeskDrawer : MonoBehaviour
     public void UnLockDrawer()
     {
         joint.xMotion = ConfigurableJointMotion.Limited;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.WakeUp(); // Rigidbody 깨우기
+        }
+        
     }
 }
