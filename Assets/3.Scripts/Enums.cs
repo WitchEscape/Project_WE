@@ -4,6 +4,7 @@ public enum Chapters { Lobby, Class535, Dormitory, PostionClass, Library, Teache
 
 public enum PuzzleColor { Red, Green, Blue, White, Black, Gray, Yellow, Orange, Violet, Skyblue, Pink }
 
+
 #region Puzzles
 public enum PuzzleType
 {
