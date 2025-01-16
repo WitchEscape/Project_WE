@@ -13,7 +13,7 @@ public class XRJointGrabInteractable : XRGrabInteractable
         {
             float currentDistance = Vector3.Distance(firstInteractorSelecting.transform.position, transform.position);
 
-            Debug.Log($"Current Distance : {currentDistance}");
+            //Debug.Log($"Current Distance : {currentDistance}");
 
             if (currentDistance > maxDistance)
             {

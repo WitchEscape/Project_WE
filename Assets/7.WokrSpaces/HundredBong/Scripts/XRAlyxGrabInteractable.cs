@@ -17,6 +17,11 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     private Rigidbody interactableRigidbody;
     private bool canJump = true;
 
+    private void Start()
+    {
+        trackScale = false;
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -123,12 +128,12 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
 
         if (interactor.transform.CompareTag("Left Hand"))
         {
-            Debug.Log("Left");
+            //Debug.Log("Left");
             i_attachTransform = leftAttachedTransform;
         }
         if (interactor.transform.CompareTag("Right Hand"))
         {
-            Debug.Log("Right");
+           // Debug.Log("Right");
             i_attachTransform = rightAttachedTransform;
         }
         return i_attachTransform != null ? i_attachTransform : base.GetAttachTransform(interactor);
