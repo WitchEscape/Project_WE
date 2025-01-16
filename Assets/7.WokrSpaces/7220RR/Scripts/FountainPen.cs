@@ -10,10 +10,11 @@ public class FountainPen : MonoBehaviour
     private Collider penNibCollider;
     [SerializeField]
     private Texture penNibRedTexture;
+    [SerializeField]
+    private GameObject penHeadFixedJointObject;
 
     private int changeLayerIndex;
     private int penHeadBaseLayerIndex = int.MaxValue;
-    private GameObject penHeadFixedJointObject = null;
     private FixedJoint j;
     private bool isInk = false;
 
@@ -66,7 +67,7 @@ public class FountainPen : MonoBehaviour
             {
                 print("OnTriggerEnter2");
 
-                penNibCollider.gameObject.GetComponent<MeshRenderer>().material.SetTexture(name, penNibRedTexture);
+                penNibCollider.gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", penNibRedTexture);
             }
         }
     }
@@ -102,6 +103,7 @@ public class FountainPen : MonoBehaviour
         }
 
         penHeadFixedJointObject.SetActive(true);
+        penNibCollider.enabled = false;
     }
 
     private void PenHeadRigidbodyAndLayerChange(SelectExitEventArgs arg)
@@ -114,6 +116,7 @@ public class FountainPen : MonoBehaviour
 
         arg.interactableObject.transform.gameObject.layer = penHeadBaseLayerIndex;
         penHeadFixedJointObject.SetActive(false);
+        penNibCollider.enabled = true;
     }
 }
 
