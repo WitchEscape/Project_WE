@@ -63,7 +63,7 @@ public class Puzzles : MonoBehaviour
     public List<PuzzleColor> passwardColors = new List<PuzzleColor>();
     public List<PushButtonTest> pushButtonTests = new List<PushButtonTest>();
     private List<int> currentPasswardColorIndexs = new List<int>();
-
+    public List<Material> materials = new List<Material>();
 
     #endregion
 
@@ -441,6 +441,20 @@ public class Puzzles : MonoBehaviour
 
     #endregion
     #region ColorButton
+
+    private void PuzzleColorIndexChange(int index)
+    {
+        if (currentPasswardColorIndexs[index] + 1 > currentPasswardColorIndexs.Count)
+        {
+            currentPasswardColorIndexs[index] = 0;
+        }
+        else
+        {
+            currentPasswardColorIndexs[index]++;
+        }
+
+
+    }
 
     #endregion
 }

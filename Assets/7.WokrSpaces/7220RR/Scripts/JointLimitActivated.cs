@@ -5,12 +5,12 @@ public class JointLimitActivated : Activated
 {
     public bool isMinLimit;
     public List<Joint> minLimitLists;
-    public List<float> minLimitFloatLists;
-    private List<float> minbaseFloatLists;
+    public List<float> minLimitFloatLists = new List<float>();
+    private List<float> minbaseFloatLists = new List<float>();
     public bool isMaxLimit;
     public List<Joint> maxLimitLists;
-    public List<float> maxLimitFloatLists;
-    private List<float> maxbaseFloatLists;
+    public List<float> maxLimitFloatLists = new List<float>();
+    private List<float> maxbaseFloatLists = new List<float>();
 
     protected override void Awake()
     {
@@ -30,23 +30,27 @@ public class JointLimitActivated : Activated
     public override void Activate()
     {
         base.Activate();
-        MinLimitReSet();
-        MaxLimitReSet();
+        if (isMinLimit)
+        {
+            MinLimitReSet();
+        }
+
+        if (isMaxLimit)
+        {
+            MaxLimitReSet();
+        }
     }
 
     private void MinLimitSet()
     {
-        if (minbaseFloatLists == null)
+        while (minbaseFloatLists.Count != minLimitLists.Count)
         {
-            minbaseFloatLists = new List<float>();
+            while (minLimitLists.Count > minLimitFloatLists.Count) minLimitFloatLists.Add(0);
+            while (minLimitLists.Count < minLimitFloatLists.Count) minLimitFloatLists.RemoveAt(minLimitFloatLists.Count - 1);
         }
+
         for (int i = 0; i < minLimitLists.Count; i++)
         {
-            if (minbaseFloatLists.Count <= i)
-            {
-                minbaseFloatLists.Add(0);
-            }
-
             if (minLimitLists[i] is ConfigurableJoint con)
             {
                 SoftJointLimit limit = con.linearLimit;
@@ -86,9 +90,10 @@ public class JointLimitActivated : Activated
     private void MaxLimitSet()
     {
 
-        if (maxbaseFloatLists == null)
+        while (maxbaseFloatLists.Count != maxLimitLists.Count)
         {
-            maxbaseFloatLists = new List<float>();
+            while (maxLimitLists.Count > maxLimitFloatLists.Count) maxLimitFloatLists.Add(0);
+            while (maxLimitLists.Count < maxLimitFloatLists.Count) maxLimitFloatLists.RemoveAt(maxLimitFloatLists.Count - 1);
         }
         for (int i = 0; i < maxLimitLists.Count; i++)
         {
