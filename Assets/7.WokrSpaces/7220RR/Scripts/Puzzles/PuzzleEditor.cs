@@ -73,7 +73,6 @@ public class PuzzleEditor : Editor
                 break;
             case PuzzleType.ColorButton:
                 puzzles.colorButtonNum = EditorGUILayout.IntSlider("버튼 갯수", puzzles.colorButtonNum, 0, 10);
-
                 break;
             default:
                 break;
