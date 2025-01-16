@@ -36,6 +36,7 @@ public class FountainPen : MonoBehaviour
         {
             Debug.LogError("FountainPen / PenNibCollider or PenBodySocket is null");
         }
+
     }
 
     private void OnEnable()
