@@ -85,6 +85,7 @@ public class FountainPen : MonoBehaviour
         }
     }
 
+
     private void OnTriggerStay(Collider other)
     {
         if (!isInk) return;
