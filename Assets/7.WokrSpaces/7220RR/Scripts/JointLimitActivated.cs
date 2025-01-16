@@ -22,6 +22,7 @@ public class JointLimitActivated : Activated
 
         if (isMaxLimit)
         {
+            print("ismaxlimit");
             MaxLimitSet();
         }
     }
@@ -35,6 +36,10 @@ public class JointLimitActivated : Activated
 
     private void MinLimitSet()
     {
+        if (minbaseFloatLists == null)
+        {
+            minbaseFloatLists = new List<float>();
+        }
         for (int i = 0; i < minLimitLists.Count; i++)
         {
             if (minbaseFloatLists.Count <= i)
@@ -44,11 +49,17 @@ public class JointLimitActivated : Activated
 
             if (minLimitLists[i] is ConfigurableJoint con)
             {
-                minbaseFloatLists[i] = con.linearLimit.limit;
+                SoftJointLimit limit = con.linearLimit;
+                minbaseFloatLists[i] = limit.limit;
+                limit.limit = minLimitFloatLists[i];
+                con.linearLimit = limit;
             }
             else if (minLimitLists[i] is HingeJoint hin)
             {
-                minbaseFloatLists[i] = hin.limits.min;
+                JointLimits limits = hin.limits;
+                minbaseFloatLists[i] = limits.min;
+                limits.min = minLimitFloatLists[i];
+                hin.limits = limits;
             }
         }
     }
@@ -74,8 +85,14 @@ public class JointLimitActivated : Activated
 
     private void MaxLimitSet()
     {
+
+        if (maxbaseFloatLists == null)
+        {
+            maxbaseFloatLists = new List<float>();
+        }
         for (int i = 0; i < maxLimitLists.Count; i++)
         {
+            print("MaxSet");
             if (maxbaseFloatLists.Count <= i)
             {
                 maxbaseFloatLists.Add(0);
@@ -83,11 +100,19 @@ public class JointLimitActivated : Activated
 
             if (maxLimitLists[i] is ConfigurableJoint con)
             {
-                maxbaseFloatLists[i] = con.linearLimit.limit;
+                print("hin");
+                SoftJointLimit limit = con.linearLimit;
+                maxbaseFloatLists[i] = limit.limit;
+                limit.limit = maxLimitFloatLists[i];
+                con.linearLimit = limit;
             }
             else if (maxLimitLists[i] is HingeJoint hin)
             {
-                maxbaseFloatLists[i] = hin.limits.max;
+                print("hin");
+                JointLimits limits = hin.limits;
+                maxbaseFloatLists[i] = limits.max;
+                limits.max = maxLimitFloatLists[i];
+                hin.limits = limits;
             }
         }
     }
