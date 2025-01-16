@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -12,16 +13,22 @@ public class FountainPen : MonoBehaviour
     private Texture penNibRedTexture;
     [SerializeField]
     private Rigidbody penHeadRigidbody;
+    [SerializeField]
+    private Rigidbody penBodyRigidbody;
 
     private int changeLayerIndex;
     private int penHeadBaseLayerIndex = int.MaxValue;
     private FixedJoint j;
     private bool isInk = false;
+    private Dictionary<Collider, Material> paperMaterials = new Dictionary<Collider, Material>();
+    private const float penBodyRigidBodyForce = 0.5f;
 
     private void Awake()
     {
         changeLayerIndex = gameObject.layer;
         penBodySocket ??= GetComponent<XRSocketInteractor>();
+        if (penBodyRigidbody == null)
+            penBodyRigidbody = GetComponent<Rigidbody>();
         if (penNibCollider == null)
             penNibCollider = GetComponentsInChildren<Collider>().FirstOrDefault(x => (x.gameObject.CompareTag("Cube")));
 
@@ -65,8 +72,27 @@ public class FountainPen : MonoBehaviour
         {
             if (penNibCollider != null && penNibRedTexture != null)
             {
-                penNibCollider.gameObject.GetComponent<MeshRenderer>().material.mainTexture = penNibRedTexture;
+                penNibCollider.gameObject.GetComponent<Renderer>().material.mainTexture = penNibRedTexture;
             }
+        }
+        else if (other.CompareTag("Cube"))
+        {
+            if (!paperMaterials.ContainsKey(other))
+            {
+                Material newMaterial = other.gameObject.GetComponent<Renderer>().material;
+                paperMaterials.Add(other, newMaterial);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!isInk) return;
+        print("stay");
+        if (paperMaterials.ContainsKey(other) && penBodyRigidbody.velocity.magnitude >= penBodyRigidBodyForce)
+        {
+            paperMaterials[other].color = Color.Lerp(paperMaterials[other].color, Color.red, Time.deltaTime);
+            print(paperMaterials[other].color);
         }
     }
 

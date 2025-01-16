@@ -4,12 +4,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ForceGrabSetting : MonoBehaviour
 {
     [SerializeField]
-    private XRBaseInteractor interactor;
+    private XRBaseInteractable interactor;
 
     private void Awake()
     {
         if (interactor == null)
-            interactor = GetComponent<XRBaseInteractor>();
+            interactor = GetComponent<XRBaseInteractable>();
     }
 
     private void OnEnable()
