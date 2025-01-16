@@ -66,13 +66,12 @@ public class FountainPen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isInk) return;
-
-        if (other.CompareTag("Water"))
+        if (other.CompareTag("Water") && !isInk)
         {
             if (penNibCollider != null && penNibRedTexture != null)
             {
                 penNibCollider.gameObject.GetComponent<Renderer>().material.mainTexture = penNibRedTexture;
+                isInk = true;
             }
         }
         else if (other.CompareTag("Cube"))

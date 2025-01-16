@@ -4,29 +4,29 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ForceGrabSetting : MonoBehaviour
 {
     [SerializeField]
-    private XRBaseInteractable interactor;
+    private XRBaseInteractable interactable;
 
     private void Awake()
     {
-        if (interactor == null)
-            interactor = GetComponent<XRBaseInteractable>();
+        if (interactable == null)
+            interactable = GetComponent<XRBaseInteractable>();
     }
 
     private void OnEnable()
     {
-        if (interactor != null)
+        if (interactable != null)
         {
-            interactor.hoverEntered.AddListener(InteractorForceGrabSet);
-            interactor.hoverExited.AddListener(InteractorForceGrabUnSet);
+            interactable.hoverEntered.AddListener(InteractorForceGrabSet);
+            interactable.hoverExited.AddListener(InteractorForceGrabUnSet);
         }
     }
 
     private void OnDisable()
     {
-        if (interactor != null)
+        if (interactable != null)
         {
-            interactor.hoverEntered.RemoveListener(InteractorForceGrabSet);
-            interactor.hoverExited.RemoveListener(InteractorForceGrabUnSet);
+            interactable.hoverEntered.RemoveListener(InteractorForceGrabSet);
+            interactable.hoverExited.RemoveListener(InteractorForceGrabUnSet);
         }
     }
 
