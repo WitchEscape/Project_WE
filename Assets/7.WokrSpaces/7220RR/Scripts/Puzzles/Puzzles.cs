@@ -57,6 +57,16 @@ public class Puzzles : MonoBehaviour
     public TextMeshPro keypadMoniterText1;
     public TextMeshProUGUI keypadMoniterText2;
     #endregion
+    #region ColorButton
+    public int colorButtonNum;
+    public bool isTrigger;
+    public List<PuzzleColor> passwardColors = new List<PuzzleColor>();
+    public List<PushButtonTest> pushButtonTests = new List<PushButtonTest>();
+    private List<int> currentPasswardColorIndexs = new List<int>();
+
+
+    #endregion
+
     private void Awake()
     {
         switch (puzzleType)
@@ -78,6 +88,8 @@ public class Puzzles : MonoBehaviour
             case PuzzleType.Keypad:
                 초기화();
                 KeypadInteractableEventSet();
+                break;
+            case PuzzleType.ColorButton:
                 break;
             default:
                 Debug.LogError("Puzzels / Awake / PuzzleType is Error");
@@ -426,6 +438,9 @@ public class Puzzles : MonoBehaviour
             currentPassword = null;
         }
     }
+
+    #endregion
+    #region ColorButton
 
     #endregion
 }
