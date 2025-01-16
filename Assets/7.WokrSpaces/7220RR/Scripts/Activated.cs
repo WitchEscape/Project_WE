@@ -11,6 +11,7 @@ public class Activated : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if( activatedUI != null )
         ActivateUI(false);
 
         if (interactable == null)

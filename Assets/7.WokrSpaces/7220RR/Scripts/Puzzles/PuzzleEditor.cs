@@ -71,6 +71,9 @@ public class PuzzleEditor : Editor
                 puzzles.keypadMoniterText1 = (TextMeshPro)EditorGUILayout.ObjectField("텍스트1", puzzles.keypadMoniterText1, typeof(TextMeshPro), true);
                 puzzles.keypadMoniterText2 = (TextMeshProUGUI)EditorGUILayout.ObjectField("텍스트2", puzzles.keypadMoniterText2, typeof(TextMeshProUGUI), true);
                 break;
+            case PuzzleType.ColorButton:
+                puzzles.colorButtonNum = EditorGUILayout.IntSlider("버튼 갯수", puzzles.colorButtonNum, 0, 10);
+                break;
             default:
                 break;
         }
@@ -385,6 +388,34 @@ public class PuzzleEditor : Editor
         if (GUI.changed)
         {
             EditorUtility.SetDirty(puzzles);
+        }
+    }
+
+    public void Set<T>(List<T> setList, int count = 0, string name = "Element") where T : class
+    {
+        if (setList == null)
+        {
+            setList = new List<T>();
+        }
+        List<GameObject> tempList = new List<GameObject>();
+
+        while (setList.Count > count) setList.RemoveAt(setList.Count - 1);
+        while (setList.Count < count) setList.Add(null);
+        while (tempList.Count > count) tempList.RemoveAt(setList.Count - 1);
+        while (tempList.Count < count) tempList.Add(null);
+
+        for (int i = 0; i < count; i++)
+        {
+            tempList[i] = (GameObject)EditorGUILayout.ObjectField($"{name} {i}", tempList[i], typeof(GameObject), true);
+
+            if (tempList[i] != null && tempList[i].TryGetComponent<T>(out T tempClass))
+            {
+                setList[i] = tempClass;
+            }
+            else
+            {
+                tempList[i] = null;
+            }
         }
     }
 }

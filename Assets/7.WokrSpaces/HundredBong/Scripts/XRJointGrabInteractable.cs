@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class XRJointGrabInteractable : XRGrabInteractable
 {
-    public float maxDistance;
+    public float maxDistance = 0.5f;
      
     private void Update()
     {
@@ -13,7 +13,7 @@ public class XRJointGrabInteractable : XRGrabInteractable
         {
             float currentDistance = Vector3.Distance(firstInteractorSelecting.transform.position, transform.position);
 
-            //Debug.Log($"Current Distance : {currentDistance}");
+            Debug.Log($"Current Distance : {currentDistance}");
 
             if (currentDistance > maxDistance)
             {
