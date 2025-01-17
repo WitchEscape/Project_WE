@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
@@ -7,6 +8,14 @@ using UnityEngine.XR.Interaction.Toolkit;
 [CustomEditor(typeof(Puzzles))]
 public class PuzzleEditor : Editor
 {
+    private SerializedObject serializedObject;
+    private SerializedProperty serializedProperty;
+
+    private void OnEnable()
+    {
+        serializedObject = new SerializedObject(target);
+        serializedProperty = serializedObject.FindProperty("setList");
+    }
     public override void OnInspectorGUI()
     {
         Puzzles puzzles = (Puzzles)target;
@@ -73,6 +82,15 @@ public class PuzzleEditor : Editor
                 break;
             case PuzzleType.ColorButton:
                 puzzles.colorButtonNum = EditorGUILayout.IntSlider("버튼 갯수", puzzles.colorButtonNum, 0, 10);
+                puzzles.isTrigger = EditorGUILayout.Toggle("트리거", puzzles.isTrigger);
+                EnumListSet(puzzles.passwardColors, puzzles.colorButtonNum, "변경 색상", "비밀번호 색상");
+                //SetClass(puzzles.pushButtonTests, puzzles.colorButtonNum, "Test");
+                SetList(puzzles.pushButtonTests, puzzles.colorButtonNum);
+
+                for (int i = 0; i < puzzles.colorButtonNum; i++)
+                {
+                    puzzles.pushButtonTests[i] = (PushButtonTest)EditorGUILayout.ObjectField($"버튼 {i}", puzzles.pushButtonTests[i], typeof(PushButtonTest), true);
+                }
                 break;
             default:
                 break;
@@ -388,34 +406,80 @@ public class PuzzleEditor : Editor
         if (GUI.changed)
         {
             EditorUtility.SetDirty(puzzles);
+            //serializedObject.Update();
         }
     }
 
-    public void Set<T>(List<T> setList, int count = 0, string name = "Element") where T : class
+    public void SetClass<T>(List<T> setList, int count = 0, string name = "Element", string header = null) where T : class
     {
-        if (setList == null)
-        {
-            setList = new List<T>();
-        }
-        List<GameObject> tempList = new List<GameObject>();
+        setList ??= new List<T>();
 
-        while (setList.Count > count) setList.RemoveAt(setList.Count - 1);
-        while (setList.Count < count) setList.Add(null);
-        while (tempList.Count > count) tempList.RemoveAt(setList.Count - 1);
-        while (tempList.Count < count) tempList.Add(null);
+        if (setList.Count != count)
+        {
+            while (setList.Count > count) setList.RemoveAt(setList.Count - 1);
+            while (setList.Count < count) setList.Add(null);
+        }
+
+        List<GameObject> temps = new List<GameObject>();
+
+        if (temps.Count != count)
+        {
+            while (temps.Count > count) temps.RemoveAt(temps.Count - 1);
+            while (temps.Count < count) temps.Add(null);
+        }
+
+
+        if (header != null)
+            EditorGUILayout.LabelField(header, EditorStyles.boldLabel);
+
+
+
 
         for (int i = 0; i < count; i++)
         {
-            tempList[i] = (GameObject)EditorGUILayout.ObjectField($"{name} {i}", tempList[i], typeof(GameObject), true);
+            temps[i] = (GameObject)EditorGUILayout.ObjectField($"{name} {i}", temps[i], typeof(GameObject), true);
+            //setList[i] = (GameObject)EditorGUILayout.ObjectField($"{name} {i}", setList[i] as GameObject, typeof(GameObject), true);
 
-            if (tempList[i] != null && tempList[i].TryGetComponent<T>(out T tempClass))
+            if (temps[i] != null && temps[i].TryGetComponent<T>(out T tempClass))
             {
                 setList[i] = tempClass;
             }
             else
             {
-                tempList[i] = null;
+                temps[i] = null;
             }
+        }
+    }
+
+    public void SetList<T>(List<T> setList, int count = 0) where T : class
+    {
+        setList ??= new List<T>();
+
+        if (setList.Count != count)
+        {
+            while (setList.Count > count) setList.RemoveAt(setList.Count - 1);
+            while (setList.Count < count) setList.Add(null);
+        }
+    }
+
+
+    public void EnumListSet<T>(List<T> enumList, int count = 0, string name = "Element", string header = null) where T : Enum
+    {
+
+        if (header != null)
+            EditorGUILayout.LabelField(header, EditorStyles.boldLabel);
+
+        enumList ??= new List<T>();
+
+        if (enumList.Count != count)
+        {
+            while (enumList.Count > count) enumList.RemoveAt(enumList.Count - 1); ;
+            while (enumList.Count < count) enumList.Add(default);
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            enumList[i] = (T)EditorGUILayout.EnumPopup($"{name} {i}", enumList[i]);
         }
     }
 }

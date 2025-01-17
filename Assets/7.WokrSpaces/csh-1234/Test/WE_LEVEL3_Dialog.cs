@@ -47,18 +47,18 @@ public class WE_LEVEL3_Dialog : MonoBehaviour
         });
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            if (!isActivate)
-            {
-                DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_01_");
-                isActivate = true;
-            }
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.CompareTag("Player"))
+    //    {
+    //        if (!isActivate)
+    //        {
+    //            DialogPlayer.Instance.PlayDialogSequence("LOBBY_11_");
+    //            isActivate = true;
+    //        }
+    //    }
 
-    }
+    //}
 
 
     private IEnumerator TypeText(string speaker, string text)

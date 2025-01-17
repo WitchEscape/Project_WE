@@ -9,6 +9,8 @@ public class MagicStone : MonoBehaviour
     private Rigidbody rb;
     private XRGrabInteractable interactable;
 
+    [SerializeField] private Vector3 SpawnPosition;
+
     private bool isTrun;
 
     private void Awake()
@@ -52,7 +54,4 @@ public class MagicStone : MonoBehaviour
         //땡겨올 때 Use Gravity 설정해서 정상적으로 날아오도록 설정 
         rb.useGravity = true;
     }
-
-    
-
 }
