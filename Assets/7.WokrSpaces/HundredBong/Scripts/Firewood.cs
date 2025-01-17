@@ -15,7 +15,36 @@ public class Firewood : MonoBehaviour
         {
             fireParticle.gameObject.SetActive(false);
         }
+
+        CheckFireState();
     }
+
+    private void CheckFireState()
+    {
+        if (PuzzleProgressManager.Instance.GetPuzzleState("Puzzle_2") == PuzzleProgressManager.PuzzleState.InProgress)
+        {
+            FireAcivate();
+        }
+    }
+
+    private void FireAcivate()
+    {
+        cauldron.isFire = true;
+        fireParticle.gameObject.SetActive(true);
+        fireParticle.Play();
+    }
+
+
+    private void OnEnable()
+    {
+        SaveLoadManager.OnLoadComplete += CheckFireState;
+    }
+
+    private void OnDisable()
+    {
+        SaveLoadManager.OnLoadComplete -= CheckFireState;
+    }
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -29,10 +58,11 @@ public class Firewood : MonoBehaviour
 
             if (fireForce <= rb.velocity.magnitude)
             {
-                cauldron.isFire = true;
-                fireParticle.gameObject.SetActive(true);
-                fireParticle.Play();
+                FireAcivate();
+                PuzzleProgressManager.Instance.SettPuzzleState("Puzzle_2", PuzzleProgressManager.PuzzleState.InProgress);
             }
         }
     }
+
+
 }

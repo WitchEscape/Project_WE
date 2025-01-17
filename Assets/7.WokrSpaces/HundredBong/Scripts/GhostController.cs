@@ -98,6 +98,10 @@ public class GhostController : MonoBehaviour
             {
                 agent.SetDestination(ghostCallPos.transform.position);
                 hasSetDestination = true;
+
+                //목적지로 이동하는동안 애니메이션 재생
+                anim.SetBool("Idle", false);
+                anim.SetBool("Move", true);
             }
 
             LookPlayer();
@@ -114,6 +118,10 @@ public class GhostController : MonoBehaviour
                     Debug.Log("내부 if문 진입");
 
                     StartCoroutine(ghostCanvas.FadeInCanvasCoroutine());
+
+                    //목적지에 도착하면 Idle 애니메이션 재생
+                    anim.SetBool("Idle", true);
+                    anim.SetBool("Move", false);
                 }
             }
         }

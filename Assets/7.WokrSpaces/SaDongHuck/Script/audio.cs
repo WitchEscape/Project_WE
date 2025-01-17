@@ -12,21 +12,30 @@ public class audio : MonoBehaviour
     [SerializeField] private Button button3;
     [SerializeField] private Button button4;
     public AudioClip clip;
+    public AudioClip bgmClip;
     //오디오 매니저를 통해 sfx 실행 오디오매니저를 통해 bgm 실행
     private void Start()
     {
-        button1 = GetComponent<Button>();
-        button2 = GetComponent<Button>();
-        button3 = GetComponent<Button>();
-        button4 = GetComponent<Button>();
         button1.onClick.AddListener(AudioPlay);
+        button2.onClick.AddListener(PlayBGM);
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.Play();
+
         
     }
     public void AudioPlay()
     {
-        AudioManager.Instance.PlaySFX(clip, 1.5f);
+        AudioManager.Instance.SFX.PlayOneShot(clip, 1.5f);
     }
 
+    public void PlayBGM()
+    {
+        AudioManager.Instance.BGM.clip = bgmClip;
+        AudioManager.Instance.BGM.volume = 1.0f;
+        AudioManager.Instance.BGM.Play();
+    }
 
 
 

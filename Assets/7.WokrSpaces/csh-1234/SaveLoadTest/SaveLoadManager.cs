@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using System.Linq;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class SaveLoadManager : MonoBehaviour
 {
     private static SaveLoadManager instance;
     public static SaveLoadManager Instance => instance;
+
+    public static event Action OnLoadComplete;
 
     private string savePath;
 
@@ -35,7 +38,6 @@ public class SaveLoadManager : MonoBehaviour
         #endif
         Directory.CreateDirectory(savePath);
 
-        Debug.Log($"Save path: {savePath}");
     }
 
 
@@ -88,8 +90,6 @@ public class SaveLoadManager : MonoBehaviour
             string json = JsonUtility.ToJson(saveData, true);
             string filePath = Path.Combine(savePath, $"save_{SceneName}.json");
             File.WriteAllText(filePath, json);
-            
-            Debug.Log($"Save completed for {SceneName} at {saveData.saveTime}");
         }
         catch (Exception e)
         {
@@ -122,35 +122,30 @@ public class SaveLoadManager : MonoBehaviour
             // 씬 로드 후에 데이터를 로드하도록 이벤트를 등록
             SceneManager.sceneLoaded += (scene, mode) => 
             {
-                Debug.Log($"Scene loaded: {scene.name}, Starting to load game data");
                 StartCoroutine(LoadGameWithDelay(saveData));
-                SceneManager.sceneLoaded -= (s, m) => { }; // 이벤트 한 번만 실행되도록 제거
+                SceneManager.sceneLoaded -= (s, m) => { };
             };
 
-            // 씬 로드 시작
             SceneManager.LoadScene(SceneName);
         }
         catch (Exception e)
         {
-            Debug.LogError($"[SaveLoadManager] LoadGame 에러: {e.Message}\n{e.StackTrace}");
+            Debug.LogError($"{e.Message}");
         }
     }
 
     private IEnumerator LoadGameWithDelay(SaveData saveData)
     {
-        Debug.Log("Starting LoadGameWithDelay coroutine");
-        yield return new WaitForSeconds(0.5f); // 씬 로드 후 모든 오브젝트가 초기화될 시간을 줍니다
+        yield return new WaitForSeconds(0.5f); 
 
         var inventoryManager = FindObjectOfType<InventoryManager>();
         if (inventoryManager != null && saveData.inventoryData != null)
         {
-            Debug.Log("[SaveLoadManager] 인벤토리 데이터 로드 시작");
             inventoryManager.LoadInventoryData(saveData.inventoryData);
             yield return new WaitForSeconds(0.2f);
         }
-
-        Debug.Log("Loading game data after delay");
         LoadGameData(saveData);
+        OnLoadComplete.Invoke();
     }
 
     private void LoadGameData(SaveData saveData)

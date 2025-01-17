@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class Cauldron : MonoBehaviour
 {
     [SerializeField] private string puzzleID = "Puzzle_2";
 
     [Header("생성할 빛나는 돌")] public GameObject magicStone;
+    [Header("빛나는 돌 소환위치")] public Vector3 magicStonePos;
     [Header("휘저을때 필요한 힘")] public float churnForce = 3f;
     [Header("물약 리스트")] public List<GameObject> positions;
     [Header("성공했을 때 파티클")] public ParticleSystem successParticle;
@@ -51,10 +53,10 @@ public class Cauldron : MonoBehaviour
         //Debug.Log(postionCount.Value);
         //Debug.Log(isCorrect.Value);
 
-        if (magicStone.activeSelf == true)
-        {
-            magicStone.gameObject.SetActive(false);
-        }
+        //if (magicStone.activeSelf == true)
+        //{
+        //    magicStone.gameObject.SetActive(false);
+        //}
     }
 
     private void Update()
@@ -109,13 +111,16 @@ public class Cauldron : MonoBehaviour
         {
             if (wasInstantiate == false)
             {
-                magicStone.gameObject.SetActive(true);
+
+                //magicStone.transform.position = 
 
                 //다음에 다시 생성되지 않도록 예외처리
                 wasInstantiate = true;
                 ghostCanvas.ClearPuzzle(1);
             }
-            DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_03_");
+            DialogPlayer.Instance.PlayDialogSequence("LOBBY_12_");
+            PuzzleProgressManager.Instance.CompletePuzzle(puzzleID);
+            magicStone.transform.position = new Vector3(magicStonePos.x, magicStonePos.y, magicStonePos.z);
             successParticle.Play();
         }
 

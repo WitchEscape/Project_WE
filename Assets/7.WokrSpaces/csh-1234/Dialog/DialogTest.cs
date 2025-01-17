@@ -1,18 +1,39 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogTest : MonoBehaviour
 {
     public TextMeshProUGUI dialogText;
-    [SerializeField] private float typingSpeed = 0.05f;
+    
     private Coroutine CoTyping;
 
     [Header("체크시 한글자씩 나옵니다!")]
     public bool isAnim = false;
 
+    [Header("체크시 한글자씩 나올때의 출력 속도입니다!")]
+    [SerializeField] private float typingSpeed = 0.05f;
+
+    [Header("입력하신 DialogId에 따라 대사가 출력됩니다.")]
+
+    [Header("대사1")]
+    public string DialogId1;
+    [Header("대사2")]
+    public string DialogId2;
+    [Header("대사3")]
+    public string DialogId3;
+
+    [Header("버튼입니다")]
+    public Button Dialog1;
+    public Button Dialog2;
+    public Button Dialog3;
     void Start()
     {
+        Dialog1.onClick.AddListener(StartDialog1);
+        Dialog2.onClick.AddListener(StartDialog2);
+        Dialog3.onClick.AddListener(StartDialog3);
+
         DialogPlayer.Instance.OnDialogStart.AddListener((dialog) =>
         {
             if(dialog.DialogType == DialogType.Story)
@@ -117,23 +138,18 @@ public class DialogTest : MonoBehaviour
         }
     }
 
-    public void StartDialog()
+    public void StartDialog1()
     {
-        DialogPlayer.Instance.PlayDialogSequence("LOBBY_01_");
+        DialogPlayer.Instance.PlayDialogSequence(DialogId1);
     }
 
     public void StartDialog2()
     {
-        DialogPlayer.Instance.PlayDialogSequence("LOBBY_02_");
+        DialogPlayer.Instance.PlayDialogSequence(DialogId2);
     }
 
     public void StartDialog3()
     {
-        DialogPlayer.Instance.PlayDialogSequence("LOBBY_03_");
-    }
-
-    void Update()
-    {
-
+        DialogPlayer.Instance.PlayDialogSequence(DialogId3);
     }
 }

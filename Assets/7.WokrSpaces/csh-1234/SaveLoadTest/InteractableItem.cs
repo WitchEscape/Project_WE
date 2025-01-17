@@ -8,7 +8,6 @@ using TMPro;
 public class InteractableItem : MonoBehaviour, ISaveableComponent
 {
     [SerializeField] private TextMeshProUGUI textMeshPro;
-    private Vector3 originalPosition;
     private XRSocketInteractor currentSocket;
     private XRGrabInteractable grabInteractable;
 
@@ -25,6 +24,12 @@ public class InteractableItem : MonoBehaviour, ISaveableComponent
         {
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         }
+    }
+
+    private void Start()
+    {
+        currentSocket = GetComponent<XRSocketTagInteractor>();
+        grabInteractable = GetComponent<XRAlyxGrabInteractable>();
     }
 
     private void OnDestroy()
