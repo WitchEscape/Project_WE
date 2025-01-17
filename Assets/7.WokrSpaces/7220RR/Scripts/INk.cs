@@ -39,11 +39,13 @@ public class INk : MonoBehaviour
         baseLayerNum = obj.layer;
         obj.layer = changeLayerNum;
         capRigidbody.isKinematic = true;
+        capRigidbody.useGravity = false;
     }
 
     private void LayerChange(SelectExitEventArgs arg0)
     {
         arg0.interactableObject.transform.gameObject.layer = baseLayerNum;
         capRigidbody.isKinematic = false;
+        capRigidbody.useGravity = true;
     }
 }
