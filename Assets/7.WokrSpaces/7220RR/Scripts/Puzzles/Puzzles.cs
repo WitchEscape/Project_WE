@@ -10,6 +10,7 @@ public class Puzzles : MonoBehaviour
     public PuzzleType puzzleType;
     public bool isActivatedObject;
     public GameObject ActivatedObject;
+
     [HideInInspector]
     public Activated activatedObject;
     public UnityEvent ClearEvent;
@@ -19,7 +20,6 @@ public class Puzzles : MonoBehaviour
     public List<GameObject> interactors;
     public string interactorName;
     private int interactorCount;
-    private int currentNum;
     private int totalNum;
     #endregion
     #region Dial
@@ -102,6 +102,7 @@ public class Puzzles : MonoBehaviour
         }
     }
 
+
     private void PuzzleClear()
     {
         print("풀림");
@@ -126,7 +127,6 @@ public class Puzzles : MonoBehaviour
         for (int i = 0; i < socketInteractors.Count; i++)
         {
             if (socketInteractors[i] == null) continue;
-            currentNum = i;
             int index = i;
             totalNum++;
             if (socketInteractors[i].TryGetComponent<XRSocketInteractor>(out XRSocketInteractor socket))
