@@ -69,6 +69,7 @@ public class Puzzles : MonoBehaviour
     private Dictionary<string, Color> subColors = new Dictionary<string, Color>();
     #endregion
 
+
     private void Awake()
     {
         switch (puzzleType)
