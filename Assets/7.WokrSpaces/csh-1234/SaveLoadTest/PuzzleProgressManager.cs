@@ -81,6 +81,11 @@ public class PuzzleProgressManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 퍼즐이 풀 수 있는 상태인지 리턴하는 메서드
+    /// </summary>
+    /// <param name="puzzleID">퍼즐 이름</param>
+    /// <returns></returns>
     public bool IsPuzzleAvailable(string puzzleID)
     {
         if(puzzleStates.TryGetValue(puzzleID, out var puzzleData) && puzzleData.state == PuzzleState.Available)
@@ -90,22 +95,6 @@ public class PuzzleProgressManager : MonoBehaviour
         else
         {
             return false;
-        }
-    }
-
-    public void SavePuzzleProgress(Dictionary<string, object> data)
-    {
-        if (data != null)
-        {
-            data["puzzleStates"] = puzzleStates;
-        }
-    }
-
-    public void LoadPuzzleProgress(Dictionary<string, object> data)
-    {
-        if (data != null && data.TryGetValue("puzzleStates", out object states))
-        {
-            puzzleStates = (Dictionary<string, PuzzleData>)states;
         }
     }
 
@@ -121,17 +110,41 @@ public class PuzzleProgressManager : MonoBehaviour
         }
     }
 
-    public void SetPuzzleProgressData(string puzzleID, string key, object value)
+    public void SettPuzzleState(string puzzleID, PuzzleState state)
     {
-        if (puzzleStates.TryGetValue(puzzleID, out var puzzleData))
+        if (puzzleStates.TryGetValue(puzzleID, out var puzzleData) == true)
         {
-            puzzleData.progressData[key] = value;
+            puzzleData.state = state;   
+        }
+        else
+        {
+            Debug.Log("Invalid puzzleId");
         }
     }
+ 
 
     public void SetPuzzleSequence(List<string> sequence)
     {
         puzzleSequence = sequence;
         InitializePuzzles();
     }
+
+    #region Save&Load
+    public void SavePuzzleProgress(Dictionary<string, object> data)
+    {
+        if (data != null)
+        {
+            data["puzzleStates"] = puzzleStates;
+        }
+    }
+
+    public void LoadPuzzleProgress(Dictionary<string, object> data)
+    {
+        if (data != null && data.TryGetValue("puzzleStates", out object states))
+        {
+            puzzleStates = (Dictionary<string, PuzzleData>)states;
+        }
+    }
+    #endregion
+
 }

@@ -11,7 +11,7 @@ public class Examiner : MonoBehaviour
     public bool[] isCorrectPostion = new bool[3];
     [Header("활성화 할 성냥")] public GameObject match;
     [Header("활성화 할 파티클")] public ParticleSystem particle;
-    private bool isComplite = false;
+    private bool isComplete = false;
     private bool isCleared = false;
 
     private TriggerZone[] triggerZone = new TriggerZone[3];
@@ -58,12 +58,12 @@ public class Examiner : MonoBehaviour
     public void SetPostionEnter(int i)
     {
         isCorrectPostion[i] = true;
-        isComplite = CheckCorrectPostion();
-        if (isComplite && isCleared == false)
+        isComplete = CheckCorrectPostion();
+        if (isComplete && isCleared == false)
         {
             //TODO : 발생할 이벤트 작성
-            DialogPlayer.Instance.PlayDialogSequence("POSSIONCLASS_02_");
-            Debug.Log("포션 퍼즐 클리어");
+            DialogPlayer.Instance.PlayDialogSequence("LOBBY_11_");
+            PuzzleProgressManager.Instance.CompletePuzzle(puzzleID);
 
             match.gameObject.SetActive(true);
 
