@@ -450,6 +450,9 @@ public class InventorySlot : MonoBehaviour
             SetupNewMeshClone(currentSlotItem);
         else
             animateItemToSlotCoroutine = StartCoroutine(AnimateItemToSlot());
+
+        leftEffect.gameObject.SetActive(false);
+        rightEffect.gameObject.SetActive(false);
     }
 
     private Coroutine animateItemToSlotCoroutine;

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Puzzles : MonoBehaviour
@@ -10,7 +12,7 @@ public class Puzzles : MonoBehaviour
     public GameObject ActivatedObject;
     [HideInInspector]
     public Activated activatedObject;
-
+    public UnityEvent ClearEvent;
     #region Slot
     public InteractorType interactorType;
     public List<GameObject> socketInteractors;
@@ -63,8 +65,8 @@ public class Puzzles : MonoBehaviour
     public List<PuzzleColor> passwardColors = new List<PuzzleColor>();
     public List<PushButtonTest> pushButtonTests = new List<PushButtonTest>();
     private List<int> currentPasswardColorIndexs = new List<int>();
-    public List<Material> materials = new List<Material>();
-
+    private List<Material> materials = new List<Material>();
+    private Dictionary<string, Color> subColors = new Dictionary<string, Color>();
     #endregion
 
     private void Awake()
@@ -90,6 +92,9 @@ public class Puzzles : MonoBehaviour
                 KeypadInteractableEventSet();
                 break;
             case PuzzleType.ColorButton:
+                SubColorSet();
+                ColorButtonMaterialsSet();
+                ColorButtonInteratableEventSet();
                 break;
             default:
                 Debug.LogError("Puzzels / Awake / PuzzleType is Error");
@@ -97,10 +102,14 @@ public class Puzzles : MonoBehaviour
         }
     }
 
+
     private void PuzzleClear()
     {
+        print("풀림");
         if (isActivatedObject)
             activatedObject.Activate();
+        ClearEvent.Invoke();
+        print("풀림");
     }
 
     #region Slot
@@ -119,22 +128,24 @@ public class Puzzles : MonoBehaviour
         {
             if (socketInteractors[i] == null) continue;
             currentNum = i;
+            int index = i;
             totalNum++;
             if (socketInteractors[i].TryGetComponent<XRSocketInteractor>(out XRSocketInteractor socket))
             {
-                socket.selectEntered.AddListener(SocketInteratorEnterEvent);
-                socket.selectExited.AddListener(SocketInteratorExitEventSet);
+                socket.selectEntered.AddListener((arg) => SocketInteratorEnterEvent(arg, index));
+                socket.selectExited.AddListener((arg) => SocketInteratorExitEventSet(arg, index));
             }
         }
     }
 
-    private void SocketInteratorEnterEvent(SelectEnterEventArgs arg)
+    private void SocketInteratorEnterEvent(SelectEnterEventArgs arg, int index)
     {
-        if (arg.interactableObject.transform.name == interactors[currentNum].name)
+        print("Enter Index : " + index);
+        if (arg.interactableObject.transform.name == interactors[index].name)
         {
-
             ++interactorCount;
-
+            print("Total : " + totalNum);
+            print("set :" + interactorCount);
             if (interactorCount == totalNum)
             {
                 PuzzleClear();
@@ -142,9 +153,10 @@ public class Puzzles : MonoBehaviour
         }
     }
 
-    private void SocketInteratorExitEventSet(SelectExitEventArgs args)
+    private void SocketInteratorExitEventSet(SelectExitEventArgs args, int index)
     {
-        if (args.interactableObject.transform.gameObject.name == interactors[currentNum].name)
+        print("Exit Index : " + index);
+        if (args.interactableObject.transform.gameObject.name == interactors[index].name)
         {
             --interactorCount;
         }
@@ -442,9 +454,35 @@ public class Puzzles : MonoBehaviour
     #endregion
     #region ColorButton
 
+    private void ColorButtonMaterialsSet()
+    {
+        if (materials.Count != colorButtonNum)
+        {
+            while (materials.Count > colorButtonNum) materials.RemoveAt(materials.Count - 1);
+            while (materials.Count < colorButtonNum) materials.Add(null);
+        }
+
+        Material newMaterial;
+        for (int i = 0; i < colorButtonNum; i++)
+        {
+            newMaterial = pushButtonTests[i].gameObject.GetComponent<Renderer>().material;
+            materials[i] = newMaterial;
+            currentPasswardColorIndexs.Add(0);
+        }
+    }
+
+    private void ColorButtonInteratableEventSet()
+    {
+        for (int i = 0; i < pushButtonTests.Count; i++)
+        {
+            int index = i;
+            pushButtonTests[index].OnPush.AddListener(() => PuzzleColorIndexChange(index));
+        }
+    }
+
     private void PuzzleColorIndexChange(int index)
     {
-        if (currentPasswardColorIndexs[index] + 1 > currentPasswardColorIndexs.Count)
+        if (currentPasswardColorIndexs[index] + 1 >= Enum.GetValues(typeof(PuzzleColor)).Length)
         {
             currentPasswardColorIndexs[index] = 0;
         }
@@ -453,13 +491,42 @@ public class Puzzles : MonoBehaviour
             currentPasswardColorIndexs[index]++;
         }
 
-
+        ColorChange(index);
     }
 
-    private void ColorChange(int index, Material material)
+    private void ColorChange(int index)
     {
-
+        Color newColor;
+        if (ColorUtility.TryParseHtmlString(((PuzzleColor)currentPasswardColorIndexs[index]).ToString(), out newColor))
+        {
+            materials[index].color = newColor;
+        }
+        else
+        {
+            materials[index].color = subColors[((PuzzleColor)currentPasswardColorIndexs[index]).ToString()];
+        }
+        ColorCheak();
     }
 
+    private void ColorCheak()
+    {
+        for (int i = 0; i < colorButtonNum; i++)
+        {
+            if (currentPasswardColorIndexs[i] != (int)passwardColors[i])
+            {
+                return;
+            }
+        }
+
+        PuzzleClear();
+    }
+
+    private void SubColorSet()
+    {
+        subColors.Add(PuzzleColor.Pink.ToString(), new Color(1f, 0.4f, 1f));
+        subColors.Add(PuzzleColor.Orange.ToString(), new Color(1f, 0.5f, 0f));
+        subColors.Add(PuzzleColor.Violet.ToString(), new Color(0.5f, 0f, 1f));
+        subColors.Add(PuzzleColor.Skyblue.ToString(), new Color(0.53f, 0.81f, 0.92f));
+    }
     #endregion
 }
