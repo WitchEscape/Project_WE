@@ -102,6 +102,7 @@ public class Puzzles : MonoBehaviour
         }
     }
 
+
     private void PuzzleClear()
     {
         if (isActivatedObject)
