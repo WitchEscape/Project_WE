@@ -105,9 +105,11 @@ public class Puzzles : MonoBehaviour
 
     private void PuzzleClear()
     {
+        print("풀림");
         if (isActivatedObject)
             activatedObject.Activate();
         ClearEvent.Invoke();
+        print("풀림");
     }
 
     #region Slot
@@ -126,11 +128,12 @@ public class Puzzles : MonoBehaviour
         {
             if (socketInteractors[i] == null) continue;
             currentNum = i;
+            int index = i;
             totalNum++;
             if (socketInteractors[i].TryGetComponent<XRSocketInteractor>(out XRSocketInteractor socket))
             {
-                socket.selectEntered.AddListener((arg) => SocketInteratorEnterEvent(arg, currentNum));
-                socket.selectExited.AddListener((arg) => SocketInteratorExitEventSet(arg, currentNum));
+                socket.selectEntered.AddListener((arg) => SocketInteratorEnterEvent(arg, index));
+                socket.selectExited.AddListener((arg) => SocketInteratorExitEventSet(arg, index));
             }
         }
     }
@@ -141,7 +144,8 @@ public class Puzzles : MonoBehaviour
         if (arg.interactableObject.transform.name == interactors[index].name)
         {
             ++interactorCount;
-
+            print("Total : " + totalNum);
+            print("set :" + interactorCount);
             if (interactorCount == totalNum)
             {
                 PuzzleClear();
