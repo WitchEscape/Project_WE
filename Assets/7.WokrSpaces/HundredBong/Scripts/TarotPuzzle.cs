@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Examiner : MonoBehaviour
+public class PlaceObject : MonoBehaviour
 {
-    [SerializeField] private string puzzleID = "Puzzle_1";
-
     private GhostCanvas ghostCanvas;
 
     public bool[] isCorrectPostion = new bool[3];
@@ -47,7 +45,7 @@ public class Examiner : MonoBehaviour
         {
             match.gameObject.SetActive(false);
         }
-        
+
         if (particle != null && particle.gameObject.activeSelf == true)
         {
             particle.Stop();
