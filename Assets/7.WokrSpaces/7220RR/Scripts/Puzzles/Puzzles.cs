@@ -128,17 +128,17 @@ public class Puzzles : MonoBehaviour
             totalNum++;
             if (socketInteractors[i].TryGetComponent<XRSocketInteractor>(out XRSocketInteractor socket))
             {
-                socket.selectEntered.AddListener(SocketInteratorEnterEvent);
-                socket.selectExited.AddListener(SocketInteratorExitEventSet);
+                socket.selectEntered.AddListener((arg) => SocketInteratorEnterEvent(arg, currentNum));
+                socket.selectExited.AddListener((arg) => SocketInteratorExitEventSet(arg, currentNum));
             }
         }
     }
 
-    private void SocketInteratorEnterEvent(SelectEnterEventArgs arg)
+    private void SocketInteratorEnterEvent(SelectEnterEventArgs arg, int index)
     {
-        if (arg.interactableObject.transform.name == interactors[currentNum].name)
+        print("Enter Index : " + index);
+        if (arg.interactableObject.transform.name == interactors[index].name)
         {
-
             ++interactorCount;
 
             if (interactorCount == totalNum)
@@ -148,9 +148,10 @@ public class Puzzles : MonoBehaviour
         }
     }
 
-    private void SocketInteratorExitEventSet(SelectExitEventArgs args)
+    private void SocketInteratorExitEventSet(SelectExitEventArgs args, int index)
     {
-        if (args.interactableObject.transform.gameObject.name == interactors[currentNum].name)
+        print("Exit Index : " + index);
+        if (args.interactableObject.transform.gameObject.name == interactors[index].name)
         {
             --interactorCount;
         }
