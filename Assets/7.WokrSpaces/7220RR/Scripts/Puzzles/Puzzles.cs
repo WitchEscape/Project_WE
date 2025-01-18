@@ -34,6 +34,7 @@ public class Puzzles : MonoBehaviour
     [HideInInspector]
     public List<Knob> dialKnob;
 
+    public bool isString;
     public InteractableType interactableType;
     public List<int> passward;
     private List<float> currentPassward = new List<float>();
@@ -303,6 +304,18 @@ public class Puzzles : MonoBehaviour
         {
             int index = i;
             dialTexts[index].text = currentPassward[index].ToString();
+            if (isString)
+            {
+                if (currentPassward[index] <= 9)
+                {
+                    char newChar = (char)('A' + currentPassward[index]);
+                    dialTexts[index].text = newChar.ToString();
+                }
+                else
+                {
+                    dialTexts[index].text = "R";
+                }
+            }
         }
     }
 
@@ -346,7 +359,20 @@ public class Puzzles : MonoBehaviour
         {
             currentPassward[index] += 10;
         }
+
         dialTexts[index].text = currentPassward[index].ToString();
+        if (isString)
+        {
+            if (currentPassward[index] < 9)
+            {
+                char newChar = (char)('A' + currentPassward[index]);
+                dialTexts[index].text = newChar.ToString();
+            }
+            else
+            {
+                dialTexts[index].text = "R";
+            }
+        }
         print(currentPassward[index]);
     }
 

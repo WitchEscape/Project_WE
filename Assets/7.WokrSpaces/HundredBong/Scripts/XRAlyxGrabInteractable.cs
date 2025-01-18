@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-
 public class XRAlyxGrabInteractable : XRGrabInteractable
 {
     //Grab Interactable 대신 이 컴포넌트 넣으면 레이로 선택하고 손을 움직이면 물건이 날아옴
@@ -20,6 +16,7 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     private void Start()
     {
         trackScale = false;
+
     }
 
     protected override void OnEnable()
@@ -40,6 +37,7 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
         interactableRigidbody = GetComponent<Rigidbody>();
         dropParticle = GetComponentInChildren<ParticleSystem>();
     }
+
 
     private void Update()
     {
@@ -133,7 +131,7 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
         }
         if (interactor.transform.CompareTag("Right Hand"))
         {
-           // Debug.Log("Right");
+            // Debug.Log("Right");
             i_attachTransform = rightAttachedTransform;
         }
         return i_attachTransform != null ? i_attachTransform : base.GetAttachTransform(interactor);

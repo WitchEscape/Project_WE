@@ -56,6 +56,7 @@ public class PuzzleEditor : Editor
                 puzzles.interactorType = (InteractorType)EditorGUILayout.EnumPopup("상호작용 방식", puzzles.interactorType);
                 break;
             case PuzzleType.Dial:
+                puzzles.isString = EditorGUILayout.Toggle("문자", puzzles.isString);
                 puzzles.rotationAxis = (Axis)EditorGUILayout.EnumPopup("오브젝트 회전 방향", puzzles.rotationAxis);
                 puzzles.controllerAxis = (Axis)EditorGUILayout.EnumPopup("컨트롤러 회전 방향", puzzles.controllerAxis);
                 puzzles.offSetAngle = EditorGUILayout.IntField("제한 각도", puzzles.offSetAngle);
