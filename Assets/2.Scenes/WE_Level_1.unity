@@ -1928,7 +1928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 500402072}
   m_Layer: 8
-  m_Name: Attach
+  m_Name: Attach Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2944,7 +2944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719320428}
   m_Layer: 8
-  m_Name: Right
+  m_Name: Right Attach Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3637,7 +3637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 922626214}
   m_Layer: 8
-  m_Name: Left
+  m_Name: Left Attach Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12332,6 +12332,7 @@ GameObject:
   - component: {fileID: 4524032325123231589}
   - component: {fileID: 4524032325123231592}
   - component: {fileID: 4524032325123231593}
+  - component: {fileID: 4524032325123231594}
   m_Layer: 8
   m_Name: Sticky_Note
   m_TagString: Untagged
@@ -12737,13 +12738,14 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
+  m_StartingSingleGrabTransformers:
+  - {fileID: 4524032325123231594}
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
-  leftAttachedTransform: {fileID: 0}
-  rightAttachedTransform: {fileID: 0}
+  leftAttachedTransform: {fileID: 922626214}
+  rightAttachedTransform: {fileID: 719320428}
 --- !u!54 &4524032325123231590
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12807,6 +12809,18 @@ MonoBehaviour:
   poseTransitionDuration: 0.2
   rightHandPose: {fileID: 2794748160177260380}
   leftHandPose: {fileID: 6310317632991326490}
+--- !u!114 &4524032325123231594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3856004607493445086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d1e14ba0263b9841a819caa2b6caafa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4568133013234254294 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 449826114510674786, guid: a80e4921b0439c54881f2e39c19b8df8,
