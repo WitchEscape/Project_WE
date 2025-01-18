@@ -14,6 +14,10 @@ public class Puzzles : MonoBehaviour
     [HideInInspector]
     public Activated activatedObject;
     public UnityEvent ClearEvent;
+
+    public GhostCanvas ghostCanvas;
+    public int clearNum;
+
     #region Slot
     public InteractorType interactorType;
     public List<GameObject> socketInteractors;
@@ -38,6 +42,8 @@ public class Puzzles : MonoBehaviour
     public int offSetAngle = 18;
     public bool isDialClamped;
     public List<TextMeshProUGUI> dialTexts;
+
+    public Material changematerial;
     #endregion
     #region Keypad
     public List<GameObject> _KeypadNum;
@@ -104,10 +110,6 @@ public class Puzzles : MonoBehaviour
                 Debug.LogError("Puzzels / Awake / PuzzleType is Error");
                 break;
         }
-
-        Color a = materials[0].color;
-        a.a = 0;
-        materials[0].color = a;
     }
 
 
@@ -120,6 +122,8 @@ public class Puzzles : MonoBehaviour
         print("풀림");
         //임시
         gameObject.SetActive(false);
+        if (ghostCanvas != null)
+            ghostCanvas.ClearPuzzle(clearNum);
     }
 
     #region Slot
@@ -344,6 +348,11 @@ public class Puzzles : MonoBehaviour
         }
         dialTexts[index].text = currentPassward[index].ToString();
         print(currentPassward[index]);
+    }
+
+    private void DialClearEvent()
+    {
+
     }
     #endregion
     #region Keypad
