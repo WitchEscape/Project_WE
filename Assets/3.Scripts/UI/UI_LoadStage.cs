@@ -34,11 +34,8 @@ public class UI_LoadStage : MonoBehaviour
     private void LoadSaveFiles()
     {
         var saveFiles = SaveLoadManager.Instance.GetSavedStageFiles();
-        Debug.Log($"Found {saveFiles.Count} save files");
-        
         foreach (var saveFile in saveFiles)
         {
-            Debug.Log($"Creating button for stage: {saveFile.StageName}");
             UI_DataLoadButton button = Instantiate(buttonPrefab, buttonContainer);
             button.Initialize(saveFile.StageName, saveFile.SaveTime, OnLoadButtonClicked, OnDeleteButtonClicked);
         }
@@ -46,41 +43,33 @@ public class UI_LoadStage : MonoBehaviour
 
     private void OnLoadButtonClicked(string stageName)
     {
-        Debug.Log($"OnLoadButtonClicked called with stage: {stageName}");
         StartCoroutine(LoadStageCoroutine(stageName));
     }
 
     private IEnumerator LoadStageCoroutine(string stageName)
     {
-        Debug.Log($"Starting to load stage: {stageName}");
         UIManager.Instance.CloseAllCurrentUI();
-        // 씬 로드
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(stageName);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        // 씬이 완전히 로드될 때까지 잠시 대기
         yield return new WaitForSeconds(0.5f);
 
-        // SaveLoadManager가 새 씬에서 초기화되었는지 확인
         if (SaveLoadManager.Instance == null)
         {
-            Debug.LogError("SaveLoadManager.Instance is null after scene load!");
             yield break;
         }
 
-        Debug.Log($"Scene loaded, now loading save data for: {stageName}");
-        
         try
         {
             SaveLoadManager.Instance.LoadGame(stageName);
-            Debug.Log($"Save data loaded successfully for: {stageName}");
         }
         catch (Exception e)
         {
-            Debug.LogError($"Failed to load save data: {e.Message}\nStackTrace: {e.StackTrace}");
+            Debug.LogError($"{e.Message}");
         }
     }
 
