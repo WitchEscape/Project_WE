@@ -25,12 +25,12 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     protected override void OnEnable()
     {
         base.OnEnable();
-        selectEntered.AddListener(attack);
+        selectEntered.AddListener(SetAttach);
     }
 
-    public void attack(SelectEnterEventArgs arg0)
+    public void SetAttach(SelectEnterEventArgs arg0)
     {
-        print("attack");
+        //print("attack");
         attachTransform = GetAttachTransform(arg0.interactorObject);
     }
 
