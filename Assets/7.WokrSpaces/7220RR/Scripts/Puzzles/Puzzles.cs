@@ -102,17 +102,19 @@ public class Puzzles : MonoBehaviour
                 KeypadInteractableEventSet();
                 break;
             case PuzzleType.ColorButton:
-                SubColorSet();
-                ColorButtonMaterialsSet();
-                ColorButtonInteratableEventSet();
-                ColorSet();
+                if (!isTrigger)
+                {
+                    SubColorSet();
+                    ColorButtonMaterialsSet();
+                    ColorButtonInteratableEventSet();
+                    ColorSet();
+                }
                 break;
             default:
                 Debug.LogError("Puzzels / Awake / PuzzleType is Error");
                 break;
         }
     }
-
 
     private void PuzzleClear()
     {
@@ -579,6 +581,19 @@ public class Puzzles : MonoBehaviour
         subColors.Add(PuzzleColor.Orange.ToString(), new Color(1f, 0.5f, 0f));
         subColors.Add(PuzzleColor.Violet.ToString(), new Color(0.5f, 0f, 1f));
         subColors.Add(PuzzleColor.Skyblue.ToString(), new Color(0.53f, 0.81f, 0.92f));
+    }
+
+    public void TriggerEvent()
+    {
+        if (!isTrigger) return;
+        ++passwordNum;
+
+        if (passwordNum == passwardColors.Count)
+        {
+            isTrigger = false;
+            Awake();
+        }
+
     }
     #endregion
 }
