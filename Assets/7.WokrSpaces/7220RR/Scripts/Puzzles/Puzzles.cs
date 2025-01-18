@@ -212,7 +212,7 @@ public class Puzzles : MonoBehaviour
         {
             ++temp;
             knob.handle.localEulerAngles = Vector3.zero;
-            print($"knob{temp} : {knob.handle.localEulerAngles}");
+            //print($"knob{temp} : {knob.handle.localEulerAngles}");
         }
     }
 

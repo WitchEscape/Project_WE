@@ -1916,6 +1916,7 @@ GameObject:
   - component: {fileID: 199275192}
   - component: {fileID: 199275191}
   - component: {fileID: 199275190}
+  - component: {fileID: 199275193}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1979,6 +1980,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &199275193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199275189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd0dde60267fd941ba8e61aa5e91988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 0}
+  alphaValue: 0
 --- !u!1 &202608001
 GameObject:
   m_ObjectHideFlags: 0
@@ -8520,6 +8535,8 @@ MonoBehaviour:
   ClearEvent:
     m_PersistentCalls:
       m_Calls: []
+  ghostCanvas: {fileID: 0}
+  clearNum: 0
   interactorType: 1
   socketInteractors:
   - {fileID: 0}
@@ -8551,6 +8568,7 @@ MonoBehaviour:
   - {fileID: 412913558}
   - {fileID: 1720802693}
   - {fileID: 1546467770}
+  isString: 0
   interactableType: 1
   passward: 01000000000000000000000000000000
   rotationAxis: 0
@@ -8562,6 +8580,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  changematerial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -9259,6 +9278,8 @@ MonoBehaviour:
   ClearEvent:
     m_PersistentCalls:
       m_Calls: []
+  ghostCanvas: {fileID: 0}
+  clearNum: 0
   interactorType: 1
   socketInteractors:
   - {fileID: 0}
@@ -9290,6 +9311,7 @@ MonoBehaviour:
   - {fileID: 412913558}
   - {fileID: 1720802693}
   - {fileID: 1546467770}
+  isString: 0
   interactableType: 1
   passward: 00000000000000000000000000000000
   rotationAxis: 0
@@ -9301,6 +9323,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  changematerial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -10509,6 +10532,8 @@ MonoBehaviour:
   ClearEvent:
     m_PersistentCalls:
       m_Calls: []
+  ghostCanvas: {fileID: 0}
+  clearNum: 0
   interactorType: 0
   socketInteractors: []
   interactors: []
@@ -10517,6 +10542,7 @@ MonoBehaviour:
   _dialInteractables: []
   dialInteractables: []
   dialKnob: []
+  isString: 0
   interactableType: 2
   passward: 
   rotationAxis: 0
@@ -10524,6 +10550,7 @@ MonoBehaviour:
   offSetAngle: 18
   isDialClamped: 0
   dialTexts: []
+  changematerial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons:
@@ -11399,6 +11426,8 @@ MonoBehaviour:
   ClearEvent:
     m_PersistentCalls:
       m_Calls: []
+  ghostCanvas: {fileID: 0}
+  clearNum: 0
   interactorType: 2
   socketInteractors:
   - {fileID: 1841075492}
@@ -11413,6 +11442,7 @@ MonoBehaviour:
   _dialInteractables: []
   dialInteractables: []
   dialKnob: []
+  isString: 0
   interactableType: 0
   passward: 
   rotationAxis: 0
@@ -11420,6 +11450,7 @@ MonoBehaviour:
   offSetAngle: 0
   isDialClamped: 0
   dialTexts: []
+  changematerial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -11776,6 +11807,8 @@ MonoBehaviour:
   ClearEvent:
     m_PersistentCalls:
       m_Calls: []
+  ghostCanvas: {fileID: 0}
+  clearNum: 0
   interactorType: 0
   socketInteractors: []
   interactors: []
@@ -11790,6 +11823,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   dialKnob: []
+  isString: 0
   interactableType: 0
   passward: 000000000000000000000000
   rotationAxis: 0
@@ -11800,6 +11834,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  changematerial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -12809,6 +12844,7 @@ GameObject:
   - component: {fileID: 1165180895}
   - component: {fileID: 1165180894}
   - component: {fileID: 1165180898}
+  - component: {fileID: 1165180899}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -12858,6 +12894,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3902e63eb273ccd4cb50d4f73db556c6, type: 2}
+  - {fileID: 2100000, guid: 41e180b31013b9e418b8dbc27ebcb5fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12921,6 +12958,20 @@ MonoBehaviour:
   asss: 0
   material: {fileID: 0}
   renderera: {fileID: 8007852291847808409}
+--- !u!114 &1165180899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165180893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd0dde60267fd941ba8e61aa5e91988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 41e180b31013b9e418b8dbc27ebcb5fb, type: 2}
+  alphaValue: 0.1
 --- !u!65 &1167740468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20288,6 +20339,99 @@ Transform:
   - {fileID: 114804830}
   m_Father: {fileID: 2011608273}
   m_LocalEulerAnglesHint: {x: -11.046314, y: 29.180206, z: 128.34506}
+--- !u!1001 &1663894052
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1421161
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.8670555
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.36254993
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328558227413381630, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319384772025575332, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319384772025575332, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319384772025575332, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: CollisionModule.colliderForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319384772025575332, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535006216103734310, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_Name
+      value: Star hit
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535006216103734310, guid: 98c4704d0fd7211449bcf5c451095a60,
+        type: 3}
+      propertyPath: m_TagString
+      value: Water
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 98c4704d0fd7211449bcf5c451095a60, type: 3}
 --- !u!65 &1671526617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23257,6 +23401,8 @@ MonoBehaviour:
   ClearEvent:
     m_PersistentCalls:
       m_Calls: []
+  ghostCanvas: {fileID: 0}
+  clearNum: 0
   interactorType: 2
   socketInteractors:
   - {fileID: 0}
@@ -23277,6 +23423,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   dialKnob: []
+  isString: 0
   interactableType: 0
   passward: 000000000000000000000000
   rotationAxis: 0
@@ -23287,6 +23434,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  changematerial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -40084,3 +40232,4 @@ SceneRoots:
   - {fileID: 1318728635}
   - {fileID: 682985531}
   - {fileID: 199275192}
+  - {fileID: 1663894052}
