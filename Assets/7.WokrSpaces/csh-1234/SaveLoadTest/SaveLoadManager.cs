@@ -16,6 +16,7 @@ public class SaveLoadManager : MonoBehaviour
     public static event Action OnLoadComplete;
 
     private string savePath;
+    public bool isDataLoadScene = false;
 
     private void Awake()
     {
@@ -39,7 +40,6 @@ public class SaveLoadManager : MonoBehaviour
         Directory.CreateDirectory(savePath);
 
     }
-
 
     public void SaveGame(string SceneName)
     {
