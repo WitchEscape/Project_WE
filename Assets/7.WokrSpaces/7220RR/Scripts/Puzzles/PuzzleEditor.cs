@@ -23,6 +23,11 @@ public class PuzzleEditor : Editor
         puzzles.puzzleType = (PuzzleType)EditorGUILayout.EnumPopup("Puzzle Type", puzzles.puzzleType);
         puzzles.isActivatedObject = EditorGUILayout.Toggle("활성화 여부", puzzles.isActivatedObject);
 
+
+
+        if (puzzles.ghostCanvas != null)
+            puzzles.clearNum = EditorGUILayout.IntSlider(puzzles.clearNum, 0, 3);
+
         if (puzzles.isActivatedObject)
         {
             puzzles.ActivatedObject = (GameObject)EditorGUILayout.ObjectField("활성화 시킬 오브젝트", puzzles.ActivatedObject, typeof(GameObject), true);
@@ -39,6 +44,8 @@ public class PuzzleEditor : Editor
                 }
             }
         }
+
+        puzzles.ghostCanvas = (GhostCanvas)EditorGUILayout.ObjectField("유령 친구", puzzles.ghostCanvas, typeof(GhostCanvas), true);
 
         switch (puzzles.puzzleType)
         {
