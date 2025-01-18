@@ -198,8 +198,8 @@ public class Cauldron : MonoBehaviour
 
             if (rb != null)
             {
-                Debug.Log($"Velocity : {rb.velocity.magnitude}");
-                Debug.Log($"PostionCount2 : {postionCount.Value}");
+                //Debug.Log($"Velocity : {rb.velocity.magnitude}");
+                //Debug.Log($"PostionCount2 : {postionCount.Value}");
             }
             //else
             //    Debug.LogWarning("RB NOT FOUND");
