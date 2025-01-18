@@ -36,10 +36,7 @@ public class Puzzles : MonoBehaviour
     public Axis rotationAxis;
     public Axis controllerAxis;
     public int offSetAngle = 18;
-    //임시 풀리면 어떻게 상호작용이 될지
-    public bool isDialClear;
     public bool isDialClamped;
-
     public List<TextMeshProUGUI> dialTexts;
     #endregion
     #region Keypad
@@ -69,6 +66,13 @@ public class Puzzles : MonoBehaviour
     private Dictionary<string, Color> subColors = new Dictionary<string, Color>();
     #endregion
 
+    //클리어가 되면
+    //다이얼 같은 경우
+    //=> 다이얼이 서서히 사라지게
+    //키패드 같은 경우
+    //=> 눌리기는 하지만 실제 상호작용을 하지 않게
+    //버튼, 소켓
+
 
     private void Awake()
     {
@@ -82,8 +86,6 @@ public class Puzzles : MonoBehaviour
                 FindSocket();
                 break;
             case PuzzleType.Dial:
-                isDialClear = false;
-
                 CurrentPasswardReset();
                 PasswardCheak();
                 DialInteractablesEventSet();
@@ -96,11 +98,16 @@ public class Puzzles : MonoBehaviour
                 SubColorSet();
                 ColorButtonMaterialsSet();
                 ColorButtonInteratableEventSet();
+                ColorSet();
                 break;
             default:
                 Debug.LogError("Puzzels / Awake / PuzzleType is Error");
                 break;
         }
+
+        Color a = materials[0].color;
+        a.a = 0;
+        materials[0].color = a;
     }
 
 
@@ -111,6 +118,8 @@ public class Puzzles : MonoBehaviour
             activatedObject.Activate();
         ClearEvent.Invoke();
         print("풀림");
+        //임시
+        gameObject.SetActive(false);
     }
 
     #region Slot
@@ -318,7 +327,6 @@ public class Puzzles : MonoBehaviour
 
         print("다이얼 풀림");
         PuzzleClear();
-        isDialClear = true;
     }
 
     private void CurrentPasswardSet(int index, float angle)
@@ -492,6 +500,15 @@ public class Puzzles : MonoBehaviour
         }
 
         ColorChange(index);
+    }
+
+    private void ColorSet()
+    {
+        for (int i = 0; i < materials.Count; i++)
+        {
+            int index = i;
+            ColorChange(index);
+        }
     }
 
     private void ColorChange(int index)

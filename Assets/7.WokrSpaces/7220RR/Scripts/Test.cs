@@ -9,11 +9,13 @@ public class Test : MonoBehaviour
     public int[] asd = new int[10];
     public List<int> list = new List<int>(1);
     public int asss;
+
+    public Material material;
+    public Renderer renderera;
     private void Start()
     {
-        asss = 10;
-        asss = Mathf.Max(asss, 1);
-        print(asss);
-
+        //asss = 10;
+        //asss = Mathf.Max(asss, 1);
+        //print(asss);
     }
 }
