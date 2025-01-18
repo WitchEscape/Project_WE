@@ -8,16 +8,19 @@ using UnityEngine.UI;
 
 public class UI_LoadStage : MonoBehaviour
 {
-    public float StartPanelDistance = 2f;
-
     [SerializeField] private UI_DataLoadButton buttonPrefab;
     [SerializeField] private Transform buttonContainer;
 
-    private void OnEnable()
+    [SerializeField] private Button stageSelectButton;
+    [SerializeField] private Button stageLoadButton;
+
+    private void Start()
     {
         Initialize();
-        SetPositionAndRotation();
-        LoadSaveFiles();
+
+        LoadSelectStages();
+        stageSelectButton.onClick.AddListener(LoadSelectStages);
+        stageLoadButton.onClick.AddListener(LoadSaveStages);
     }
 
     private void Initialize()
@@ -31,19 +34,45 @@ public class UI_LoadStage : MonoBehaviour
         }
     }
 
-    private void LoadSaveFiles()
+    private void LoadSelectStages()
     {
-        var saveFiles = SaveLoadManager.Instance.GetSavedStageFiles();
-        foreach (var saveFile in saveFiles)
+        Initialize();
+        UI_DataLoadButton button = Instantiate(buttonPrefab, buttonContainer);
+        button.Initialize("535교실", DateTime.Now, OnLoadButtonClicked, OnDeleteButtonClicked);
+    }
+
+
+    private void LoadSaveStages()
+    {
+        Initialize();
+        if(SaveLoadManager.Instance != null)
         {
-            UI_DataLoadButton button = Instantiate(buttonPrefab, buttonContainer);
-            button.Initialize(saveFile.StageName, saveFile.SaveTime, OnLoadButtonClicked, OnDeleteButtonClicked);
+            var saveFiles = SaveLoadManager.Instance.GetSavedStageFiles();
+            foreach (var saveFile in saveFiles)
+            {
+                UI_DataLoadButton button = Instantiate(buttonPrefab, buttonContainer);
+                button.Initialize(saveFile.StageName, saveFile.SaveTime, OnLoadButtonClicked, OnDeleteButtonClicked);
+            }
+        }
+        else
+        {
+            Debug.Log("SaveLoadManager 없음");
         }
     }
 
+
     private void OnLoadButtonClicked(string stageName)
     {
-        StartCoroutine(LoadStageCoroutine(stageName));
+        SaveLoadManager.Instance.isDataLoadScene = true;
+        SceneManager.LoadScene(stageName);
+        //StartCoroutine(LoadStageCoroutine(stageName));
+    }
+
+    private void OnDeleteButtonClicked(string stageName)
+    {
+        SaveLoadManager.Instance.DeleteSaveFile(stageName);
+        Initialize();
+        LoadSaveStages();
     }
 
     private IEnumerator LoadStageCoroutine(string stageName)
@@ -71,23 +100,5 @@ public class UI_LoadStage : MonoBehaviour
         {
             Debug.LogError($"{e.Message}");
         }
-    }
-
-    private void OnDeleteButtonClicked(string stageName)
-    {
-        SaveLoadManager.Instance.DeleteSaveFile(stageName);
-        Initialize();
-        LoadSaveFiles();
-    }
-
-    private void SetPositionAndRotation()
-    {
-        Transform cameraTransform = Camera.main.transform;
-
-        Vector3 inventoryPosition = cameraTransform.position + (cameraTransform.forward * StartPanelDistance);
-        transform.position = inventoryPosition;
-
-        transform.LookAt(cameraTransform);
-        transform.Rotate(0, 180f, 0);
     }
 }

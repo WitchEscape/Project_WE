@@ -59,7 +59,6 @@ public class SaveableObject : MonoBehaviour, ISaveable
     {
         if (data == null)
         {
-            Debug.LogError($"ObjectData is null for {gameObject.name}");
             return;
         }
 

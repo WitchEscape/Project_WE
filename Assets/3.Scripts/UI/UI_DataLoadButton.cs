@@ -4,27 +4,23 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class UI_DataLoadButton : MonoBehaviour
+public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private TextMeshProUGUI stageNameText;
     [SerializeField] private TextMeshProUGUI saveTimeText;
+
     [SerializeField] private Button loadButton;
+    [SerializeField] private GameObject focus;
     //[SerializeField] private Button deleteButton;
 
     private string stageName;
     private Action<string> onLoadCallback;
     private Action<string> onDeleteCallback;
-
-    private void Awake()
-    {
-        if (stageNameText == null || saveTimeText == null || loadButton == null /*|| deleteButton == null*/)
-        {
-            Debug.LogError($"Missing component references in {gameObject.name}");
-        }
-    }
 
     public void Initialize(string stageName, DateTime saveTime, Action<string> onLoad, Action<string> onDelete)
     {
@@ -52,5 +48,15 @@ public class UI_DataLoadButton : MonoBehaviour
     public void OnLoadButtonClick()
     {
         onLoadCallback?.Invoke(stageName);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        focus.gameObject.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        focus.gameObject.SetActive(false);
     }
 }
