@@ -104,10 +104,6 @@ public class Puzzles : MonoBehaviour
                 Debug.LogError("Puzzels / Awake / PuzzleType is Error");
                 break;
         }
-
-        Color a = materials[0].color;
-        a.a = 0;
-        materials[0].color = a;
     }
 
 
