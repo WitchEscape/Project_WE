@@ -47,6 +47,14 @@ public class PuzzleEditor : Editor
 
         puzzles.ghostCanvas = (GhostCanvas)EditorGUILayout.ObjectField("유령 친구", puzzles.ghostCanvas, typeof(GhostCanvas), true);
 
+        if (puzzles.puzzleType != PuzzleType.None)
+        {
+            puzzles.clearClip = (AudioClip)EditorGUILayout.ObjectField("Clear Clip", puzzles.clearClip, typeof(AudioClip), false);
+            puzzles.clearClipValue = EditorGUILayout.Slider("Clear Clip Value", puzzles.clearClipValue, 0f, 1f);
+            puzzles.subClip = (AudioClip)EditorGUILayout.ObjectField("Sub Clip", puzzles.subClip, typeof(AudioClip), false);
+            puzzles.subClipValue = EditorGUILayout.Slider("Sub Clip Value", puzzles.subClipValue, 0f, 1f);
+        }
+
         switch (puzzles.puzzleType)
         {
             case PuzzleType.None:
@@ -56,6 +64,24 @@ public class PuzzleEditor : Editor
                 puzzles.interactorType = (InteractorType)EditorGUILayout.EnumPopup("상호작용 방식", puzzles.interactorType);
                 break;
             case PuzzleType.Dial:
+                puzzles.changeMaterial = (Material)EditorGUILayout.ObjectField("변경할 마테리얼", puzzles.changeMaterial, typeof(Material), true);
+
+                if (puzzles.dialRenderers == null)
+                {
+                    puzzles.dialRenderers = new List<Renderer>();
+                }
+                if (puzzles.dialRenderers.Count != 8)
+                {
+                    while (puzzles.dialRenderers.Count < 8) puzzles.dialRenderers.Add(new Renderer());
+                    while (puzzles.dialRenderers.Count > 8) puzzles.dialRenderers.RemoveAt(puzzles.dialRenderers.Count - 1);
+                }
+
+                for (int i = 0; i < 8; i++)
+                {
+                    puzzles.dialRenderers[i] = (Renderer)EditorGUILayout.ObjectField($"렌더러 {i}", puzzles.dialRenderers[i], typeof(Renderer), true);
+                }
+
+
                 puzzles.isString = EditorGUILayout.Toggle("문자", puzzles.isString);
                 puzzles.rotationAxis = (Axis)EditorGUILayout.EnumPopup("오브젝트 회전 방향", puzzles.rotationAxis);
                 puzzles.controllerAxis = (Axis)EditorGUILayout.EnumPopup("컨트롤러 회전 방향", puzzles.controllerAxis);
