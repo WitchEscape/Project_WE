@@ -131,7 +131,7 @@ public class Puzzles : MonoBehaviour
         ClearEvent.Invoke();
         print("풀림");
         //임시
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         if (ghostCanvas != null)
             ghostCanvas.ClearPuzzle(clearNum);
 
