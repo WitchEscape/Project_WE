@@ -6,6 +6,8 @@ public class AlphaController : MonoBehaviour
     private Material material;
     [SerializeField]
     private float alphaValue;
+    [SerializeField]
+    private Puzzles puzzles;
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class AlphaController : MonoBehaviour
             {
                 newColor.a = 0f;
                 material.color = newColor;
+                if (puzzles != null)
+                    puzzles.TriggerEvent();
                 Destroy(this);
             }
             material.color = newColor;
