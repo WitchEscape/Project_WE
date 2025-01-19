@@ -680,6 +680,9 @@ public class Puzzles : MonoBehaviour
         {
             materials[index].color = subColors[((PuzzleColor)currentPasswardColorIndexs[index]).ToString()];
         }
+
+        print((PuzzleColor)currentPasswardColorIndexs[index]);
+
         ColorCheak();
     }
 
