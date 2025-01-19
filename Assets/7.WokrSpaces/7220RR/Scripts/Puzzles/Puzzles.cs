@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,11 @@ public class Puzzles : MonoBehaviour
 
     public GhostCanvas ghostCanvas;
     public int clearNum;
+
+    public AudioClip clearClip;
+    public float clearClipValue;
+    public AudioClip subClip;
+    public float subClipValue;
 
     #region Slot
     public InteractorType interactorType;
@@ -44,7 +50,8 @@ public class Puzzles : MonoBehaviour
     public bool isDialClamped;
     public List<TextMeshProUGUI> dialTexts;
 
-    public Material changematerial;
+    public List<Renderer> dialRenderers;
+    public Material changeMaterial;
     #endregion
     #region Keypad
     public List<GameObject> _KeypadNum;
@@ -98,7 +105,7 @@ public class Puzzles : MonoBehaviour
                 DialInteractablesEventSet();
                 break;
             case PuzzleType.Keypad:
-                초기화();
+                KeypadInitialization();
                 KeypadInteractableEventSet();
                 break;
             case PuzzleType.ColorButton:
@@ -127,6 +134,22 @@ public class Puzzles : MonoBehaviour
         gameObject.SetActive(false);
         if (ghostCanvas != null)
             ghostCanvas.ClearPuzzle(clearNum);
+
+        if (AudioManager.Instance != null && clearClip != null)
+        {
+            AudioManager.Instance.PlaySFX(clearClip, clearClipValue);
+        }
+
+        if (isActivatedObject)
+            activatedObject.enabled = false;
+    }
+
+    private void SubClipPlay()
+    {
+        if (AudioManager.Instance != null && subClip != null)
+        {
+            AudioManager.Instance.PlaySFX(subClip, subClipValue);
+        }
     }
 
     #region Slot
@@ -166,6 +189,11 @@ public class Puzzles : MonoBehaviour
             {
                 PuzzleClear();
             }
+        }
+
+        if (AudioManager.Instance != null && subClip != null)
+        {
+            AudioManager.Instance.PlaySFX(subClip, subClipValue);
         }
     }
 
@@ -216,7 +244,46 @@ public class Puzzles : MonoBehaviour
             knob.handle.localEulerAngles = Vector3.zero;
             //print($"knob{temp} : {knob.handle.localEulerAngles}");
         }
+
+        if (changeMaterial != null)
+        {
+            ClearEvent.AddListener(DialClearEventSet);
+        }
     }
+
+    private void DialClearEventSet()
+    {
+        for (int i = 0; i < dialCount; i++)
+        {
+            int index = i;
+            dialKnob[index].selectExited.RemoveListener((x) => DialRotationSet(x, dialKnob[index].handle, index));
+        }
+        _ = StartCoroutine(DialAlphaChange());
+    }
+
+    private IEnumerator DialAlphaChange()
+    {
+        yield return null;
+        foreach (Renderer renderer in dialRenderers)
+        {
+            renderer.material = changeMaterial;
+        }
+
+        Color newColor = changeMaterial.color;
+
+        while (newColor.a <= 0.1f)
+        {
+            newColor.a = Mathf.Lerp(newColor.a, 0f, 0.01f);
+            changeMaterial.color = newColor;
+            yield return null;
+        }
+
+        newColor.a = 0f;
+        changeMaterial.color = newColor;
+
+        gameObject.SetActive(false);
+    }
+
 
     public void DialUIUPButtonEvent(int index)
     {
@@ -376,6 +443,11 @@ public class Puzzles : MonoBehaviour
             }
         }
         print(currentPassward[index]);
+
+        if (AudioManager.Instance != null && subClip != null)
+        {
+            AudioManager.Instance.PlaySFX(subClip, subClipValue);
+        }
     }
 
     private void DialClearEvent()
@@ -384,8 +456,7 @@ public class Puzzles : MonoBehaviour
     }
     #endregion
     #region Keypad
-
-    private void 초기화()
+    private void KeypadInitialization()
     {
         passwordNum = password.Length;
         keypadMoniterMaterial = keypadMoniter.GetComponent<MeshRenderer>().material;
@@ -415,6 +486,21 @@ public class Puzzles : MonoBehaviour
                     subPushButtons[0].OnPush.AddListener(keypadEnterButtonClickEvent);
                     subPushButtons[1].OnPush.AddListener(KeypadClearButtonClickEvent);
                 }
+
+                ClearEvent.AddListener(() =>
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        int index = i;
+                        numPushButtons[index].OnPush.RemoveListener(() => { KeypadNumEvent(index); });
+                        numPushButtons[index].OnPush.AddListener(SubClipPlay);
+                    }
+                    subPushButtons[0].OnPush.RemoveListener(keypadEnterButtonClickEvent);
+                    subPushButtons[0].OnPush.AddListener(SubClipPlay);
+
+                    subPushButtons[1].OnPush.RemoveListener(KeypadClearButtonClickEvent);
+                    subPushButtons[1].OnPush.AddListener(SubClipPlay);
+                });
                 break;
             case InteractableType.Press:
                 for (int i = 0; i < 10; i++)
@@ -433,6 +519,20 @@ public class Puzzles : MonoBehaviour
                     subPressButton[0].OnPress.AddListener(keypadEnterButtonClickEvent);
                     subPressButton[1].OnPress.AddListener(KeypadClearButtonClickEvent);
                 }
+
+                ClearEvent.AddListener(() =>
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        int index = i;
+                        numPressButton[index].OnPress.RemoveListener(() => KeypadNumEvent(index));
+                        numPressButton[index].OnPress.AddListener(SubClipPlay);
+                    }
+                    subPressButton[0].OnPress.RemoveListener(keypadEnterButtonClickEvent);
+                    subPressButton[0].OnPress.AddListener(SubClipPlay);
+                    subPressButton[0].OnPress.RemoveListener(KeypadClearButtonClickEvent);
+                    subPressButton[0].OnPress.AddListener(SubClipPlay);
+                });
                 break;
             default:
                 Debug.LogError("Puzzles / KeypadInteracbleEventSet / InteractableType is Error");
@@ -469,6 +569,10 @@ public class Puzzles : MonoBehaviour
     {
         keypadMoniterText1.text = text;
         keypadMoniterText2.text = text;
+        if (AudioManager.Instance != null && subClip != null)
+        {
+            AudioManager.Instance.PlaySFX(subClip, subClipValue);
+        }
     }
 
     private void KeypadClearButtonClickEvent()
@@ -523,6 +627,18 @@ public class Puzzles : MonoBehaviour
             int index = i;
             pushButtonTests[index].OnPush.AddListener(() => PuzzleColorIndexChange(index));
         }
+
+        ClearEvent.AddListener(() =>
+        {
+            for (int i = 0; i < pushButtonTests.Count; i++)
+            {
+                int index = i;
+                pushButtonTests[index].OnPush.RemoveListener(() => PuzzleColorIndexChange(index));
+                pushButtonTests[index].OnPush.AddListener(SubClipPlay);
+            }
+
+        });
+
     }
 
     private void PuzzleColorIndexChange(int index)
@@ -537,6 +653,11 @@ public class Puzzles : MonoBehaviour
         }
 
         ColorChange(index);
+
+        if (subClip != null && AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX(subClip, subClipValue);
+        }
     }
 
     private void ColorSet()

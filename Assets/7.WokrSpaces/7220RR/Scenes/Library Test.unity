@@ -1917,6 +1917,7 @@ GameObject:
   - component: {fileID: 199275191}
   - component: {fileID: 199275190}
   - component: {fileID: 199275193}
+  - component: {fileID: 199275194}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1994,6 +1995,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 0}
   alphaValue: 0
+  puzzles: {fileID: 0}
+--- !u!114 &199275194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199275189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92abf3e0216ffbd4f9c2999a0a68eee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzleType: 2
+  isActivatedObject: 0
+  ActivatedObject: {fileID: 0}
+  activatedObject: {fileID: 0}
+  ClearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ghostCanvas: {fileID: 0}
+  clearNum: 0
+  clearClip: {fileID: 0}
+  clearClipValue: 0.142
+  subClip: {fileID: 0}
+  subClipValue: 0
+  interactorType: 0
+  socketInteractors: []
+  interactors: []
+  interactorName: 
+  dialCount: 1
+  _dialInteractables:
+  - {fileID: 0}
+  dialInteractables:
+  - {fileID: 0}
+  dialKnob: []
+  isString: 0
+  interactableType: 0
+  passward: 00000000
+  rotationAxis: 0
+  controllerAxis: 0
+  offSetAngle: 18
+  isDialClamped: 0
+  dialTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  dialRenderers:
+  - {fileID: 8973313850159327105}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  changeMaterial: {fileID: 0}
+  _KeypadNum: []
+  _KeypadSub: []
+  numPushButtons: []
+  subPushButtons: []
+  numPressButton: []
+  subPressButton: []
+  password: 
+  keypadMoniter: {fileID: 0}
+  keypadMoniterText1: {fileID: 0}
+  keypadMoniterText2: {fileID: 0}
+  colorButtonNum: 0
+  isTrigger: 0
+  passwardColors: 
+  pushButtonTests: []
 --- !u!1 &202608001
 GameObject:
   m_ObjectHideFlags: 0
@@ -8537,6 +8614,10 @@ MonoBehaviour:
       m_Calls: []
   ghostCanvas: {fileID: 0}
   clearNum: 0
+  clearClip: {fileID: 0}
+  clearClipValue: 0
+  subClip: {fileID: 0}
+  subClipValue: 0
   interactorType: 1
   socketInteractors:
   - {fileID: 0}
@@ -8580,7 +8661,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  changematerial: {fileID: 0}
+  dialRenderers: []
+  changeMaterial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -9280,6 +9362,10 @@ MonoBehaviour:
       m_Calls: []
   ghostCanvas: {fileID: 0}
   clearNum: 0
+  clearClip: {fileID: 0}
+  clearClipValue: 0
+  subClip: {fileID: 0}
+  subClipValue: 0
   interactorType: 1
   socketInteractors:
   - {fileID: 0}
@@ -9323,7 +9409,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  changematerial: {fileID: 0}
+  dialRenderers: []
+  changeMaterial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -10534,6 +10621,10 @@ MonoBehaviour:
       m_Calls: []
   ghostCanvas: {fileID: 0}
   clearNum: 0
+  clearClip: {fileID: 0}
+  clearClipValue: 0
+  subClip: {fileID: 0}
+  subClipValue: 0
   interactorType: 0
   socketInteractors: []
   interactors: []
@@ -10550,7 +10641,8 @@ MonoBehaviour:
   offSetAngle: 18
   isDialClamped: 0
   dialTexts: []
-  changematerial: {fileID: 0}
+  dialRenderers: []
+  changeMaterial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons:
@@ -11428,6 +11520,10 @@ MonoBehaviour:
       m_Calls: []
   ghostCanvas: {fileID: 0}
   clearNum: 0
+  clearClip: {fileID: 0}
+  clearClipValue: 0
+  subClip: {fileID: 0}
+  subClipValue: 0
   interactorType: 2
   socketInteractors:
   - {fileID: 1841075492}
@@ -11450,7 +11546,8 @@ MonoBehaviour:
   offSetAngle: 0
   isDialClamped: 0
   dialTexts: []
-  changematerial: {fileID: 0}
+  dialRenderers: []
+  changeMaterial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -11809,6 +11906,10 @@ MonoBehaviour:
       m_Calls: []
   ghostCanvas: {fileID: 0}
   clearNum: 0
+  clearClip: {fileID: 0}
+  clearClipValue: 0
+  subClip: {fileID: 0}
+  subClipValue: 0
   interactorType: 0
   socketInteractors: []
   interactors: []
@@ -11834,7 +11935,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  changematerial: {fileID: 0}
+  dialRenderers: []
+  changeMaterial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -12972,6 +13074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 41e180b31013b9e418b8dbc27ebcb5fb, type: 2}
   alphaValue: 0.1
+  puzzles: {fileID: 0}
 --- !u!65 &1167740468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23403,6 +23506,10 @@ MonoBehaviour:
       m_Calls: []
   ghostCanvas: {fileID: 0}
   clearNum: 0
+  clearClip: {fileID: 0}
+  clearClipValue: 0
+  subClip: {fileID: 0}
+  subClipValue: 0
   interactorType: 2
   socketInteractors:
   - {fileID: 0}
@@ -23434,7 +23541,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  changematerial: {fileID: 0}
+  dialRenderers: []
+  changeMaterial: {fileID: 0}
   _KeypadNum: []
   _KeypadSub: []
   numPushButtons: []
@@ -39943,6 +40051,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1902397865}
   m_SourcePrefab: {fileID: 100100000, guid: 899a4f9d2384fde49a4b26904caacd73, type: 3}
+--- !u!23 &8973313850159327105 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5715263149312901638, guid: 899a4f9d2384fde49a4b26904caacd73,
+    type: 3}
+  m_PrefabInstance: {fileID: 8973313850159327104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &8998055367456816227
 MeshRenderer:
   m_ObjectHideFlags: 0
