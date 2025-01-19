@@ -4943,7 +4943,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1392157470}
-  m_Father: {fileID: 693291065}
+  m_Father: {fileID: 1881307684}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!114 &350118399
 MonoBehaviour:
@@ -10272,7 +10272,7 @@ GameObject:
   - component: {fileID: 693291067}
   - component: {fileID: 693291068}
   m_Layer: 0
-  m_Name: TarotPuzzle
+  m_Name: Puzzles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10286,17 +10286,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693291063}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1891453149}
-  - {fileID: 728895522}
-  - {fileID: 350118398}
-  - {fileID: 1885288297}
-  - {fileID: 1822196484}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 1881307684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &693291067
 MonoBehaviour:
@@ -11155,7 +11150,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1180840583}
-  m_Father: {fileID: 693291065}
+  m_Father: {fileID: 1881307684}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!114 &728895523
 MonoBehaviour:
@@ -28637,7 +28632,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 136391368}
-  m_Father: {fileID: 693291065}
+  m_Father: {fileID: 1881307684}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!114 &1822196485
 MonoBehaviour:
@@ -30045,6 +30040,43 @@ Transform:
   - {fileID: 1014369378}
   m_Father: {fileID: 1542822725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1881307683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1881307684}
+  m_Layer: 0
+  m_Name: TarotPuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1881307684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881307683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 693291065}
+  - {fileID: 1822196484}
+  - {fileID: 1885288297}
+  - {fileID: 350118398}
+  - {fileID: 728895522}
+  - {fileID: 1891453149}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881352122
 GameObject:
   m_ObjectHideFlags: 0
@@ -30290,7 +30322,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 534627812}
-  m_Father: {fileID: 693291065}
+  m_Father: {fileID: 1881307684}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!114 &1885288298
 MonoBehaviour:
@@ -30637,7 +30669,7 @@ Transform:
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 693291065}
+  m_Father: {fileID: 1881307684}
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
 --- !u!212 &1891453150
 SpriteRenderer:
@@ -41862,7 +41894,7 @@ SceneRoots:
   - {fileID: 1096319893}
   - {fileID: 4413008967534061892}
   - {fileID: 1125131060}
-  - {fileID: 693291065}
+  - {fileID: 1881307684}
   - {fileID: 625485221}
   - {fileID: 543450653197859367}
   - {fileID: 6445420732314466412}
