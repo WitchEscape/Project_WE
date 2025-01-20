@@ -1162,6 +1162,7 @@ GameObject:
   - component: {fileID: 4559627388297359941}
   - component: {fileID: 4785458121432227327}
   - component: {fileID: 1215544702257687091}
+  - component: {fileID: 6670007312228583245}
   m_Layer: 8
   m_Name: Potion_B
   m_TagString: Rune
@@ -1177,7 +1178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3582019311201406049}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.62, y: 1.71, z: 1.178}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1419,6 +1420,19 @@ MonoBehaviour:
   poseTransitionDuration: 0.2
   rightHandPose: {fileID: 2912188310890157984}
   leftHandPose: {fileID: 8140838866851607322}
+--- !u!114 &6670007312228583245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582019311201406049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34368472d7e997e4db7a1b0f7092baf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabPotionClip: {fileID: 8300000, guid: 7d5d58e86798d3d48aa0a681f186ff6e, type: 3}
 --- !u!1 &3749788603113123590
 GameObject:
   m_ObjectHideFlags: 0
