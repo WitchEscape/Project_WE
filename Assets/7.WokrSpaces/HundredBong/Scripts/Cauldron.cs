@@ -9,12 +9,16 @@ public class Cauldron : MonoBehaviour
 {
     [SerializeField] private string puzzleID = "Puzzle_2";
 
-    [Header("생성할 빛나는 돌")] public GameObject magicStone;
-    [Header("빛나는 돌 소환위치")] public Vector3 magicStonePos;
-    [Header("휘저을때 필요한 힘")] public float churnForce = 3f;
-    [Header("물약 리스트")] public List<GameObject> positions;
-    [Header("성공했을 때 파티클")] public ParticleSystem successParticle;
-    [Header("실패했을 때 파티클")] public ParticleSystem failParticle;
+    [SerializeField, Header("생성할 빛나는 돌")] private GameObject magicStone;
+    [SerializeField, Header("빛나는 돌 소환위치")] private Vector3 magicStonePos;
+    [SerializeField, Header("휘저을때 필요한 힘")] private float churnForce = 3f;
+    [SerializeField, Header("물약 리스트")] private List<GameObject> positions;
+    [SerializeField, Header("성공했을때 파티클")] private ParticleSystem successParticle;
+    [SerializeField, Header("실패했을때 파티클")] private ParticleSystem failParticle;
+
+    [SerializeField, Header("성공했을때 재생할 클립")] private AudioClip successClip;
+    [SerializeField, Header("솥에 물약 넣었을때 재생할 클립")] private AudioClip putInCauldronClip;
+
     private GhostCanvas ghostCanvas;
     
     [HideInInspector] public Observable<int> postionCount;
@@ -29,11 +33,16 @@ public class Cauldron : MonoBehaviour
     {
         ghostCanvas = FindObjectOfType<GhostCanvas>();
 
-        foreach (GameObject obj in positions)
-        {
-            //리셋될 때 Transform 리셋할 수 있도록 컴포넌트 부착
-            obj.AddComponent<ResetPostion>();   
-        }
+        //foreach (GameObject obj in positions)
+        //{
+        //    //리셋될 때 Transform 리셋할 수 있도록 컴포넌트 부착
+        //    obj.AddComponent<ResetPostion>();  
+
+        //    AudioSource audioSource = obj.GetComponent<AudioSource>();
+        //    audioSource.clip = grabPotionClip;
+        //    audioSource.playOnAwake = false;
+        //    audioSource.loop = false;
+        //}
     }
 
     private void OnEnable()
@@ -122,6 +131,7 @@ public class Cauldron : MonoBehaviour
             PuzzleProgressManager.Instance.CompletePuzzle(puzzleID);
             magicStone.transform.position = new Vector3(magicStonePos.x, magicStonePos.y, magicStonePos.z);
             successParticle.Play();
+            AudioManager.Instance.PlaySFX(successClip);
         }
 
         //조건 검사가 끝나면 다시 포션카운트 0으로 초기화
@@ -148,6 +158,11 @@ public class Cauldron : MonoBehaviour
             arg.gameObject.SetActive(false);
             StartCoroutine(ResetPostionCoroutine());
             return;
+        }
+
+        if (putInCauldronClip != null)
+        {
+            AudioManager.Instance.PlaySFX(putInCauldronClip);
         }
 
         //0일때 H를 넣으면 true

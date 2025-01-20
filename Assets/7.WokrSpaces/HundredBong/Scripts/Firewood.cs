@@ -7,6 +7,7 @@ public class Firewood : MonoBehaviour
     [Header("불꽃 파티클")] public ParticleSystem fireParticle;
     [Header("성냥 태그")] public string matchTag;
     [Header("불 붙이는데 필요한 힘")] public float fireForce;
+    [Header("불 붙였을때 재생할 클립")] public AudioClip fireClip;
     [Header("가마솥")] public Cauldron cauldron;
 
     private void Start()
@@ -32,6 +33,7 @@ public class Firewood : MonoBehaviour
         cauldron.isFire = true;
         fireParticle.gameObject.SetActive(true);
         fireParticle.Play();
+        AudioManager.Instance.PlaySFX(fireClip);
     }
 
 
