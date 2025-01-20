@@ -21,6 +21,8 @@ public class DisplayMaterial : MonoBehaviour
     private float erase = 1f;
 
     [Header("마법진 생성 시 재생할 파티클")] public ParticleSystem spawnParticle;
+    [Header("마법진 생성 시작시 재생할 클립")] public AudioClip spawnClip;
+
     private GhostCanvas ghostCanvas;
 
     private int playerHandCount; 
@@ -38,6 +40,7 @@ public class DisplayMaterial : MonoBehaviour
     private void OnEnable()
     {
         material.color = new Color(material.color.r, material.color.g, material.color.b, 0);
+        AudioManager.Instance.PlaySFX(spawnClip);
     }
 
     private void Start()
