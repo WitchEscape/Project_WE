@@ -6470,7 +6470,7 @@ PrefabInstance:
     - target: {fileID: 5709546463115564815, guid: cb50e453e21fb1f42b8fd84467421cc2,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5709546463115564815, guid: cb50e453e21fb1f42b8fd84467421cc2,
         type: 3}
@@ -6481,6 +6481,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pot_Anemone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8628560791675215222, guid: cb50e453e21fb1f42b8fd84467421cc2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6513,7 +6518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd0dde60267fd941ba8e61aa5e91988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: a61a52b15e5af904db7b8443991dc1cf, type: 2}
+  baseMaterial: {fileID: 2100000, guid: a61a52b15e5af904db7b8443991dc1cf, type: 2}
+  re: {fileID: 79042910001673851}
   alphaValue: 0.01
   puzzles: {fileID: 668171821}
 --- !u!64 &79042910001673848
@@ -6541,6 +6547,12 @@ MeshCollider:
 --- !u!4 &79042910001673849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989714715157367029, guid: cb50e453e21fb1f42b8fd84467421cc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 79042910001673845}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &79042910001673851 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5709546463115564815, guid: cb50e453e21fb1f42b8fd84467421cc2,
     type: 3}
   m_PrefabInstance: {fileID: 79042910001673845}
   m_PrefabAsset: {fileID: 0}
@@ -8354,7 +8366,7 @@ PrefabInstance:
     - target: {fileID: 5045649126726387843, guid: 8ffd45f153602944ca2200ebd9c2e7ae,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5045649126726387843, guid: 8ffd45f153602944ca2200ebd9c2e7ae,
         type: 3}
@@ -8397,8 +8409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd0dde60267fd941ba8e61aa5e91988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 5f8aaf87e0a069e4f8b51b00d6234e10, type: 2}
-  alphaValue: 0.01
+  baseMaterial: {fileID: 2100000, guid: 5f8aaf87e0a069e4f8b51b00d6234e10, type: 2}
+  re: {fileID: 1693979692441854785}
+  alphaValue: 0.02
   puzzles: {fileID: 668171821}
 --- !u!64 &1693979692441854782
 MeshCollider:
@@ -8425,6 +8438,12 @@ MeshCollider:
 --- !u!4 &1693979692441854783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3467078053700244765, guid: 8ffd45f153602944ca2200ebd9c2e7ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 1693979692441854779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1693979692441854785 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5045649126726387843, guid: 8ffd45f153602944ca2200ebd9c2e7ae,
     type: 3}
   m_PrefabInstance: {fileID: 1693979692441854779}
   m_PrefabAsset: {fileID: 0}
@@ -10445,7 +10464,7 @@ PrefabInstance:
     - target: {fileID: 866460767838968013, guid: d12df8790ad3df94291bd41e571a5dc3,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 866460767838968013, guid: d12df8790ad3df94291bd41e571a5dc3,
         type: 3}
@@ -10456,6 +10475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pot_SunFlower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183903908399096077, guid: d12df8790ad3df94291bd41e571a5dc3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5258713456225938383, guid: d12df8790ad3df94291bd41e571a5dc3,
         type: 3}
@@ -10558,7 +10582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd0dde60267fd941ba8e61aa5e91988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: bc8fc65233d1f2d479f4f6b450552621, type: 2}
+  baseMaterial: {fileID: 2100000, guid: bc8fc65233d1f2d479f4f6b450552621, type: 2}
+  re: {fileID: 6133046695129407628}
   alphaValue: 0.01
   puzzles: {fileID: 668171821}
 --- !u!64 &6133046695129407625
@@ -10586,6 +10611,12 @@ MeshCollider:
 --- !u!4 &6133046695129407626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5258713456225938383, guid: d12df8790ad3df94291bd41e571a5dc3,
+    type: 3}
+  m_PrefabInstance: {fileID: 6133046695129407622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6133046695129407628 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 866460767838968013, guid: d12df8790ad3df94291bd41e571a5dc3,
     type: 3}
   m_PrefabInstance: {fileID: 6133046695129407622}
   m_PrefabAsset: {fileID: 0}
@@ -11351,10 +11382,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pot_Daffodil
       objectReference: {fileID: 0}
+    - target: {fileID: 7287227988732963024, guid: 9d7490e53638aad4090183d07e9a9db1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8557447144479126686, guid: 9d7490e53638aad4090183d07e9a9db1,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8557447144479126686, guid: 9d7490e53638aad4090183d07e9a9db1,
         type: 3}
@@ -11392,7 +11428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd0dde60267fd941ba8e61aa5e91988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 76800d76ba17995489895ecbcb816549, type: 2}
+  baseMaterial: {fileID: 2100000, guid: 76800d76ba17995489895ecbcb816549, type: 2}
+  re: {fileID: 7784770186976765162}
   alphaValue: 0.01
   puzzles: {fileID: 668171821}
 --- !u!64 &7784770186976765159
@@ -11420,6 +11457,12 @@ MeshCollider:
 --- !u!4 &7784770186976765160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3846915468161254768, guid: 9d7490e53638aad4090183d07e9a9db1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7784770186976765156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7784770186976765162 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8557447144479126686, guid: 9d7490e53638aad4090183d07e9a9db1,
     type: 3}
   m_PrefabInstance: {fileID: 7784770186976765156}
   m_PrefabAsset: {fileID: 0}
