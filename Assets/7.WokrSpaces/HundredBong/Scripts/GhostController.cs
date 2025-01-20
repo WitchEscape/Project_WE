@@ -50,7 +50,7 @@ public class GhostController : MonoBehaviour
         if (fsm.currentState == State.Idle)
         {
             //설정된 목표 초기화 및 이동 중지
-            agent.ResetPath();
+            agent?.ResetPath();
 
             //agent.isStopped = true;
 

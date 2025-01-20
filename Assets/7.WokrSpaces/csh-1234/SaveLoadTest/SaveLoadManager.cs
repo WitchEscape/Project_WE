@@ -7,6 +7,7 @@ using UnityEditor;
 using System.Linq;
 using System.Collections;
 using Unity.VisualScripting;
+using static UserData;
 
 public class SaveLoadManager : MonoBehaviour
 {
@@ -56,9 +57,48 @@ public class SaveLoadManager : MonoBehaviour
         Directory.CreateDirectory(savePath);
     }
 
+    public void SaveUserData()
+    {
+        Debug.Log($"Save Start UserData");
+        try
+        {
+            UserData userData = new UserData();
+            userData.baseData = CollectUserData();
+
+            string json = JsonUtility.ToJson(userData, true);
+            string filePath = Path.Combine(savePath, $"save_UserData.json");
+            File.WriteAllText(filePath, json);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Save failed: {e.Message}");
+        }
+    }
+    public void LoadUserData()
+    {
+        Debug.Log($"Load Start UserData");
+        try
+        {
+            string filePath = Path.Combine(savePath, $"save_UserData.json");
+            if (!File.Exists(filePath))
+            {
+                Debug.LogError($"Save file not found: {filePath}");
+                return;
+            }
+            string json = File.ReadAllText(filePath);
+            UserData userData = JsonUtility.FromJson<UserData>(json);
+            CurrentClearStage = userData.baseData.StageProgress;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"{e.Message}");
+        }
+    }
+
     public void SaveGame(string SceneName)
     {
         Debug.Log($"Save Start {SceneName}");
+        SaveUserData();
         try
         {
             SaveData saveData = new SaveData();
@@ -117,6 +157,7 @@ public class SaveLoadManager : MonoBehaviour
     public void LoadGame(string SceneName)
     {
         Debug.Log($"Load Stage {SceneName}");
+        LoadUserData();
         try
         {
             string filePath = Path.Combine(savePath, $"save_{SceneName}.json");
@@ -194,6 +235,9 @@ public class SaveLoadManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+
+
+
     #region CollectData
     private PlayerData CollectPlayerData()
     {
@@ -241,6 +285,21 @@ public class SaveLoadManager : MonoBehaviour
         }
 
         return objectsData;
+    }
+
+    private BaseData CollectUserData()
+    {
+        BaseData baseData = new BaseData();
+        if(SaveLoadManager.instance != null)
+        {
+            baseData.StageProgress = SaveLoadManager.instance.CurrentClearStage;
+        }
+        else
+        {
+            //일단 없으면 터지니까 1로 초기화 하겠음
+            baseData.StageProgress = 1;
+        }
+        return baseData;
     }
 
     #endregion

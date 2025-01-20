@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class DataManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class DataManager : MonoBehaviour
     }
     
     public Dictionary<string, DialogData> DialogDic { get; private set; } = new Dictionary<string, DialogData>();
+    public Dictionary<string, UserData> UserDic { get; private set; } = new Dictionary<string, UserData>();
+
 
 
     private void Awake()
@@ -109,7 +112,6 @@ public class DataManager : MonoBehaviour
         {
             if (string.IsNullOrEmpty(lines[y].Trim())) continue;
 
-            // CSV 파싱 로직 개선
             List<string> row = new List<string>();
             bool inQuotes = false;
             string currentValue = "";
@@ -132,7 +134,6 @@ public class DataManager : MonoBehaviour
                 currentValue += c;
             }
             
-            // 마지막 값 추가
             if (!string.IsNullOrEmpty(currentValue))
             {
                 row.Add(currentValue.Trim());
@@ -195,7 +196,6 @@ public class DataManager : MonoBehaviour
         public List<DialogData> Dialogs;
     }
     #endregion
-
 
     /// <summary>
     /// 같은 접두사를 가진 DialogId들을 List로 묶어서 리턴하는 메서드
