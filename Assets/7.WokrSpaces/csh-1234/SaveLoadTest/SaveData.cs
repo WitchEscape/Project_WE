@@ -10,6 +10,7 @@ public class SaveData
     public List<ObjectData> worldObjects;
     public List<StageProgressData> stageProgressList;
     public string saveTimeString;
+    
     public List<InventorySlotData> inventoryData;
     public List<string> removedFromWorldItems;
 
@@ -152,11 +153,7 @@ public class PlayerData
     public Quaternion rotation;
 }
 
-[System.Serializable]
-public class UserData
-{
-    public int StageProgress;
-}
+
 
 [System.Serializable]
 public class ObjectData
@@ -211,4 +208,18 @@ public class SaveFileInfo
 {
     public string StageName;
     public DateTime SaveTime;
+}
+
+[System.Serializable]
+public class UserData
+{
+    public BaseData baseData;
+
+    [Serializable]
+    public class BaseData
+    {
+        public int StageProgress;
+    }
+
+    
 }
