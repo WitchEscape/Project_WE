@@ -20,7 +20,7 @@ public class AlphaController : MonoBehaviour
         {
             alphaValue = 0.5f;
         }
-        if (baseMaterial != null)
+        if (baseMaterial != null && re != null)
         {
             material = new Material(baseMaterial);
             materials.Add(material);
