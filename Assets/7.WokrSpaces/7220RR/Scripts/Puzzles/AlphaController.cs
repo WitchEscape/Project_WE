@@ -23,8 +23,8 @@ public class AlphaController : MonoBehaviour
         if (baseMaterial != null && re != null)
         {
             material = new Material(baseMaterial);
-            materials.Add(material);
             materials.Add(re.material);
+            materials.Add(material);
             re.SetMaterials(materials);
         }
     }
