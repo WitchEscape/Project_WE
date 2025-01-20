@@ -1,14 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AlphaController : MonoBehaviour
 {
-    [SerializeField]
     private Material material;
-    private Color baseColor;
+    [SerializeField]
+    private Material baseMaterial;
+    [SerializeField]
+    private Renderer re;
     [SerializeField]
     private float alphaValue;
     [SerializeField]
     private Puzzles puzzles;
+    List<Material> materials = new List<Material>();
 
     private void Awake()
     {
@@ -16,9 +20,12 @@ public class AlphaController : MonoBehaviour
         {
             alphaValue = 0.5f;
         }
-        if (material != null)
+        if (baseMaterial != null)
         {
-            baseColor = material.color;
+            material = new Material(baseMaterial);
+            materials.Add(material);
+            materials.Add(re.material);
+            re.SetMaterials(materials);
         }
     }
 
@@ -41,15 +48,4 @@ public class AlphaController : MonoBehaviour
             material.color = newColor;
         }
     }
-
-    private void OnDisable()
-    {
-        material.color = baseColor;
-    }
-
-    private void OnDestroy()
-    {
-        material.color = baseColor;
-    }
-
 }
