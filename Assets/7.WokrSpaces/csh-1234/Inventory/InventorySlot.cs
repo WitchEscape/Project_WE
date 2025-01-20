@@ -276,7 +276,7 @@ public class InventorySlot : MonoBehaviour
         yield return null;
 
         var enableDisable = item.GetComponent<OnGrabEnableDisable>();
-        if (enableDisable != null)
+        if (enableDisable != null)  
         {
             enableDisable.EnableAll();
         }
@@ -366,20 +366,47 @@ public class InventorySlot : MonoBehaviour
             boundCenterTransform.localScale
         );
 
-        boundCenterTransform.localEulerAngles = new Vector3(0, 90, 0);
+        itemSlotMeshClone.localRotation = Quaternion.Euler(GetRotationByTag(itemHandIsHolding.gameObject.tag));
+        Vector3 rotationByTag = GetRotationByTag(itemHandIsHolding.gameObject.tag);
+        boundCenterTransform.localEulerAngles = rotationByTag;
 
         inventorySize.enabled = true;
         Vector3 parentSize = inventorySize.bounds.size;
         while (bounds.size.x > parentSize.x || bounds.size.y > parentSize.y || bounds.size.z > parentSize.z)
         {
             bounds = GetBoundsOfAllMeshes(boundCenterTransform.transform);
+
             boundCenterTransform.transform.localScale *= 0.9f;
         }
         inventorySize.enabled = false;
 
-        goalSizeToFitInSlot = boundCenterTransform.transform.localScale;
+        goalSizeToFitInSlot = boundCenterTransform.transform.localScale * GetScaleByTag(itemHandIsHolding.gameObject.tag);
 
         animateItemToSlotCoroutine = StartCoroutine(AnimateItemToSlot());
+    }
+
+    private Vector3 GetRotationByTag(string tag)
+    {
+        switch (tag)
+        {
+            case "Tarot":
+                Debug.Log("이거 타로임");
+                return new Vector3(90, 90, 180);
+            default:
+                return new Vector3(0, 90, 0);
+        }
+    }
+
+    private float GetScaleByTag(string tag)
+    {
+        switch (tag)
+        {
+            case "Tarot":
+                Debug.Log("이거 타로임");
+                return 1.4f;
+            default:
+                return 0.9f;
+        }
     }
 
     private void ActivateItemSlotMeshClone() => itemSlotMeshClone.gameObject.SetActive(true);

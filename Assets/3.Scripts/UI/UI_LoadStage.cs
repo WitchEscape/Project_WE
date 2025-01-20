@@ -11,16 +11,28 @@ public class UI_LoadStage : MonoBehaviour
     [SerializeField] private UI_DataLoadButton buttonPrefab;
     [SerializeField] private Transform buttonContainer;
 
-    [SerializeField] private Button stageSelectButton;
-    [SerializeField] private Button stageLoadButton;
+    [SerializeField] private Button selectStageButtons;
+    [SerializeField] private Button loadStageButton;
+
+    [SerializeField] private GameObject selectStage;
+    [SerializeField] private GameObject loadStage;
+
+    [SerializeField] private GameObject selectStageState;
+    [SerializeField] private GameObject loadStageState;
 
     private void Start()
     {
         Initialize();
 
-        LoadSelectStages();
-        stageSelectButton.onClick.AddListener(LoadSelectStages);
-        stageLoadButton.onClick.AddListener(LoadSaveStages);
+        SelectStages();
+        selectStageButtons.onClick.AddListener(SelectStages);
+        loadStageButton.onClick.AddListener(LoadStages);
+    }
+
+    private void OnEnable()
+    {   
+        selectStageState.SetActive(true);
+        selectStageState.SetActive(false);
     }
 
     private void Initialize()
@@ -34,22 +46,31 @@ public class UI_LoadStage : MonoBehaviour
         }
     }
 
-    private void LoadSelectStages()
+    private void SelectStages()
     {
         Initialize();
-        UI_DataLoadButton button = Instantiate(buttonPrefab, buttonContainer);
-        button.Initialize("535교실", DateTime.Now, OnLoadButtonClicked, OnDeleteButtonClicked);
+
+        selectStageState.gameObject.SetActive(false);
+        loadStageState.gameObject.SetActive(true);
+
+        selectStage.gameObject.SetActive(true);
     }
 
-
-    private void LoadSaveStages()
+    private void LoadStages()
     {
+        selectStage.gameObject.SetActive(false);
+
+        selectStageState.gameObject.SetActive(true);
+        loadStageState.gameObject.SetActive(false);
+
         Initialize();
-        if(SaveLoadManager.Instance != null)
+
+        if (SaveLoadManager.Instance != null)
         {
             var saveFiles = SaveLoadManager.Instance.GetSavedStageFiles();
             foreach (var saveFile in saveFiles)
             {
+                SaveLoadManager.Instance.isDataLoadScene = true;
                 UI_DataLoadButton button = Instantiate(buttonPrefab, buttonContainer);
                 button.Initialize(saveFile.StageName, saveFile.SaveTime, OnLoadButtonClicked, OnDeleteButtonClicked);
             }
@@ -60,45 +81,15 @@ public class UI_LoadStage : MonoBehaviour
         }
     }
 
-
     private void OnLoadButtonClicked(string stageName)
     {
-        SaveLoadManager.Instance.isDataLoadScene = true;
         SceneManager.LoadScene(stageName);
-        //StartCoroutine(LoadStageCoroutine(stageName));
     }
 
     private void OnDeleteButtonClicked(string stageName)
     {
         SaveLoadManager.Instance.DeleteSaveFile(stageName);
         Initialize();
-        LoadSaveStages();
-    }
-
-    private IEnumerator LoadStageCoroutine(string stageName)
-    {
-        UIManager.Instance.CloseAllCurrentUI();
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(stageName);
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(0.5f);
-
-        if (SaveLoadManager.Instance == null)
-        {
-            yield break;
-        }
-
-        try
-        {
-            SaveLoadManager.Instance.LoadGame(stageName);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"{e.Message}");
-        }
+        LoadStages();
     }
 }

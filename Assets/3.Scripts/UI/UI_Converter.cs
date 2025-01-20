@@ -8,8 +8,7 @@ public class UI_Converter : MonoBehaviour
 {
     [SerializeField] InventoryManager inventoryManager;
     [SerializeField] GameObject ui_Menu;
-    [SerializeField] GameObject PlayerPrefab;
-
+    
     [SerializeField] private InputActionReference openInventoryRightHand;
     [SerializeField] private InputActionReference openMenuInputRightHand;
 
@@ -22,7 +21,6 @@ public class UI_Converter : MonoBehaviour
     {
         if (ui_Menu == null)
         {
-            Debug.LogError("UI Menu reference is missing on UI_Converter");
             return;
         }
 
@@ -62,7 +60,6 @@ public class UI_Converter : MonoBehaviour
     {
         if (ui_Menu == null)
         {
-            Debug.LogWarning("UI Menu is null. Please check the reference.");
             isMenuOpen = false;
             return;
         }

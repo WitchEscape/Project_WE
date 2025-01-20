@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 [Serializable]
@@ -152,6 +153,12 @@ public class PlayerData
 }
 
 [System.Serializable]
+public class UserData
+{
+    public int StageProgress;
+}
+
+[System.Serializable]
 public class ObjectData
 {
     public string uniqueID;
@@ -198,4 +205,10 @@ public class CustomDataEntry
 {
     public string key;
     public string value;
+}
+
+public class SaveFileInfo
+{
+    public string StageName;
+    public DateTime SaveTime;
 }

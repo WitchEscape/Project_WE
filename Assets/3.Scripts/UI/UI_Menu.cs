@@ -7,20 +7,31 @@ public class UI_Menu : MonoBehaviour
 {
     [SerializeField] private Button settingButton;
     [SerializeField] private Button saveLoadButton;
-    [SerializeField] private Button backButton;
     [SerializeField] private Button saveExitButton;
 
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Button loadButton;
+
     [SerializeField] private GameObject settingPanel;
-    [SerializeField] private GameObject saveLoadPanel;
 
     public float StartPanelDistance = 2f;
 
     private void Start()
     {
         settingButton.onClick.AddListener(OnSettingButtonClick);
-        saveLoadButton.onClick.AddListener(OnSaveLoadButtonClick);
-        backButton.onClick.AddListener(OnBackButtonClick);
         saveExitButton.onClick.AddListener(OnSaveExitButtonClick);
+        saveButton.onClick.AddListener(OnSaveButtonClick);
+        loadButton.onClick.AddListener(OnLoadButtonClick);
+    }
+
+    private void OnLoadButtonClick()
+    {
+        SaveLoadManager.Instance.LoadGame(SceneManager.GetActiveScene().name);
+    }
+
+    private void OnSaveButtonClick()
+    {
+        SaveLoadManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
     }
 
     private void OnEnable()
@@ -33,19 +44,10 @@ public class UI_Menu : MonoBehaviour
         UIManager.Instance.OpenUI(settingPanel);
     }
 
-    private void OnSaveLoadButtonClick()
-    {
-        UIManager.Instance.OpenUI(saveLoadPanel);
-    }
-
-    private void OnBackButtonClick()
-    {
-        UIManager.Instance.CloseCurrentUI();
-    }
-
     private void OnSaveExitButtonClick()
     {
-        SceneManager.LoadScene("LobbyScene");
+        //SaveLoadManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("WE_Level_Tuturial");
     }
 
     private void SetPositionAndRotation()
