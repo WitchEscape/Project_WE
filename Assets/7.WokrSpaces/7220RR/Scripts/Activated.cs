@@ -31,7 +31,6 @@ public class Activated : MonoBehaviour
 
         ObjectOnOff<GameObject>(objects, false);
         ObjectOnOff<XRBaseInteractable>(interactables, false);
-
     }
 
     public virtual void ActivateUI()
