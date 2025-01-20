@@ -133,7 +133,6 @@ public class JointLimitActivated : Activated
         }
     }
 
-
     private void MaxLimitReSet()
     {
         for (int i = 0; i < maxLimitLists.Count; i++)
