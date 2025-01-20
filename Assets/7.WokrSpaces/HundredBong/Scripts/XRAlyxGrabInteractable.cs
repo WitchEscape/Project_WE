@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 public class XRAlyxGrabInteractable : XRGrabInteractable
@@ -23,6 +24,12 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
     {
         base.OnEnable();
         selectEntered.AddListener(SetAttach);
+        selectExited.AddListener(Setat);
+    }
+
+    private void Setat(SelectExitEventArgs arg0)
+    {
+        attachTransform = null;
     }
 
     public void SetAttach(SelectEnterEventArgs arg0)
