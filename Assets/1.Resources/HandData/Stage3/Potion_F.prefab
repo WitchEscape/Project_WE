@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 2185527693186551885}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.043964148, y: 0.11566317, z: 0.025099993}
+  m_LocalPosition: {x: -0.0446, y: 0.1158, z: 0.0251}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 2256657042283432587}
   - component: {fileID: 3987794630010256223}
   - component: {fileID: 7183331180320484105}
+  - component: {fileID: 526076400964603117}
   m_Layer: 8
   m_Name: Potion_F
   m_TagString: Rune
@@ -377,7 +378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8465208786101737097}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.618, y: 1.41, z: 0.564}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -620,6 +621,19 @@ MonoBehaviour:
   poseTransitionDuration: 0.2
   rightHandPose: {fileID: 1517942012391281060}
   leftHandPose: {fileID: 5303818809734871617}
+--- !u!114 &526076400964603117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465208786101737097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34368472d7e997e4db7a1b0f7092baf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabPotionClip: {fileID: 8300000, guid: 7d5d58e86798d3d48aa0a681f186ff6e, type: 3}
 --- !u!1 &8846998456638451606
 GameObject:
   m_ObjectHideFlags: 0
