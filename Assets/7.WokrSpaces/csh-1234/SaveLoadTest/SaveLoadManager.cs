@@ -10,35 +10,50 @@ using Unity.VisualScripting;
 
 public class SaveLoadManager : MonoBehaviour
 {
-    private static SaveLoadManager instance;
-    public static SaveLoadManager Instance => instance;
+    private static SaveLoadManager instance = null;
+    public static SaveLoadManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<SaveLoadManager>();
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("@SaveLoadManager");
+                    instance = go.AddComponent<SaveLoadManager>();
+                }
+            }
+            return instance;
+        }
+    }
 
     public static event Action OnLoadComplete;
 
     private string savePath;
     public bool isDataLoadScene = false;
 
+    public int CurrentClearStage = 1;
+    
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
 
-        #if UNITY_EDITOR
-            // 유니티 에디터에서 실행 시 프로젝트 내부 경로 사용
-            savePath = Path.Combine(Application.dataPath, "1.Resources/Data/SaveData");
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+#if UNITY_EDITOR
+        // 유니티 에디터에서 실행 시 프로젝트 내부 경로 사용
+        savePath = Path.Combine(Application.dataPath, "1.Resources/Data/SaveData");
         #else
             // 빌드된 게임에서는 persistentDataPath 사용
             savePath = Path.Combine(Application.persistentDataPath, "SaveData");
         #endif
         Directory.CreateDirectory(savePath);
-
     }
 
     public void SaveGame(string SceneName)
@@ -90,6 +105,8 @@ public class SaveLoadManager : MonoBehaviour
             string json = JsonUtility.ToJson(saveData, true);
             string filePath = Path.Combine(savePath, $"save_{SceneName}.json");
             File.WriteAllText(filePath, json);
+
+            //SceneManager.LoadScene("WE_Level_Tuturial");
         }
         catch (Exception e)
         {
@@ -145,7 +162,7 @@ public class SaveLoadManager : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         LoadGameData(saveData);
-        OnLoadComplete.Invoke();
+        OnLoadComplete?.Invoke();
     }
 
     private void LoadGameData(SaveData saveData)
@@ -171,7 +188,11 @@ public class SaveLoadManager : MonoBehaviour
             }
         }
     }
-
+    
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
     #region CollectData
     private PlayerData CollectPlayerData()
@@ -375,9 +396,5 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
-    public class SaveFileInfo
-    {
-        public string StageName;
-        public DateTime SaveTime;
-    }
+
 }

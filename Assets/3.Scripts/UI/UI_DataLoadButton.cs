@@ -1,13 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -30,7 +25,7 @@ public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
         if (stageNameText != null)
         {
-            stageNameText.text = stageName;
+            stageNameText.text = ConvertStageName(stageName);
         }
 
         if (saveTimeText != null)
@@ -50,13 +45,51 @@ public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         onLoadCallback?.Invoke(stageName);
     }
 
+    private string ConvertStageName(string stageName)
+    {
+        if(stageName == "WE_Level_1")
+        {
+            return "535교실";
+        }
+        else if (stageName == "WE_Level_2")
+        {
+            return "기숙사";
+        }
+        else if (stageName == "WE_Level_3")
+        {
+            return "마법약 교실";
+        }
+        else if (stageName == "WE_Level_4")
+        {
+            return "도서관";
+        }
+        else if (stageName == "WE_Level_5")
+        {
+            return "교무실";
+        }
+        else if (stageName == "WE_Level_Tuturial")
+        {
+            return "로비";
+        }
+        else
+        {
+            return "UNKNOWN";
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        focus.gameObject.SetActive(true);
+        if (focus != null)
+        {
+            focus.SetActive(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        focus.gameObject.SetActive(false);
+        if (focus != null)
+        {
+            focus.SetActive(false);
+        }
     }
 }
