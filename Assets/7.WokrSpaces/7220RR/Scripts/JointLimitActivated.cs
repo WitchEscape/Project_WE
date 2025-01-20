@@ -147,7 +147,7 @@ public class JointLimitActivated : Activated
             else if (maxLimitLists[i] is HingeJoint hin)
             {
                 JointLimits limits = hin.limits;
-                limits.min = maxbaseFloatLists[i];
+                limits.max = maxbaseFloatLists[i];
                 hin.limits = limits;
             }
         }
