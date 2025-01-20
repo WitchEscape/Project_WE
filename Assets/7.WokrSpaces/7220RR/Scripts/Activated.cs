@@ -4,6 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Activated : MonoBehaviour
 {
+
     public GameObject activatedUI;
     public XRBaseInteractable interactable;
     public List<GameObject> objects;
