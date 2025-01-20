@@ -5,14 +5,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Latern : MonoBehaviour
 {
-    private XRSocketInteractor interactor;
-    private Light pointLight;
+    private XRSocketTagInteractor interactor;
+    public Light pointLight;
     public string itemTag;
 
     private void Awake()
     {
-        interactor = GetComponentInChildren<XRSocketInteractor>();
-        pointLight = GetComponentInChildren<Light>();
+        interactor = GetComponentInChildren<XRSocketTagInteractor>();
     }
 
     private void OnEnable()
@@ -29,7 +28,7 @@ public class Latern : MonoBehaviour
 
     private void Start()
     {
-        if (pointLight.gameObject.activeSelf)
+        if (pointLight.gameObject.activeSelf && pointLight != null)
         {
             pointLight.gameObject.SetActive(false); 
         }
