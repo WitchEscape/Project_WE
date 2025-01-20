@@ -692,6 +692,9 @@ public class Puzzles : MonoBehaviour
         {
             if (currentPasswardColorIndexs[i] != (int)passwardColors[i])
             {
+                print($"index {i}");
+                print($"currentPassward {currentPasswardColorIndexs[i]}");
+                print($"passward {(int)passwardColors[i]}");
                 return;
             }
         }

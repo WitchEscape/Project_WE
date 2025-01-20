@@ -4,7 +4,7 @@ public class AlphaController : MonoBehaviour
 {
     [SerializeField]
     private Material material;
-    private Material baseMaterial;
+    private Color baseColor;
     [SerializeField]
     private float alphaValue;
     [SerializeField]
@@ -18,7 +18,7 @@ public class AlphaController : MonoBehaviour
         }
         if (material != null)
         {
-            baseMaterial = Instantiate(material);
+            baseColor = material.color;
         }
     }
 
@@ -44,7 +44,12 @@ public class AlphaController : MonoBehaviour
 
     private void OnDisable()
     {
-        material = baseMaterial;
+        material.color = baseColor;
+    }
+
+    private void OnDestroy()
+    {
+        material.color = baseColor;
     }
 
 }
