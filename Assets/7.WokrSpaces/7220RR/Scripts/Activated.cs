@@ -14,8 +14,8 @@ public class Activated : MonoBehaviour
         if (activatedUI != null)
             ActivateUI(false);
 
-        if (interactable == null)
-            interactable = GetComponent<XRBaseInteractable>();
+        //if (interactable == null)
+        //    interactable = GetComponent<XRBaseInteractable>();
 
         if (interactable != null)
         {
@@ -40,7 +40,12 @@ public class Activated : MonoBehaviour
 
     public virtual void ActivateUI(bool isbool)
     {
-        activatedUI?.SetActive(isbool);
+        if (activatedUI != null)
+            activatedUI.SetActive(isbool);
+        else
+        {
+            Debug.LogError($"{gameObject.name} 뭐함");
+        }
     }
 
     public virtual void Activate()
