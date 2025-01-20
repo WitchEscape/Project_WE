@@ -492,7 +492,8 @@ public class Puzzles : MonoBehaviour
                     for (int i = 0; i < 10; i++)
                     {
                         int index = i;
-                        numPushButtons[index].OnPush.RemoveListener(() => { KeypadNumEvent(index); });
+                        //numPushButtons[index].OnPush.RemoveListener(() => { KeypadNumEvent(index); });
+                        numPushButtons[index].OnPush.RemoveAllListeners();
                         numPushButtons[index].OnPush.AddListener(SubClipPlay);
                     }
                     subPushButtons[0].OnPush.RemoveListener(keypadEnterButtonClickEvent);
@@ -633,7 +634,8 @@ public class Puzzles : MonoBehaviour
             for (int i = 0; i < pushButtonTests.Count; i++)
             {
                 int index = i;
-                pushButtonTests[index].OnPush.RemoveListener(() => PuzzleColorIndexChange(index));
+                //pushButtonTests[index].OnPush.RemoveListener(() => PuzzleColorIndexChange(index));
+                pushButtonTests[index].OnPush.RemoveAllListeners();
                 pushButtonTests[index].OnPush.AddListener(SubClipPlay);
             }
 
