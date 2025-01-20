@@ -20,7 +20,8 @@ public class BookAnimationControll : MonoBehaviour
     private float animationTime;
     [SerializeField]
     private Activated activated;
-
+    [SerializeField, Header("페이지 프리팹")] private XRAlyxGrabInteractable page;
+    [SerializeField, Header("페이지 프리팹 Rigid")] private Rigidbody pageR;
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
@@ -28,6 +29,8 @@ public class BookAnimationControll : MonoBehaviour
         if (activated == null) activated = GetComponent<Activated>();
         ObjectControll();
         GrabInteractorEventSet();
+
+        if(page != null) page.enabled = false;
     }
 
     private void ObjectControll()
@@ -54,7 +57,14 @@ public class BookAnimationControll : MonoBehaviour
         grab.selectEntered.AddListener(ControllerEventSetMk1);
         grab.selectExited.AddListener(ContollerEventRemoveMk1);
 
-        grab.activated.AddListener((x) => BookAnimation());
+        grab.activated.AddListener((x) => { BookAnimation();
+            if (page != null & page.enabled == false)
+            {
+                print("실행됨");
+                page.enabled = true;
+                pageR.isKinematic = false;
+            }
+        });
 
         grab.selectExited.AddListener(IsOpenBookCheak);
     }
@@ -87,6 +97,7 @@ public class BookAnimationControll : MonoBehaviour
         ActionBasedController controller = arg.interactorObject.transform.GetComponentInParent<ActionBasedController>();
         if (controller != null)
             controller.scaleToggleAction.action.performed += ControllerEventMk1;
+
     }
 
     private void ControllerEventMk1(InputAction.CallbackContext call)
@@ -100,6 +111,8 @@ public class BookAnimationControll : MonoBehaviour
     private void ControllerEvent(InputAction.CallbackContext call)
     {
         BookAnimation();
+
+        
     }
 
     private void BookAnimation()
