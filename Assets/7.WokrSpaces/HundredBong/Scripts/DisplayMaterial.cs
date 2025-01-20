@@ -20,6 +20,7 @@ public class DisplayMaterial : MonoBehaviour
 
     private float erase = 1f;
 
+    [Header("최종 퍼즐 인덱스")] public int puzzleIndex;
     [Header("마법진 생성 시 재생할 파티클")] public ParticleSystem spawnParticle;
     [Header("마법진 생성 시작시 재생할 클립")] public AudioClip spawnClip;
 
@@ -31,10 +32,10 @@ public class DisplayMaterial : MonoBehaviour
     {
         material = GetComponent<MeshRenderer>().material;
         ghostCanvas = FindObjectOfType<GhostCanvas>();
-        if (gameObject.activeSelf == true)
-        {
-            gameObject.SetActive(false);    
-        }
+        //if (gameObject.activeSelf == true)
+        //{
+        //    gameObject.SetActive(false);    
+        //}
     }
 
     private void OnEnable()
@@ -134,7 +135,7 @@ public class DisplayMaterial : MonoBehaviour
                 Debug.Log("투명도 0");
 
                 //TODO : 대화던 씬 이동이던 다음 로직 작성
-                ghostCanvas.ClearPuzzle(2);
+                ghostCanvas.ClearPuzzle(puzzleIndex);
                 Debug.Log("모든 퍼즐 클리어");
             }
         }

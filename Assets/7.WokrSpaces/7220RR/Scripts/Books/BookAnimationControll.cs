@@ -62,7 +62,8 @@ public class BookAnimationControll : MonoBehaviour
             {
                 print("실행됨");
                 page.enabled = true;
-                pageR.isKinematic = false;
+                page.selectExited.AddListener((x) => { page.transform.SetParent(null); pageR.isKinematic = false; } );
+                //page.selectEntered.AddListener((x)=> pageR.isKinematic = false);
             }
         });
 

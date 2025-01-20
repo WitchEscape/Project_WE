@@ -2075,7 +2075,6 @@ GameObject:
   - component: {fileID: 2643383026108036757}
   - component: {fileID: 912407467499936249}
   - component: {fileID: 3691661982003847215}
-  - component: {fileID: 3197669980355465987}
   m_Layer: 0
   m_Name: MagicCirclePrefab
   m_TagString: Untagged
@@ -2176,7 +2175,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleID: Puzzle_3
   fadeDuration: 5
+  puzzleIndex: 0
   spawnParticle: {fileID: 1769356537219802025}
+  spawnClip: {fileID: 0}
 --- !u!65 &3691661982003847215
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2198,33 +2199,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10.000001, y: 1, z: 10.000001}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!54 &3197669980355465987
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5660210038158781242}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5768992871600271429
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,8 +11,8 @@ public class TarotNumber : MonoBehaviour
     {
         spriteColor = GetComponent<SpriteRenderer>();
 
-        if (gameObject.activeSelf)
-            gameObject.SetActive(false);
+        //if (gameObject.activeSelf)
+        //    gameObject.SetActive(false);
     }
 
     private void OnEnable()
