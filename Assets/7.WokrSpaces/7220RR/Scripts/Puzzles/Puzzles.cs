@@ -160,8 +160,6 @@ public class Puzzles : MonoBehaviour
             AudioManager.Instance.PlaySFX(clearClip, clearClipValue);
         }
 
-        ClearParticle.Play();
-
         if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
     }
@@ -188,6 +186,7 @@ public class Puzzles : MonoBehaviour
     {
         for (int i = 0; i < socketInteractors.Count; i++)
         {
+            print($"FindSocket {i}");
             if (socketInteractors[i] == null) continue;
             int index = i;
             totalNum++;
@@ -208,7 +207,7 @@ public class Puzzles : MonoBehaviour
             print("Total : " + totalNum);
             print("set :" + interactorCount);
             if (interactorCount == totalNum)
-            {      
+            {
                 PuzzleClear();
             }
         }

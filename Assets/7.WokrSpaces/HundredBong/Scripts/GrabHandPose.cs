@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using Unity.VisualScripting;
 
 
 #if UNITY_EDITOR
@@ -168,7 +166,7 @@ public class GrabHandPose : MonoBehaviour
         //손의 위치를 x축 반전해서 대칭 좌표를 만들어줌
         Vector3 mirroredPosition = poseUsedToMirror.root.localPosition;
         mirroredPosition.x *= -1;
-        
+
         //손의 회전값을 y축과 z축을 반전하여 대칭된 회전값을 만들어줌
         //쿼터니언의 반전을 통해 방향이 반대가 되도록 조정함
         Quaternion mirroredQuaternion = poseUsedToMirror.root.localRotation;
