@@ -2,7 +2,7 @@ public enum Languages { KR, EN }
 
 public enum Chapters { Lobby, Class535, Dormitory, PostionClass, Library, TeachersRoom, Totorial }
 
-public enum PuzzleColor { white, red, Orange, Violet, Skyblue, Pink, green, blue, black, grey, yellow, magenta, cyan }
+public enum PuzzleColor { white, red, Orange,  Skyblue,  green, blue, black, grey, yellow, magenta, cyan }
 //Orange,Violet,Skyblue,Pink
 
 #region Puzzles
