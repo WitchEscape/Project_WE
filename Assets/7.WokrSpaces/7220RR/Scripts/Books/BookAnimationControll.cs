@@ -58,7 +58,7 @@ public class BookAnimationControll : MonoBehaviour
         grab.selectExited.AddListener(ContollerEventRemoveMk1);
 
         grab.activated.AddListener((x) => { BookAnimation();
-            if (page != null & page.enabled == false)
+            if (page != null && page.enabled == false)
             {
                 print("실행됨");
                 page.enabled = true;
