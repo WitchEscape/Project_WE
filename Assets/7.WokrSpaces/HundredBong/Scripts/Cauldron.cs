@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class Cauldron : MonoBehaviour
 {
-    [SerializeField] private string puzzleID = "Puzzle_2";
+    [SerializeField] private string puzzleID = "PotionClass_Puzzle_02";
 
     [SerializeField, Header("생성할 빛나는 돌")] private GameObject magicStone;
     [SerializeField, Header("빛나는 돌 소환위치")] private Vector3 magicStonePos;
