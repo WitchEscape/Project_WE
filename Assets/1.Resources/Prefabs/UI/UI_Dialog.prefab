@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6276094766053666582}
   - component: {fileID: 6813445438167761967}
   - component: {fileID: 4624699538656826678}
+  - component: {fileID: 491140689860076211}
+  - component: {fileID: 6696265488229488949}
   m_Layer: 5
   m_Name: UI_Dialog
   m_TagString: Untagged
@@ -26,7 +28,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6394689871792878470}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -102,6 +104,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &491140689860076211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394689871792878470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3177b36ee01568c4baa19ca24f0c0bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typingSpeed: 0.05
+  dialogText: {fileID: 6381450032373432596}
+  isTypingEffect: 1
+--- !u!114 &6696265488229488949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6394689871792878470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e575ffef6ba155a42b38359f9612ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraOffset: {fileID: 0}
+  playerCamera: {fileID: 0}
+  followSpeed: 2
+  offset: {x: 0, y: -0.1, z: 1}
 --- !u!1 &7343364286038618567
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: ddddd
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f0f9c7679be6a0a418f67a3796510724, type: 2}
   m_sharedMaterial: {fileID: -2206438298364040680, guid: f0f9c7679be6a0a418f67a3796510724,

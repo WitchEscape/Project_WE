@@ -26,6 +26,7 @@ public class UI_Menu : MonoBehaviour
 
     private void OnLoadButtonClick()
     {
+        SaveLoadManager.Instance.isDataLoadScene = true;
         SaveLoadManager.Instance.LoadGame(SceneManager.GetActiveScene().name);
     }
 
