@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 [CustomEditor(typeof(Puzzles))]
 public class PuzzleEditor : Editor
 {
-    private SerializedObject serializedObject;
+    private new SerializedObject serializedObject;
     private SerializedProperty serializedProperty;
 
     private void OnEnable()
