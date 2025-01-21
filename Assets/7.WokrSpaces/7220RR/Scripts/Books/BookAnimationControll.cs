@@ -22,6 +22,7 @@ public class BookAnimationControll : MonoBehaviour
     private Activated activated;
     [SerializeField, Header("페이지 프리팹")] private XRAlyxGrabInteractable page;
     [SerializeField, Header("페이지 프리팹 Rigid")] private Rigidbody pageR;
+
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
@@ -30,7 +31,7 @@ public class BookAnimationControll : MonoBehaviour
         ObjectControll();
         GrabInteractorEventSet();
 
-        if(page != null) page.enabled = false;
+        if (page != null) page.enabled = false;
     }
 
     private void ObjectControll()
@@ -57,12 +58,14 @@ public class BookAnimationControll : MonoBehaviour
         grab.selectEntered.AddListener(ControllerEventSetMk1);
         grab.selectExited.AddListener(ContollerEventRemoveMk1);
 
-        grab.activated.AddListener((x) => { BookAnimation();
+        grab.activated.AddListener((x) =>
+        {
+            BookAnimation();
             if (page != null & page.enabled == false)
             {
                 print("실행됨");
                 page.enabled = true;
-                page.selectExited.AddListener((x) => { page.transform.SetParent(null); pageR.isKinematic = false; } );
+                page.selectExited.AddListener((x) => { page.transform.SetParent(null); pageR.isKinematic = false; });
                 //page.selectEntered.AddListener((x)=> pageR.isKinematic = false);
             }
         });
@@ -113,7 +116,7 @@ public class BookAnimationControll : MonoBehaviour
     {
         BookAnimation();
 
-        
+
     }
 
     private void BookAnimation()
@@ -134,6 +137,7 @@ public class BookAnimationControll : MonoBehaviour
             print(animator.GetBool("IsOpen"));
             animator.SetBool("IsOpen", !animator.GetBool("IsOpen"));
             animationTime = Time.time + (animator.GetBool("IsOpen") ? openClip.length : closeClip.length);
+
             if (!animator.GetBool("IsOpen"))
             {
                 activated.ActivateUI(false);
