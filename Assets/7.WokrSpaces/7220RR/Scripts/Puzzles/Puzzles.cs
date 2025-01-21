@@ -90,6 +90,7 @@ public class Puzzles : MonoBehaviour
     //=> 눌리기는 하지만 실제 상호작용을 하지 않게
     //버튼, 소켓
 
+
     private void Awake()
     {
         switch (puzzleType)
