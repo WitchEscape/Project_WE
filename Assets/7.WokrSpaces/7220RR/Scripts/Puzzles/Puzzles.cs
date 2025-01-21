@@ -90,7 +90,6 @@ public class Puzzles : MonoBehaviour
     //=> 눌리기는 하지만 실제 상호작용을 하지 않게
     //버튼, 소켓
 
-
     private void Awake()
     {
         switch (puzzleType)
@@ -133,11 +132,11 @@ public class Puzzles : MonoBehaviour
 
     private void AutoClear()
     {
-        if(PuzzleProgressManager.Instance?.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
+        if (PuzzleProgressManager.Instance?.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
         {
             PuzzleClear();
         }
-        
+
     }
 
     private void PuzzleClear()
