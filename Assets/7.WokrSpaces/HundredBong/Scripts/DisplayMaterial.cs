@@ -41,7 +41,7 @@ public class DisplayMaterial : MonoBehaviour
     private void OnEnable()
     {
         material.color = new Color(material.color.r, material.color.g, material.color.b, 0);
-        AudioManager.Instance.PlaySFX(spawnClip);
+        AudioManager.Instance?.PlaySFX(spawnClip);
     }
 
     private void Start()
