@@ -12,10 +12,10 @@ public class PuzzleProgressManager : MonoBehaviour
 
     public enum PuzzleState
     {
-        Locked,      
-        Available,   
-        InProgress,  
-        Completed    
+        Locked,      //0
+        Available,   //1
+        InProgress,  //2
+        Completed    //3
     }
 
     [System.Serializable]

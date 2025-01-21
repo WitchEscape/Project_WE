@@ -8,6 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Puzzles : MonoBehaviour
 {
+    public string puzzleId;
     public PuzzleType puzzleType;
     public bool isActivatedObject;
     public GameObject ActivatedObject;
@@ -123,12 +124,29 @@ public class Puzzles : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SaveLoadManager.OnLoadComplete += AutoClear;
+    }
+
+    private void AutoClear()
+    {
+        if(PuzzleProgressManager.Instance?.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
+        {
+            PuzzleClear();
+        }
+        
+    }
+
     private void PuzzleClear()
     {
         print("풀림");
-        if (isActivatedObject)
-            activatedObject.Activate();
+        if (isActivatedObject && activatedObject != null)
+            activatedObject?.Activate();
         ClearEvent.Invoke();
+
+        PuzzleProgressManager.Instance?.CompletePuzzle(puzzleId);
+
         print("풀림");
         //임시
         //gameObject.SetActive(false);
@@ -140,7 +158,7 @@ public class Puzzles : MonoBehaviour
             AudioManager.Instance.PlaySFX(clearClip, clearClipValue);
         }
 
-        if (isActivatedObject)
+        if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
     }
 

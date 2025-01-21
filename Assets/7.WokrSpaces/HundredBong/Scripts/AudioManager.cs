@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource SFX;
     public AudioSource BGM;
-    [Header("Lobby, 535, Dormitory, Postion, Library, Teacher")] public AudioClip[] backgroundMusic;
+    [Header("Lobby, 535, Dormitory, Postion, Library, Teacher, Totorial")] public AudioClip[] backgroundMusic;
     [HideInInspector]public float SFXVolume = 1f;
     [HideInInspector]public float BGMVolume = 1f;
 
@@ -63,6 +63,7 @@ public class AudioManager : MonoBehaviour
         bgmDictionary.Add(Chapters.PostionClass, backgroundMusic[3]);
         bgmDictionary.Add(Chapters.Library, backgroundMusic[4]);
         bgmDictionary.Add(Chapters.TeachersRoom, backgroundMusic[5]);
+        bgmDictionary.Add(Chapters.Totorial, backgroundMusic[6]);
 
         SFXVolume = 1f;
         BGMVolume = 1f;
