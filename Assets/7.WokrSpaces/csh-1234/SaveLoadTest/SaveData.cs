@@ -153,8 +153,6 @@ public class PlayerData
     public Quaternion rotation;
 }
 
-
-
 [System.Serializable]
 public class ObjectData
 {

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections;
 using Unity.VisualScripting;
 using static UserData;
+using UnityEngine.Events;
 
 public class SaveLoadManager : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class SaveLoadManager : MonoBehaviour
     public bool isDataLoadScene = false;
 
     public int CurrentClearStage = 1;
-    
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -177,13 +178,21 @@ public class SaveLoadManager : MonoBehaviour
             string json = File.ReadAllText(filePath);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
             
-            // 씬 로드 후에 데이터를 로드하도록 이벤트를 등록
-            SceneManager.sceneLoaded += (scene, mode) => 
+            if(isDataLoadScene == true)
             {
-                StartCoroutine(LoadGameWithDelay(saveData));
-                SceneManager.sceneLoaded -= (s, m) => { };
-            };
-
+                // 씬 로드 후에 데이터를 로드하도록 이벤트를 등록
+                UnityAction<Scene, LoadSceneMode> onSceneLoaded = null;
+                onSceneLoaded = (scene, mode) =>
+                {
+                    if (scene.name == SceneName)  // 원하는 씬이 로드됐을 때만 실행
+                    {
+                        StartCoroutine(LoadGameWithDelay(saveData));
+                        SceneManager.sceneLoaded -= onSceneLoaded;  // 이벤트 한 번만 실행되도록 제거
+                    }
+                };
+                SceneManager.sceneLoaded += onSceneLoaded;
+            }
+            isDataLoadScene = false;
             SceneManager.LoadScene(SceneName);
         }
         catch (Exception e)
@@ -307,6 +316,7 @@ public class SaveLoadManager : MonoBehaviour
     #region LoadData
     private void LoadPlayerData(PlayerData playerData)
     {
+        Debug.Log("로드 플레이어 데이터 호출됨~!!!!");
         if (playerData == null)
         {
             Debug.LogError("playerData is null");
@@ -322,10 +332,13 @@ public class SaveLoadManager : MonoBehaviour
                 return;
             }
 
+            //xrOrigin.MoveCameraToWorldLocation(Vector3.zero);
+            //xrOrigin.RotateAroundCameraPosition(Vector3.up, 0f);
+
             xrOrigin.MoveCameraToWorldLocation(playerData.position);
             Vector3 currentRotation = xrOrigin.Camera.transform.eulerAngles;
             float rotationDifference = playerData.rotation.eulerAngles.y - currentRotation.y;
-            xrOrigin.RotateAroundCameraPosition(Vector3.up, rotationDifference * Mathf.Deg2Rad);
+            xrOrigin.RotateAroundCameraPosition(Vector3.up, playerData.rotation.eulerAngles.y);
         }
         catch (Exception e)
         {
