@@ -8,7 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisplayMaterial : MonoBehaviour
 {
-    [SerializeField] private string puzzleID = "Puzzle_3";
+    [SerializeField] private string nextSceneName;
 
     private Material material;
     public float fadeDuration = 3f;
@@ -41,7 +41,7 @@ public class DisplayMaterial : MonoBehaviour
     private void OnEnable()
     {
         material.color = new Color(material.color.r, material.color.g, material.color.b, 0);
-        AudioManager.Instance.PlaySFX(spawnClip);
+        AudioManager.Instance?.PlaySFX(spawnClip);
     }
 
     private void Start()
@@ -77,16 +77,8 @@ public class DisplayMaterial : MonoBehaviour
                 spawnParticle.Play();
                 wasPlayParticle = true;
             }
-            StartCoroutine(sceneChange());
         }
     }
-
-    IEnumerator sceneChange()
-    {
-        yield return new WaitForSeconds(10f);
-        SceneManager.LoadScene("SaveLoadTest");
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<XRDirectInteractor>() != null)
@@ -135,9 +127,11 @@ public class DisplayMaterial : MonoBehaviour
                 Debug.Log("투명도 0");
 
                 //TODO : 대화던 씬 이동이던 다음 로직 작성
-                ghostCanvas.ClearPuzzle(puzzleIndex);
+                ghostCanvas?.ClearPuzzle(puzzleIndex);
                 Debug.Log("모든 퍼즐 클리어");
+                SceneManager.LoadScene(nextSceneName);
             }
+            
         }
     }
     #endregion

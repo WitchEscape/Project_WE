@@ -1403,6 +1403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287b4577d1279974690ff10117a4460d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointLight: {fileID: 0}
   itemTag: Projectile
 --- !u!114 &411048600
 MonoBehaviour:
@@ -3211,6 +3212,7 @@ MonoBehaviour:
   fireParticle: {fileID: 818547128}
   matchTag: Match
   fireForce: 5
+  fireClip: {fileID: 0}
   cauldron: {fileID: 1752484822}
 --- !u!114 &831687638
 MonoBehaviour:
@@ -8190,6 +8192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d65340ba0f66f444b855cc679e0bf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDataLoadScene: 0
+  CurrentClearStage: 1
 --- !u!4 &1680340237
 Transform:
   m_ObjectHideFlags: 0
@@ -8576,7 +8580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleID: Puzzle_2
-  magicStone: {fileID: 7354903953719428490}
+  magicStone: {fileID: 0}
   magicStonePos: {x: 1.041, y: 1.106, z: 0.037}
   churnForce: 5
   positions:
@@ -8586,6 +8590,8 @@ MonoBehaviour:
   - {fileID: 7415437263322696286}
   successParticle: {fileID: 1209604184}
   failParticle: {fileID: 1444946247}
+  successClip: {fileID: 0}
+  putInCauldronClip: {fileID: 0}
   postionCount:
     value: 0
     onValueChanged:
@@ -16571,89 +16577,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 84200762603298209}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1001 &1663702911352157583
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.041
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.101
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.037
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999757
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.000040042672
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.0069766995
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.000282537
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.004
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.799
-      objectReference: {fileID: 0}
-    - target: {fileID: 880419437535657236, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.032
-      objectReference: {fileID: 0}
-    - target: {fileID: 1741290473284817360, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: SpawnPosition.x
-      value: 1.041
-      objectReference: {fileID: 0}
-    - target: {fileID: 1741290473284817360, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: SpawnPosition.y
-      value: 1.106
-      objectReference: {fileID: 0}
-    - target: {fileID: 1741290473284817360, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: SpawnPosition.z
-      value: 0.037
-      objectReference: {fileID: 0}
-    - target: {fileID: 8714258565109699731, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-        type: 3}
-      propertyPath: m_Name
-      value: Magic Stone
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6b4cd79b7057a554491dd41c3786b0cd, type: 3}
 --- !u!65 &1683038194685791096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34385,12 +34308,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &7354903953719428490 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8714258565109699731, guid: 6b4cd79b7057a554491dd41c3786b0cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1663702911352157583}
-  m_PrefabAsset: {fileID: 0}
 --- !u!222 &7363432187043539411
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42846,6 +42763,7 @@ MonoBehaviour:
   puzzleID: Puzzle_3
   fadeDuration: 5
   spawnParticle: {fileID: 8045218562116905874}
+  spawnClip: {fileID: 0}
 --- !u!23 &8603697024781140712
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -44679,7 +44597,6 @@ SceneRoots:
   - {fileID: 375897720}
   - {fileID: 4702278540108657592}
   - {fileID: 3280234954431612575}
-  - {fileID: 1663702911352157583}
   - {fileID: 2525716421084565344}
   - {fileID: 5328257019018100780}
   - {fileID: 1014213899}

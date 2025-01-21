@@ -8,6 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Puzzles : MonoBehaviour
 {
+    public string puzzleId;
     public PuzzleType puzzleType;
     public bool isActivatedObject;
     public GameObject ActivatedObject;
@@ -23,6 +24,8 @@ public class Puzzles : MonoBehaviour
     public float clearClipValue;
     public AudioClip subClip;
     public float subClipValue;
+
+    public ParticleSystem ClearParticle;
 
     #region Slot
     public InteractorType interactorType;
@@ -123,12 +126,29 @@ public class Puzzles : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SaveLoadManager.OnLoadComplete += AutoClear;
+    }
+
+    private void AutoClear()
+    {
+        if(PuzzleProgressManager.Instance?.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
+        {
+            PuzzleClear();
+        }
+        
+    }
+
     private void PuzzleClear()
     {
         print("풀림");
-        if (isActivatedObject)
-            activatedObject.Activate();
+        if (isActivatedObject && activatedObject != null)
+            activatedObject?.Activate();
         ClearEvent.Invoke();
+
+        PuzzleProgressManager.Instance?.CompletePuzzle(puzzleId);
+
         print("풀림");
         //임시
         //gameObject.SetActive(false);
@@ -140,7 +160,9 @@ public class Puzzles : MonoBehaviour
             AudioManager.Instance.PlaySFX(clearClip, clearClipValue);
         }
 
-        if (isActivatedObject)
+        ClearParticle.Play();
+
+        if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
     }
 
@@ -186,7 +208,7 @@ public class Puzzles : MonoBehaviour
             print("Total : " + totalNum);
             print("set :" + interactorCount);
             if (interactorCount == totalNum)
-            {
+            {      
                 PuzzleClear();
             }
         }
@@ -706,9 +728,7 @@ public class Puzzles : MonoBehaviour
 
     private void SubColorSet()
     {
-        subColors.Add(PuzzleColor.Pink.ToString(), new Color(1f, 0.4f, 1f));
         subColors.Add(PuzzleColor.Orange.ToString(), new Color(1f, 0.5f, 0f));
-        subColors.Add(PuzzleColor.Violet.ToString(), new Color(0.5f, 0f, 1f));
         subColors.Add(PuzzleColor.Skyblue.ToString(), new Color(0.53f, 0.81f, 0.92f));
     }
 

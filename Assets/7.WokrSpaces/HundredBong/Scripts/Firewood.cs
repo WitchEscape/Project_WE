@@ -22,10 +22,10 @@ public class Firewood : MonoBehaviour
 
     private void CheckFireState()
     {
-        if (PuzzleProgressManager.Instance.GetPuzzleState("Puzzle_2") == PuzzleProgressManager.PuzzleState.InProgress)
-        {
-            FireAcivate();
-        }
+        //if (PuzzleProgressManager.Instance.GetPuzzleState("Puzzle_2") == PuzzleProgressManager.PuzzleState.InProgress)
+        //{
+        //    FireAcivate();
+        //}
     }
 
     private void FireAcivate()

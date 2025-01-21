@@ -8,7 +8,7 @@ public class Knob : XRBaseInteractable
 {
     public Axis interactableAxis;
     public Axis interactorAxis;
-    [HideInInspector]
+    [HideInInspector] 
     public float angleIncrement
     {
         get { return m_AngleIncrement; }

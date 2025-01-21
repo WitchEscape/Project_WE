@@ -63,13 +63,16 @@ public class Activated : MonoBehaviour
         {
             foreach (T howRyou in list)
             {
+                if (howRyou == null) continue;
                 if (howRyou is XRBaseInteractable whatbase)
                 {
-                    whatbase.enabled = isBooooool;
+                    if (whatbase != null)
+                        whatbase.enabled = isBooooool;
                 }
                 else if (howRyou is GameObject whatname)
                 {
-                    whatname.SetActive(isBooooool);
+                    if (whatname != null)
+                        whatname.SetActive(isBooooool);
                 }
             }
         }

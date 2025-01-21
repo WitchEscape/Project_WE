@@ -23,6 +23,9 @@ public class PuzzleEditor : Editor
         puzzles.puzzleType = (PuzzleType)EditorGUILayout.EnumPopup("Puzzle Type", puzzles.puzzleType);
         puzzles.isActivatedObject = EditorGUILayout.Toggle("활성화 여부", puzzles.isActivatedObject);
 
+        puzzles.puzzleId = EditorGUILayout.TextField("퍼즐 아이디", puzzles.puzzleId);
+
+        puzzles.ClearParticle = (ParticleSystem)EditorGUILayout.ObjectField("Clear Particle", puzzles.ClearParticle, typeof(ParticleSystem), true);
 
 
         if (puzzles.ghostCanvas != null)
