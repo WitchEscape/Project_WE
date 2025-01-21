@@ -35,7 +35,7 @@ public class ResetPostion : MonoBehaviour
     {
         if (grabPotionClip != null)
         { 
-            AudioManager.Instance.PlaySFX(grabPotionClip);
+            AudioManager.Instance?.PlaySFX(grabPotionClip);
         }
     }
 }

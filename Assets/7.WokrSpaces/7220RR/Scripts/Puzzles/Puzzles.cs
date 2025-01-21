@@ -25,6 +25,8 @@ public class Puzzles : MonoBehaviour
     public AudioClip subClip;
     public float subClipValue;
 
+    public ParticleSystem ClearParticle;
+
     #region Slot
     public InteractorType interactorType;
     public List<GameObject> socketInteractors;
@@ -158,6 +160,8 @@ public class Puzzles : MonoBehaviour
             AudioManager.Instance.PlaySFX(clearClip, clearClipValue);
         }
 
+        ClearParticle.Play();
+
         if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
     }
@@ -204,7 +208,7 @@ public class Puzzles : MonoBehaviour
             print("Total : " + totalNum);
             print("set :" + interactorCount);
             if (interactorCount == totalNum)
-            {
+            {      
                 PuzzleClear();
             }
         }
