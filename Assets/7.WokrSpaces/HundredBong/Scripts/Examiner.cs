@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Examiner : MonoBehaviour
 {
-    [SerializeField] private string puzzleID = "Puzzle_1";
+    [SerializeField] private string puzzleID = "PotionClass_Puzzle_01";
 
     private GhostCanvas ghostCanvas;
 
@@ -62,13 +62,13 @@ public class Examiner : MonoBehaviour
         if (isComplete && isCleared == false)
         {
             //TODO : 발생할 이벤트 작성
-            DialogPlayer.Instance.PlayDialogSequence("LOBBY_11_");
+            //DialogPlayer.Instance.PlayDialogSequence("LOBBY_11_");
             PuzzleProgressManager.Instance.CompletePuzzle(puzzleID);
 
             match.gameObject.SetActive(true);
 
-            particle.gameObject.SetActive(true);
-            particle.Play();
+            //particle.gameObject?.SetActive(true);
+            //particle.Play();
 
             isCleared = true;
 
