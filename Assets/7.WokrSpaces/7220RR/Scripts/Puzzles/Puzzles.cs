@@ -25,6 +25,8 @@ public class Puzzles : MonoBehaviour
     public AudioClip subClip;
     public float subClipValue;
 
+    public ParticleSystem ClearParticle;
+
     #region Slot
     public InteractorType interactorType;
     public List<GameObject> socketInteractors;
@@ -158,6 +160,8 @@ public class Puzzles : MonoBehaviour
             AudioManager.Instance.PlaySFX(clearClip, clearClipValue);
         }
 
+        ClearParticle.Play();
+
         if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
     }
@@ -204,7 +208,7 @@ public class Puzzles : MonoBehaviour
             print("Total : " + totalNum);
             print("set :" + interactorCount);
             if (interactorCount == totalNum)
-            {
+            {      
                 PuzzleClear();
             }
         }
@@ -724,9 +728,7 @@ public class Puzzles : MonoBehaviour
 
     private void SubColorSet()
     {
-        subColors.Add(PuzzleColor.Pink.ToString(), new Color(1f, 0.4f, 1f));
         subColors.Add(PuzzleColor.Orange.ToString(), new Color(1f, 0.5f, 0f));
-        subColors.Add(PuzzleColor.Violet.ToString(), new Color(0.5f, 0f, 1f));
         subColors.Add(PuzzleColor.Skyblue.ToString(), new Color(0.53f, 0.81f, 0.92f));
     }
 

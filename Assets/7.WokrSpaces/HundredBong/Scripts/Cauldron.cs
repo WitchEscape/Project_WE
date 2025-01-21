@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class Cauldron : MonoBehaviour
 {
-    [SerializeField] private string puzzleID = "Puzzle_2";
+    [SerializeField] private string puzzleID = "PotionClass_Puzzle_02";
 
     [SerializeField, Header("생성할 빛나는 돌")] private GameObject magicStone;
     [SerializeField, Header("빛나는 돌 소환위치")] private Vector3 magicStonePos;
@@ -24,6 +24,9 @@ public class Cauldron : MonoBehaviour
     [HideInInspector] public Observable<int> postionCount;
     [HideInInspector] public Observable<bool> isCorrect;
     [HideInInspector] public bool isFire;
+
+
+    [SerializeField] private bool isActivated = false;
 
     private bool[] isCorrectRune = new bool[4];
     private bool isChurned;
@@ -44,12 +47,24 @@ public class Cauldron : MonoBehaviour
         //    audioSource.loop = false;
         //}
     }
-
+    private void OnDisable()
+    {
+        SaveLoadManager.OnLoadComplete -= CheckClearState;
+    }
     private void OnEnable()
     {
         postionCount.onValueChanged.AddListener(OnValueChanged);
         isCorrect.onValueChanged.AddListener(OnValueChanged);
         GetComponent<TriggerZone>().OnEnterEvent.AddListener(PutInCauldron);
+        SaveLoadManager.OnLoadComplete += CheckClearState;
+    }
+
+    private void CheckClearState()
+    {
+        if(PuzzleProgressManager.Instance.GetPuzzleState(puzzleID) == PuzzleProgressManager.PuzzleState.Completed)
+        {
+            magicStone.transform.position = new Vector3(magicStonePos.x, magicStonePos.y, magicStonePos.z);
+        }
     }
 
     private void Start()
@@ -120,18 +135,15 @@ public class Cauldron : MonoBehaviour
         {
             if (wasInstantiate == false)
             {
-
-                //magicStone.transform.position = 
-
                 //다음에 다시 생성되지 않도록 예외처리
                 wasInstantiate = true;
                 ghostCanvas.ClearPuzzle(1);
             }
-            DialogPlayer.Instance.PlayDialogSequence("LOBBY_12_");
+            DialogPlayer.Instance.PlayDialogSequence("POTIONROOM_03");
             PuzzleProgressManager.Instance.CompletePuzzle(puzzleID);
             magicStone.transform.position = new Vector3(magicStonePos.x, magicStonePos.y, magicStonePos.z);
-            successParticle.Play();
-            AudioManager.Instance.PlaySFX(successClip);
+            successParticle?.Play();
+            AudioManager.Instance?.PlaySFX(successClip);
         }
 
         //조건 검사가 끝나면 다시 포션카운트 0으로 초기화

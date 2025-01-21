@@ -22,8 +22,9 @@ public class Firewood : MonoBehaviour
 
     private void CheckFireState()
     {
-        if (PuzzleProgressManager.Instance.GetPuzzleState("Puzzle_2") == PuzzleProgressManager.PuzzleState.InProgress)
+        if (PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_02") == PuzzleProgressManager.PuzzleState.InProgress || PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_02") == PuzzleProgressManager.PuzzleState.Completed)
         {
+            cauldron.isFire = true;
             FireAcivate();
         }
     }
@@ -33,7 +34,7 @@ public class Firewood : MonoBehaviour
         cauldron.isFire = true;
         fireParticle.gameObject.SetActive(true);
         fireParticle.Play();
-        AudioManager.Instance.PlaySFX(fireClip);
+        AudioManager.Instance?.PlaySFX(fireClip);
     }
 
 
@@ -61,7 +62,7 @@ public class Firewood : MonoBehaviour
             if (fireForce <= rb.velocity.magnitude)
             {
                 FireAcivate();
-                PuzzleProgressManager.Instance.SettPuzzleState("Puzzle_2", PuzzleProgressManager.PuzzleState.InProgress);
+                PuzzleProgressManager.Instance.SettPuzzleState("PotionClass_Puzzle_02", PuzzleProgressManager.PuzzleState.InProgress);
             }
         }
     }
