@@ -24,6 +24,7 @@ public class BookAnimationControll : MonoBehaviour
     [SerializeField, Header("페이지 프리팹")] private XRAlyxGrabInteractable page;
     [SerializeField, Header("페이지 프리팹 Rigid")] private Rigidbody pageR;
 
+    public UnityEvent OpenEvent;
     public UnityEvent CloseEvent;
 
     private void Awake()
@@ -63,6 +64,7 @@ public class BookAnimationControll : MonoBehaviour
 
         grab.activated.AddListener((x) => { BookAnimation();
             page.enabled = true;
+            OpenEvent?.Invoke();
         });
 
         if (page != null)
