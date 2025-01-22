@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -22,6 +23,9 @@ public class BookAnimationControll : MonoBehaviour
     private Activated activated;
     [SerializeField, Header("페이지 프리팹")] private XRAlyxGrabInteractable page;
     [SerializeField, Header("페이지 프리팹 Rigid")] private Rigidbody pageR;
+
+    public UnityEvent CloseEvent;
+
     private void Awake()
     {
         if (animator == null) animator = GetComponent<Animator>();
@@ -137,6 +141,7 @@ public class BookAnimationControll : MonoBehaviour
             if (!animator.GetBool("IsOpen"))
             {
                 activated.ActivateUI(false);
+                CloseEvent?.Invoke();
             }
         }
     }
@@ -179,7 +184,7 @@ public class BookAnimationControll : MonoBehaviour
             if (animator.GetBool("IsOpen"))
             {
                 animator.SetBool("IsOpen", false);
-                animationTime = Time.time + closeClip.length;
+                animationTime = Time.time + closeClip.length;                
             }
             else
             {

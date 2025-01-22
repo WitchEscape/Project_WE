@@ -133,11 +133,11 @@ public class Puzzles : MonoBehaviour
 
     private void AutoClear()
     {
-        if(PuzzleProgressManager.Instance?.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
+        if (PuzzleProgressManager.Instance?.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
         {
             PuzzleClear();
         }
-        
+
     }
 
     private void PuzzleClear()

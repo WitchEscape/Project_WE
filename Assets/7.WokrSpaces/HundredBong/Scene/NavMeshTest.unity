@@ -381,6 +381,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &131608266
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -577,7 +579,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3714666912708587795}
+      - m_Target: {fileID: 5738253051600277830}
         m_TargetAssemblyTypeName: GhostCanvas, Assembly-CSharp
         m_MethodName: ClearPuzzle
         m_Mode: 3
@@ -1637,7 +1639,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3714666912708587795}
+      - m_Target: {fileID: 5738253051600277830}
         m_TargetAssemblyTypeName: GhostCanvas, Assembly-CSharp
         m_MethodName: ClearPuzzle
         m_Mode: 3
@@ -2216,6 +2218,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &699654654
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2846,6 +2850,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &894476837
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3400,6 +3406,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &1057954789
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4338,6 +4346,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &1185447575
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4567,6 +4577,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &1258884092
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5094,6 +5106,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &1393584753
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5850,6 +5864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleID: Puzzle_2
   magicStone: {fileID: 0}
+  magicStonePos: {x: 0, y: 0, z: 0}
   churnForce: 3
   positions:
   - {fileID: 131608264}
@@ -5860,6 +5875,8 @@ MonoBehaviour:
     type: 3}
   failParticle: {fileID: 7811848480906902895, guid: adb51aa53d3ba9e46ae4adc7c975a953,
     type: 3}
+  successClip: {fileID: 0}
+  putInCauldronClip: {fileID: 0}
   postionCount:
     value: 0
     onValueChanged:
@@ -5871,6 +5888,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   isFire: 0
+  isActivated: 0
 --- !u!114 &1854699533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5977,7 +5995,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3714666912708587795}
+      - m_Target: {fileID: 5738253051600277830}
         m_TargetAssemblyTypeName: GhostCanvas, Assembly-CSharp
         m_MethodName: ClearPuzzle
         m_Mode: 3
@@ -6275,6 +6293,8 @@ MonoBehaviour:
   m_AddDefaultGrabTransformers: 1
   velocityThreshold: 2
   jumpAngleInDegree: 60
+  leftAttachedTransform: {fileID: 0}
+  rightAttachedTransform: {fileID: 0}
 --- !u!54 &1898124257
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6619,6 +6639,114 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca5807ed7bc04c44eb56b3b7cbbd1618, type: 3}
+--- !u!1001 &2878482710452710974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 127218421502622268, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 7733578779226972362}
+    - target: {fileID: 127218421502622268, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: ghostCallPos
+      value: 
+      objectReference: {fileID: 1588145449430614261}
+    - target: {fileID: 127218421502622268, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: wayPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1572442032}
+    - target: {fileID: 127218421502622268, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: wayPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1810673558}
+    - target: {fileID: 127218421502622268, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: wayPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 294580552}
+    - target: {fileID: 127218421502622268, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: wayPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 1598247145}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.844
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.615
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503730654891006596, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502765761036224634, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_Name
+      value: GhostFriend Mk3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520586469525625228, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 7733578779226972362}
+    - target: {fileID: 5599955332271206804, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 3228911966699848865}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c, type: 3}
 --- !u!20 &3228911966699848865 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4924742273793240551, guid: a24cf60fb70202d499317d495aa854df,
@@ -6693,18 +6821,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a24cf60fb70202d499317d495aa854df, type: 3}
---- !u!114 &3714666912708587795 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 793877808416572128, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4946699611169608614}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f9c0cb857ec9fd409f5fcf2d6650f7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4686887319431646671
 GameObject:
   m_ObjectHideFlags: 0
@@ -6812,114 +6928,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 1f5cd62a70a6ed64ebd758c7f463981a, type: 3}
---- !u!1001 &4946699611169608614
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2451677312935381334, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 7733578779226972362}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.844
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.615
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413008967274336932, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6047892294243635220, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 7733578779226972362}
-    - target: {fileID: 6047892294243635220, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: ghostCallPos
-      value: 
-      objectReference: {fileID: 1588145449430614261}
-    - target: {fileID: 6047892294243635220, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: wayPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1572442032}
-    - target: {fileID: 6047892294243635220, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: wayPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 1810673558}
-    - target: {fileID: 6047892294243635220, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: wayPoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 294580552}
-    - target: {fileID: 6047892294243635220, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: wayPoints.Array.data[3]
-      value: 
-      objectReference: {fileID: 1598247145}
-    - target: {fileID: 8654212955652864733, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_Name
-      value: GhostFriend Mk2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184415003782994069, guid: 8105ef75341dd9e41ab7880c0fb3c2d8,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 3228911966699848865}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8105ef75341dd9e41ab7880c0fb3c2d8, type: 3}
 --- !u!4 &5686134209512524545
 Transform:
   m_ObjectHideFlags: 0
@@ -7895,6 +7903,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0072079375, y: -0.035964184, z: -0.06280201}
     m_Extent: {x: 0.07287095, y: 0.09202262, z: 0.10613526}
   m_DirtyAABB: 0
+--- !u!114 &5738253051600277830 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1081952439484303039, guid: 7a879c78a2cdf1c4089ee1acd6fa8d9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2878482710452710974}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9c0cb857ec9fd409f5fcf2d6650f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7733578779226972362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2193914741063591957, guid: a24cf60fb70202d499317d495aa854df,
@@ -7940,7 +7960,7 @@ SceneRoots:
   - {fileID: 1332813659}
   - {fileID: 3419176976742978571}
   - {fileID: 1824370948}
-  - {fileID: 4946699611169608614}
+  - {fileID: 2878482710452710974}
   - {fileID: 2119863930}
   - {fileID: 414732516}
   - {fileID: 240588442}

@@ -14,6 +14,8 @@ public class AlphaController : MonoBehaviour
     private Puzzles puzzles;
     List<Material> materials = new List<Material>();
 
+    [SerializeField] private ParticleSystem completeParticle;
+
     private void Awake()
     {
         if (alphaValue > 1 || alphaValue < 0)
@@ -44,6 +46,7 @@ public class AlphaController : MonoBehaviour
                 if (puzzles != null)
                     puzzles.TriggerEvent();
                 Destroy(this);
+                completeParticle.Play();
             }
             material.color = newColor;
         }

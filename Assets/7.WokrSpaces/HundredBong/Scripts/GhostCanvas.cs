@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +14,11 @@ public class GhostCanvas : MonoBehaviour
     [SerializeField, Header("Yes버튼")] private Button yesButton;
     [SerializeField, Header("No버튼")] private Button noButton;
     [SerializeField, Header("취소 버튼")] private Button cancelButton;
+    [SerializeField, Header("힌트 버튼 출력할 영역")] private RectTransform hintButtonArea;
     [SerializeField, Header("호출 횟수에 따른 난이도")] private Button[] hintButtons;
     [Header("클리어 체크용 bool 변수")] public bool[] isCleared;
     [Header("힌트 지속시간")] public float hintDuration;
-
+    
     //유령 호출 횟수
     private int currentIndex = 0;
     private int callIndex { get { return currentIndex; } set { currentIndex = Mathf.Clamp(value, 0, 2); } }
@@ -90,7 +90,9 @@ public class GhostCanvas : MonoBehaviour
             hintButtons[i].gameObject.SetActive(false);
         }
 
-        hintText.text = "";
+        hintButtonArea?.gameObject.SetActive(false);
+
+        hintText.text = "도와줄까?";
     }
 
     private void OnClickYes()
@@ -174,6 +176,8 @@ public class GhostCanvas : MonoBehaviour
     private void SetHintButtons()
     {
         Debug.Log($"Call Index1 : {callIndex}");
+        
+        hintButtonArea?.gameObject.SetActive(true);
 
         if (chapters == Chapters.Library)
         {
@@ -385,7 +389,7 @@ public class GhostCanvas : MonoBehaviour
         }
 
         canvas.alpha = 0;
-
+        hintText.text = "도와줄까?";
         canvas.gameObject.SetActive(false);
     }
 
