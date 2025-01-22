@@ -162,6 +162,8 @@ public class Puzzles : MonoBehaviour
 
         if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
+
+        ClearParticle?.Play();
     }
 
     private void SubClipPlay()
