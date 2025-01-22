@@ -51,10 +51,12 @@ public class AudioManager : MonoBehaviour
         if (hasFocus)
         {
             BGM.UnPause();
+            Voice.UnPause();
         }
         else
         {
             BGM.Pause();
+            Voice.Pause();
         }
     }
     private void Start()
