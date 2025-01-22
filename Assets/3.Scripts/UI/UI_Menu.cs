@@ -48,7 +48,7 @@ public class UI_Menu : MonoBehaviour
     private void OnSaveExitButtonClick()
     {
         //SaveLoadManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene("WE_Level_Tuturial");
+        SceneManager.LoadScene("WE_Level_Tutorial");
     }
 
     private void SetPositionAndRotation()
