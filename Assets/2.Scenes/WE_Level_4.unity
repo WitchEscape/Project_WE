@@ -8525,6 +8525,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 941502254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &941502256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5826906832188249741, guid: 9cc719de7947f1042ab7aae883d910dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 941502254}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437941038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f848a525550f42c4b9f813bcbc07c53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &949241051
 GameObject:
   m_ObjectHideFlags: 0
@@ -9356,6 +9368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1074936213}
   - component: {fileID: 1074936214}
+  - component: {fileID: 1074936215}
   m_Layer: 0
   m_Name: Puzzle
   m_TagString: Untagged
@@ -9394,8 +9407,8 @@ MonoBehaviour:
   puzzleId: 
   puzzleType: 1
   isActivatedObject: 1
-  ActivatedObject: {fileID: 1060670833}
-  activatedObject: {fileID: 1198793883}
+  ActivatedObject: {fileID: 1074936212}
+  activatedObject: {fileID: 1074936215}
   ClearEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -9446,6 +9459,26 @@ MonoBehaviour:
   isTrigger: 0
   passwardColors: 
   pushButtonTests: []
+--- !u!114 &1074936215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074936212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc38f26002897e44a38f14777b82ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activatedUI: {fileID: 0}
+  interactable: {fileID: 0}
+  objects:
+  - {fileID: 1613117279}
+  - {fileID: 1218325744491419537}
+  - {fileID: 1972928474}
+  interactables:
+  - {fileID: 1198793882}
 --- !u!1 &1085665040
 GameObject:
   m_ObjectHideFlags: 0
@@ -9756,6 +9789,18 @@ MonoBehaviour:
   poseTransitionDuration: 0.2
   rightHandPose: {fileID: 1167685992}
   leftHandPose: {fileID: 1506394123}
+--- !u!114 &1099643565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5826906832188249741, guid: 9cc719de7947f1042ab7aae883d910dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1099643561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240494769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f848a525550f42c4b9f813bcbc07c53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1116595408
 GameObject:
   m_ObjectHideFlags: 0
@@ -10619,7 +10664,7 @@ PrefabInstance:
     - target: {fileID: 5590369150477568978, guid: 9cc719de7947f1042ab7aae883d910dc,
         type: 3}
       propertyPath: isTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5590369150477568978, guid: 9cc719de7947f1042ab7aae883d910dc,
         type: 3}
@@ -10629,7 +10674,7 @@ PrefabInstance:
     - target: {fileID: 5590369150477568978, guid: 9cc719de7947f1042ab7aae883d910dc,
         type: 3}
       propertyPath: objects.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5590369150477568978, guid: 9cc719de7947f1042ab7aae883d910dc,
         type: 3}
@@ -10649,7 +10694,7 @@ PrefabInstance:
     - target: {fileID: 5590369150477568978, guid: 9cc719de7947f1042ab7aae883d910dc,
         type: 3}
       propertyPath: interactables.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5590369150477568978, guid: 9cc719de7947f1042ab7aae883d910dc,
         type: 3}
@@ -10830,18 +10875,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f848a525550f42c4b9f813bcbc07c53e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1198793883 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5590369150477568978, guid: 9cc719de7947f1042ab7aae883d910dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1198793880}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060670833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a19e1233238675459e88377460e5144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1198793884 stripped
@@ -11508,6 +11541,18 @@ MonoBehaviour:
   poseTransitionDuration: 0.2
   rightHandPose: {fileID: 2065621146}
   leftHandPose: {fileID: 2102010790}
+--- !u!114 &1258794146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5826906832188249741, guid: 9cc719de7947f1042ab7aae883d910dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1258794142}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404635646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f848a525550f42c4b9f813bcbc07c53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1259520617
 GameObject:
   m_ObjectHideFlags: 0
@@ -11823,7 +11868,7 @@ MonoBehaviour:
   m_AttachTransform: {fileID: 1316435353}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
-  m_StartingSelectedInteractable: {fileID: 0}
+  m_StartingSelectedInteractable: {fileID: 1258794146}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -16805,7 +16850,7 @@ MonoBehaviour:
   m_AttachTransform: {fileID: 1322153328}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
-  m_StartingSelectedInteractable: {fileID: 0}
+  m_StartingSelectedInteractable: {fileID: 941502256}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -17293,6 +17338,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paper_With_MagicCircle
       objectReference: {fileID: 0}
+    - target: {fileID: 1218325744145901638, guid: ae683bfb5e919a3458309a8ce156c0ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1383079278117676407, guid: ae683bfb5e919a3458309a8ce156c0ac,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -17357,6 +17407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 80.063
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337550024900065978, guid: ae683bfb5e919a3458309a8ce156c0ac,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19323,7 +19378,7 @@ MonoBehaviour:
   m_AttachTransform: {fileID: 1582466871}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
-  m_StartingSelectedInteractable: {fileID: 0}
+  m_StartingSelectedInteractable: {fileID: 711869350169757361}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
@@ -19663,7 +19718,7 @@ MonoBehaviour:
   m_AttachTransform: {fileID: 872415022}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
-  m_StartingSelectedInteractable: {fileID: 0}
+  m_StartingSelectedInteractable: {fileID: 1099643565}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
     m_PersistentCalls:
