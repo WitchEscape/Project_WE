@@ -27,10 +27,21 @@ public class Tutorial : MonoBehaviour
     public Material alphaOrange;
 
     public TextMeshProUGUI text;
-    public Button button;
 
     public Transform[] tutorialAreas;
-    public bool[] tutorialCleared;
+    public bool[] tutorialCleared = new bool[10];
+
+    [Header("힌트 UI"), Range(0.1f, 2f)] public float fadeSpeed = 0.5f;
+    [Header("힌트 UI 지속시간")] public float duration;
+    public CanvasGroup canvas;
+
+    //1. 플레이어 시작 위치에 UI 출력, 이동 관련해서 L스틱으로 이동 및 R스틱으로 시점전환, 텔레포트 기능을 알려줌
+    //2. 플레이어가 이동해서 첫 번째 TriggerZone에서 UI를 정해진 위치로 이동 및 컨트롤러 색상 교체
+    
+    private void Awake()
+    {
+
+    }
 
     public void Start()
     {
@@ -43,18 +54,17 @@ public class Tutorial : MonoBehaviour
         renderers.Add(rightButtonB);
         renderers.Add(leftThumbStick);
         renderers.Add(rightThumbStick);
-
-        if (button.gameObject.activeSelf)
-        {
-            button.gameObject.SetActive(false);
-        }
+        
+        StartCoroutine(FadeInCanvasCoroutine());
     }
 
     //아래 이벤트는 Trigger Zone 스크립트 넣고 EnterEvent로 실행시키기
     //플레이어한테 Rigidbody가 없으니 콜라이더에 Rigidbody넣고 UseGravity = false로 해야함 
 
+    #region 처음에 바로 출력하도록 기획 수정됨
     public void OnMoveArea(int i)
     {
+        Debug.Log("무브");
         if (tutorialCleared[i] == true)
             return;
 
@@ -62,10 +72,13 @@ public class Tutorial : MonoBehaviour
 
         leftThumbStick.material = alphaOrange;
 
-        text.text = "이동은 L스틱";
 
         gameObject.transform.position = tutorialAreas[0].transform.position;
         tutorialCleared[i] = true;
+
+        canvas.gameObject.SetActive(true);
+        StartCoroutine(FadeInCanvasCoroutine());
+        text.text = "이동은 L스틱";
     }
 
     public void OnLookArea(int i)
@@ -78,17 +91,24 @@ public class Tutorial : MonoBehaviour
 
         gameObject.transform.position = tutorialAreas[0].transform.position;
     }
+    #endregion
 
-    public void OnGrapArea(int i)
+    public void OnGrapArea(int i) //0
     {
+        if (tutorialCleared[i] == true)
+            return;
+
         ResetRenderers();
 
         leftBumper.material = alphaOrange;
         rightBumper.material = alphaOrange;
 
-        text.text = "물건을 집으려면 그립 버튼";
+        gameObject.transform.position = tutorialAreas[i].transform.position;
+        tutorialCleared[i] = true;
 
-        gameObject.transform.position = tutorialAreas[0].transform.position;
+        canvas.gameObject.SetActive(true);
+        StartCoroutine(FadeInCanvasCoroutine());
+        text.text = "책상 위에 있는 물건을 잡으려면 그립 버튼";
     }
 
     public void OnRayInteractorArea(int i)
@@ -125,4 +145,51 @@ public class Tutorial : MonoBehaviour
             renderer.material = alphaWhite;
         }
     }
+
+    public IEnumerator FadeOutCanvasCoroutine()
+    {
+        Debug.Log("캔버스 안보이게");
+        //캔버스 안보이게 하는거
+        if (canvas.alpha <= 0)
+        {
+            canvas.gameObject.SetActive(false);
+            yield break;
+        }
+
+        while (canvas.alpha > 0)
+        {
+            canvas.alpha -= Time.deltaTime * fadeSpeed;
+            yield return null;
+        }
+
+        canvas.alpha = 0;
+        canvas.gameObject.SetActive(false);
+    }
+
+    public IEnumerator FadeInCanvasCoroutine()
+    {
+        canvas.alpha = 0;
+
+        Debug.Log("캔버스 보이게");
+        //캔바스 보이게 하는거
+        if (canvas.gameObject.activeSelf == false)
+        {
+            canvas.gameObject.SetActive(true);
+        }
+
+        while (canvas.alpha < 1)
+        {
+            canvas.alpha += Time.deltaTime * fadeSpeed;
+            yield return null;
+        }
+
+        canvas.alpha = 1;
+
+        yield return new WaitForSeconds(duration);
+
+        //지속시간동안 표시하다가 날려버리기
+        StartCoroutine(FadeOutCanvasCoroutine());
+    }
+
+
 }
