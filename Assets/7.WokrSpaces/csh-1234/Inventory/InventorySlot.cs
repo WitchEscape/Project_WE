@@ -332,6 +332,8 @@ public class InventorySlot : MonoBehaviour
 
     private void SetupNewMeshClone(XRBaseInteractable itemHandIsHolding)
     {
+
+        //넣음
         if (itemSlotMeshClone)
         {
             Destroy(itemSlotMeshClone.gameObject);
@@ -413,6 +415,7 @@ public class InventorySlot : MonoBehaviour
 
     private void DestroyComponentsOnClone(Transform clone)
     {
+        //빼기
         try
         {
             var movedColliders = clone.GetComponentsInChildren<IReturnMovedColliders>(true);

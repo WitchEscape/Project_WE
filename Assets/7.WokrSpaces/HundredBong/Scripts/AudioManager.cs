@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
             BGM.Pause();
             Voice.Pause();
         }
-    }
+    }  
     private void Start()
     {
         bgmDictionary.Add(Chapters.Lobby, backgroundMusic[0]);
