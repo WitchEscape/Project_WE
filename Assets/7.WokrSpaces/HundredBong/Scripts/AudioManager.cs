@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource BGM;
     public AudioSource Voice;
 
-    [Header("Lobby, 535, Dormitory, Postion, Library, Teacher, Totorial")] public AudioClip[] backgroundMusic;
+    [Header("Lobby, 535, Dormitory, Postion, Library, Teacher, Totorial, Ending")] public AudioClip[] backgroundMusic;
     [HideInInspector]public float SFXVolume = 1f;
     [HideInInspector]public float BGMVolume = 1f;
 
@@ -51,10 +51,12 @@ public class AudioManager : MonoBehaviour
         if (hasFocus)
         {
             BGM.UnPause();
+            Voice.UnPause();
         }
         else
         {
             BGM.Pause();
+            Voice.Pause();
         }
     }
     private void Start()
@@ -66,6 +68,7 @@ public class AudioManager : MonoBehaviour
         bgmDictionary.Add(Chapters.Library, backgroundMusic[4]);
         bgmDictionary.Add(Chapters.TeachersRoom, backgroundMusic[5]);
         bgmDictionary.Add(Chapters.Totorial, backgroundMusic[6]);
+        bgmDictionary.Add(Chapters.Ending, backgroundMusic[7]);
 
         SFXVolume = 1f;
         BGMVolume = 1f;
