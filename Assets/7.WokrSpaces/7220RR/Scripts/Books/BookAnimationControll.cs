@@ -62,14 +62,15 @@ public class BookAnimationControll : MonoBehaviour
         grab.selectExited.AddListener(ContollerEventRemoveMk1);
 
         grab.activated.AddListener((x) => { BookAnimation();
-            if (page != null && page.enabled == false)
-            {
-                print("실행됨");
-                page.enabled = true;
-                page.selectExited.AddListener((x) => { page.transform.SetParent(null); pageR.isKinematic = false; } );
-                //page.selectEntered.AddListener((x)=> pageR.isKinematic = false);
-            }
+            page.enabled = true;
         });
+
+        if (page != null)
+        {
+            print("실행됨");
+            page.selectExited.AddListener((x) => { page.transform.SetParent(null); pageR.isKinematic = false; });
+            //page.selectEntered.AddListener((x)=> pageR.isKinematic = false);
+        }
 
         grab.selectExited.AddListener(IsOpenBookCheak);
     }
@@ -136,6 +137,7 @@ public class BookAnimationControll : MonoBehaviour
         if (Time.time >= animationTime)
         {
             print(animator.GetBool("IsOpen"));
+
             animator.SetBool("IsOpen", !animator.GetBool("IsOpen"));
             animationTime = Time.time + (animator.GetBool("IsOpen") ? openClip.length : closeClip.length);
             if (!animator.GetBool("IsOpen"))
