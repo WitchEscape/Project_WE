@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
@@ -29,18 +30,20 @@ public class Tutorial : MonoBehaviour
     public TextMeshProUGUI text;
 
     public Transform[] tutorialAreas;
+    public Transform[] ghostWayPoints;
     public bool[] tutorialCleared = new bool[10];
 
     [Header("힌트 UI"), Range(0.1f, 2f)] public float fadeSpeed = 0.5f;
     [Header("힌트 UI 지속시간")] public float duration;
     public CanvasGroup canvas;
 
+    private NavMeshAgent agent;
     //1. 플레이어 시작 위치에 UI 출력, 이동 관련해서 L스틱으로 이동 및 R스틱으로 시점전환, 텔레포트 기능을 알려줌
     //2. 플레이어가 이동해서 첫 번째 TriggerZone에서 UI를 정해진 위치로 이동 및 컨트롤러 색상 교체
-    
+
     private void Awake()
     {
-
+        agent = FindObjectOfType<NavMeshAgent>();
     }
 
     public void Start()
@@ -103,13 +106,77 @@ public class Tutorial : MonoBehaviour
         leftBumper.material = alphaOrange;
         rightBumper.material = alphaOrange;
 
-        gameObject.transform.position = tutorialAreas[i].transform.position;
-        tutorialCleared[i] = true;
+        SetUI(i);    
 
-        canvas.gameObject.SetActive(true);
-        StartCoroutine(FadeInCanvasCoroutine());
         text.text = "책상 위에 있는 물건을 잡으려면 그립 버튼";
     }
+    public void OnAlyxGrabArea(int i) //1
+    {
+        if (tutorialCleared[i] == true)
+            return;
+
+        ResetRenderers();
+
+        leftTrigger.material = alphaOrange;
+        rightTrigger.material = alphaOrange;
+        leftBumper.material = alphaOrange;
+        rightBumper.material = alphaOrange;
+
+        SetUI(i);
+
+        text.text = "멀리 있는 물건을 잡으려면 트리거버튼 + 그립버튼 + 당기기";
+    }
+
+    public void OnExplainInventory(int i) //2
+    {
+        if (tutorialCleared[i] == true)
+            return;
+
+        ResetRenderers();
+
+        rightButtonB.material = alphaOrange;
+
+        SetUI(i);
+
+        text.text = "대충 인벤토리에 넣고 빼는 기능 설명하는 텍스트";
+        //인벤토리에 이벤트 없으면 하나로 대신하고싶어요
+
+    }
+
+    public void OnKeyPuzzle(int i) //3
+    {
+        if (tutorialCleared[i] == true)
+            return;
+
+        ResetRenderers();
+
+        leftBumper.material = alphaOrange;
+        rightBumper.material = alphaOrange;
+        leftTrigger.material = alphaOrange;
+        rightTrigger.material = alphaOrange;
+
+        SetUI(i);
+
+        text.text = "책과 가방은 그립 + 트리거로 열 수 있다는 텍스트";
+    }
+
+    public void OnDialPuzzle(int i) //4
+    {
+        if (tutorialCleared[i] == true)
+            return;
+
+        ResetRenderers();
+
+        leftBumper.material = alphaOrange;
+        rightBumper.material = alphaOrange;
+        leftTrigger.material = alphaOrange;
+        rightTrigger.material = alphaOrange;
+
+        SetUI(i);
+
+        text.text = "다이얼, 키패드 옆에서 그립 + 트리거를 누르면 UI를 출력한다는 텍스트";
+    }
+
 
     public void OnRayInteractorArea(int i)
     {
@@ -123,20 +190,7 @@ public class Tutorial : MonoBehaviour
         gameObject.transform.position = tutorialAreas[0].transform.position;
     }
 
-    public void OnAlyxGrabArea(int i)
-    {
-        //AlyxGrabTutorialObject 이벤트에서 SetActive(true)하고 다음 튜토리얼존에서 false 시키기
-        ResetRenderers();
 
-        leftTrigger.material = alphaOrange;
-        rightTrigger.material = alphaOrange;
-        leftBumper.material = alphaOrange;
-        rightBumper.material = alphaOrange;
-
-        text.text = "멀리 있는 물건을 잡으려면 트리거 버튼과 그립버튼을 누른 채로 손을 흔들기";
-
-        gameObject.transform.position = tutorialAreas[0].transform.position;
-    }
 
     private void ResetRenderers()
     {
@@ -146,8 +200,19 @@ public class Tutorial : MonoBehaviour
         }
     }
 
+    private void SetUI(int i)
+    {
+        gameObject.transform.position = tutorialAreas[i].transform.position;
+        tutorialCleared[i] = true;
+
+        canvas.gameObject.SetActive(true);
+        StopAllCoroutines();
+        StartCoroutine(FadeInCanvasCoroutine());
+    }
+
     public IEnumerator FadeOutCanvasCoroutine()
     {
+        canvas.alpha = 1f;
         Debug.Log("캔버스 안보이게");
         //캔버스 안보이게 하는거
         if (canvas.alpha <= 0)
@@ -161,7 +226,9 @@ public class Tutorial : MonoBehaviour
             canvas.alpha -= Time.deltaTime * fadeSpeed;
             yield return null;
         }
-
+        //업데이트문
+        //따로 시작할 수 있는 업데이트 문2 <- 그런데 업데이트랑은 따로 돌아감
+        //
         canvas.alpha = 0;
         canvas.gameObject.SetActive(false);
     }
