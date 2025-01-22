@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource SFX;
     public AudioSource BGM;
+    public AudioSource Voice;
+
     [Header("Lobby, 535, Dormitory, Postion, Library, Teacher, Totorial")] public AudioClip[] backgroundMusic;
     [HideInInspector]public float SFXVolume = 1f;
     [HideInInspector]public float BGMVolume = 1f;

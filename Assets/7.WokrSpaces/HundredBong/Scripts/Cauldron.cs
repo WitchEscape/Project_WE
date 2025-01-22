@@ -200,6 +200,17 @@ public class Cauldron : MonoBehaviour
             isCorrectRune[3] = true;
         }
 
+        if(isActivated == false)
+        {
+            if(PuzzleProgressManager.Instance.GetPuzzleState(puzzleID) != PuzzleProgressManager.PuzzleState.Completed)
+            {
+                DialogPlayer.Instance?.PlayDialogSequence("POTIONROOM_02");
+                isActivated = true;
+            }
+        }
+
+        
+
         //가마솥 안에 있는 트리거로 들어간 물약 비활성화
         //TODL : 물약 들어갈 때 자기 위치 기억해놓았다가 다시 그쪽으로 돌아가도록 하기
         if (arg != null)
