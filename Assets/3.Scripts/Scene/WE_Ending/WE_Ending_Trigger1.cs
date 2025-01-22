@@ -12,14 +12,10 @@ public class WE_Ending_Trigger1 : MonoBehaviour
 
     public void TriggerActivate(GameObject go)
     {
-
-        if (PuzzleProgressManager.Instance.GetPuzzleState("Claass535_Puzzle_01") == PuzzleProgressManager.PuzzleState.Available)
+        if (!isActivate)
         {
-            if (!isActivate)
-            {
-                DialogPlayer.Instance.PlayDialogSequence("535CLASSROOM_01");
-                isActivate = true;
-            }
+            DialogPlayer.Instance.PlayDialogSequence("ENDING_01");
+            isActivate = true;
         }
     }
 }
