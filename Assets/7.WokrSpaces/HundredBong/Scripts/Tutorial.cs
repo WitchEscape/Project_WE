@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.VisionOS;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class Tutorial : MonoBehaviour
 {
@@ -42,6 +45,8 @@ public class Tutorial : MonoBehaviour
     //1. 플레이어 시작 위치에 UI 출력, 이동 관련해서 L스틱으로 이동 및 R스틱으로 시점전환, 텔레포트 기능을 알려줌
     //2. 플레이어가 이동해서 첫 번째 TriggerZone에서 UI를 정해진 위치로 이동 및 컨트롤러 색상 교체
 
+
+    [SerializeField] private DynamicMoveProvider dynamic; 
     private void Awake()
     {
         agent = FindObjectOfType<NavMeshAgent>();
@@ -97,6 +102,18 @@ public class Tutorial : MonoBehaviour
     //}
     #endregion
 
+
+    // tutorialCleared 에 포함되지 않음
+    private bool isActivated = false;
+    public void OnStartDialog()
+    {
+        if(isActivated == false)
+        {
+            DialogPlayer.Instance.PlayDialogSequence("LOBBY_01");
+            isActivated = true;
+        }
+    }
+
     public void OnGrapArea(int i) //0
     {
         if (tutorialCleared[i] == true)
@@ -112,6 +129,7 @@ public class Tutorial : MonoBehaviour
         UIText.text = "책상 위에 있는 물건을 잡으려면 그립 버튼";
         ghostText.text = "ㅇ";
     }
+
     public void OnAlyxGrabArea(int i) //1
     {
         if (tutorialCleared[i] == true)
@@ -141,8 +159,10 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "대충 인벤토리에 넣고 빼는 기능 설명하는 텍스트";
+        UIText.text = "오른쪽 컨트룰러의 B버튼을 통해 아이템을 인벤토리에 넣을 수 있음";
         ghostText.text = "ㅇ";
+
+
         //인벤토리에 이벤트 없으면 하나로 대신하고싶어요
 
     }
@@ -200,6 +220,8 @@ public class Tutorial : MonoBehaviour
         ghostText.text = "ㅇ";
     }
 
+
+    private bool isActivated2 = false;
     public void OnDialog(int i) //6
     {
         if (tutorialCleared[i] == true)
@@ -211,7 +233,18 @@ public class Tutorial : MonoBehaviour
 
         UIText.text = "살여주세요";
         //트리거존 지나면서 태그 변경한 뒤 그 이후에 상호작용 되게 하기
+        if(isActivated2 == false)
+        {
+            DialogPlayer.Instance.PlayDialogSequence("LOBBY_02");
+            isActivated2 = true;
+        }
+        
         ghostText.text = "살고싶어요";
+    }
+
+    public void LowSpeed()
+    {
+        dynamic.moveSpeed  =1f;
     }
 
     //public void OnRayInteractorArea(int i)
@@ -225,8 +258,6 @@ public class Tutorial : MonoBehaviour
 
     //    gameObject.transform.position = tutorialAreas[0].transform.position;
     //}
-
-
 
     private void ResetRenderers()
     {

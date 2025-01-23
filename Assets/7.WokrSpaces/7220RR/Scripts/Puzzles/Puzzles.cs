@@ -135,7 +135,7 @@ public class Puzzles : MonoBehaviour
     {
         if (PuzzleProgressManager.Instance?.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
         {
-            PuzzleClear();
+            PuzzleClearWithLoad();
         }
 
     }
@@ -146,8 +146,6 @@ public class Puzzles : MonoBehaviour
         if (isActivatedObject && activatedObject != null)
             activatedObject?.Activate();
         ClearEvent.Invoke();
-
-        PuzzleProgressManager.Instance?.CompletePuzzle(puzzleId);
 
         print("풀림");
         //임시
@@ -163,8 +161,29 @@ public class Puzzles : MonoBehaviour
         if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
 
-        ClearParticle?.Play();
+        if(ClearParticle!= null)
+        {
+            ClearParticle.Play();
+        }
     }
+
+    private void PuzzleClearWithLoad()
+    {
+        if (isActivatedObject && activatedObject != null)
+            activatedObject?.Activate();
+        ClearEvent.Invoke();
+
+        PuzzleProgressManager.Instance?.CompletePuzzle(puzzleId);
+
+        //TODO 고스트 캔버스 clearpuzzle값 수정해줘야함
+        if (ghostCanvas != null)
+            ghostCanvas.ClearPuzzle(clearNum);
+
+        if (isActivatedObject && activatedObject != null)
+            activatedObject.enabled = false;
+    }
+
+
 
     private void SubClipPlay()
     {
@@ -475,7 +494,7 @@ public class Puzzles : MonoBehaviour
 
     private void DialClearEvent()
     {
-
+        _ = StartCoroutine(DialAlphaChange());
     }
     #endregion
     #region Keypad
