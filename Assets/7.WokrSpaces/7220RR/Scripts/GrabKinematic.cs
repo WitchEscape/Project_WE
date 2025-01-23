@@ -31,10 +31,8 @@ public class GrabKinematic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("누가이김/");
         if (other.CompareTag("Match"))
         {
-            print($"{other.name}");
             gameObject.layer = changeLayer;
             rigidbodyee.isKinematic = true;
             //rigidbodyee.velocity = Vector3.zero;
