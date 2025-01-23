@@ -18,7 +18,6 @@ public class FountainPen : MonoBehaviour
 
     private int changeLayerIndex;
     private int penHeadBaseLayerIndex = int.MaxValue;
-    private FixedJoint j;
     private bool isInk = false;
     private Dictionary<Collider, Material> paperMaterials = new Dictionary<Collider, Material>();
     private const float penBodyRigidBodyForce = 0.5f;
@@ -37,6 +36,7 @@ public class FountainPen : MonoBehaviour
             Debug.LogError("FountainPen / PenNibCollider or PenBodySocket is null");
         }
 
+        penBodySocket.enabled = false;
     }
 
     private void OnEnable()
@@ -96,6 +96,12 @@ public class FountainPen : MonoBehaviour
             print(paperMaterials[other].color);
         }
     }
+
+    private void OnJointBreak(float breakForce)
+    {
+        penBodySocket.enabled = true;
+    }
+
 
     private void PenHeadRigidbodyAndLayerChange(SelectEnterEventArgs arg)
     {
