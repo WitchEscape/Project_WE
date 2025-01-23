@@ -16,7 +16,12 @@ public class ReciprocatingMotion : MonoBehaviour
     public bool project_WE_Tutorial;
     private void Update()
     {
-        float dir = Mathf.Sin(Time.time * mooveSpeed) * moveAmplitude * 0.01f;
+
+        if (project_WE_Tutorial)
+        {
+            float dir = Mathf.Sin(Time.time * mooveSpeed) * moveAmplitude * 0.01f;
+            transform.position = new Vector3(transform.position.x, transform.position.y + dir, transform.position.z);
+        }
 
         //if (dirX)
         //    transform.rotation = new Quaternion(transform.rotation.x + dir, transform.rotation.y, transform.rotation.z, transform.rotation.w);
@@ -28,6 +33,17 @@ public class ReciprocatingMotion : MonoBehaviour
         //    transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z + dir, transform.rotation.w);
 
         //if (project_WE_Tutorial)
-            transform.position = new Vector3(transform.position.x, transform.position.y + dir, transform.position.z);
+    }
+
+    public void SetBoolTrue()
+    {
+        project_WE_Tutorial = true;
+    }
+
+    public void SetBoolFalse()
+    {
+        project_WE_Tutorial = false;
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
+
     }
 }
