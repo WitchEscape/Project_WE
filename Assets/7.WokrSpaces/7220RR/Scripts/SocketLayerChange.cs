@@ -5,7 +5,7 @@ public class SocketLayerChange : MonoBehaviour
 {
     [SerializeField]
     private XRSocketInteractor xrSocketInteractor;
-    private const int changeLayer = 8;
+    private const int changeLayer = 9;
     private int baseInteractorLayer;
     private int baseInteractableLayer;
 
