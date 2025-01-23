@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -7,6 +5,8 @@ public class WateringCan : MonoBehaviour
 {
     public ParticleSystem waterParticle; // 물 입자 효과
     private XRGrabInteractable grabInteractable;
+    [SerializeField]
+    private GameObject paticleObject;
 
     private void Start()
     {
@@ -20,26 +20,36 @@ public class WateringCan : MonoBehaviour
         if (waterParticle != null)
         {
             waterParticle.Stop();
+            paticleObject?.SetActive(false);
         }
     }
 
     private void OnTriggerPressed(ActivateEventArgs args)
     {
-        print($"");
-        // 물 뿌리기 시작
-        if (waterParticle != null)
+        if (args.interactorObject is XRDirectInteractor)
         {
-            waterParticle.Play();
-            
+            Debug.Log("진행시켜!");
+
+            if (waterParticle != null)
+            {
+                paticleObject?.SetActive(true);
+                waterParticle.Play();
+
+            }
         }
     }
 
     private void OnTriggerReleased(DeactivateEventArgs args)
     {
         // 물 뿌리기 멈춤
-        if (waterParticle != null)
+        if (args.interactorObject is XRDirectInteractor)
         {
-            waterParticle.Stop();
+            Debug.Log("멈춰!");
+            if (waterParticle != null)
+            {
+                waterParticle.Stop();
+                paticleObject?.SetActive(false);
+            }
         }
     }
 }

@@ -82,7 +82,8 @@ public class UI_LoadStage : MonoBehaviour
 
     private void OnLoadButtonClicked(string stageName)
     {
-        SceneManager.LoadScene(stageName);
+        SaveLoadManager.Instance.LoadGame(stageName);
+        //SceneManager.LoadScene(stageName);
     }
 
     private void OnDeleteButtonClicked(string stageName)

@@ -8,6 +8,9 @@ public class TeachersRoomPuzzleData : StageDataBase
     [SerializeField] private Puzzles TeachersRoom_Puzzle_03;
     [SerializeField] private BookAnimationControll bookOpen;
 
+    private bool isBookOpen = false;
+    private bool isPuzzle3Clear = false;
+
     protected override void Start()
     {
         base.Start();
@@ -18,16 +21,24 @@ public class TeachersRoomPuzzleData : StageDataBase
     
     private void TeachersRoom_Puzzle_03_Event()
     {
-        if(PuzzleProgressManager.Instance.GetPuzzleState("TeachersRoom_Puzzle_03") == PuzzleProgressManager.PuzzleState.Completed)
+        if(isPuzzle3Clear == false)
         {
-            DialogPlayer.Instance.PlayDialogSequence("TEACHERSROOM_03");
+            if (PuzzleProgressManager.Instance.GetPuzzleState("TeachersRoom_Puzzle_02") == PuzzleProgressManager.PuzzleState.Completed)
+            {
+                DialogPlayer.Instance.PlayDialogSequence("TEACHERSROOM_03");
+                isPuzzle3Clear = true;
+            }
         }
     }
     private void LaffleBookOpen()
     {
-        if (PuzzleProgressManager.Instance.GetPuzzleState("TeachersRoom_Puzzle_03") == PuzzleProgressManager.PuzzleState.Completed)
+        if(isBookOpen == false)
         {
-            DialogPlayer.Instance.PlayDialogSequence("TEACHERSROOM_04");
+            if (PuzzleProgressManager.Instance.GetPuzzleState("TeachersRoom_Puzzle_03") == PuzzleProgressManager.PuzzleState.Completed)
+            {
+                DialogPlayer.Instance.PlayDialogSequence("TEACHERSROOM_04");
+                isBookOpen = true;
+            }
         }
     }
 

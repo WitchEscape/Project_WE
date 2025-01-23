@@ -67,7 +67,7 @@ public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         {
             return "교무실";
         }
-        else if (stageName == "WE_Level_Tuturial")
+        else if (stageName == "WE_Level_Tutorial")
         {
             return "로비";
         }
