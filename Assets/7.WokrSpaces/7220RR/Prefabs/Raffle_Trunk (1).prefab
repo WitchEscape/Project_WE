@@ -602,6 +602,7 @@ Transform:
   - {fileID: 7109358259142902575}
   - {fileID: 6169778780509629418}
   - {fileID: 1883679833539139827}
+  - {fileID: 5713632276745257036}
   - {fileID: 5111857061940283470}
   - {fileID: 5807686207127169040}
   - {fileID: 1601485816097896087}
@@ -896,8 +897,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.99589235, z: -0, w: -0.09054547}
   m_LocalPosition: {x: -4.652, y: 1.125, z: 0.683}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4227920005517734917}
   m_Father: {fileID: 0}
@@ -3545,9 +3546,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1883679833539139827}
-  - component: {fileID: 8764716620318377607}
-  - component: {fileID: 2086235622801732115}
-  m_Layer: 0
+  - component: {fileID: 2186549117982493060}
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Match
   m_Icon: {fileID: 0}
@@ -3569,7 +3569,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4227920005517734917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8764716620318377607
+--- !u!65 &2186549117982493060
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3588,29 +3588,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &2086235622801732115
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5054560552357101727}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 4.6437936, z: 1}
-  m_Center: {x: 0, y: 0.6418966, z: 0}
+  m_Size: {x: 1.0606966, y: 1.387366, z: 1.025253}
+  m_Center: {x: 0.0012873913, y: 0.47, z: -0.012626971}
 --- !u!1 &5089353231052143658
 GameObject:
   m_ObjectHideFlags: 0
@@ -4535,6 +4514,59 @@ Transform:
   - {fileID: 1170448266332935417}
   m_Father: {fileID: 3725509964492779941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7206558190672761863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5713632276745257036}
+  - component: {fileID: 7698907993794543159}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: Match
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5713632276745257036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206558190672761863}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.065, z: -0.1834}
+  m_LocalScale: {x: 0.42143002, y: 0.01, z: 0.28802982}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4227920005517734917}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7698907993794543159
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206558190672761863}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9611115, y: 1.014042, z: 0.95058954}
+  m_Center: {x: 0.0031964146, y: 1.5139295, z: -0.00075590727}
 --- !u!1 &7207961699539366770
 GameObject:
   m_ObjectHideFlags: 0
@@ -5256,7 +5288,7 @@ MonoBehaviour:
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
-  m_TrackScale: 1
+  m_TrackScale: 0
   m_SmoothScale: 0
   m_SmoothScaleAmount: 8
   m_TightenScale: 0.1
@@ -5331,6 +5363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xrGrabInteractable: {fileID: 4592747054012216275}
   rigidbodyee: {fileID: 8494438026841692282}
+  changeLayer: 0
 --- !u!1 &8718785716678898049
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,11 +5,15 @@ public class GrabKinematic : MonoBehaviour
 {
     [SerializeField] private XRGrabInteractable xrGrabInteractable;
     [SerializeField] private Rigidbody rigidbodyee;
+    [SerializeField] private int changeLayer = 8;
+    private int baseLayer;
+
 
     private void Awake()
     {
         xrGrabInteractable ??= GetComponent<XRGrabInteractable>();
         rigidbodyee ??= GetComponent<Rigidbody>();
+        baseLayer = gameObject.layer;
 
         if (rigidbodyee != null)
         {
@@ -22,6 +26,7 @@ public class GrabKinematic : MonoBehaviour
     {
         rigidbodyee.isKinematic = false;
         transform.parent = null;
+        gameObject.layer = baseLayer;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,10 +35,14 @@ public class GrabKinematic : MonoBehaviour
         if (other.CompareTag("Match"))
         {
             print($"{other.name}");
+            gameObject.layer = changeLayer;
             rigidbodyee.isKinematic = true;
             rigidbodyee.velocity = Vector3.zero;
-            transform.parent = other.transform;
-            
+            transform.parent = other.transform.parent;
+            Vector3 newV3 = transform.localEulerAngles;
+            newV3.x = 0f;
+            newV3.z = 0f;
+            transform.localEulerAngles = newV3;
         }
     }
 }
