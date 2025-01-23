@@ -6,7 +6,7 @@ using UnityEngine;
 public class LibraryPuzzleData : StageDataBase
 {
     [SerializeField] private BookAnimationControll bookOpen;
-
+    
     private bool isActivated = false;
 
     protected override void Start()
