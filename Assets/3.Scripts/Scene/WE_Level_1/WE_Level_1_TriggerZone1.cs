@@ -12,7 +12,6 @@ public class WE_Level_1_TriggerZone1 : MonoBehaviour
 
     public void Start_535CLASSROOM_01(GameObject go)
     {
-
         if (PuzzleProgressManager.Instance.GetPuzzleState("Claass535_Puzzle_01") == PuzzleProgressManager.PuzzleState.Available)
         {
             if (!isActivate)

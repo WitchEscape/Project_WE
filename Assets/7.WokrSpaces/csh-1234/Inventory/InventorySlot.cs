@@ -48,6 +48,11 @@ public class InventorySlot : MonoBehaviour
     private TransformStruct startingTransformFromHand;
     private Vector3 goalSizeToFitInSlot;
 
+    // 아이템이 슬롯에 들어갈 때 발생하는 이벤트
+    public UnityEvent<XRBaseInteractable> OnItemAdded;
+    // 아이템이 슬롯에서 나올 때 발생하는 이벤트
+    public UnityEvent<XRBaseInteractable> OnItemRemoved;
+
     private void Awake()
     {
         OnValidate();
@@ -183,11 +188,15 @@ public class InventorySlot : MonoBehaviour
 
         if (currentSlotItem)
         {
+            // 아이템을 꺼낼 때 이벤트 발생
+            OnItemRemoved?.Invoke(currentSlotItem);
             DisableItemInHand(controller);
             GetNewItemFromSlot(controller);
         }
-        else
+        else if (itemHandIsHolding)
         {
+            // 아이템을 넣을 때 이벤트 발생
+            OnItemAdded?.Invoke(itemHandIsHolding);
             DisableItemInHand(controller);
         }
 

@@ -96,14 +96,13 @@ public class DisplayMaterial : MonoBehaviour
 
         if (wasPlayParticle == false) { return; }
 
-        //튜토리얼 진행중일때
-        if (duringTutorial)
+        if(duringTutorial)
         {
-            //TODO : 씬 이동
+
         }
 
         //1 : 불투명      0 : 투명
-        else if (2 <= playerHandCount && wasPlaying == false)
+        if (2 <= playerHandCount && wasPlaying == false)
         {
             //알파값을 매 프레임 감소시킴
             erase = erase - (Time.deltaTime * 0.1f);
@@ -134,8 +133,6 @@ public class DisplayMaterial : MonoBehaviour
                 ghostCanvas?.ClearPuzzle(puzzleIndex);
                 Debug.Log("모든 퍼즐 클리어");
                 SceneManager.LoadScene(nextSceneName);
-
-
             }
 
         }
