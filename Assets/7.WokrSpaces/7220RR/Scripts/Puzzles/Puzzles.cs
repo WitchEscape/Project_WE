@@ -161,7 +161,7 @@ public class Puzzles : MonoBehaviour
         if (isActivatedObject && activatedObject != null)
             activatedObject.enabled = false;
 
-        if(ClearParticle!= null)
+        if (ClearParticle != null)
         {
             ClearParticle.Play();
         }
@@ -289,6 +289,7 @@ public class Puzzles : MonoBehaviour
 
         if (changeMaterial != null)
         {
+            print("Clear Event Set");
             ClearEvent.AddListener(DialClearEventSet);
         }
     }
@@ -303,19 +304,23 @@ public class Puzzles : MonoBehaviour
         _ = StartCoroutine(DialAlphaChange());
     }
 
+    private const float duration = 1f;
+
     private IEnumerator DialAlphaChange()
     {
-        yield return null;
+        print("다이얼 클리어 이벤트 코루틴 실행");
         foreach (Renderer renderer in dialRenderers)
         {
             renderer.material = changeMaterial;
         }
 
         Color newColor = changeMaterial.color;
+        float tempDuration = 0f;
 
-        while (newColor.a <= 0.1f)
+        while (tempDuration < duration)
         {
-            newColor.a = Mathf.Lerp(newColor.a, 0f, 0.01f);
+            tempDuration += Time.deltaTime;
+            newColor.a = Mathf.Lerp(newColor.a, 0f, tempDuration / duration);
             changeMaterial.color = newColor;
             yield return null;
         }
@@ -565,10 +570,12 @@ public class Puzzles : MonoBehaviour
 
                 ClearEvent.AddListener(() =>
                 {
+                    print("키패드 클리어 이벤트 실행");
                     for (int i = 0; i < 10; i++)
                     {
                         int index = i;
-                        numPressButton[index].OnPress.RemoveListener(() => KeypadNumEvent(index));
+                        //numPressButton[index].OnPress.RemoveListener(() => KeypadNumEvent(index));
+                        numPressButton[index].OnPress.RemoveAllListeners();
                         numPressButton[index].OnPress.AddListener(SubClipPlay);
                     }
                     subPressButton[0].OnPress.RemoveListener(keypadEnterButtonClickEvent);
