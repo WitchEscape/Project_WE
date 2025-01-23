@@ -61,11 +61,11 @@ public class Examiner : MonoBehaviour
         isComplete = CheckCorrectPostion();
         if (isComplete && isCleared == false)
         {
-            //TODO : 발생할 이벤트 작성
             //DialogPlayer.Instance.PlayDialogSequence("LOBBY_11_");
             PuzzleProgressManager.Instance.CompletePuzzle(puzzleID);
 
             match.gameObject.SetActive(true);
+            //TODO : 서랍 열리는 소리 재생
 
             //particle.gameObject?.SetActive(true);
             //particle.Play();
