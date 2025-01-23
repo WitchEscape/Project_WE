@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class XRJointGrabInteractable : XRGrabInteractable
 {
     public float maxDistance = 0.5f;
-     
+
     private void Update()
     {
         if (isSelected && firstInteractorSelecting is XRDirectInteractor)
