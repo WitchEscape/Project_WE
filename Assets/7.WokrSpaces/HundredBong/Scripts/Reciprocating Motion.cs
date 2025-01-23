@@ -8,6 +8,7 @@ public class ReciprocatingMotion : MonoBehaviour
     public float mooveSpeed = 2f;
     public float moveAmplitude = 0.2f;
 
+    [Header("리셋후 컨트롤러 높이"), Range(1, 2)] public float height; 
     //[Header("이동할 축")]
     //public bool dirX;
     //public bool dirY;
@@ -43,7 +44,7 @@ public class ReciprocatingMotion : MonoBehaviour
     public void SetBoolFalse()
     {
         project_WE_Tutorial = false;
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z);
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, height, gameObject.transform.position.z);
 
     }
 }
