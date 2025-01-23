@@ -147,4 +147,11 @@ public class PuzzleProgressManager : MonoBehaviour
     }
     #endregion
 
+    // 씬 이동시 호출 해주기
+    public void ClearPuzzleProgress()
+    {
+        puzzleStates.Clear();
+        InitializePuzzles();
+    }
+    
 }
