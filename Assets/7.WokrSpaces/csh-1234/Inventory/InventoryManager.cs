@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class InventoryManager : MonoBehaviour
 
     public bool IsInventoryOpen { get; private set; }
 
+    // 아이템이 어떤 슬롯에 들어갈 때 발생하는 이벤트
+    public UnityEvent<XRBaseInteractable, int> OnItemAddedToSlot;
+    // 아이템이 어떤 슬롯에서 나올 때 발생하는 이벤트
+    public UnityEvent<XRBaseInteractable, int> OnItemRemovedFromSlot;
+
     private void Start()
     {
         OnValidate();
@@ -26,15 +32,44 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        foreach (var itemSlot in inventorySlots)
+        // 각 슬롯의 이벤트를 구독
+        for (int i = 0; i < inventorySlots.Length; i++)
         {
-            if (itemSlot == null)
+            int slotIndex = i; // 클로저를 위해 로컬 변수 사용
+            if (inventorySlots[i] != null)
             {
-                continue;
+                inventorySlots[i].OnItemAdded.AddListener((item) => HandleItemAdded(item, slotIndex));
+                inventorySlots[i].OnItemRemoved.AddListener((item) => HandleItemRemoved(item, slotIndex));
+                inventorySlots[i].StartCoroutine(inventorySlots[i].CreateStartingItemAndDisable());
             }
-            itemSlot.StartCoroutine(itemSlot.CreateStartingItemAndDisable());
         }
+    }
 
+    private void HandleItemAdded(XRBaseInteractable item, int slotIndex)
+    {
+        OnItemAddedToSlot?.Invoke(item, slotIndex);
+    }
+
+    private void HandleItemRemoved(XRBaseInteractable item, int slotIndex)
+    {
+        OnItemRemovedFromSlot?.Invoke(item, slotIndex);
+    }
+
+    private void OnDestroy()
+    {
+        // 이벤트 구독 해제
+        if (inventorySlots != null)
+        {
+            for (int i = 0; i < inventorySlots.Length; i++)
+            {
+                if (inventorySlots[i] != null)
+                {
+                    int slotIndex = i;
+                    inventorySlots[i].OnItemAdded.RemoveListener((item) => HandleItemAdded(item, slotIndex));
+                    inventorySlots[i].OnItemRemoved.RemoveListener((item) => HandleItemRemoved(item, slotIndex));
+                }
+            }
+        }
     }
 
     private void OnValidate()

@@ -47,7 +47,9 @@ public class UI_Menu : MonoBehaviour
 
     private void OnSaveExitButtonClick()
     {
-        //SaveLoadManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
+        SaveLoadManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
+        PuzzleProgressManager.Instance.ClearPuzzleProgress();
+        SaveLoadManager.Instance.isDataLoadScene = false;
         SceneManager.LoadScene("WE_Level_Tutorial");
     }
 
