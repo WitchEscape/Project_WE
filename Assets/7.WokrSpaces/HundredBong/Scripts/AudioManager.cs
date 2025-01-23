@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource SFX;
     public AudioSource BGM;
-    public AudioSource Voice;
+    //public AudioSource Voice;
 
     [Header("Lobby, 535, Dormitory, Postion, Library, Teacher, Totorial, Ending")] public AudioClip[] backgroundMusic;
     [HideInInspector]public float SFXVolume = 1f;
@@ -51,12 +51,12 @@ public class AudioManager : MonoBehaviour
         if (hasFocus)
         {
             BGM.UnPause();
-            Voice.UnPause();
+            //Voice.UnPause();
         }
         else
         {
             BGM.Pause();
-            Voice.Pause();
+            //Voice.Pause();
         }
     }  
     private void Start()

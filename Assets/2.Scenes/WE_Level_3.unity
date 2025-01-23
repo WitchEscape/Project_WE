@@ -1052,7 +1052,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SFX: {fileID: 60084274}
   BGM: {fileID: 60084274}
-  Voice: {fileID: 0}
   backgroundMusic:
   - {fileID: 8300000, guid: a920db8397f2a2349877fd858abf27d3, type: 3}
   - {fileID: 8300000, guid: a920db8397f2a2349877fd858abf27d3, type: 3}
@@ -32338,7 +32337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTags:
-  - Postion_B
+  - Postion_R
   OnEnterEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -35131,7 +35130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTags:
-  - Postion_R
+  - Postion_B
   OnEnterEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -50558,15 +50557,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8822595467118883701}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.518, y: 0.5, z: 0.65600014}
+  m_LocalRotation: {x: -0.4991523, y: 0.4991523, z: -0.5008463, w: 0.5008463}
+  m_LocalPosition: {x: 3.0188, y: 0.66, z: 0.0993}
   m_LocalScale: {x: 800, y: 800, z: 800}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4906364536335677896}
   - {fileID: 3310135359631958268}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.806, z: -90}
 --- !u!33 &1519666609264039574
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -53727,6 +53726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSceneName: WE_Level_4
   fadeDuration: 5
+  duringTutorial: 0
   puzzleIndex: 0
   spawnParticle: {fileID: 4101578529812593334}
   spawnClip: {fileID: 0}
@@ -72984,7 +72984,7 @@ HingeJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 2.78805, y: 0.5116319, z: 0.53389996}
   serializedVersion: 2
-  m_UseSpring: 0
+  m_UseSpring: 1
   m_Spring:
     spring: 0
     damper: 0
