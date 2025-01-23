@@ -13,7 +13,7 @@ public class GrabKinematic : MonoBehaviour
 
         if (rigidbodyee != null)
         {
-            rigidbodyee.isKinematic = true;
+            //rigidbodyee.isKinematic = true;
             xrGrabInteractable?.selectExited.AddListener(KinematicReset);
         }
     }
@@ -21,5 +21,17 @@ public class GrabKinematic : MonoBehaviour
     private void KinematicReset(SelectExitEventArgs args)
     {
         rigidbodyee.isKinematic = false;
+        transform.parent = null;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("누가이김/");
+        if (other.CompareTag("Match"))
+        {
+            print("내가 이김");
+            rigidbodyee.isKinematic = true;
+            transform.parent = other.transform;
+        }
     }
 }
