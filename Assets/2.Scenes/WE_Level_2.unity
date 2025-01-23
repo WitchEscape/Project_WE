@@ -3664,7 +3664,7 @@ Transform:
   m_GameObject: {fileID: 668171819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5279999, y: 1.2680001, z: -0.26699996}
+  m_LocalPosition: {x: 3.011, y: 1.2680001, z: -1.446}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3673,7 +3673,7 @@ Transform:
   - {fileID: 437140830}
   - {fileID: 1769314640}
   - {fileID: 1126634764}
-  m_Father: {fileID: 963265451283393812}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &668171821
 MonoBehaviour:
@@ -5644,7 +5644,7 @@ Transform:
   m_GameObject: {fileID: 1090467702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1, y: 2, z: 3.274}
+  m_LocalPosition: {x: -1, y: 2.2, z: 3.345}
   m_LocalScale: {x: 0.8, y: 1.12, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10161,7 +10161,7 @@ GameObject:
   - component: {fileID: 2394528959038795203}
   - component: {fileID: 3331886373020674074}
   - component: {fileID: 8046806060756573287}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12486,7 +12486,7 @@ GameObject:
   - component: {fileID: 4081843571254737252}
   - component: {fileID: 9045172806102521055}
   - component: {fileID: 3072686089318596736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drawer right side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13548,7 +13548,7 @@ GameObject:
   - component: {fileID: 241910466532823225}
   - component: {fileID: 3164745386921140900}
   - component: {fileID: 7985590176025375121}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drawer front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13674,7 +13674,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 668171820}
   - {fileID: 3190818834066835036}
   - {fileID: 2720388425231641887}
   - {fileID: 6624574182639284918}
@@ -15916,7 +15915,7 @@ GameObject:
   - component: {fileID: 5018495203715246800}
   - component: {fileID: 6371328273877007421}
   - component: {fileID: 6450590574026853863}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drawer back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19891,7 +19890,7 @@ GameObject:
   - component: {fileID: 2557666163309572116}
   - component: {fileID: 9192257882031954554}
   - component: {fileID: 1504626427}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21014,7 +21013,7 @@ GameObject:
   - component: {fileID: 454206101352098786}
   - component: {fileID: 6369415693904610811}
   - component: {fileID: 550487448105317593}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Left side panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23838,7 +23837,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 768
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -27993,7 +27992,7 @@ GameObject:
   - component: {fileID: 5099396797877882635}
   - component: {fileID: 5266464822725256317}
   - component: {fileID: 5637085252814557870}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bottom panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30177,7 +30176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 963265451283393812}
   - component: {fileID: 1504626414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cabinet_HundredBong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32212,7 +32211,7 @@ GameObject:
   - component: {fileID: 2474027854959374466}
   - component: {fileID: 654935512679422715}
   - component: {fileID: 3415786075475225030}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36655,6 +36654,21 @@ PrefabInstance:
         type: 3}
       propertyPath: prefabPath
       value: Hera's_Diary
+      objectReference: {fileID: 0}
+    - target: {fileID: 2437852663734434276, guid: c63aa47464e64e147a1c32bca0db9ba8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998996346087958313, guid: c63aa47464e64e147a1c32bca0db9ba8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6998996346087958313, guid: c63aa47464e64e147a1c32bca0db9ba8,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7024806233095931052, guid: c63aa47464e64e147a1c32bca0db9ba8,
         type: 3}
@@ -43549,7 +43563,7 @@ GameObject:
   - component: {fileID: 46934438524468429}
   - component: {fileID: 3742478866677707901}
   - component: {fileID: 1113199504454969444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Right side panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47176,7 +47190,7 @@ GameObject:
   - component: {fileID: 1859616469446850518}
   - component: {fileID: 474639423}
   - component: {fileID: 1504626421}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47799,6 +47813,11 @@ PrefabInstance:
     - target: {fileID: 85904292568069671, guid: 9b3a4c0b3658cab49be494fcdf2f454b,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1811074301076501814, guid: 9b3a4c0b3658cab49be494fcdf2f454b,
+        type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3798288909433068527, guid: 9b3a4c0b3658cab49be494fcdf2f454b,
@@ -48487,7 +48506,7 @@ GameObject:
   - component: {fileID: 7684179175658099827}
   - component: {fileID: 7345970376362281788}
   - component: {fileID: 6009617363010849067}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drawer bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48784,7 +48803,7 @@ GameObject:
   - component: {fileID: 5403988565554427118}
   - component: {fileID: 9187248054382825512}
   - component: {fileID: 979738529106000967}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51515,7 +51534,7 @@ GameObject:
   - component: {fileID: 7426118031297355454}
   - component: {fileID: 7584384950378250385}
   - component: {fileID: 9175163375265572190}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Back panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53803,7 +53822,7 @@ GameObject:
   - component: {fileID: 2820691338317480012}
   - component: {fileID: 2461265808039365117}
   - component: {fileID: 2043214983739505226}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Drawer left side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54016,6 +54035,7 @@ SceneRoots:
   - {fileID: 2098511832}
   - {fileID: 3383912588210175093}
   - {fileID: 2142638945}
+  - {fileID: 668171820}
   - {fileID: 963265451283393812}
   - {fileID: 950641888}
   - {fileID: 889090787180919265}
