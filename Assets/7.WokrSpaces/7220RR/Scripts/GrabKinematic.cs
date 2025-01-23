@@ -37,12 +37,19 @@ public class GrabKinematic : MonoBehaviour
             print($"{other.name}");
             gameObject.layer = changeLayer;
             rigidbodyee.isKinematic = true;
-            rigidbodyee.velocity = Vector3.zero;
+            //rigidbodyee.velocity = Vector3.zero;
             transform.parent = other.transform.parent;
             Vector3 newV3 = transform.localEulerAngles;
             newV3.x = 0f;
             newV3.z = 0f;
             transform.localEulerAngles = newV3;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Match"))
+        {
+            rigidbodyee.useGravity = true;
         }
     }
 }
