@@ -27,8 +27,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426466341712115935}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000014901161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 500, y: -220}
+  m_SizeDelta: {x: 550, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3895694453815390378
 MonoBehaviour:
@@ -139,6 +139,13 @@ MonoBehaviour:
   saveTimeText: {fileID: 7174972231015458096}
   loadButton: {fileID: 3895694453815390378}
   focus: {fileID: 1529764032677669461}
+  images:
+  - {fileID: 21300000, guid: 8da8d2fa41e22c444854cfb571ea0c42, type: 3}
+  - {fileID: 21300000, guid: eab134d54834df4488211e22b930e2c3, type: 3}
+  - {fileID: 21300000, guid: f83c89a413a3a654db296825b42ed9f3, type: 3}
+  - {fileID: 21300000, guid: 66a2dba8b14bf02479572736443bb7f7, type: 3}
+  - {fileID: 21300000, guid: c36f183cb497e3741a4acaa727ebd929, type: 3}
+  stageImage: {fileID: 7772264811728042267}
 --- !u!1 &1529764032677669461
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,8 +352,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 2024.01.01.11:11:11
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8338b6fe28da69043a9df67d44311340, type: 2}
-  m_sharedMaterial: {fileID: 6328190287917334285, guid: 8338b6fe28da69043a9df67d44311340,
+  m_fontAsset: {fileID: 11400000, guid: f0f9c7679be6a0a418f67a3796510724, type: 2}
+  m_sharedMaterial: {fileID: -2206438298364040680, guid: f0f9c7679be6a0a418f67a3796510724,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -371,13 +378,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 59.7
+  m_fontSize: 45.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 80
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -480,8 +487,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uAD50\uBB34\uC2E4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8338b6fe28da69043a9df67d44311340, type: 2}
-  m_sharedMaterial: {fileID: 6328190287917334285, guid: 8338b6fe28da69043a9df67d44311340,
+  m_fontAsset: {fileID: 11400000, guid: f0f9c7679be6a0a418f67a3796510724, type: 2}
+  m_sharedMaterial: {fileID: -2206438298364040680, guid: f0f9c7679be6a0a418f67a3796510724,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -512,7 +519,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 80
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

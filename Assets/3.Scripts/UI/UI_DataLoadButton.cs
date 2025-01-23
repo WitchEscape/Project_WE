@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,11 +13,22 @@ public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     [SerializeField] private Button loadButton;
     [SerializeField] private GameObject focus;
+
+    [SerializeField] private List<Sprite> images;
+    [SerializeField] private Image stageImage;
     //[SerializeField] private Button deleteButton;
 
     private string stageName;
     private Action<string> onLoadCallback;
     private Action<string> onDeleteCallback;
+
+    private void Awake()
+    {
+        if (stageImage == null)
+        {
+            stageImage = GetComponent<Image>();
+        }
+    }
 
     public void Initialize(string stageName, DateTime saveTime, Action<string> onLoad, Action<string> onDelete)
     {
@@ -26,6 +39,7 @@ public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         if (stageNameText != null)
         {
             stageNameText.text = ConvertStageName(stageName);
+            Debug.Log(stageName);
         }
 
         if (saveTimeText != null)
@@ -47,33 +61,27 @@ public class UI_DataLoadButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private string ConvertStageName(string stageName)
     {
-        if(stageName == "WE_Level_1")
+
+        switch(stageName)
         {
-            return "535교실";
-        }
-        else if (stageName == "WE_Level_2")
-        {
-            return "기숙사";
-        }
-        else if (stageName == "WE_Level_3")
-        {
-            return "마법약 교실";
-        }
-        else if (stageName == "WE_Level_4")
-        {
-            return "도서관";
-        }
-        else if (stageName == "WE_Level_5")
-        {
-            return "교무실";
-        }
-        else if (stageName == "WE_Level_Tutorial")
-        {
-            return "로비";
-        }
-        else
-        {
-            return "UNKNOWN";
+            case "WE_Level_1":
+                stageImage.sprite = images[0];
+                return "535교실";
+            case "WE_Level_2":
+                stageImage.sprite = images[1];
+                return "기숙사";
+            case "WE_Level_3":
+                stageImage.sprite = images[2];
+                return "마법약 교실";
+            case "WE_Level_4":
+                stageImage.sprite = images[3];
+                return "도서관";
+            case "WE_Level_5":
+                stageImage.sprite = images[4];
+                return "교무실";
+            default:
+                stageImage.sprite = images[0];
+                return "UNKNOWN";
         }
     }
 
