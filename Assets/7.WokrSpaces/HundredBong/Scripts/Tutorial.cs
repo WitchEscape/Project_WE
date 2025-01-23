@@ -27,7 +27,8 @@ public class Tutorial : MonoBehaviour
     public Material alphaWhite;
     public Material alphaOrange;
 
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI UIText;
+    public TextMeshProUGUI ghostText;
 
     public Transform[] tutorialAreas;
     public Transform[] ghostWayPoints;
@@ -65,35 +66,35 @@ public class Tutorial : MonoBehaviour
     //플레이어한테 Rigidbody가 없으니 콜라이더에 Rigidbody넣고 UseGravity = false로 해야함 
 
     #region 처음에 바로 출력하도록 기획 수정됨
-    public void OnMoveArea(int i)
-    {
-        Debug.Log("무브");
-        if (tutorialCleared[i] == true)
-            return;
+    //public void OnMoveArea(int i)
+    //{
+    //    Debug.Log("무브");
+    //    if (tutorialCleared[i] == true)
+    //        return;
 
-        ResetRenderers();
+    //    ResetRenderers();
 
-        leftThumbStick.material = alphaOrange;
+    //    leftThumbStick.material = alphaOrange;
 
 
-        gameObject.transform.position = tutorialAreas[0].transform.position;
-        tutorialCleared[i] = true;
+    //    gameObject.transform.position = tutorialAreas[0].transform.position;
+    //    tutorialCleared[i] = true;
 
-        canvas.gameObject.SetActive(true);
-        StartCoroutine(FadeInCanvasCoroutine());
-        text.text = "이동은 L스틱";
-    }
+    //    canvas.gameObject.SetActive(true);
+    //    StartCoroutine(FadeInCanvasCoroutine());
+    //    text.text = "이동은 L스틱";
+    //}
 
-    public void OnLookArea(int i)
-    {
-        ResetRenderers();
+    //public void OnLookArea(int i)
+    //{
+    //    ResetRenderers();
 
-        rightThumbStick.material = alphaOrange;
+    //    rightThumbStick.material = alphaOrange;
 
-        text.text = "둘러보려면 R스틱";
+    //    text.text = "둘러보려면 R스틱";
 
-        gameObject.transform.position = tutorialAreas[0].transform.position;
-    }
+    //    gameObject.transform.position = tutorialAreas[0].transform.position;
+    //}
     #endregion
 
     public void OnGrapArea(int i) //0
@@ -106,9 +107,10 @@ public class Tutorial : MonoBehaviour
         leftBumper.material = alphaOrange;
         rightBumper.material = alphaOrange;
 
-        SetUI(i);    
+        SetUI(i);
 
-        text.text = "책상 위에 있는 물건을 잡으려면 그립 버튼";
+        UIText.text = "책상 위에 있는 물건을 잡으려면 그립 버튼";
+        ghostText.text = "ㅇ";
     }
     public void OnAlyxGrabArea(int i) //1
     {
@@ -124,7 +126,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        text.text = "멀리 있는 물건을 잡으려면 트리거버튼 + 그립버튼 + 당기기";
+        UIText.text = "멀리 있는 물건을 잡으려면 트리거버튼 + 그립버튼 + 당기기";
+        ghostText.text = "ㅇ";
     }
 
     public void OnExplainInventory(int i) //2
@@ -138,7 +141,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        text.text = "대충 인벤토리에 넣고 빼는 기능 설명하는 텍스트";
+        UIText.text = "대충 인벤토리에 넣고 빼는 기능 설명하는 텍스트";
+        ghostText.text = "ㅇ";
         //인벤토리에 이벤트 없으면 하나로 대신하고싶어요
 
     }
@@ -157,7 +161,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        text.text = "책과 가방은 그립 + 트리거로 열 수 있다는 텍스트";
+        UIText.text = "책과 가방은 그립 + 트리거로 열 수 있다는 텍스트";
+        ghostText.text = "ㅇ";
     }
 
     public void OnDialPuzzle(int i) //4
@@ -174,21 +179,52 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        text.text = "다이얼, 키패드 옆에서 그립 + 트리거를 누르면 UI를 출력한다는 텍스트";
+        UIText.text = "다이얼, 키패드 옆에서 그립 + 트리거를 누르면 UI를 출력한다는 텍스트";
+        ghostText.text = "ㅇ";
     }
 
-
-    public void OnRayInteractorArea(int i)
+    public void OnMixPuzzle(int i) //5
     {
+        if (tutorialCleared[i] == true)
+            return;
+
         ResetRenderers();
 
-        leftTrigger.material = alphaOrange;
-        rightTrigger.material = alphaOrange;
+        leftBumper.material = alphaOrange;
+        rightBumper.material = alphaOrange;
 
-        text.text = "UI와 상호작용하려면 트리거 버튼";
+        SetUI(i);
 
-        gameObject.transform.position = tutorialAreas[0].transform.position;
+        UIText.text = "대충 랜턴이랑 양초랑 쓰까보라는 텍스트";
+        //트리거존 지나면서 태그 변경한 뒤 그 이후에 상호작용 되게 하기
+        ghostText.text = "ㅇ";
     }
+
+    public void OnDialog(int i) //6
+    {
+        if (tutorialCleared[i] == true)
+            return;
+
+        ResetRenderers();
+
+        SetUI(i);
+
+        UIText.text = "살여주세요";
+        //트리거존 지나면서 태그 변경한 뒤 그 이후에 상호작용 되게 하기
+        ghostText.text = "살고싶어요";
+    }
+
+    //public void OnRayInteractorArea(int i)
+    //{
+    //    ResetRenderers();
+
+    //    leftTrigger.material = alphaOrange;
+    //    rightTrigger.material = alphaOrange;
+
+    //    UIText.text = "UI와 상호작용하려면 트리거 버튼";
+
+    //    gameObject.transform.position = tutorialAreas[0].transform.position;
+    //}
 
 
 
@@ -204,6 +240,7 @@ public class Tutorial : MonoBehaviour
     {
         gameObject.transform.position = tutorialAreas[i].transform.position;
         tutorialCleared[i] = true;
+        agent.SetDestination(ghostWayPoints[i].transform.position);
 
         canvas.gameObject.SetActive(true);
         StopAllCoroutines();

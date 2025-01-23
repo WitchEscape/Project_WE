@@ -17,6 +17,7 @@ public class DisplayMaterial : MonoBehaviour
     private bool isChanging;
     private bool wasPlayParticle;
     private bool wasPlaying;
+    public bool duringTutorial = false;
 
     private float erase = 1f;
 
@@ -26,7 +27,7 @@ public class DisplayMaterial : MonoBehaviour
 
     private GhostCanvas ghostCanvas;
 
-    private int playerHandCount; 
+    private int playerHandCount;
 
     private void Awake()
     {
@@ -87,7 +88,6 @@ public class DisplayMaterial : MonoBehaviour
         }
     }
 
-    #region 임시 페이드 아웃 로직
     private void OnTriggerStay(Collider other)
     {
         //추후 Cauldron처럼 velocity 조건 추가해야하나 플레이어 손에는 리지드바디가 없어서 다른 도구로 하던가 해야함
@@ -96,9 +96,15 @@ public class DisplayMaterial : MonoBehaviour
 
         if (wasPlayParticle == false) { return; }
 
+        //튜토리얼 진행중일때
+        if (duringTutorial)
+        {
+            //TODO : 씬 이동
+        }
+
         //1 : 불투명      0 : 투명
-        if (2 <=playerHandCount && wasPlaying == false)
-        {            
+        else if (2 <= playerHandCount && wasPlaying == false)
+        {
             //알파값을 매 프레임 감소시킴
             erase = erase - (Time.deltaTime * 0.1f);
 
@@ -124,17 +130,16 @@ public class DisplayMaterial : MonoBehaviour
                 startColor.a = 0;
                 mainModule.startColor = startColor;
 
-                Debug.Log("투명도 0");
-
                 //TODO : 대화던 씬 이동이던 다음 로직 작성
                 ghostCanvas?.ClearPuzzle(puzzleIndex);
                 Debug.Log("모든 퍼즐 클리어");
                 SceneManager.LoadScene(nextSceneName);
+
+
             }
-            
+
         }
     }
-    #endregion
 
     private void OnTriggerExit(Collider other)
     {
