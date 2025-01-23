@@ -45,8 +45,8 @@ public class AlphaController : MonoBehaviour
                 material.color = newColor;
                 if (puzzles != null)
                     puzzles.TriggerEvent();
+                completeParticle?.Play();
                 Destroy(this);
-                completeParticle.Play();
             }
             material.color = newColor;
         }

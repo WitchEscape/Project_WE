@@ -35,7 +35,7 @@ public class BookAnimationControll : MonoBehaviour
         ObjectControll();
         GrabInteractorEventSet();
 
-        if(page != null) page.enabled = false;
+        if (page != null) page.enabled = false;
     }
 
     private void ObjectControll()
@@ -62,8 +62,11 @@ public class BookAnimationControll : MonoBehaviour
         grab.selectEntered.AddListener(ControllerEventSetMk1);
         grab.selectExited.AddListener(ContollerEventRemoveMk1);
 
-        grab.activated.AddListener((x) => { BookAnimation();
-            page.enabled = true;
+        grab.activated.AddListener((x) =>
+        {
+            BookAnimation();
+            if (page != null)
+                page.enabled = true;
             OpenEvent?.Invoke();
         });
 
@@ -120,7 +123,7 @@ public class BookAnimationControll : MonoBehaviour
     {
         BookAnimation();
 
-        
+
     }
 
     private void BookAnimation()
@@ -188,7 +191,7 @@ public class BookAnimationControll : MonoBehaviour
             if (animator.GetBool("IsOpen"))
             {
                 animator.SetBool("IsOpen", false);
-                animationTime = Time.time + closeClip.length;                
+                animationTime = Time.time + closeClip.length;
             }
             else
             {
