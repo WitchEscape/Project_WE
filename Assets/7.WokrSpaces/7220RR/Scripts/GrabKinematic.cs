@@ -29,9 +29,11 @@ public class GrabKinematic : MonoBehaviour
         print("누가이김/");
         if (other.CompareTag("Match"))
         {
-            print("내가 이김");
+            print($"{other.name}");
             rigidbodyee.isKinematic = true;
+            rigidbodyee.velocity = Vector3.zero;
             transform.parent = other.transform;
+            
         }
     }
 }
