@@ -11,6 +11,7 @@ public class XRSocketTagInteractor : XRSocketInteractor
 
     public override bool CanHover(IXRHoverInteractable interactable)
     {
+       // Debug.Log($"히히 나도 모르겠다 {interactable.transform.transform.tag}");
         //배열에서 태그를 순회하며 비교
         foreach (string tag in targetTags)
         {
@@ -18,17 +19,28 @@ public class XRSocketTagInteractor : XRSocketInteractor
             {
                 isCorrectTag = true;
             }
+            else
+            {
+                isCorrectTag = false;
+            }
         }
         return base.CanHover(interactable) && isCorrectTag;//interactable.transform.CompareTag(targetTag);
     }
 
     public override bool CanSelect(IXRSelectInteractable interactable)
     {
+        //Debug.Log($"히히 나도 모르겠다 {interactable.transform.transform.tag}");
+
+
         foreach (string tag in targetTags)
         {
             if (interactable.transform.CompareTag(tag))
             {
                 isCorrectTag = true;
+            }
+            else
+            {
+                isCorrectTag = false;
             }
         }
         return base.CanSelect(interactable) && isCorrectTag;
