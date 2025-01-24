@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -15,12 +16,24 @@ public class WateringCan : MonoBehaviour
         // Grab 이벤트 등록
         grabInteractable.activated.AddListener(OnTriggerPressed);
         grabInteractable.deactivated.AddListener(OnTriggerReleased);
-
+        grabInteractable.selectExited.AddListener(OnGrabReleased);
         // 물 효과 초기화
         if (waterParticle != null)
         {
             waterParticle.Stop();
             paticleObject?.SetActive(false);
+        }
+    }
+
+    private void OnGrabReleased(SelectExitEventArgs arg0)
+    {
+        if (arg0.interactorObject is XRDirectInteractor)
+        {
+            if (waterParticle != null)
+            {
+                waterParticle.Stop();
+                paticleObject?.SetActive(false);
+            }
         }
     }
 

@@ -6,12 +6,10 @@ public class SocketLayerChange : MonoBehaviour
     [SerializeField]
     private XRSocketInteractor xrSocketInteractor;
     private const int changeLayer = 9;
-    private int baseInteractorLayer;
     private int baseInteractableLayer;
 
     private void Awake()
     {
-        baseInteractorLayer = gameObject.layer;
         xrSocketInteractor ??= GetComponent<XRSocketInteractor>();
     }
 
@@ -38,13 +36,16 @@ public class SocketLayerChange : MonoBehaviour
         GameObject obj = arg.interactableObject.transform.gameObject;
         baseInteractableLayer = obj.layer;
         obj.layer = changeLayer;
-        gameObject.layer = changeLayer;
+        Debug.Log($"오브제 레이어1 {obj.layer}");
+
     }
 
     private void LayerChangeReset(SelectExitEventArgs arg)
     {
+        Debug.Log($"오브제 레이어2 진입");
+
         GameObject obj = arg.interactableObject.transform.gameObject;
         obj.layer = baseInteractableLayer;
-        gameObject.layer = baseInteractorLayer;
+        Debug.Log($"오브제 레이어2 {obj.layer}");
     }
 }
