@@ -203,6 +203,8 @@ public class Puzzles : MonoBehaviour
         }
     }
 
+
+
     private void FindSocket()
     {
         for (int i = 0; i < socketInteractors.Count; i++)
