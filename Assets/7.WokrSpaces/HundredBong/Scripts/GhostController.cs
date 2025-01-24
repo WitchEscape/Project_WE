@@ -3,6 +3,8 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.XR.Interaction.Toolkit;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GhostController : MonoBehaviour
 {
@@ -33,11 +35,33 @@ public class GhostController : MonoBehaviour
         ghostCanvas = GetComponentInChildren<GhostCanvas>();
     }
 
+    
+
     private void Start()
     {
-
+        SaveLoadManager.OnLoadComplete += CheckClearState;
     }
-
+    private void CheckClearState()
+    {
+        // 3스테이지만 퍼즐 로직 안들어가서 다르게 구현함
+        if (SceneManager.GetActiveScene().name == "WE_Level_3")
+        {
+            var puzzleManager = PuzzleProgressManager.Instance;
+            if (puzzleManager != null)
+            {
+                int completedCount = 0;
+                foreach (var puzzleId in puzzleManager.puzzleSequence)
+                {
+                    if (puzzleManager.GetPuzzleState(puzzleId) == PuzzleProgressManager.PuzzleState.Completed)
+                    {
+                        //ghostCanvas.ClearPuzzle(completedCount);
+                        //completedCount++;
+                        ghostCanvas.clearCount++;
+                    }
+                }
+            }
+        }
+    }
     private void Update()
     {
         Idle();

@@ -6,7 +6,7 @@ public class PuzzleProgressManager : MonoBehaviour
     private static PuzzleProgressManager instance;
     public static PuzzleProgressManager Instance => instance;
 
-    [SerializeField] private List<string> puzzleSequence;
+    [SerializeField] public List<string> puzzleSequence;
 
     private Dictionary<string, PuzzleData> puzzleStates = new Dictionary<string, PuzzleData>();
 
