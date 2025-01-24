@@ -18037,7 +18037,7 @@ MonoBehaviour:
   - {fileID: 3673900429055629941}
   - {fileID: 3690146879891412959}
   isCleared: 000000
-  hintDuration: 3
+  hintDuration: 30
   clearCount: 0
   hintText: {fileID: 5127207486344228433}
 --- !u!222 &1119538852049203363
@@ -21024,6 +21024,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 12105142521466358, guid: edbe7d67464ed16489660868a7202568,
+        type: 3}
+      propertyPath: m_MoveSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1118083366854058465, guid: edbe7d67464ed16489660868a7202568,
         type: 3}
       propertyPath: m_IsActive
@@ -21032,7 +21037,7 @@ PrefabInstance:
     - target: {fileID: 1890457149525642441, guid: edbe7d67464ed16489660868a7202568,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.25
+      value: -0.145
       objectReference: {fileID: 0}
     - target: {fileID: 2675885614866047811, guid: edbe7d67464ed16489660868a7202568,
         type: 3}
@@ -29867,7 +29872,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -7393599902109466040, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  callInterval: 5
+  callInterval: 120
   mainCamera: {fileID: 6158537680113861967}
 --- !u!114 &5529148869039386864
 MonoBehaviour:
