@@ -2673,6 +2673,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PotionClear
       objectReference: {fileID: 0}
+    - target: {fileID: 123343256444109326, guid: 905ed67e9cacaec4c9f12ee7eed3ef36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 578228095669197245, guid: 905ed67e9cacaec4c9f12ee7eed3ef36,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14426,6 +14431,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145fb008cc1c31b44a1db805b0088d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &711284336 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 118542712761883952, guid: 905ed67e9cacaec4c9f12ee7eed3ef36,
+    type: 3}
+  m_PrefabInstance: {fileID: 86463556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &713667196
 GameObject:
   m_ObjectHideFlags: 0
@@ -14612,17 +14623,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726312295}
-  m_LocalRotation: {x: -0.005463034, y: -0.0005306544, z: -0.0070489827, w: -0.9999601}
-  m_LocalPosition: {x: 0, y: 0, z: 3.9420002}
+  m_LocalRotation: {x: -0.00029038952, y: -0.0004973858, z: 0.0037428087, w: -0.9999929}
+  m_LocalPosition: {x: 0, y: 0, z: 3.947}
   m_LocalScale: {x: 0.012795001, y: 0.014031001, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1661261051}
   m_Father: {fileID: 543450652979384407}
-  m_LocalEulerAnglesHint: {x: 0.626, y: 0.065, z: 0.808}
+  m_LocalEulerAnglesHint: {x: 0.033, y: 0.057, z: -0.429}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -63.539253, y: 2.4444807}
+  m_AnchoredPosition: {x: -1.107, y: 1.32}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &726312297
@@ -31214,9 +31225,9 @@ MonoBehaviour:
   puzzleID: PotionClass_Puzzle_01
   isCorrectPostion: 000000
   match: {fileID: 8822595467118883701}
-  particle: {fileID: 0}
+  particle: {fileID: 711284336}
   canvas: {fileID: 726312300}
-  clip: {fileID: 8300000, guid: c44e4452342d748588ede433dce5936c, type: 3}
+  clip: {fileID: 8300000, guid: 20438241471dc2d498e639a77e28e541, type: 3}
   joints:
   - {fileID: 5784846196184171409}
   - {fileID: 6797850419440656522}
@@ -37719,7 +37730,7 @@ Transform:
   m_GameObject: {fileID: 1885751193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.0137, y: 0.625, z: 1.1395}
+  m_LocalPosition: {x: -0.775, y: 0.625, z: 0.931}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -67223,7 +67234,7 @@ Transform:
   m_GameObject: {fileID: 7820137870342294885}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000081460335, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1587, y: 1.038, z: 1.1075}
+  m_LocalPosition: {x: -0.91999996, y: 1.038, z: 0.8989999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

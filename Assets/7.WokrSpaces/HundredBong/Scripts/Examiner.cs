@@ -80,10 +80,10 @@ public class Examiner : MonoBehaviour
             SetJoint();
 
 
-            //TODO : 서랍 열리는 소리 재생
+        //DONE: 서랍 열리는 소리 재생
 
-            //particle.gameObject?.SetActive(true);
-            //particle.Play();
+            particle.gameObject?.SetActive(true);
+            particle.Play();
 
             isCleared = true;
 
