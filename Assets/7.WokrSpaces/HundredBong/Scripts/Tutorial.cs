@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.VisionOS;
+
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Experimental.Rendering;
-using UnityEngine.UI;
+
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class Tutorial : MonoBehaviour
