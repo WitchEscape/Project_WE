@@ -8,9 +8,6 @@ public class MagicStone : MonoBehaviour
 {
     private Rigidbody rb;
     private XRGrabInteractable interactable;
-
-    [SerializeField] private Vector3 SpawnPosition;
-
     private bool isTrun;
 
     private void Awake()
