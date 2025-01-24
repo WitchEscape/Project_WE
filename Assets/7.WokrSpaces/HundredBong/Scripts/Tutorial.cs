@@ -125,8 +125,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "책상 위에 있는 물건을 잡으려면 그립 버튼";
-        ghostText.text = "ㅇ";
+        UIText.text = "그립 버튼을 이용해 책을 집어보세요.";
+        ghostText.text = "책상 위 책을 잡아봐~";
     }
 
     public void OnAlyxGrabArea(int i) //1
@@ -143,8 +143,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "멀리 있는 물건을 잡으려면 트리거버튼 + 그립버튼 + 당기기";
-        ghostText.text = "ㅇ";
+        UIText.text = "좌측 책상 위 트리거를 눌러 조준한 뒤, 그립 버튼을 눌러 잡은 물건을 끌어 당기세요.";
+        ghostText.text = "멀리서 물건을 잡아오면 굳이 걸어서 가지 않아도 돼";
     }
 
     public void OnExplainInventory(int i) //2
@@ -158,12 +158,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "오른쪽 컨트룰러의 B버튼을 통해 아이템을 인벤토리에 넣을 수 있음";
-        ghostText.text = "ㅇ";
-
-
-        //인벤토리에 이벤트 없으면 하나로 대신하고싶어요
-
+        UIText.text = "인벤토리엔 여러가지 물건을 손으로 잡아 넣거나 뺄 수 있어!";
+        ghostText.text = "A 버튼을 눌러 인벤토리 창을 켜세요.";
     }
 
     public void OnKeyPuzzle(int i) //3
@@ -180,8 +176,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "책과 가방은 그립 + 트리거로 열 수 있다는 텍스트";
-        ghostText.text = "ㅇ";
+        UIText.text = "트리거 버튼을 눌러 책을 펼쳐봐~";
+        ghostText.text = "책을 잡은 상태에서 트리거 버튼을 눌러 펼치세요.";
     }
 
     public void OnDialPuzzle(int i) //4
@@ -198,8 +194,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "다이얼, 키패드 옆에서 그립 + 트리거를 누르면 UI를 출력한다는 텍스트";
-        ghostText.text = "ㅇ";
+        UIText.text = "아까 책에있던 비밀번호를 입력해서 열어봐!";
+        ghostText.text = "비밀번호를 입력해 서랍장을 여세요.";
     }
 
     public void OnMixPuzzle(int i) //5
@@ -214,9 +210,9 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "대충 랜턴이랑 양초랑 쓰까보라는 텍스트";
+        UIText.text = "등불이 여기 있네! 양초를 등불에 넣어보자~";
         //트리거존 지나면서 태그 변경한 뒤 그 이후에 상호작용 되게 하기
-        ghostText.text = "ㅇ";
+        ghostText.text = "등불에 초를 넣어 조합해 보세요.";
     }
 
 
@@ -230,7 +226,7 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "살여주세요";
+        UIText.text = "종이에 불을 비춰보세요.";
         //트리거존 지나면서 태그 변경한 뒤 그 이후에 상호작용 되게 하기
         if(isActivated2 == false)
         {
@@ -238,7 +234,7 @@ public class Tutorial : MonoBehaviour
             isActivated2 = true;
         }
         
-        ghostText.text = "살고싶어요";
+        ghostText.text = "등불을 종이 근처에 두면 무슨 일이 생길까?";
     }
 
     public void LowSpeed()

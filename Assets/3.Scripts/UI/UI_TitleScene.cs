@@ -20,7 +20,14 @@ public class UI_TitleScene : MonoBehaviour
 
     private void GameStart()
     {
-        SceneManager.LoadScene("TutorialScene");
+        if(SaveLoadManager.Instance.CurrentClearStage > 0)
+        {
+            SceneManager.LoadScene("WE_Level_lobby");
+        }
+        else
+        {
+            SceneManager.LoadScene("WE_Level_Totorial2");
+        }
     }
 
     private void OpenOption()

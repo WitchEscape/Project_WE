@@ -82,6 +82,7 @@ public class UI_LoadStage : MonoBehaviour
 
     private void OnLoadButtonClicked(string stageName)
     {
+        SaveLoadManager.Instance.isDataLoadScene = true;
         SaveLoadManager.Instance.LoadGame(stageName);
         //SceneManager.LoadScene(stageName);
     }

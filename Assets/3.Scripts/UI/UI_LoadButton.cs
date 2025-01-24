@@ -25,6 +25,7 @@ public class UI_LoadButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (SaveLoadManager.Instance.CurrentClearStage >= sceneNum)
         {
+            SaveLoadManager.Instance.isDataLoadScene = false;
             SceneManager.LoadScene(sceneName);
         }
     }
