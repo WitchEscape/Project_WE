@@ -9323,68 +9323,6 @@ Transform:
   - {fileID: 1199087776}
   m_Father: {fileID: 175276998}
   m_LocalEulerAnglesHint: {x: -82.977, y: 27.348, z: 92.228}
---- !u!114 &358404247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5502765762018159106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d71b6b402b149a24a8572532dd3d4809, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
-  m_InteractionLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_InteractionLayers:
-    m_Bits: 4294967295
-  m_AttachTransform: {fileID: 0}
-  m_KeepSelectedTargetValid: 1
-  m_DisableVisualsWhenBlockedInGroup: 1
-  m_StartingSelectedInteractable: {fileID: 0}
-  m_StartingTargetFilter: {fileID: 0}
-  m_HoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_HoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_SelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_SelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_StartingHoverFilters: []
-  m_StartingSelectFilters: []
-  m_OnHoverEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnHoverExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectEntered:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectExited:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ShowInteractableHoverMeshes: 1
-  m_InteractableHoverMeshMaterial: {fileID: 0}
-  m_InteractableCantHoverMeshMaterial: {fileID: 0}
-  m_SocketActive: 1
-  m_InteractableHoverScale: 1
-  m_RecycleDelayTime: 1
-  m_HoverSocketSnapping: 0
-  m_SocketSnappingRadius: 0.1
-  m_SocketScaleMode: 0
-  m_FixedScale: {x: 1, y: 1, z: 1}
-  m_TargetBoundsSize: {x: 1, y: 1, z: 1}
-  targetTags:
-  - Projectile
 --- !u!1 &366808681
 GameObject:
   m_ObjectHideFlags: 0
@@ -27994,6 +27932,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 12105142521466358, guid: edbe7d67464ed16489660868a7202568,
+        type: 3}
+      propertyPath: m_MoveSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 187883571642531287, guid: edbe7d67464ed16489660868a7202568,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -28012,7 +27955,7 @@ PrefabInstance:
     - target: {fileID: 1890457149525642441, guid: edbe7d67464ed16489660868a7202568,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.25
+      value: -0.145
       objectReference: {fileID: 0}
     - target: {fileID: 2251046572268522293, guid: edbe7d67464ed16489660868a7202568,
         type: 3}
@@ -51775,7 +51718,7 @@ MonoBehaviour:
   - {fileID: 3673900429397593089}
   - {fileID: 3690146879281267115}
   isCleared: 000000
-  hintDuration: 3
+  hintDuration: 30
   clearCount: 0
   hintText: {fileID: 5127207486006720549}
 --- !u!4 &1087403968520684881
@@ -72734,7 +72677,6 @@ GameObject:
   - component: {fileID: 3679765627115419631}
   - component: {fileID: 127218420813240388}
   - component: {fileID: 5520586470133218292}
-  - component: {fileID: 358404247}
   m_Layer: 0
   m_Name: GhostFriend Mk3
   m_TagString: Untagged
@@ -72814,7 +72756,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -7393599902109466040, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  callInterval: 5
+  callInterval: 120
   mainCamera: {fileID: 941945305}
 --- !u!4 &5522675485364303103
 Transform:
