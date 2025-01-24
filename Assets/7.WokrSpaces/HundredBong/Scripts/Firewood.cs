@@ -22,7 +22,9 @@ public class Firewood : MonoBehaviour
 
     private void CheckFireState()
     {
-        if (PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_02") == PuzzleProgressManager.PuzzleState.InProgress || PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_02") == PuzzleProgressManager.PuzzleState.Completed)
+        if (PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_02") == PuzzleProgressManager.PuzzleState.InProgress || PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_02") == PuzzleProgressManager.PuzzleState.Completed
+            || PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_03") == PuzzleProgressManager.PuzzleState.Completed
+            || PuzzleProgressManager.Instance.GetPuzzleState("PotionClass_Puzzle_03") == PuzzleProgressManager.PuzzleState.Available)
         {
             cauldron.isFire = true;
             FireAcivate();

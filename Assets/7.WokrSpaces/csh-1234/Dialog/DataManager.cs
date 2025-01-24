@@ -56,32 +56,18 @@ public class DataManager : MonoBehaviour
         if (isLoad)
         {
 #if UNITY_EDITOR
-            return Path.Combine(Application.dataPath, "1.Resources/Data", fileName);
+            return Path.Combine(Application.dataPath, "1.Resources/Data/Excel", fileName);
 #else
-        // 빌드된 버전에서는 StreamingAssets 폴더 사용
-        string streamingPath = Path.Combine(Application.streamingAssetsPath, "Data", fileName);
-        
-        // 파일이 존재하는지 확인하고 로그 출력
-        if (File.Exists(streamingPath))
-        {
-            Debug.Log($"Data file found at: {streamingPath}");
-        }
-        else
-        {
-            Debug.LogError($"Data file not found at: {streamingPath}");
-        }
-        
-        return streamingPath;
+            // 빌드된 버전에서는 StreamingAssets 폴더 사용
+            return Path.Combine(Application.streamingAssetsPath, "Data/Excel", fileName);
 #endif
         }
         else
         {
             // 저장 데이터용 경로
             string savePath = Path.Combine(Application.persistentDataPath, "SaveData", fileName);
-
             // 저장 폴더가 없다면 생성
             Directory.CreateDirectory(Path.GetDirectoryName(savePath));
-
             return savePath;
         }
     }
@@ -94,19 +80,43 @@ public class DataManager : MonoBehaviour
 
     private void LoadDialogData()
     {
-        string csvPath = GetDataPath("Excel/DialogData.csv", true);
+        TextAsset csvFile = null;
 
+#if UNITY_EDITOR
+        // 에디터에서는 기존 경로도 시도해봅니다
+        string csvPath = GetDataPath("DialogData.csv", true);
         if (File.Exists(csvPath))
         {
-            ParseDialogData("Dialog");
+            try
+            {
+                string csvText = File.ReadAllText(csvPath);
+                ParseDialogDataFromText(csvText);
+                return;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"파일 직접 읽기 실패, Resources 폴더에서 시도합니다: {e.Message}");
+            }
+        }
+#endif
+
+        // Resources 폴더에서 로드 시도
+        csvFile = Resources.Load<TextAsset>("Data/DialogData");
+        
+        if (csvFile != null)
+        {
+            ParseDialogDataFromText(csvFile.text);
+        }
+        else
+        {
+            Debug.LogError("DialogData.csv 파일을 찾을 수 없습니다. Resources/Data 폴더에 파일을 넣어주세요.");
         }
     }
 
-    public void ParseDialogData(string filename)
+    private void ParseDialogDataFromText(string csvText)
     {
+        string[] lines = csvText.Split('\n');
         List<DialogData> dialogList = new List<DialogData>();
-        string csvPath = GetDataPath($"Excel/{filename}Data.csv", true);
-        string[] lines = File.ReadAllText(csvPath).Split('\n');
 
         for (int y = 1; y < lines.Length; y++)
         {

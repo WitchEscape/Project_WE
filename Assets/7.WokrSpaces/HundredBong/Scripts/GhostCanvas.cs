@@ -23,7 +23,7 @@ public class GhostCanvas : MonoBehaviour
     private int currentIndex = 0;
     private int callIndex { get { return currentIndex; } set { currentIndex = Mathf.Clamp(value, 0, 2); } }
 
-    private int clearCount = 0;
+    public int clearCount = 0;
     private string[] hintTexts;
 
     public TextMeshProUGUI hintText;
