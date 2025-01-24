@@ -255,19 +255,19 @@ public class GhostCanvas : MonoBehaviour
         switch (clearCount)
         {
             case 0:
-                hintTexts[0] = "색깔이 다른 글자가 숫자랑 연관이 있어";
-                hintTexts[1] = "4번 자리에 색이 다른 글자를 잘 보고 숫자로 바꿔서 비밀번호를 입력해봐";
-                hintTexts[2] = "4번 자리에 5242를 입력해봐";
+                hintTexts[0] = "노란색 글자만 읽어봐";
+                hintTexts[1] = "노란색 글자를 숫자라고 생각해봐";
+                hintTexts[2] = "3번 자리에 5242를 입력해";
                 break;
             case 1:
-                hintTexts[0] = "뒤에 게시판에 타로 카드가포스트잇과 연관되어 있어";
-                hintTexts[1] = "바보, 마법, 힘, 은둔자를 의미하는 카드를 수정구가 있는 책상 위에 배치해봐";
-                hintTexts[2] = "0번카드, 1번카드, 8번카드, 9번카드를 순서대로 책상 위에 배치하고 3번자리에 가봐!";
+                hintTexts[0] = "쪽지에 글자가 타로 카드랑 연관이 있어";
+                hintTexts[1] = "1번 책상에 타로 카드를 쪽지에 적힌 순서대로 놓아봐";
+                hintTexts[2] = "1번 책상에 바보, 마법, 힘, 은둔자 카드를 순서대로 배치해봐";
                 break;
             case 2:
-                hintTexts[0] = "오른쪽에 있는 숫자를 왼쪽 키패드에 대입해서 생각해봐";
-                hintTexts[1] = "휴대폰에 있는 패턴처럼 생각하고 숫자를 따라 그려봐";
-                hintTexts[2] = "4번자리에 있는 상자에 HERA를 입력해봐";
+                hintTexts[0] = "오른쪽에 적혀 있는 숫자를 휴대폰 패턴을 풀듯 생각해 보는 게 어때?";
+                hintTexts[1] = "오른쪽에 적힌 숫자가 한 줄에 하나의 글자를 나타내고 있어";
+                hintTexts[2] = "H E R A 를 교탁 밑 상자에 입력해봐!";
                 break;
             case 3:
                 break;
@@ -280,14 +280,14 @@ public class GhostCanvas : MonoBehaviour
         switch (clearCount)
         {
             case 0:
-                hintTexts[0] = "포스터 오른쪽 밑에 로마 숫자가 있어";
-                hintTexts[1] = "로마 숫자를 생각해서 서랍장에 입력해봐";
-                hintTexts[2] = "1042를 서랍장에 입력하면 돼";
+                hintTexts[0] = "포스터에 어떤 문자가 적혀 있어! 서랍장 비밀번호와 관련 있어 보여";
+                hintTexts[1] = "포스터에 적힌 문자가 로마 숫자인 것 같아";
+                hintTexts[2] = "1042를 서랍장에 입력해봐!";
                 break;
             case 1:
-                hintTexts[0] = "일기장에서 화분을 말했었지? 물뿌리개가 있으니 사용해볼까?";
-                hintTexts[1] = "책상 밑에 꽃처럼 생긴 키패드가 있네? 꽃 색깔을 입력해보자";
-                hintTexts[2] = "파란색,빨간색,주황색,분홍색을 입력하고 헤라의 서랍장을 열자!";
+                hintTexts[0] = "물뿌리개로 시든 꽃에 물을 줘보자!";
+                hintTexts[1] = "꽃의 색이 퍼즐과 연관이 있는 것 같지 않아?";
+                hintTexts[2] = "꽃에 나타난 색을 순서대로 퍼즐에 입력해";
                 break;
             case 2:
                 hintTexts[0] = "";
@@ -304,19 +304,19 @@ public class GhostCanvas : MonoBehaviour
         switch (clearCount)
         {
             case 0:
-                hintTexts[0] = "선반 위에 포션이 움직일 수 있게 되어있어! 시험관에 있는 글라스크랑 연관이 있을 것 같은데..";
-                hintTexts[1] = "포션을 시험관 글라스크의 색 순서대로 배치해보자";
-                hintTexts[2] = "포션을 초록, 빨강, 파랑 순서로 배치 해보자!";
+                hintTexts[0] = "선반 위에 포션이 올려져 있어! 색을 알맞게 배치하면 될 것 같아";
+                hintTexts[1] = "포션의 색이 책상 위 시험관 색과 같아!";
+                hintTexts[2] = "포션을 초록, 빨강, 파랑 순서로 배치해봐";
                 break;
             case 1:
-                hintTexts[0] = "책상 밑 쪽지에 힌트가 있어! 그 힌트를 이용해서 벽에 있는 숨은 글자를 찾아봐!";
-                hintTexts[1] = "2-8이 2번째 줄의 8번째 글자를 의미하는 것 같아. 이대로 룬문자를 해석하고 순서대로 솥에 넣어봐!";
-                hintTexts[2] = "쪽지를 찾아 HOPE에 맞는 룬 문자를 순서대로 솥에 넣어보자!";
+                hintTexts[0] = "곳곳에 쪽지가 떨어져 있어! 벽에 있는 글자의 힌트가 될 거야";
+                hintTexts[1] = "벽에 있는 글자 중 네 글자를 쪽지에 힌트를 얻어 찾아내고, 룬 문자로 된 물약을 답에 맞게 솥에 넣자!";
+                hintTexts[2] = "성냥으로 솥에 불을 붙이고, HOPE를 룬 문자에 맞게 물약을 넣어봐";
                 break;
             case 2:
-                hintTexts[0] = "꺼져있는 등불에 초를 빼고 다른 걸 넣을 수 있을 것 같아";
-                hintTexts[1] = "빛나는 돌을 등불 안에 넣어볼까? 등불에 빛이 들어올 것 같아";
-                hintTexts[2] = "빛나는 돌을 등불 안에 넣고 책상 위 종이를 확인해봐!";
+                hintTexts[0] = "돌이 밝게 빛나고 있어! 조명처럼 쓸 수 있을거 같은데..";
+                hintTexts[1] = "밑에 꺼진 등불이 놓여져 있어! 쟤를 잘 이용하면 되지 않을까?";
+                hintTexts[2] = "꺼진 등불에 빛나는 돌을 넣고, 빈 종이 위에 불을 비쳐봐";
                 break;
             case 3:
                 break;
@@ -328,10 +328,10 @@ public class GhostCanvas : MonoBehaviour
         switch (clearCount)
         {
             case 0:
-                hintTexts[0] = "A x B + C";
+                hintTexts[0] = "A x B + C 의 규칙을 떠올려봐";
                 hintTexts[1] = "숫자를 시간이라고 생각해봐";
-                hintTexts[2] = "책을 뒤집어서 확인해봐";
-                hintTexts[3] = "하하 나도 모르겠지렁이";
+                hintTexts[2] = "글자를 뒤집어서 확인해봐";
+                hintTexts[3] = "A=1, B=2 ... Z=26 의 규칙을 잘 생각해봐";
                 break;
             case 1:
                 hintTexts[0] = "";
@@ -353,14 +353,14 @@ public class GhostCanvas : MonoBehaviour
         switch (clearCount)
         {
             case 0:
-                hintTexts[0] = "칠판에 있는 문제가 어떤 규칙이 있는 것 같아.";
-                hintTexts[1] = "숫자를 천천히 읽으면서 규칙을 살펴봐! 구구단 8단이랑 연관이 있는 것 같아";
-                hintTexts[2] = "3287을 캐비닛에 입력해보자!";
+                hintTexts[0] = "칠판의 문제가 8이라는 숫자와 관련 있는 것 같아";
+                hintTexts[1] = "8의 곱셈을 떠올려 볼까?";
+                hintTexts[2] = "3287을 잠겨 있는 캐비넷에 입력해보자!";
                 break;
             case 1:
-                hintTexts[0] = "만년필과잉크를조합할수있을것같아! 만년필을종이에올려볼까?";
-                hintTexts[1] = "종이에 있는 빨간 부분을 제외하고 회색 부분만 읽어봐!";
-                hintTexts[2] = "0504를 두 번째 서랍에 입력하자!";
+                hintTexts[0] = "책상에 수상한 종이가 하나 놓여져 있어. 펜으로 무언가 적어볼까?";
+                hintTexts[1] = "펜에 잉크를 묻혀 종이에 그려보면 문양이 나타나!";
+                hintTexts[2] = "문양에 빨간 부분을 빼고 회색 부분만 보면 네 가지 숫자가 있네!";
                 break;
             case 2:
                 hintTexts[0] = "";

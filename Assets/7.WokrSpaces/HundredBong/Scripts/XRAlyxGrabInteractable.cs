@@ -57,6 +57,8 @@ public class XRAlyxGrabInteractable : XRGrabInteractable
             {
                 Drop();
                 interactableRigidbody.velocity = ComputeVelocity();
+                
+                //interactableRigidbody.AddTorque(Vector3.forward * 10);
                 canJump = false;
 
                 //par.transform.position = previousPos;
