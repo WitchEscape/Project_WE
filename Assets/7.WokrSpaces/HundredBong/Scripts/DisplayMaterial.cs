@@ -28,6 +28,7 @@ public class DisplayMaterial : MonoBehaviour
     private GhostCanvas ghostCanvas;
 
     private int playerHandCount;
+    [SerializeField] private int SceneNum;
 
     private void Awake()
     {
@@ -132,6 +133,16 @@ public class DisplayMaterial : MonoBehaviour
                 //TODO : 대화던 씬 이동이던 다음 로직 작성
                 ghostCanvas?.ClearPuzzle(puzzleIndex);
                 Debug.Log("모든 퍼즐 클리어");
+                if(SaveLoadManager.Instance.CurrentClearStage <= SceneNum)
+                {
+                    SaveLoadManager.Instance.CurrentClearStage = SceneNum;
+                }
+
+                if (SaveLoadManager.Instance.isDataLoadScene == true)
+                {
+                    SaveLoadManager.Instance.DeleteSaveFile(SceneManager.GetActiveScene().name);
+                }
+
                 SceneManager.LoadScene(nextSceneName);
             }
 

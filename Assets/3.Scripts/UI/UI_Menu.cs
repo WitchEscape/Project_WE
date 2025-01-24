@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -47,10 +48,17 @@ public class UI_Menu : MonoBehaviour
 
     private void OnSaveExitButtonClick()
     {
-        SaveLoadManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
-        PuzzleProgressManager.Instance.ClearPuzzleProgress();
-        SaveLoadManager.Instance.isDataLoadScene = false;
-        SceneManager.LoadScene("WE_Level_Tutorial");
+        if (SceneManager.GetActiveScene().name == "WE_Level_Totorial2")
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
+        else
+        {
+            SaveLoadManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
+            PuzzleProgressManager.Instance.ClearPuzzleProgress();
+            SaveLoadManager.Instance.isDataLoadScene = false;
+            SceneManager.LoadScene("WE_Level_lobby");
+        }
     }
 
     private void SetPositionAndRotation()
