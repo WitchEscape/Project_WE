@@ -35,7 +35,7 @@ public class SaveLoadManager : MonoBehaviour
     private string savePath;
     public bool isDataLoadScene = false;
 
-    public int CurrentClearStage = 1;
+    public int CurrentClearStage = 0;
 
     private void Awake()
     {
@@ -454,7 +454,7 @@ public class SaveLoadManager : MonoBehaviour
     public void DeleteSaveFile(string stageName)
     {
         try
-        {
+        { 
             string filePath = Path.Combine(savePath, $"save_{stageName}.json");
             if (File.Exists(filePath))
             {
