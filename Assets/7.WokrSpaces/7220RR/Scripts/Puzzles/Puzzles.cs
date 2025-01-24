@@ -217,6 +217,19 @@ public class Puzzles : MonoBehaviour
                 socket.selectExited.AddListener((arg) => SocketInteratorExitEventSet(arg, index));
             }
         }
+
+        ClearEvent.AddListener(() =>
+        {
+            for (int i = 0; i < socketInteractors.Count; i++)
+            {
+                if (socketInteractors[i].TryGetComponent<XRSocketInteractor>(out XRSocketInteractor socket))
+                {
+                    socket.selectEntered.RemoveAllListeners();
+                    socket.selectExited.RemoveAllListeners();
+                }
+            }
+
+        });
     }
 
     private void SocketInteratorEnterEvent(SelectEnterEventArgs arg, int index)
