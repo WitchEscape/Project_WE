@@ -255,6 +255,16 @@ public class Cauldron : MonoBehaviour
         {
             isChurned = false;
         }
+        else
+        {
+            print("싱행해");
+
+            if(other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
+            {
+                print("싱싱해");
+                rb.AddForce(Vector3.up * 100f);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
