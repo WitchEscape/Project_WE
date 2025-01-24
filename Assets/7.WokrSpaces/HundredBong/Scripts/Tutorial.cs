@@ -158,8 +158,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "인벤토리엔 여러가지 물건을 손으로 잡아 넣거나 뺄 수 있어!";
-        ghostText.text = "A 버튼을 눌러 인벤토리 창을 켜세요.";
+        UIText.text = "A 버튼을 눌러 인벤토리 창을 켜세요.";
+        ghostText.text = "인벤토리엔 여러가지 물건을 손으로 잡아 넣거나 뺄 수 있어!";
     }
 
     public void OnKeyPuzzle(int i) //3
@@ -176,8 +176,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "트리거 버튼을 눌러 책을 펼쳐봐~";
-        ghostText.text = "책을 잡은 상태에서 트리거 버튼을 눌러 펼치세요.";
+        UIText.text = "책을 잡은 상태에서 트리거 버튼을 눌러 펼치세요.";
+        ghostText.text = "트리거 버튼을 눌러 책을 펼쳐봐~"; 
     }
 
     public void OnDialPuzzle(int i) //4
@@ -194,8 +194,8 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "아까 책에있던 비밀번호를 입력해서 열어봐!";
-        ghostText.text = "비밀번호를 입력해 서랍장을 여세요.";
+        UIText.text = "비밀번호를 입력해 서랍장을 여세요.";
+        ghostText.text = "아까 책에있던 비밀번호를 입력해서 열어봐!"; 
     }
 
     public void OnMixPuzzle(int i) //5
@@ -210,9 +210,9 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "등불이 여기 있네! 양초를 등불에 넣어보자~";
+        UIText.text = "등불에 초를 넣어 조합해 보세요.";
         //트리거존 지나면서 태그 변경한 뒤 그 이후에 상호작용 되게 하기
-        ghostText.text = "등불에 초를 넣어 조합해 보세요.";
+        ghostText.text = "등불이 여기 있네! 양초를 등불에 넣어보자~"; 
     }
 
 
@@ -226,15 +226,15 @@ public class Tutorial : MonoBehaviour
 
         SetUI(i);
 
-        UIText.text = "종이에 불을 비춰보세요.";
+        UIText.text = "등불을 종이 근처에 두면 무슨 일이 생길까?";
         //트리거존 지나면서 태그 변경한 뒤 그 이후에 상호작용 되게 하기
-        if(isActivated2 == false)
+        if (isActivated2 == false)
         {
             DialogPlayer.Instance.PlayDialogSequence("LOBBY_02");
             isActivated2 = true;
         }
         
-        ghostText.text = "등불을 종이 근처에 두면 무슨 일이 생길까?";
+        ghostText.text = "종이에 불을 비춰보세요."; 
     }
 
     public void LowSpeed()
